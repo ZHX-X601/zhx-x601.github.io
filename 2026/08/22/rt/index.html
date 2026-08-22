@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 
-<title>Hexo</title>
+<title>rt - Hexo</title>
 
 
 
@@ -14,10 +14,10 @@
 
 
 <!-- Open Graph -->
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="rt - Hexo">
 <meta property="og:description" content="">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.blog-x.cc.cd">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.blog-x.cc.cd/2026/08/22/rt/">
 <meta property="og:site_name" content="Hexo">
 
 <meta property="og:image" content="/img/favicon.ico">
@@ -25,7 +25,7 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="rt - Hexo">
 <meta name="twitter:description" content="">
 
 <meta name="twitter:image" content="/img/favicon.ico">
@@ -101,13 +101,13 @@
 
 
 <!-- Canonical URL -->
-<link rel="canonical" href="https://www.blog-x.cc.cd">
+<link rel="canonical" href="https://www.blog-x.cc.cd/2026/08/22/rt/">
 
 <!-- No-Referrer Domain Script -->
 
 
 <meta name="generator" content="Hexo 8.1.2"></head>
-<body class="min-h-screen is-home sticky-navbar enable-card-border " style="--bannerOffset: 15vh; --banner-height-home: 73vh; --banner-height: 67vh; --configHue: 165; --page-width: 100rem;">
+<body class="min-h-screen  sticky-navbar enable-card-border " style="--bannerOffset: 15vh; --banner-height-home: 73vh; --banner-height: 67vh; --configHue: 165; --page-width: 100rem;">
   <script>
     (function() {
       var BANNER_HEIGHT_EXTEND = 6;
@@ -238,7 +238,7 @@
       <ul class="navbar-links">
         <!-- Home (LinkPreset.Home) -->
         <li class="navbar-link-item" role="none">
-          <a href="/" class="navbar-link active" role="menuitem">
+          <a href="/" class="navbar-link" role="menuitem">
             <span class="navbar-link-content">
               <span class="material-symbols-outlined">home</span>
               <span>首页</span>
@@ -481,17 +481,27 @@
   <!-- Banner Overlay Container -->
   <div id="banner-overlay-container">
     
-    <!-- Home Page Text Overlay -->
-    <div class="home-text-overlay">
-      
-      <h1 class="home-text-title">Lovely firefly!</h1>
-      
-      
-      <span class="typewriter home-text-subtitle" data-text="In Reddened Chrysalis, I Once Rest">In Reddened Chrysalis, I Once Rest</span>
-      
-    </div>
-    
 
+    
+    <!-- Post Meta Overlay -->
+    <div class="post-meta-overlay banner-post-meta">
+      <h1 class="post-meta-title">rt</h1>
+      <div class="post-meta-info meta-info">
+        
+        <span class="post-meta-date">
+          <span class="material-symbols-outlined md-18">calendar_today</span>
+          发布于: 2026-08-22
+        </span>
+        
+        
+        <span class="post-meta-updated">
+          <span class="material-symbols-outlined md-18">edit</span>
+          更新于: 2026-08-22 23:07
+        </span>
+        
+        
+      </div>
+    </div>
     
 
     
@@ -519,7 +529,7 @@
 
 
   <!-- Main Content Area with grid wrappers -->
-  <div id="main-content-wrapper" class="absolute w-full z-30 pointer-events-none ">
+  <div id="main-content-wrapper" class="absolute w-full z-30 pointer-events-none mobile-main-no-banner">
     <div class="relative w-full xl:w-[92vw] max-w-[var(--page-width)] mx-auto pointer-events-auto">
       
 
@@ -528,6 +538,7 @@
   
   <aside class="sidebar-left" aria-label="左侧边栏">
     
+      
 
 <!-- Left sidebar widgets -->
 <div class="sidebar-widgets sidebar-left-widgets">
@@ -747,20 +758,23 @@
   
 </div>
 
+    
+    
+    
+      
+
+
+
+    
   </aside>
   
 
   <!-- ===== Main Content ===== -->
-  <main
-    id="main-content"
-    class="post-list-container"
-    data-layout="list"
-    aria-label="文章列表"
-  >
+  <main id="main-content" aria-label="文章">
     
 <div class="content-nav-bar card-base">
   <!-- Home button -->
-  <a href="/" class="content-nav-item content-nav-home active" aria-label="Home" title="首页">
+  <a href="/" class="content-nav-item content-nav-home" aria-label="Home" title="首页">
     <span class="material-symbols-outlined">home</span>
   </a>
   
@@ -775,299 +789,437 @@
 
   <!-- Layout Toggle (right-aligned spacer + buttons) -->
   
-  <span class="content-nav-spacer"></span>
-  <div class="layout-buttons" style="display:flex;gap:0.25rem;">
-    <button data-layout="list" class="active" title="列表">
-      <span class="material-symbols-outlined">view_list</span>
-    </button>
-    <button data-layout="grid" class="" title="网格">
-      <span class="material-symbols-outlined">grid_view</span>
-    </button>
-  </div>
-  
 </div>
 
-    <!-- Category navigation bar at top (if enabled) -->
-    
+    <article class="post-container" itemscope itemtype="http://schema.org/Article">
 
-    <!-- Page title (shown on paginated pages > 1 or when configured) -->
-    
 
-    <!-- Post list -->
-    <div class="post-list" data-mode="list">
-      
+      <div class="post-content-card">
+        <!-- Post meta top: title, date, author, reading time, word count, categories -->
         
+
+
+  <header class="post-meta-top">
+    <!-- Top row: Word count & Reading time pills -->
+    <div class="post-header-badges-top">
+      
+      <span class="post-meta-badge badge-wordcount">
+        <span class="material-symbols-outlined" aria-hidden="true">trending_up</span>
+        <span>0 字</span>
+      </span>
+      
+
+      
+      <span class="post-meta-badge badge-reading-time">
+        <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+        <span>
           
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/22/rt/">rt</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-22" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-22</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        1 min
+          
+          1 分钟
+        </span>
       </span>
       
     </div>
-  </div>
 
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/22/rt/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
+    <!-- Title with CSS-styled vertical bar prefix -->
+    <h1 class="post-title post-title-custom">
+      <strong>rt</strong>
+    </h1>
 
+    <!-- Bottom row: Date & Categories/Tags path -->
+    <div class="post-header-badges-bottom">
+      
+      <span class="post-meta-badge badge-date">
+        <span class="material-symbols-outlined" aria-hidden="true">calendar_month</span>
+        <time datetime="2026-08-22 23:07" pubdate>
+          2026-08-22
+        </time>
+      </span>
+      
+
+      <!-- Categories & Tags Breadcrumb Path -->
+      
+      
+    </div>
+
+    <!-- Post updated notice -->
+    
+    <div class="post-updated-note">
+      <span class="material-symbols-outlined" aria-hidden="true">update</span>
+      更新于 2026-08-22 23:07
+    </div>
+    
+  </header>
+
+
+
+        <!-- Post content -->
+        <div
+          class="post-content markdown-body custom-md"
+          itemprop="articleBody"
+        >
+          
+        </div>
+
+        <!-- Post license / copyright -->
         
           
 
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/22/eded/">eded</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-22" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-22</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">asdad</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        1 min
-      </span>
-      
-    </div>
+<!-- Support & Share Widget -->
+<div class="post-share-donate-box">
+  <div class="share-donate-left-icon">
+    <span class="material-symbols-outlined">favorite</span>
   </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/22/eded/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
+  <div class="share-donate-content">
+    <div class="share-donate-title">支持与分享</div>
+    <div class="share-donate-desc">如果这篇文章对你有帮助，欢迎分享给更多人或打赏支持！</div>
+  </div>
+  <div class="share-donate-actions">
+    <button class="share-donate-btn share-btn-outline" id="share-post-btn">
+      <span class="material-symbols-outlined">share</span>
+      <span>分享</span>
+    </button>
+    <a href="/donate/" class="share-donate-btn donate-btn-filled">
+      <span>打赏</span>
+      <span class="material-symbols-outlined">arrow_right_alt</span>
     </a>
   </div>
-  
-</article>
+</div>
 
+<!-- Copyright Card -->
+<div class="post-copyright-box">
+  <div class="copyright-watermark">CC</div>
+  <div class="copyright-header">
+    <span class="copyright-title">rt</span>
+    <a class="copyright-link" href="https://www.blog-x.cc.cd/2026/08/22/rt/" target="_blank" rel="noopener noreferrer">
+      https://www.blog-x.cc.cd/2026/08/22/rt/
+    </a>
+  </div>
+  <div class="copyright-meta">
+    <div class="copyright-meta-item">
+      <span class="meta-label">author</span>
+      <span class="meta-value">John Doe</span>
+    </div>
+    <div class="copyright-meta-item">
+      <span class="meta-label">发布于</span>
+      <span class="meta-value">2026-08-22</span>
+    </div>
+    <div class="copyright-meta-item">
+      <span class="meta-label">许可协议</span>
+      <span class="meta-value">
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener noreferrer">
+          CC BY-NC-SA 4.0
+        </a>
+      </span>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const shareBtn = document.getElementById('share-post-btn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', function() {
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        showToast('链接已复制到剪贴板，快去分享给好友吧！');
+      }).catch(function() {
+        showToast('复制失败，请手动复制链接');
+      });
+    });
+  }
+  
+  function showToast(message) {
+    let toast = document.getElementById('firefly-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'firefly-toast';
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(1rem);
+        background: oklch(0.25 0.12 var(--hue));
+        color: #fff;
+        padding: 0.65rem 1.5rem;
+        border-radius: 9999px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        font-size: 0.875rem;
+        font-weight: 600;
+        z-index: 99999;
+        opacity: 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+      `;
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    setTimeout(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+    }, 50);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(1rem)';
+    }, 2500);
+  }
+});
+</script>
+
+        
+
+        <!-- Post meta bottom: tags, last modified -->
+        
+
+<footer class="post-meta-bottom">
+  <!-- Tags list -->
+  
+
+  <!-- Categories list at bottom -->
+  
+
+  <!-- Last modified date -->
+  
+  <div class="post-last-modified">
+    <span class="material-symbols-outlined" aria-hidden="true">edit</span>
+    最后编辑于 2026-08-22 23:07
+  </div>
+  
+</footer>
+
+      </div>
+
+      <!-- Share buttons -->
+      
+
+      <!-- Footer widgets (Alert, Prev/Next Navigation, Smart Related & Random Articles) -->
+      
+
+<div class="post-footer-widgets">
+  <!-- Warning Info Alert -->
+  
+
+  <!-- Prev / Next Navigation -->
+  <nav class="post-footer-navigation">
+    <div class="post-nav-card-wrapper">
+      
+      <div class="post-nav-card card-base prev-nav-card disabled">
+        <span class="material-symbols-outlined nav-arrow">chevron_left</span>
+        <span class="nav-card-title">没有更早的文章了</span>
+      </div>
+      
+    </div>
+    <div class="post-nav-card-wrapper">
+      
+      <a href="/2026/08/22/eded/" class="post-nav-card card-base next-nav-card" title="eded">
+        <span class="nav-card-title">eded</span>
+        <span class="material-symbols-outlined nav-arrow">chevron_right</span>
+      </a>
+      
+    </div>
+  </nav>
+
+  <!-- Side-by-Side Recommendations Grid -->
+  <div class="post-recommendations-row">
+    <!-- Left Column: Related Posts -->
+    <div class="recommendations-column card-base">
+      <div class="recommendations-column-header">
+        <div class="column-header-title">
+          <span class="material-symbols-outlined">schema</span>
+          <h3>相关文章</h3>
+        </div>
+        <span class="recommend-badge smart-badge">智能推荐</span>
+      </div>
+      <ul class="recommend-list">
         
           
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/22/22/">22</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-22" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-22</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        1 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/22/22/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
+          <li>
+            <a href="/2026/08/22/eded/" class="recommend-item">
+              <span class="recommend-index-badge first-index">1</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">eded</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">asdad...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
         
           
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/22/hello-%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/">hello,我的第一篇文章</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-22" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-22</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">hello今天自己尝试部署玩一下</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        1 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/22/hello-%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
+          <li>
+            <a href="/2026/08/22/22/" class="recommend-item">
+              <span class="recommend-index-badge ">2</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">22</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
         
           
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/22/hello-world/">Hello World</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-22" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-22</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        1 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/22/hello-world/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
+          <li>
+            <a href="/2026/08/22/hello-%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" class="recommend-item">
+              <span class="recommend-index-badge ">3</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">hello,我的第一篇文章</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">hello今天自己尝试部署玩一下...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
         
-      
+          
+          <li>
+            <a href="/2026/08/22/hello-world/" class="recommend-item">
+              <span class="recommend-index-badge ">4</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">Hello World</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">Welcome to Hexo! This is your very...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+      </ul>
     </div>
 
-    <!-- Pagination -->
+    <!-- Right Column: Random Posts -->
+    <div class="recommendations-column card-base">
+      <div class="recommendations-column-header">
+        <div class="column-header-title">
+          <span class="material-symbols-outlined">explore</span>
+          <h3>随机文章</h3>
+        </div>
+        <span class="recommend-badge random-badge">随机推荐</span>
+      </div>
+      <ul class="recommend-list">
+        
+          
+          <li>
+            <a href="/2026/08/22/hello-%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" class="recommend-item">
+              <span class="recommend-index-badge first-index">1</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">hello,我的第一篇文章</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">hello今天自己尝试部署玩一下...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/22/22/" class="recommend-item">
+              <span class="recommend-index-badge ">2</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">22</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/22/hello-world/" class="recommend-item">
+              <span class="recommend-index-badge ">3</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">Hello World</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">Welcome to Hexo! This is your very...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/22/eded/" class="recommend-item">
+              <span class="recommend-index-badge ">4</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">eded</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">asdad...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+    </article>
+
+    <!-- Comments section -->
     
+    <section class="post-comments" aria-label="评论">
+      
+<div class="comments-container">
+  <div class="comments-title">评论</div>
+  <div class="giscus-wrapper">
+    <script src="https://giscus.app/client.js"
+      data-repo="lkdenchin/hexo-blog-comments"
+      data-repo-id="R_kgDORXaOrA"
+      data-category="Announcements"
+      data-category-id="DIC_kwDORXaOrM4C3F8Y"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="1"
+      data-input-position="top"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
 
 
-
+    </section>
+    
   </main>
 
   <!-- ===== Right Sidebar ===== -->
   
   <aside class="sidebar-right" aria-label="右侧边栏">
     
+      
 
 <!-- Right sidebar widgets -->
 <div class="sidebar-widgets sidebar-right-widgets">
@@ -1740,6 +1892,23 @@ document.addEventListener('DOMContentLoaded', function() {
   
 </div>
 
+    
+    
+      
+
+
+<div id="toc" class="toc-widget">
+  <div class="toc-header">
+    <span>目录</span>
+  </div>
+  <div class="toc-body" id="toc-body">
+    <!-- Populated by client-side JavaScript -->
+  </div>
+</div>
+
+
+    
+    
   </aside>
   
 
@@ -2142,6 +2311,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
+
+  <!-- Floating TOC (always available via JS, appears as a floating widget on scroll) -->
+  
 
   
 
