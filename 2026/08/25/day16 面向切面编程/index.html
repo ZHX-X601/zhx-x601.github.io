@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 
-<title>Hexo</title>
+<title>day16 面向切面编程 - Hexo</title>
 
 
 
@@ -14,10 +14,10 @@
 
 
 <!-- Open Graph -->
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="day16 面向切面编程 - Hexo">
 <meta property="og:description" content="">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.blog-x.cc.cd">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.blog-x.cc.cd/2026/08/25/day16%20%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/">
 <meta property="og:site_name" content="Hexo">
 
 <meta property="og:image" content="/img/favicon.ico">
@@ -25,7 +25,7 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="day16 面向切面编程 - Hexo">
 <meta name="twitter:description" content="">
 
 <meta name="twitter:image" content="/img/favicon.ico">
@@ -101,13 +101,13 @@
 
 
 <!-- Canonical URL -->
-<link rel="canonical" href="https://www.blog-x.cc.cd">
+<link rel="canonical" href="https://www.blog-x.cc.cd/2026/08/25/day16%20%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/">
 
 <!-- No-Referrer Domain Script -->
 
 
 <meta name="generator" content="Hexo 8.1.2"></head>
-<body class="min-h-screen is-home sticky-navbar enable-card-border " style="--bannerOffset: 15vh; --banner-height-home: 73vh; --banner-height: 67vh; --configHue: 165; --page-width: 100rem;">
+<body class="min-h-screen  sticky-navbar enable-card-border " style="--bannerOffset: 15vh; --banner-height-home: 73vh; --banner-height: 67vh; --configHue: 165; --page-width: 100rem;">
   <script>
     (function() {
       var BANNER_HEIGHT_EXTEND = 6;
@@ -238,7 +238,7 @@
       <ul class="navbar-links">
         <!-- Home (LinkPreset.Home) -->
         <li class="navbar-link-item" role="none">
-          <a href="/" class="navbar-link active" role="menuitem">
+          <a href="/" class="navbar-link" role="menuitem">
             <span class="navbar-link-content">
               <span class="material-symbols-outlined">home</span>
               <span>首页</span>
@@ -481,17 +481,36 @@
   <!-- Banner Overlay Container -->
   <div id="banner-overlay-container">
     
-    <!-- Home Page Text Overlay -->
-    <div class="home-text-overlay">
-      
-      <h1 class="home-text-title">Lovely firefly!</h1>
-      
-      
-      <span class="typewriter home-text-subtitle" data-text="In Reddened Chrysalis, I Once Rest">In Reddened Chrysalis, I Once Rest</span>
-      
-    </div>
-    
 
+    
+    <!-- Post Meta Overlay -->
+    <div class="post-meta-overlay banner-post-meta">
+      <h1 class="post-meta-title">day16 面向切面编程</h1>
+      <div class="post-meta-info meta-info">
+        
+        <span class="post-meta-date">
+          <span class="material-symbols-outlined md-18">calendar_today</span>
+          发布于: 2026-08-25
+        </span>
+        
+        
+        <span class="post-meta-updated">
+          <span class="material-symbols-outlined md-18">edit</span>
+          更新于: 2026-08-25 11:44
+        </span>
+        
+        
+        <span class="post-meta-word-count">
+          <span class="material-symbols-outlined md-18">description</span>
+          10884 字
+        </span>
+        <span class="post-meta-reading-time">
+          <span class="material-symbols-outlined md-18">schedule</span>
+          22 min
+        </span>
+        
+      </div>
+    </div>
     
 
     
@@ -519,7 +538,7 @@
 
 
   <!-- Main Content Area with grid wrappers -->
-  <div id="main-content-wrapper" class="absolute w-full z-30 pointer-events-none ">
+  <div id="main-content-wrapper" class="absolute w-full z-30 pointer-events-none mobile-main-no-banner">
     <div class="relative w-full xl:w-[92vw] max-w-[var(--page-width)] mx-auto pointer-events-auto">
       
 
@@ -528,6 +547,7 @@
   
   <aside class="sidebar-left" aria-label="左侧边栏">
     
+      
 
 <!-- Left sidebar widgets -->
 <div class="sidebar-widgets sidebar-left-widgets">
@@ -747,20 +767,23 @@
   
 </div>
 
+    
+    
+    
+      
+
+
+
+    
   </aside>
   
 
   <!-- ===== Main Content ===== -->
-  <main
-    id="main-content"
-    class="post-list-container"
-    data-layout="list"
-    aria-label="文章列表"
-  >
+  <main id="main-content" aria-label="文章">
     
 <div class="content-nav-bar card-base">
   <!-- Home button -->
-  <a href="/" class="content-nav-item content-nav-home active" aria-label="Home" title="首页">
+  <a href="/" class="content-nav-item content-nav-home" aria-label="Home" title="首页">
     <span class="material-symbols-outlined">home</span>
   </a>
   
@@ -775,711 +798,735 @@
 
   <!-- Layout Toggle (right-aligned spacer + buttons) -->
   
-  <span class="content-nav-spacer"></span>
-  <div class="layout-buttons" style="display:flex;gap:0.25rem;">
-    <button data-layout="list" class="active" title="列表">
-      <span class="material-symbols-outlined">view_list</span>
-    </button>
-    <button data-layout="grid" class="" title="网格">
-      <span class="material-symbols-outlined">grid_view</span>
-    </button>
-  </div>
-  
 </div>
 
-    <!-- Category navigation bar at top (if enabled) -->
-    
+    <article class="post-container" itemscope itemtype="http://schema.org/Article">
 
-    <!-- Page title (shown on paginated pages > 1 or when configured) -->
-    
 
-    <!-- Post list -->
-    <div class="post-list" data-mode="list">
-      
+      <div class="post-content-card">
+        <!-- Post meta top: title, date, author, reading time, word count, categories -->
         
+
+
+  <header class="post-meta-top">
+    <!-- Top row: Word count & Reading time pills -->
+    <div class="post-header-badges-top">
+      
+      <span class="post-meta-badge badge-wordcount">
+        <span class="material-symbols-outlined" aria-hidden="true">trending_up</span>
+        <span>10884 字</span>
+      </span>
+      
+
+      
+      <span class="post-meta-badge badge-reading-time">
+        <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+        <span>
           
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/hello/">hello</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        1 min
+          
+          28 分钟
+        </span>
       </span>
       
     </div>
-  </div>
 
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/hello/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
+    <!-- Title with CSS-styled vertical bar prefix -->
+    <h1 class="post-title post-title-custom">
+      <strong>day16 面向切面编程</strong>
+    </h1>
 
+    <!-- Bottom row: Date & Categories/Tags path -->
+    <div class="post-header-badges-bottom">
+      
+      <span class="post-meta-badge badge-date">
+        <span class="material-symbols-outlined" aria-hidden="true">calendar_month</span>
+        <time datetime="2026-08-25 11:29" pubdate>
+          2026-08-25
+        </time>
+      </span>
+      
+
+      <!-- Categories & Tags Breadcrumb Path -->
+      
+      
+    </div>
+
+    <!-- Post updated notice -->
+    
+    <div class="post-updated-note">
+      <span class="material-symbols-outlined" aria-hidden="true">update</span>
+      更新于 2026-08-25 11:44
+    </div>
+    
+  </header>
+
+
+
+        <!-- Post content -->
+        <div
+          class="post-content markdown-body custom-md"
+          itemprop="articleBody"
+        >
+          <h1 id="实战总结：AOP-面向切面编程"><a href="#实战总结：AOP-面向切面编程" class="headerlink" title="实战总结：AOP 面向切面编程"></a>实战总结：AOP 面向切面编程</h1><blockquote>
+<p>本文是对《13-后端Web进阶(AOP)》的总结，记录 AOP 的核心概念、通知类型、切入点表达式以及在项目中的实战应用（操作日志记录）。<br>项目地址：<code>project/tlias-web-management</code>（SpringBoot + AOP）<br>对应讲义：<code>讲义/13-后端Web进阶(AOP).md</code></p>
+</blockquote>
+<hr>
+<h2 id="一、AOP-核心概念"><a href="#一、AOP-核心概念" class="headerlink" title="一、AOP 核心概念"></a>一、AOP 核心概念</h2><h3 id="1-什么是-AOP"><a href="#1-什么是-AOP" class="headerlink" title="1. 什么是 AOP"></a>1. 什么是 AOP</h3><p><strong>AOP (Aspect Oriented Programming)</strong> 即面向切面编程，是一种通过分离横切关注点（如日志、安全、事务等）来提高代码模块化程度的编程范式。</p>
+<p><strong>核心优势</strong>：</p>
+<ul>
+<li><strong>代码无侵入</strong>：在不修改原有业务代码的前提下，对功能进行增强。</li>
+<li><strong>减少重复代码</strong>：将通用逻辑（如日志记录、权限校验）抽取出来，避免在每个业务方法中重复编写。</li>
+<li><strong>提高开发效率与维护性</strong>：通用逻辑集中管理，修改时只需改一处。</li>
+</ul>
+<h3 id="2-核心术语"><a href="#2-核心术语" class="headerlink" title="2. 核心术语"></a>2. 核心术语</h3><table>
+<thead>
+<tr>
+<th>术语</th>
+<th>英文</th>
+<th>描述</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>连接点</strong></td>
+<td>JoinPoint</td>
+<td>可以被 AOP 控制的方法</td>
+<td>业务层的 <code>list()</code>, <code>delete()</code> 方法</td>
+</tr>
+<tr>
+<td><strong>通知</strong></td>
+<td>Advice</td>
+<td>共性功能（重复逻辑）</td>
+<td>记录方法执行耗时的代码</td>
+</tr>
+<tr>
+<td><strong>切入点</strong></td>
+<td>Pointcut</td>
+<td>匹配连接点的条件，决定在哪些方法上应用通知</td>
+<td><code>execution(* com.zhang.service.*.*(..))</code></td>
+</tr>
+<tr>
+<td><strong>切面</strong></td>
+<td>Aspect</td>
+<td>通知 + 切入点的组合</td>
+<td>日志切面 &#x3D; 记录耗时逻辑 + 匹配业务方法的规则</td>
+</tr>
+<tr>
+<td><strong>目标对象</strong></td>
+<td>Target</td>
+<td>被增强的原始对象</td>
+<td><code>DeptServiceImpl</code> 实例</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>关系总结</strong>：在<strong>切入点</strong>指定的<strong>连接点</strong>上，执行<strong>通知</strong>定义的逻辑，这个组合形成了<strong>切面</strong>，作用于<strong>目标对象</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="二、通知类型详解"><a href="#二、通知类型详解" class="headerlink" title="二、通知类型详解"></a>二、通知类型详解</h2><h3 id="1-五种通知类型"><a href="#1-五种通知类型" class="headerlink" title="1. 五种通知类型"></a>1. 五种通知类型</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>注解</th>
+<th>执行时机</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>前置通知</strong></td>
+<td><code>@Before</code></td>
+<td>目标方法执行<strong>前</strong></td>
+<td>常用于参数校验、权限检查</td>
+</tr>
+<tr>
+<td><strong>后置通知</strong></td>
+<td><code>@After</code></td>
+<td>目标方法执行<strong>后</strong>（无论是否异常）</td>
+<td>常用于释放资源、清理操作</td>
+</tr>
+<tr>
+<td><strong>返回后通知</strong></td>
+<td><code>@AfterReturning</code></td>
+<td>目标方法执行<strong>后</strong>（无异常时）</td>
+<td>常用于获取返回值、成功日志</td>
+</tr>
+<tr>
+<td><strong>异常通知</strong></td>
+<td><code>@AfterThrowing</code></td>
+<td>目标方法执行<strong>后</strong>（有异常时）</td>
+<td>常用于异常处理、失败日志</td>
+</tr>
+<tr>
+<td><strong>环绕通知</strong></td>
+<td><code>@Around</code></td>
+<td>目标方法执行<strong>前和后</strong></td>
+<td>功能最强大，可控制方法是否执行，获取返回值</td>
+</tr>
+</tbody></table>
+<h3 id="2-执行顺序表"><a href="#2-执行顺序表" class="headerlink" title="2. 执行顺序表"></a>2. 执行顺序表</h3><h4 id="正常执行（无异常）"><a href="#正常执行（无异常）" class="headerlink" title="正常执行（无异常）"></a>正常执行（无异常）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. @Around (前置部分)</span><br><span class="line">2. @Before</span><br><span class="line">3. 目标方法执行</span><br><span class="line">4. @Around (后置部分)</span><br><span class="line">5. @AfterReturning</span><br><span class="line">6. @After</span><br></pre></td></tr></table></figure>
+
+<h4 id="异常执行（有异常）"><a href="#异常执行（有异常）" class="headerlink" title="异常执行（有异常）"></a>异常执行（有异常）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. @Around (前置部分)</span><br><span class="line">2. @Before</span><br><span class="line">3. 目标方法执行 (抛出异常)</span><br><span class="line">4. @Around (后置部分 - **不执行**)</span><br><span class="line">5. @AfterReturning (**不执行**)</span><br><span class="line">6. @AfterThrowing (执行)</span><br><span class="line">7. @After (执行)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：<code>@Around</code> 环绕通知中，若在 <code>pjp.proceed()</code> 前后的代码，当目标方法抛出异常时，<code>proceed()</code> 后的代码不会执行（除非捕获异常）。</p>
+</blockquote>
+<h3 id="3-代码示例"><a href="#3-代码示例" class="headerlink" title="3. 代码示例"></a>3. 代码示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAspect</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1. 前置通知</span></span><br><span class="line">    <span class="meta">@Before(&quot;execution(* com.zhang.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">before</span><span class="params">(JoinPoint joinPoint)</span> &#123;</span><br><span class="line">        log.info(<span class="string">&quot;Before: 方法执行前...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 后置通知</span></span><br><span class="line">    <span class="meta">@After(&quot;execution(* com.zhang.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">after</span><span class="params">(JoinPoint joinPoint)</span> &#123;</span><br><span class="line">        log.info(<span class="string">&quot;After: 方法执行后...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 返回后通知</span></span><br><span class="line">    <span class="meta">@AfterReturning(&quot;execution(* com.zhang.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">afterReturning</span><span class="params">(JoinPoint joinPoint)</span> &#123;</span><br><span class="line">        log.info(<span class="string">&quot;AfterReturning: 方法返回后...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4. 异常通知</span></span><br><span class="line">    <span class="meta">@AfterThrowing(&quot;execution(* com.zhang.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">afterThrowing</span><span class="params">(JoinPoint joinPoint)</span> &#123;</span><br><span class="line">        log.info(<span class="string">&quot;AfterThrowing: 方法异常时...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 5. 环绕通知 (最常用)</span></span><br><span class="line">    <span class="meta">@Around(&quot;execution(* com.zhang.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">Object</span> <span class="title function_">around</span><span class="params">(ProceedingJoinPoint pjp)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        log.info(<span class="string">&quot;Around Before: 进入方法...&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            result = pjp.proceed(); <span class="comment">// 执行目标方法</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            log.info(<span class="string">&quot;Around Exception: 方法异常...&quot;</span>);</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        log.info(<span class="string">&quot;Around After: 方法结束...&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-通知优先级-Order"><a href="#4-通知优先级-Order" class="headerlink" title="4. 通知优先级 (@Order)"></a>4. 通知优先级 (<code>@Order</code>)</h3><p>当多个切面或多个通知匹配同一个方法时，执行顺序由 <code>@Order</code> 注解控制：</p>
+<ul>
+<li><strong>值越小，优先级越高</strong></li>
+<li><strong>前置通知</strong>：优先级高的先执行</li>
+<li><strong>后置通知</strong>：优先级高的后执行（先进后出，类似栈结构）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order(1)</span> <span class="comment">// 优先级最高</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAspect1</span> &#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order(2)</span> <span class="comment">// 优先级次之</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAspect2</span> &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="三、切入点表达式"><a href="#三、切入点表达式" class="headerlink" title="三、切入点表达式"></a>三、切入点表达式</h2><h3 id="1-两种匹配方式"><a href="#1-两种匹配方式" class="headerlink" title="1. 两种匹配方式"></a>1. 两种匹配方式</h3><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>语法</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>execution</strong></td>
+<td><code>execution(modifiers-pattern? ret-type-pattern declaring-type-pattern? name-pattern(param-pattern) throws-pattern?)</code></td>
+<td>基于方法签名（类名、方法名、参数）匹配</td>
+</tr>
+<tr>
+<td><strong>@annotation</strong></td>
+<td><code>@annotation(annotation-type)</code></td>
+<td>基于自定义注解匹配</td>
+</tr>
+</tbody></table>
+<h3 id="2-execution-表达式详解"><a href="#2-execution-表达式详解" class="headerlink" title="2. execution 表达式详解"></a>2. execution 表达式详解</h3><p><strong>语法结构</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(访问修饰符? 返回值 包名.类名.?方法名(参数) throws 异常?)</span><br></pre></td></tr></table></figure>
+
+<p><strong>通配符</strong>：</p>
+<ul>
+<li><code>*</code>：匹配任意单个字符</li>
+<li><code>..</code>：匹配任意数量的字符或包</li>
+<li><code>?</code>：表示该项可选</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>execution(* com.zhang.service.*.*(..))</code></td>
+<td>匹配 <code>com.zhang.service</code> 包下所有类的所有方法</td>
+</tr>
+<tr>
+<td><code>execution(* com.zhang.service.impl.DeptServiceImpl.*(..))</code></td>
+<td>匹配 <code>DeptServiceImpl</code> 类的所有方法</td>
+</tr>
+<tr>
+<td><code>execution(* com.zhang.service.*.*(String, Integer))</code></td>
+<td>匹配参数为 String 和 Integer 的方法</td>
+</tr>
+<tr>
+<td><code>execution(void com.zhang.service.*.delete(*))</code></td>
+<td>匹配返回值为 void，方法名为 delete，一个参数的方法</td>
+</tr>
+</tbody></table>
+<h3 id="3-annotation-注解匹配"><a href="#3-annotation-注解匹配" class="headerlink" title="3. @annotation 注解匹配"></a>3. @annotation 注解匹配</h3><p><strong>适用场景</strong>：当需要增强的方法名无规律时，通过自定义注解来标记哪些方法需要被拦截。</p>
+<p><strong>实现步骤</strong>：</p>
+<ol>
+<li>创建自定义注解</li>
+<li>在需要增强的方法上添加该注解</li>
+<li>切面类中使用 <code>@annotation</code> 匹配</li>
+</ol>
+<p><strong>代码示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 创建自定义注解</span></span><br><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> LogOperation &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 在业务方法上添加注解</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeptController</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@LogOperation</span> <span class="comment">// 标记此方法需要记录日志</span></span><br><span class="line">    <span class="meta">@PostMapping</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">Result</span> <span class="title function_">save</span><span class="params">(<span class="meta">@RequestBody</span> Dept dept)</span> &#123;</span><br><span class="line">        deptService.save(dept);</span><br><span class="line">        <span class="keyword">return</span> Result.success();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 切面类使用 @annotation 匹配</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OperationLogAspect</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 使用 @annotation 匹配带有 @LogOperation 注解的方法</span></span><br><span class="line">    <span class="meta">@Around(&quot;@annotation(com.zhang.anno.LogOperation)&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">Object</span> <span class="title function_">around</span><span class="params">(ProceedingJoinPoint pjp)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="comment">// ... 记录日志逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="四、项目实战：操作日志记录"><a href="#四、项目实战：操作日志记录" class="headerlink" title="四、项目实战：操作日志记录"></a>四、项目实战：操作日志记录</h2><h3 id="1-需求分析"><a href="#1-需求分析" class="headerlink" title="1. 需求分析"></a>1. 需求分析</h3><p><strong>需求</strong>：记录 Tlias 系统中所有增、删、改操作的日志，便于后期数据追踪。</p>
+<p><strong>日志内容</strong>：</p>
+<ul>
+<li>操作人 ID</li>
+<li>操作时间</li>
+<li>操作类名</li>
+<li>操作方法名</li>
+<li>方法参数</li>
+<li>返回值</li>
+<li>执行耗时</li>
+</ul>
+<p><strong>技术选型</strong>：</p>
+<ul>
+<li><strong>通知类型</strong>：<code>@Around</code> 环绕通知（需要获取方法执行前后的信息）</li>
+<li><strong>切入点</strong>：<code>@annotation</code> 注解匹配（增删改方法名无统一前缀）</li>
+</ul>
+<h3 id="2-项目实现代码"><a href="#2-项目实现代码" class="headerlink" title="2. 项目实现代码"></a>2. 项目实现代码</h3><h4 id="①-自定义注解-LogOperation"><a href="#①-自定义注解-LogOperation" class="headerlink" title="① 自定义注解 @LogOperation"></a>① 自定义注解 <code>@LogOperation</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件：com.zhang.anno.LogOperation</span></span><br><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> LogOperation &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="②-日志实体类-OperateLog"><a href="#②-日志实体类-OperateLog" class="headerlink" title="② 日志实体类 OperateLog"></a>② 日志实体类 <code>OperateLog</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件：com.zhang.pojo.OperateLog</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OperateLog</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;             <span class="comment">// 主键</span></span><br><span class="line">    <span class="keyword">private</span> Integer operateEmpId;  <span class="comment">// 操作人ID</span></span><br><span class="line">    <span class="keyword">private</span> LocalDateTime operateTime; <span class="comment">// 操作时间</span></span><br><span class="line">    <span class="keyword">private</span> String className;      <span class="comment">// 操作类名</span></span><br><span class="line">    <span class="keyword">private</span> String methodName;     <span class="comment">// 操作方法名</span></span><br><span class="line">    <span class="keyword">private</span> String methodParams;   <span class="comment">// 方法参数</span></span><br><span class="line">    <span class="keyword">private</span> String returnValue;    <span class="comment">// 返回值</span></span><br><span class="line">    <span class="keyword">private</span> Long costTime;         <span class="comment">// 执行耗时（毫秒）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="③-Mapper-接口-OperateLogMapper"><a href="#③-Mapper-接口-OperateLogMapper" class="headerlink" title="③ Mapper 接口 OperateLogMapper"></a>③ Mapper 接口 <code>OperateLogMapper</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件：com.zhang.mapper.OperateLogMapper</span></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">OperateLogMapper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Insert(&quot;INSERT INTO operate_log(operate_emp_id, operate_time, class_name, method_name, method_params, return_value, cost_time) &quot; +</span></span><br><span class="line"><span class="meta">            &quot;VALUES(#&#123;operateEmpId&#125;, #&#123;operateTime&#125;, #&#123;className&#125;, #&#123;methodName&#125;, #&#123;methodParams&#125;, #&#123;returnValue&#125;, #&#123;costTime&#125;)&quot;)</span></span><br><span class="line">    <span class="type">void</span> <span class="title function_">insert</span><span class="params">(OperateLog log)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="④-切面类-OperationLogAspect（核心）"><a href="#④-切面类-OperationLogAspect（核心）" class="headerlink" title="④ 切面类 OperationLogAspect（核心）"></a>④ 切面类 <code>OperationLogAspect</code>（核心）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件：com.zhang.aop.OperationLogAspect</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OperationLogAspect</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OperateLogMapper operateLogMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Around(&quot;@annotation(com.zhang.anno.LogOperation)&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">Object</span> <span class="title function_">around</span><span class="params">(ProceedingJoinPoint pjp)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">startTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        </span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            result = pjp.proceed(); <span class="comment">// 执行目标方法</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            <span class="comment">// 异常时也要记录日志，继续抛出异常</span></span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="type">long</span> <span class="variable">endTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">            <span class="type">long</span> <span class="variable">costTime</span> <span class="operator">=</span> endTime - startTime;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 构建日志对象</span></span><br><span class="line">            <span class="type">OperateLog</span> <span class="variable">log</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OperateLog</span>();</span><br><span class="line">            log.setOperateEmpId(CurrentHolder.getCurrentId()); <span class="comment">// 从 ThreadLocal 获取当前用户ID</span></span><br><span class="line">            log.setOperateTime(LocalDateTime.now());</span><br><span class="line">            log.setClassName(pjp.getTarget().getClass().getName());</span><br><span class="line">            log.setMethodName(pjp.getSignature().getName());</span><br><span class="line">            log.setMethodParams(Arrays.toString(pjp.getArgs()));</span><br><span class="line">            log.setReturnValue(result != <span class="literal">null</span> ? result.toString() : <span class="literal">null</span>); <span class="comment">// ⚠ 注意空指针判断</span></span><br><span class="line">            log.setCostTime(costTime);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 保存日志到数据库</span></span><br><span class="line">            operateLogMapper.insert(log);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="⑤-获取当前用户-ID（CurrentHolder）"><a href="#⑤-获取当前用户-ID（CurrentHolder）" class="headerlink" title="⑤ 获取当前用户 ID（CurrentHolder）"></a>⑤ 获取当前用户 ID（<code>CurrentHolder</code>）</h4><p>由于 AOP 切面无法直接获取 HttpServletRequest 中的登录信息，需要通过 <code>ThreadLocal</code> 在拦截器和切面之间传递数据。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件：com.zhang.utils.CurrentHolder</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CurrentHolder</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">ThreadLocal</span>&lt;Integer&gt; <span class="variable">CURRENT_LOCAL</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ThreadLocal</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">Integer</span> <span class="title function_">getCurrentId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> CURRENT_LOCAL.get();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">setCurrentId</span><span class="params">(Integer id)</span> &#123;</span><br><span class="line">        CURRENT_LOCAL.set(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">remove</span><span class="params">()</span> &#123;</span><br><span class="line">        CURRENT_LOCAL.remove();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>在登录拦截器中设置用户 ID</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TokenInterceptor.preHandle() 方法中</span></span><br><span class="line"><span class="type">Integer</span> <span class="variable">userId</span> <span class="operator">=</span> <span class="comment">/* 从 token 解析出的用户ID */</span>;</span><br><span class="line">CurrentHolder.setCurrentId(userId);</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 继续执行...</span></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    CurrentHolder.remove(); <span class="comment">// 必须清理，防止内存泄漏</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="⑥-在-Controller-中添加注解"><a href="#⑥-在-Controller-中添加注解" class="headerlink" title="⑥ 在 Controller 中添加注解"></a>⑥ 在 Controller 中添加注解</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件：com.zhang.controller.DeptController</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/depts&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeptController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DeptService deptService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@LogOperation</span> <span class="comment">// 新增部门</span></span><br><span class="line">    <span class="meta">@PostMapping</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">Result</span> <span class="title function_">save</span><span class="params">(<span class="meta">@RequestBody</span> Dept dept)</span> &#123;</span><br><span class="line">        deptService.save(dept);</span><br><span class="line">        <span class="keyword">return</span> Result.success();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@LogOperation</span> <span class="comment">// 修改部门</span></span><br><span class="line">    <span class="meta">@PutMapping</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">Result</span> <span class="title function_">update</span><span class="params">(<span class="meta">@RequestBody</span> Dept dept)</span> &#123;</span><br><span class="line">        deptService.update(dept);</span><br><span class="line">        <span class="keyword">return</span> Result.success();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@LogOperation</span> <span class="comment">// 删除部门</span></span><br><span class="line">    <span class="meta">@DeleteMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">Result</span> <span class="title function_">delete</span><span class="params">(<span class="meta">@PathVariable</span> Integer id)</span> &#123;</span><br><span class="line">        deptService.deleteById(id);</span><br><span class="line">        <span class="keyword">return</span> Result.success();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="五、项目文件清单"><a href="#五、项目文件清单" class="headerlink" title="五、项目文件清单"></a>五、项目文件清单</h2><table>
+<thead>
+<tr>
+<th>层</th>
+<th>全限定类名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>anno</td>
+<td><code>com.zhang.anno.LogOperation</code></td>
+<td>自定义注解，标记需要记录日志的方法</td>
+</tr>
+<tr>
+<td>pojo</td>
+<td><code>com.zhang.pojo.OperateLog</code></td>
+<td>日志实体类</td>
+</tr>
+<tr>
+<td>mapper</td>
+<td><code>com.zhang.mapper.OperateLogMapper</code></td>
+<td>日志持久化接口</td>
+</tr>
+<tr>
+<td>aop</td>
+<td><code>com.zhang.aop.OperationLogAspect</code></td>
+<td>AOP 切面类，核心逻辑</td>
+</tr>
+<tr>
+<td>utils</td>
+<td><code>com.zhang.utils.CurrentHolder</code></td>
+<td>ThreadLocal 工具类，传递用户 ID</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="六、易错点-复习提醒"><a href="#六、易错点-复习提醒" class="headerlink" title="六、易错点 &amp; 复习提醒"></a>六、易错点 &amp; 复习提醒</h2><h3 id="1-环绕通知的-proceed-调用"><a href="#1-环绕通知的-proceed-调用" class="headerlink" title="1. 环绕通知的 proceed() 调用"></a>1. 环绕通知的 <code>proceed()</code> 调用</h3><ul>
+<li><strong>必须调用</strong> <code>pjp.proceed()</code> 才能执行原始方法，否则原始方法不会执行。</li>
+<li><strong>必须返回</strong> <code>proceed()</code> 的返回值，否则原始方法的返回值会丢失。</li>
+<li>当原始方法抛出异常时，<code>proceed()</code> 后的代码不会执行（除非用 try-catch 包裹）。</li>
+</ul>
+<h3 id="2-返回值空指针风险"><a href="#2-返回值空指针风险" class="headerlink" title="2. 返回值空指针风险"></a>2. 返回值空指针风险</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误写法</span></span><br><span class="line">log.setReturnValue(result.toString()); <span class="comment">// 当 result 为 null 时，抛出 NullPointerException</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确写法</span></span><br><span class="line">log.setReturnValue(result != <span class="literal">null</span> ? result.toString() : <span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>对于 void 返回值的方法，<code>result</code> 可能为 null，需要做空判断。</p>
+<h3 id="3-ThreadLocal-内存泄漏"><a href="#3-ThreadLocal-内存泄漏" class="headerlink" title="3. ThreadLocal 内存泄漏"></a>3. ThreadLocal 内存泄漏</h3><p><code>CurrentHolder</code> 使用 <code>ThreadLocal</code> 时，必须在使用完毕后调用 <code>remove()</code> 方法清理，否则会造成内存泄漏。</p>
+<h3 id="4-切入点表达式书写规范"><a href="#4-切入点表达式书写规范" class="headerlink" title="4. 切入点表达式书写规范"></a>4. 切入点表达式书写规范</h3><ul>
+<li><strong>优先使用接口</strong>：<code>execution(* com.zhang.service.DeptService.*(..))</code> 比使用实现类更好，提高可扩展性。</li>
+<li><strong>缩小匹配范围</strong>：避免使用 <code>..</code> 匹配所有包，应尽可能精确指定包路径。</li>
+<li><strong>注释清晰</strong>：在切面类中注释该切面的功能，方便后期维护。</li>
+</ul>
+<h3 id="5-AOP-与事务的关系"><a href="#5-AOP-与事务的关系" class="headerlink" title="5. AOP 与事务的关系"></a>5. AOP 与事务的关系</h3><p>Spring 的 <code>@Transactional</code> 注解底层也是基于 AOP 实现的。在使用自定义 AOP 时，需要注意事务注解的顺序，确保数据一致性。</p>
+<h3 id="6-切面类必须是-Spring-Bean"><a href="#6-切面类必须是-Spring-Bean" class="headerlink" title="6. 切面类必须是 Spring Bean"></a>6. 切面类必须是 Spring Bean</h3><p>切面类必须添加 <code>@Component</code> 或其他注解，使其成为 Spring 管理的 Bean，否则切面不会生效。</p>
+<hr>
+<h2 id="七、一图回顾-AOP-流程"><a href="#七、一图回顾-AOP-流程" class="headerlink" title="七、一图回顾 AOP 流程"></a>七、一图回顾 AOP 流程</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">┌──────────────── AOP 执行流程 ────────────────┐</span><br><span class="line">│                                                │</span><br><span class="line">│  请求到达 Controller 方法                     │</span><br><span class="line">│         ↓                                      │</span><br><span class="line">│  AOP 切面拦截（匹配 @LogOperation 注解）      │</span><br><span class="line">│         ↓                                      │</span><br><span class="line">│  @Around 环绕通知开始                         │</span><br><span class="line">│  ├── 记录开始时间                             │</span><br><span class="line">│  ├── 获取当前用户 ID（从 ThreadLocal）         │</span><br><span class="line">│  ├── 执行 pjp.proceed() → 原始业务方法        │</span><br><span class="line">│  ├── 获取方法参数、返回值                     │</span><br><span class="line">│  ├── 计算耗时                                 │</span><br><span class="line">│  ├── 构建 OperateLog 对象                     │</span><br><span class="line">│  └── 调用 OperateLogMapper 保存日志           │</span><br><span class="line">│         ↓                                      │</span><br><span class="line">│  返回原始方法结果给前端                       │</span><br><span class="line">│                                                │</span><br><span class="line">└────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        <!-- Post license / copyright -->
         
           
 
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day1%20IO%E6%B5%81/">day1 IO流</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">day1计划
-今天学完IO
-
-笔记1.File
-File的3个构造方法
-表示什么：路径，可以表示文件或文件夹
-常用方法
-判断，获取
-创建，删除
-遍历
-
-
-不能读写数据，读写需要用到IO流
-
-2.IO流1.字节流
-计算机数据的最小单位是字节
-字节流可以操作任何文件
-字节流读取文本文件，需要读取为byte[]，指定编码方式转为字符串，否则中文字符会出现乱码。
-字节流没有缓冲区，可以用byte数组来做缓</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        2 min
-      </span>
-      
-    </div>
+<!-- Support & Share Widget -->
+<div class="post-share-donate-box">
+  <div class="share-donate-left-icon">
+    <span class="material-symbols-outlined">favorite</span>
   </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day1%20IO%E6%B5%81/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
+  <div class="share-donate-content">
+    <div class="share-donate-title">支持与分享</div>
+    <div class="share-donate-desc">如果这篇文章对你有帮助，欢迎分享给更多人或打赏支持！</div>
+  </div>
+  <div class="share-donate-actions">
+    <button class="share-donate-btn share-btn-outline" id="share-post-btn">
+      <span class="material-symbols-outlined">share</span>
+      <span>分享</span>
+    </button>
+    <a href="/donate/" class="share-donate-btn donate-btn-filled">
+      <span>打赏</span>
+      <span class="material-symbols-outlined">arrow_right_alt</span>
     </a>
   </div>
+</div>
+
+<!-- Copyright Card -->
+<div class="post-copyright-box">
+  <div class="copyright-watermark">CC</div>
+  <div class="copyright-header">
+    <span class="copyright-title">day16 面向切面编程</span>
+    <a class="copyright-link" href="https://www.blog-x.cc.cd/2026/08/25/day16%20%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/" target="_blank" rel="noopener noreferrer">
+      https://www.blog-x.cc.cd/2026/08/25/day16%20%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/
+    </a>
+  </div>
+  <div class="copyright-meta">
+    <div class="copyright-meta-item">
+      <span class="meta-label">author</span>
+      <span class="meta-value">John Doe</span>
+    </div>
+    <div class="copyright-meta-item">
+      <span class="meta-label">发布于</span>
+      <span class="meta-value">2026-08-25</span>
+    </div>
+    <div class="copyright-meta-item">
+      <span class="meta-label">许可协议</span>
+      <span class="meta-value">
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener noreferrer">
+          CC BY-NC-SA 4.0
+        </a>
+      </span>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const shareBtn = document.getElementById('share-post-btn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', function() {
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        showToast('链接已复制到剪贴板，快去分享给好友吧！');
+      }).catch(function() {
+        showToast('复制失败，请手动复制链接');
+      });
+    });
+  }
   
-</article>
+  function showToast(message) {
+    let toast = document.getElementById('firefly-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'firefly-toast';
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(1rem);
+        background: oklch(0.25 0.12 var(--hue));
+        color: #fff;
+        padding: 0.65rem 1.5rem;
+        border-radius: 9999px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        font-size: 0.875rem;
+        font-weight: 600;
+        z-index: 99999;
+        opacity: 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+      `;
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    setTimeout(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+    }, 50);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(1rem)';
+    }, 2500);
+  }
+});
+</script>
 
         
-          
 
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/">day11 部门管理实战</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">day11计划
-前后端分离开发规范与REST风格
-工程搭建与基础代码结构
-部门管理CRUD功能实现
-参数接收方式详解
-MyBatis结果映射与驼峰命名
-Nginx部署与前后端联调
-Logback日志技术
-
-笔记1.前后端分离开发前后端分离将工程拆分为前端工程和后端工程，各自独立开发、独立部署。前端通过异步请求获取数据，后端根据接口文档提供数据。
-开发流程
-需求分析 → 理解产品原型和需求文档
-接口</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        20 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
+        <!-- Post meta bottom: tags, last modified -->
         
-          
 
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
+<footer class="post-meta-bottom">
+  <!-- Tags list -->
   
 
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/">day10 Java操作数据库</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">计划
-JDBC基础入门
-JDBC查询与增删改
-SQL注入与预编译SQL
-MyBatis快速入门
-MyBatis注解写法与XML映射
-SpringBoot配置文件与数据库连接池
-
-笔记1.JDBC概述JDBC是什么
-JDBC：Java DataBase Connectivity，使用Java语言操作关系型数据库的一套API
-本质：Sun公司定义的一套接口规范，数据库厂商提供驱动jar包实现接口
-执行</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        20 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
+  <!-- Categories list at bottom -->
   
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
+
+  <!-- Last modified date -->
+  
+  <div class="post-last-modified">
+    <span class="material-symbols-outlined" aria-hidden="true">edit</span>
+    最后编辑于 2026-08-25 11:44
   </div>
   
-</article>
+</footer>
 
-        
-          
+      </div>
 
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
+      <!-- Share buttons -->
+      
+
+      <!-- Footer widgets (Alert, Prev/Next Navigation, Smart Related & Random Articles) -->
+      
+
+<div class="post-footer-widgets">
+  <!-- Warning Info Alert -->
   
 
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day2%20IO%E6%B5%81/">day2 IO流</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
+  <!-- Prev / Next Navigation -->
+  <nav class="post-footer-navigation">
+    <div class="post-nav-card-wrapper">
       
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
+      <a href="/2026/08/25/day15-2%20%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/" class="post-nav-card card-base prev-nav-card" title="day15-2 登录认证">
+        <span class="material-symbols-outlined nav-arrow">chevron_left</span>
+        <span class="nav-card-title">day15-2 登录认证</span>
+      </a>
       
     </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">day2计划
-学完IO流
-
-笔记1.缓冲流字节缓冲流
-缓冲流默认缓冲区大小为8192字节（8KB）
-使用方式：在基本流外包装一层缓冲流
-关闭缓冲流时，底层基本流也会自动关闭
-性能对比
-缓冲流逐字节读取复制：35ms（内部缓冲区已优化磁盘I&amp;#x2F;O）
-缓冲流配合 byte[] 数组读取复制：4ms
-
-
-缓冲流与缓冲数组同时使用是不必要的
-缓冲流内部已有 8KB 缓冲区，逐字节读取时已通过内部缓</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
+    <div class="post-nav-card-wrapper">
       
-      
-      <span class="post-card-reading-time">
-        4 min
-      </span>
+      <a href="/2026/08/25/day18%20%E5%89%8D%E7%AB%AFWeb%E5%AE%9E%E6%88%98-Vue%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="post-nav-card card-base next-nav-card" title="day18 前端Web实战-Vue工程化">
+        <span class="nav-card-title">day18 前端Web实战-Vue工程化</span>
+        <span class="material-symbols-outlined nav-arrow">chevron_right</span>
+      </a>
       
     </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day2%20IO%E6%B5%81/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-          
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/">day20 Redis入门与店铺状态设置</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">前几天陆陆续续写了苍穹外卖的员工管理,菜品,分类,套餐管理等,未坚持每日学习,未写复盘
-1. 今天做了什么(day5的内容)
-
-Redis入门
-安装
-Redis里的数据类型:字符串,哈希,集合,有序集合,列表
-Redis操作的命令
-java程序中操作Redis数据库:使用Spring Data Redis
-配置
-使用
-
-
-
-
-店铺相关接口 , 使用Redis存储
-设置店铺营业状态
-获取店铺状态(用</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        3 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-          
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day22%20%E7%BC%93%E5%AD%98/">day22 缓存</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">1. 今天做了什么外卖day7的一部分
-
-缓存菜品
-缓存套餐
-
-2. 核心知识点
-两种实现缓存的方式
-使用Redis自己实现缓存
-根据分类id查询菜品,将分类id作为key,将查询到的集合作为value
-查询时先查缓存是否存在,存在直接返回,不存在则查询后存入缓存返回
-一旦管理端发生新增,修改,删除,起售停售,都要对缓存进行清理
-
-
-使用Spring Cache实现缓存
-完全使用注解实现,很方便</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        3 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day22%20%E7%BC%93%E5%AD%98/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-          
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/">day21 微信登录</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">1. 今天做了什么(外卖day6的内容)
-
-HttpClient的使用
-微信小程序开发入门
-项目目录结构
-获取头像与昵称
-获取授权码
-
-
-微信登录
-流程:小程序获取授权码-&amp;gt;携带授权码向服务端发起请求-&amp;gt;服务端使用授权码向微信的接口发起请求,获取openid(微信用户唯一标识)-&amp;gt;查询若为新用户则1创建-&amp;gt;创建jwt令牌,与用户基本信息一起返回给小程序
-设置拦截器,对除登录</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        1 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-          
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/">day3 多线程</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">计划多线程
-总结1.线程创建3种方式
-继承Thread
-实现Runnable
-实现Callable
-
-特点：3可以有返回值，1，2无返回值1因为单继承，无法继承其他类
-方法：设置&amp;#x2F;获取线程名，获取当前线程名，出让，插入，睡眠等
-2.同步安全问题原因
-大多操作系统对线程采用抢占式调度
-线程之间会争夺CPU执行权
-多个线程对同一资源进行操作的过程中，CUP执行权随时会被夺走，被其他线程占用，</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        6 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-          
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/">day23 购物车与用户下单</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">1. 今天做了什么(外卖day07,day08)
-
-购物车相关接口
-用户下单相关接口
-
-2. 核心知识点
-订单表与订单明细表的设计
-订单表存储订单相关的信息
-订单明细表存储订单中的菜品,套餐的单价,数量等数据,一条菜品或套餐对应一条数据
-二者是一对多的
-
-
-冗余字段
-数据表中某些字段可以通过其他字段在其他表中查询到
-为什么设计冗余字段
-在插入数据时将冗余字段从其他表查出来,一并插入其中
-以后查询的</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        1 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-      
-    </div>
-
-    <!-- Pagination -->
-    
-
-
-<div class="pagination-wrapper">
-  <nav class="pagination" aria-label="pagination">
-    
-    <span class="pagination-item pagination-prev pagination-disabled" aria-disabled="true">
-      <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
-      <span>上一页</span>
-    </span>
-    
-
-    <span class="pagination-info">
-      <span class="page-number">1</span>
-      <span class="page-divider">/</span>
-      <span class="page-total">3</span>
-    </span>
-
-    
-    <a
-      href="/page/2/"
-      class="pagination-item pagination-next"
-      rel="next"
-      aria-label="下一页"
-    >
-      <span>下一页</span>
-      <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-    </a>
-    
   </nav>
+
+  <!-- Side-by-Side Recommendations Grid -->
+  <div class="post-recommendations-row">
+    <!-- Left Column: Related Posts -->
+    <div class="recommendations-column card-base">
+      <div class="recommendations-column-header">
+        <div class="column-header-title">
+          <span class="material-symbols-outlined">schema</span>
+          <h3>相关文章</h3>
+        </div>
+        <span class="recommend-badge smart-badge">智能推荐</span>
+      </div>
+      <ul class="recommend-list">
+        
+          
+          <li>
+            <a href="/2026/08/25/hello/" class="recommend-item">
+              <span class="recommend-index-badge first-index">1</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">hello</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day1%20IO%E6%B5%81/" class="recommend-item">
+              <span class="recommend-index-badge ">2</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day1 IO流</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day1计划 今天学完IO 笔记1.File File的3个构造方法...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/" class="recommend-item">
+              <span class="recommend-index-badge ">3</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day11 部门管理实战</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day11计划 前后端分离开发规范与REST风格 工程搭建与基础代码结...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" class="recommend-item">
+              <span class="recommend-index-badge ">4</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day10 Java操作数据库</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">计划 JDBC基础入门 JDBC查询与增删改 SQL注入与预编译SQL...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day2%20IO%E6%B5%81/" class="recommend-item">
+              <span class="recommend-index-badge ">5</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day2 IO流</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day2计划 学完IO流 笔记1.缓冲流字节缓冲流 缓冲流默认缓冲区大...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <!-- Right Column: Random Posts -->
+    <div class="recommendations-column card-base">
+      <div class="recommendations-column-header">
+        <div class="column-header-title">
+          <span class="material-symbols-outlined">explore</span>
+          <h3>随机文章</h3>
+        </div>
+        <span class="recommend-badge random-badge">随机推荐</span>
+      </div>
+      <ul class="recommend-list">
+        
+          
+          <li>
+            <a href="/2026/08/25/day9%20%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ESQL%E8%AF%AD%E5%8F%A5/" class="recommend-item">
+              <span class="recommend-index-badge first-index">1</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day9 数据库与SQL语句</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">计划 MySQL概述 SQL语句（DDL、DML、DQL） 数据类型与...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day6%20js,vue,Ajax/" class="recommend-item">
+              <span class="recommend-index-badge ">2</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day6 js,vue,Ajax</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day6计划 JS基础语法学习 Vue3框架入门 笔记1.JS引入方式...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/" class="recommend-item">
+              <span class="recommend-index-badge ">3</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day20 Redis入门与店铺状态设置</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">前几天陆陆续续写了苍穹外卖的员工管理,菜品,分类,套餐管理等,未坚持每...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day18%20%E5%89%8D%E7%AB%AFWeb%E5%AE%9E%E6%88%98-Vue%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="recommend-item">
+              <span class="recommend-index-badge ">4</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day18 前端Web实战-Vue工程化</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">实战总结：Vue 工程化 本文是对《15-前端Web实战(Vue工程化...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/hello/" class="recommend-item">
+              <span class="recommend-index-badge ">5</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">hello</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+    </article>
+
+    <!-- Comments section -->
+    
+    <section class="post-comments" aria-label="评论">
+      
+<div class="comments-container">
+  <div class="comments-title">评论</div>
+  <div class="giscus-wrapper">
+    <script src="https://giscus.app/client.js"
+      data-repo="lkdenchin/hexo-blog-comments"
+      data-repo-id="R_kgDORXaOrA"
+      data-category="Announcements"
+      data-category-id="DIC_kwDORXaOrM4C3F8Y"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="1"
+      data-input-position="top"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
 </div>
 
 
+    </section>
+    
   </main>
 
   <!-- ===== Right Sidebar ===== -->
   
   <aside class="sidebar-right" aria-label="右侧边栏">
     
+      
 
 <!-- Right sidebar widgets -->
 <div class="sidebar-widgets sidebar-right-widgets">
@@ -2152,6 +2199,23 @@ document.addEventListener('DOMContentLoaded', function() {
   
 </div>
 
+    
+    
+      
+
+
+<div id="toc" class="toc-widget">
+  <div class="toc-header">
+    <span>目录</span>
+  </div>
+  <div class="toc-body" id="toc-body">
+    <!-- Populated by client-side JavaScript -->
+  </div>
+</div>
+
+
+    
+    
   </aside>
   
 
@@ -2554,6 +2618,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
+
+  <!-- Floating TOC (always available via JS, appears as a floating widget on scroll) -->
+  
 
   
 

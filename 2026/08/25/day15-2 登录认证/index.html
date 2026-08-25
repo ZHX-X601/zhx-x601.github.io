@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 
-<title>Hexo</title>
+<title>day15-2 登录认证 - Hexo</title>
 
 
 
@@ -14,10 +14,10 @@
 
 
 <!-- Open Graph -->
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="day15-2 登录认证 - Hexo">
 <meta property="og:description" content="">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.blog-x.cc.cd">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.blog-x.cc.cd/2026/08/25/day15-2%20%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/">
 <meta property="og:site_name" content="Hexo">
 
 <meta property="og:image" content="/img/favicon.ico">
@@ -25,7 +25,7 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="day15-2 登录认证 - Hexo">
 <meta name="twitter:description" content="">
 
 <meta name="twitter:image" content="/img/favicon.ico">
@@ -101,13 +101,13 @@
 
 
 <!-- Canonical URL -->
-<link rel="canonical" href="https://www.blog-x.cc.cd">
+<link rel="canonical" href="https://www.blog-x.cc.cd/2026/08/25/day15-2%20%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/">
 
 <!-- No-Referrer Domain Script -->
 
 
 <meta name="generator" content="Hexo 8.1.2"></head>
-<body class="min-h-screen is-home sticky-navbar enable-card-border " style="--bannerOffset: 15vh; --banner-height-home: 73vh; --banner-height: 67vh; --configHue: 165; --page-width: 100rem;">
+<body class="min-h-screen  sticky-navbar enable-card-border " style="--bannerOffset: 15vh; --banner-height-home: 73vh; --banner-height: 67vh; --configHue: 165; --page-width: 100rem;">
   <script>
     (function() {
       var BANNER_HEIGHT_EXTEND = 6;
@@ -238,7 +238,7 @@
       <ul class="navbar-links">
         <!-- Home (LinkPreset.Home) -->
         <li class="navbar-link-item" role="none">
-          <a href="/" class="navbar-link active" role="menuitem">
+          <a href="/" class="navbar-link" role="menuitem">
             <span class="navbar-link-content">
               <span class="material-symbols-outlined">home</span>
               <span>首页</span>
@@ -481,17 +481,36 @@
   <!-- Banner Overlay Container -->
   <div id="banner-overlay-container">
     
-    <!-- Home Page Text Overlay -->
-    <div class="home-text-overlay">
-      
-      <h1 class="home-text-title">Lovely firefly!</h1>
-      
-      
-      <span class="typewriter home-text-subtitle" data-text="In Reddened Chrysalis, I Once Rest">In Reddened Chrysalis, I Once Rest</span>
-      
-    </div>
-    
 
+    
+    <!-- Post Meta Overlay -->
+    <div class="post-meta-overlay banner-post-meta">
+      <h1 class="post-meta-title">day15-2 登录认证</h1>
+      <div class="post-meta-info meta-info">
+        
+        <span class="post-meta-date">
+          <span class="material-symbols-outlined md-18">calendar_today</span>
+          发布于: 2026-08-25
+        </span>
+        
+        
+        <span class="post-meta-updated">
+          <span class="material-symbols-outlined md-18">edit</span>
+          更新于: 2026-08-25 11:44
+        </span>
+        
+        
+        <span class="post-meta-word-count">
+          <span class="material-symbols-outlined md-18">description</span>
+          14125 字
+        </span>
+        <span class="post-meta-reading-time">
+          <span class="material-symbols-outlined md-18">schedule</span>
+          29 min
+        </span>
+        
+      </div>
+    </div>
     
 
     
@@ -519,7 +538,7 @@
 
 
   <!-- Main Content Area with grid wrappers -->
-  <div id="main-content-wrapper" class="absolute w-full z-30 pointer-events-none ">
+  <div id="main-content-wrapper" class="absolute w-full z-30 pointer-events-none mobile-main-no-banner">
     <div class="relative w-full xl:w-[92vw] max-w-[var(--page-width)] mx-auto pointer-events-auto">
       
 
@@ -528,6 +547,7 @@
   
   <aside class="sidebar-left" aria-label="左侧边栏">
     
+      
 
 <!-- Left sidebar widgets -->
 <div class="sidebar-widgets sidebar-left-widgets">
@@ -747,20 +767,23 @@
   
 </div>
 
+    
+    
+    
+      
+
+
+
+    
   </aside>
   
 
   <!-- ===== Main Content ===== -->
-  <main
-    id="main-content"
-    class="post-list-container"
-    data-layout="list"
-    aria-label="文章列表"
-  >
+  <main id="main-content" aria-label="文章">
     
 <div class="content-nav-bar card-base">
   <!-- Home button -->
-  <a href="/" class="content-nav-item content-nav-home active" aria-label="Home" title="首页">
+  <a href="/" class="content-nav-item content-nav-home" aria-label="Home" title="首页">
     <span class="material-symbols-outlined">home</span>
   </a>
   
@@ -775,711 +798,944 @@
 
   <!-- Layout Toggle (right-aligned spacer + buttons) -->
   
-  <span class="content-nav-spacer"></span>
-  <div class="layout-buttons" style="display:flex;gap:0.25rem;">
-    <button data-layout="list" class="active" title="列表">
-      <span class="material-symbols-outlined">view_list</span>
-    </button>
-    <button data-layout="grid" class="" title="网格">
-      <span class="material-symbols-outlined">grid_view</span>
-    </button>
-  </div>
-  
 </div>
 
-    <!-- Category navigation bar at top (if enabled) -->
-    
+    <article class="post-container" itemscope itemtype="http://schema.org/Article">
 
-    <!-- Page title (shown on paginated pages > 1 or when configured) -->
-    
 
-    <!-- Post list -->
-    <div class="post-list" data-mode="list">
-      
+      <div class="post-content-card">
+        <!-- Post meta top: title, date, author, reading time, word count, categories -->
         
+
+
+  <header class="post-meta-top">
+    <!-- Top row: Word count & Reading time pills -->
+    <div class="post-header-badges-top">
+      
+      <span class="post-meta-badge badge-wordcount">
+        <span class="material-symbols-outlined" aria-hidden="true">trending_up</span>
+        <span>14125 字</span>
+      </span>
+      
+
+      
+      <span class="post-meta-badge badge-reading-time">
+        <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+        <span>
           
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/hello/">hello</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        1 min
+          
+          36 分钟
+        </span>
       </span>
       
     </div>
-  </div>
 
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/hello/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
+    <!-- Title with CSS-styled vertical bar prefix -->
+    <h1 class="post-title post-title-custom">
+      <strong>day15-2 登录认证</strong>
+    </h1>
 
+    <!-- Bottom row: Date & Categories/Tags path -->
+    <div class="post-header-badges-bottom">
+      
+      <span class="post-meta-badge badge-date">
+        <span class="material-symbols-outlined" aria-hidden="true">calendar_month</span>
+        <time datetime="2026-08-25 11:29" pubdate>
+          2026-08-25
+        </time>
+      </span>
+      
+
+      <!-- Categories & Tags Breadcrumb Path -->
+      
+      
+    </div>
+
+    <!-- Post updated notice -->
+    
+    <div class="post-updated-note">
+      <span class="material-symbols-outlined" aria-hidden="true">update</span>
+      更新于 2026-08-25 11:44
+    </div>
+    
+  </header>
+
+
+
+        <!-- Post content -->
+        <div
+          class="post-content markdown-body custom-md"
+          itemprop="articleBody"
+        >
+          <h1 id="实战总结：登录认证（登录功能-登录校验）"><a href="#实战总结：登录认证（登录功能-登录校验）" class="headerlink" title="实战总结：登录认证（登录功能 + 登录校验）"></a>实战总结：登录认证（登录功能 + 登录校验）</h1><blockquote>
+<p>本文是对《12-后端Web实战(登录认证)》的总结，记录”登录功能徒有其表 → 登录校验闭环”的完整链路。<br>项目地址：<code>project/tlias-web-management</code>（SpringBoot + MyBatis + JWT + Filter&#x2F;Interceptor）<br>对应讲义：<code>讲义/12-后端Web实战(登录认证).md</code></p>
+</blockquote>
+<hr>
+<h2 id="一、本节要解决的核心问题"><a href="#一、本节要解决的核心问题" class="headerlink" title="一、本节要解决的核心问题"></a>一、本节要解决的核心问题</h2><p>上一节做完基础登录后，会出现一个<strong>安全漏洞</strong>：浏览器直接访问 <code>http://localhost:90</code>，<strong>不登录也能进后台</strong>。</p>
+<p>原因：HTTP 是<strong>无状态协议</strong>，每次请求相互独立，服务器根本不知道”这次请求的员工登没登录过”。而部门管理、员工管理等接口在服务端<strong>没有任何登录判断</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">登录功能(徒有其表)  ──►  需要登录校验(闭环)</span><br><span class="line">   只查账号密码              服务端统一拦截每一个请求</span><br><span class="line">   不存登录标记              先校验是否登录，再放行业务</span><br></pre></td></tr></table></figure>
+
+<p>登录校验的实现思路拆成两块：</p>
+<table>
+<thead>
+<tr>
+<th>关键点</th>
+<th>作用</th>
+<th>用到的技术</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>① 存登录标记</td>
+<td>登录成功后留一个”已登录”凭证，后续请求能带上</td>
+<td><strong>会话技术</strong>（令牌 JWT）</td>
+</tr>
+<tr>
+<td>② 统一拦截</td>
+<td>拦下所有请求，统一校验标记，避免每个接口都写一遍</td>
+<td><strong>Filter 过滤器 &#x2F; Interceptor 拦截器</strong></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>为什么不能在每个 Controller 方法里手写校验？——相同逻辑会重复出现在所有增删改查接口里，代码繁琐。统一拦截是标准做法。</p>
+</blockquote>
+<hr>
+<h2 id="二、会话技术：三种方案对比"><a href="#二、会话技术：三种方案对比" class="headerlink" title="二、会话技术：三种方案对比"></a>二、会话技术：三种方案对比</h2><h3 id="1-概念澄清"><a href="#1-概念澄清" class="headerlink" title="1. 概念澄清"></a>1. 概念澄清</h3><ul>
+<li><strong>会话</strong>：浏览器与服务器之间的一次连接（从打开浏览器第一次访问，到任一方断开）。一次会话可包含多次请求响应。</li>
+<li><strong>会话跟踪</strong>：服务器识别”多次请求是否来自同一浏览器”，从而在同一次会话的多次请求间<strong>共享数据</strong>。</li>
+<li>为什么要共享数据？因为 HTTP 无状态，后一次请求拿不到前一次请求生成的数据。</li>
+</ul>
+<h3 id="2-三种方案横向对比"><a href="#2-三种方案横向对比" class="headerlink" title="2. 三种方案横向对比"></a>2. 三种方案横向对比</h3><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>存储位置</th>
+<th>底层依赖</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Cookie</strong></td>
+<td>客户端浏览器</td>
+<td>HTTP 协议自带（Set-Cookie 响应头 &#x2F; Cookie 请求头）</td>
+<td>浏览器自动收发，无需手写</td>
+<td>移动端 APP 不可用；不安全（可禁用）；<strong>不能跨域</strong></td>
+</tr>
+<tr>
+<td><strong>Session</strong></td>
+<td>服务端</td>
+<td>底层基于 Cookie（JSESSIONID）</td>
+<td>数据在服务端，相对安全</td>
+<td>集群环境下无法直接用；移动端不可用；可被禁用；不能跨域</td>
+</tr>
+<tr>
+<td><strong>令牌 Token</strong></td>
+<td>客户端（如 localStorage）</td>
+<td>自己实现生成&#x2F;传递&#x2F;校验</td>
+<td>支持 PC + 移动端；解决集群认证；不占服务端存储</td>
+<td>需自己实现整套逻辑</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>企业开发首选第三种令牌技术</strong>，前两种已很少使用。本项目也采用令牌。</p>
+</blockquote>
+<h3 id="3-跨域速记"><a href="#3-跨域速记" class="headerlink" title="3. 跨域速记"></a>3. 跨域速记</h3><p>三个维度（协议 &#x2F; IP(域名) &#x2F; 端口）<strong>任意一个不同</strong>就是跨域。Cookie 无法跨域，这是 Cookie&#x2F;Session 方案在前后端分离部署时失效的直接原因。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.150.200/login.html  →  https://192.168.150.200/login   协议不同 → 跨域</span><br><span class="line">http://192.168.150.200/login.html  →  http://192.168.150.100/login     IP不同   → 跨域</span><br><span class="line">http://192.168.150.200/login.html  →  http://192.168.150.200:8080/login 端口不同 → 跨域</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-集群环境为何-Session-失效"><a href="#4-集群环境为何-Session-失效" class="headerlink" title="4. 集群环境为何 Session 失效"></a>4. 集群环境为何 Session 失效</h3><p>部署多份 Tomcat + 负载均衡时：登录请求落到 Tomcat1 创建 Session，下一次查询请求可能被分到 Tomcat2，Tomcat2 里没有这个 JSESSIONID 对应的 Session → 会话丢失。令牌方案把凭证存在客户端，每次请求自带，天然避开这个问题。</p>
+<hr>
+<h2 id="三、JWT-令牌"><a href="#三、JWT-令牌" class="headerlink" title="三、JWT 令牌"></a>三、JWT 令牌</h2><h3 id="1-是什么"><a href="#1-是什么" class="headerlink" title="1. 是什么"></a>1. 是什么</h3><p>JWT（JSON Web Token）：一种<strong>简洁、自包含</strong>的字符串格式，用于通信双方以 JSON 格式安全传输信息，靠<strong>数字签名</strong>保证可靠性。</p>
+<ul>
+<li><strong>简洁</strong>：就是一个字符串，可直接放请求参数或请求头。</li>
+<li><strong>自包含</strong>：可在令牌里存自定义数据（如 id、username），不用查服务端。</li>
+<li>本质：把原始 JSON 数据安全封装成字符串，传输时基于 base64 编码（<strong>编码 ≠ 加密</strong>）。</li>
+</ul>
+<h3 id="2-三段组成（用-分隔）"><a href="#2-三段组成（用-分隔）" class="headerlink" title="2. 三段组成（用 . 分隔）"></a>2. 三段组成（用 <code>.</code> 分隔）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAsInVzZXJuYW1lIjoiaXRoZWltYSIsImV4cCI6MTcwMTkwOTAxNX0.N-MD6DmoeIIY5lB5z73UFLN9u7veppx1K5_N_jS9Yko</span><br><span class="line">└── Header(头) ──┘  └── Payload(载荷) ──────────────────────────────┘  └── Signature(签名) ──────────────┘</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>内容</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Header</td>
+<td>令牌类型 + 签名算法</td>
+<td><code>{&quot;alg&quot;:&quot;HS256&quot;,&quot;type&quot;:&quot;JWT&quot;}</code></td>
+</tr>
+<tr>
+<td>Payload</td>
+<td>自定义信息 + 默认信息（如 exp 过期时间）</td>
+<td><code>{&quot;id&quot;:1,&quot;username&quot;:&quot;Tom&quot;,&quot;exp&quot;:...}</code></td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>Header + Payload + 秘钥，按指定算法计算，<strong>防篡改</strong></td>
+<td>签名串</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>关键结论：<strong>篡改令牌任意一个字符，解析都会报错</strong>；<strong>令牌过期后解析也报错</strong>（非法）。</p>
+</blockquote>
+<h3 id="3-生成与校验（讲义示例）"><a href="#3-生成与校验（讲义示例）" class="headerlink" title="3. 生成与校验（讲义示例）"></a>3. 生成与校验（讲义示例）</h3><p>依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.jsonwebtoken<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jjwt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>生成 + 校验：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生成</span></span><br><span class="line"><span class="type">Map</span>&lt;String, Object&gt; <span class="variable">claims</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">claims.put(<span class="string">&quot;id&quot;</span>, <span class="number">10</span>);</span><br><span class="line">claims.put(<span class="string">&quot;username&quot;</span>, <span class="string">&quot;itheima&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">String</span> <span class="variable">jwt</span> <span class="operator">=</span> Jwts.builder()</span><br><span class="line">        .signWith(SignatureAlgorithm.HS256, <span class="string">&quot;aXRjYXN0&quot;</span>)        <span class="comment">// 签名算法 + 秘钥</span></span><br><span class="line">        .addClaims(claims)                                     <span class="comment">// 自定义载荷</span></span><br><span class="line">        .setExpiration(<span class="keyword">new</span> <span class="title class_">Date</span>(System.currentTimeMillis() + <span class="number">12</span> * <span class="number">3600</span> * <span class="number">1000</span>)) <span class="comment">// 过期时间</span></span><br><span class="line">        .compact();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 校验（解析失败就抛异常）</span></span><br><span class="line"><span class="type">Claims</span> <span class="variable">claims</span> <span class="operator">=</span> Jwts.parser()</span><br><span class="line">        .setSigningKey(<span class="string">&quot;aXRjYXN0&quot;</span>)   <span class="comment">// 必须和生成时同一秘钥</span></span><br><span class="line">        .parseClaimsJws(jwt)</span><br><span class="line">        .getBody();</span><br></pre></td></tr></table></figure>
+
+<p>两条铁律：</p>
+<ul>
+<li>校验用的签名秘钥，必须和生成时<strong>配套</strong>。</li>
+<li>解析报错 &#x3D; 令牌被篡改 或 已过期 &#x3D; 非法。</li>
+</ul>
+<hr>
+<h2 id="四、登录时下发令牌（项目实现）"><a href="#四、登录时下发令牌（项目实现）" class="headerlink" title="四、登录时下发令牌（项目实现）"></a>四、登录时下发令牌（项目实现）</h2><h3 id="1-整体流程"><a href="#1-整体流程" class="headerlink" title="1. 整体流程"></a>1. 整体流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">浏览器                服务端</span><br><span class="line">  │  POST /login &#123;username,password&#125;</span><br><span class="line">  │ ─────────────────────────────────► │  EmpService.login 查 emp 表</span><br><span class="line">  │                                     │  查到 → 生成 JWT 装进 LoginInfo</span><br><span class="line">  │  &#123;code:1, data:&#123;id,username,name,token&#125;&#125;</span><br><span class="line">  │ ◄───────────────────────────────── │</span><br><span class="line">  │  前端把 token 存到 localStorage</span><br><span class="line">  │                                     │</span><br><span class="line">  │  GET /depts  Header: token: xxx</span><br><span class="line">  │ ─────────────────────────────────► │  Filter/Interceptor 校验 token</span><br><span class="line">  │                                     │  合法 → 放行到 Controller</span><br><span class="line">  │  &#123;code:1, data:[...]&#125;</span><br><span class="line">  │ ◄───────────────────────────────── │</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-关键类与代码"><a href="#2-关键类与代码" class="headerlink" title="2. 关键类与代码"></a>2. 关键类与代码</h3><table>
+<thead>
+<tr>
+<th>类&#x2F;所在层</th>
+<th>全限定类名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pojo</td>
+<td><code>com.zhang.pojo.LoginInfo</code></td>
+<td>登录成功响应封装：<code>id</code>、<code>username</code>、<code>name</code>、<code>token</code></td>
+</tr>
+<tr>
+<td>utils</td>
+<td><code>com.zhang.utils.JwtUtils</code></td>
+<td>JWT 工具类：<code>generateToken</code> 生成、<code>parseToken</code> 解析</td>
+</tr>
+<tr>
+<td>controller</td>
+<td><code>com.zhang.controller.LoginController</code></td>
+<td><code>/login</code> 接口入口，返回 <code>Result.success(loginInfo)</code> 或 <code>Result.error(...)</code></td>
+</tr>
+<tr>
+<td>service</td>
+<td><code>com.zhang.service.impl.EmpServiceImpl</code></td>
+<td><code>login(Emp)</code>：根据用户名密码查库 → 生成 JWT → 组装 <code>LoginInfo</code></td>
+</tr>
+<tr>
+<td>mapper</td>
+<td><code>com.zhang.mapper.EmpMapper</code></td>
+<td><code>getByUsernamePassword(Emp)</code>：按 username + password 查询员工</td>
+</tr>
+</tbody></table>
+<p><strong>LoginInfo</strong>（响应封装）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoginInfo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String token;   <span class="comment">// JWT 令牌</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>JwtUtils</strong>（项目版本，方法名是 <code>generateToken</code> &#x2F; <code>parseToken</code>）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JwtUtils</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">signKey</span> <span class="operator">=</span> <span class="string">&quot;emhhbmctMjAyNg==&quot;</span>;   <span class="comment">// 签名秘钥</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">long</span> <span class="variable">expire</span> <span class="operator">=</span> <span class="number">12</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>;     <span class="comment">// 12 小时</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">String</span> <span class="title function_">generateToken</span><span class="params">(Map&lt;String, Object&gt; claims)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Jwts.builder()</span><br><span class="line">                .addClaims(claims)</span><br><span class="line">                .setExpiration(<span class="keyword">new</span> <span class="title class_">Date</span>(System.currentTimeMillis() + expire))</span><br><span class="line">                .signWith(SignatureAlgorithm.HS256, signKey)</span><br><span class="line">                .compact();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">Map</span>&lt;String, Object&gt; <span class="title function_">parseToken</span><span class="params">(String token)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Jwts.parser()</span><br><span class="line">                .setSigningKey(signKey)</span><br><span class="line">                .parseClaimsJws(token)</span><br><span class="line">                .getBody();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>LoginController</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping(&quot;/login&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">Result</span> <span class="title function_">login</span><span class="params">(<span class="meta">@RequestBody</span> Emp emp)</span> &#123;</span><br><span class="line">    log.info(<span class="string">&quot;登录请求 emp:&#123;&#125;&quot;</span>, emp);</span><br><span class="line">    <span class="type">LoginInfo</span> <span class="variable">loginInfo</span> <span class="operator">=</span> empService.login(emp);</span><br><span class="line">    <span class="keyword">if</span> (loginInfo != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> Result.success(loginInfo);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Result.error(<span class="string">&quot;用户名或密码错误&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>EmpServiceImpl.login</strong>（查库 + 生成 token）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">LoginInfo</span> <span class="title function_">login</span><span class="params">(Emp emp)</span> &#123;</span><br><span class="line">    <span class="type">Emp</span> <span class="variable">e</span> <span class="operator">=</span> empMapper.getByUsernamePassword(emp);   <span class="comment">// select id,username,name from emp where username=? and password=?</span></span><br><span class="line">    <span class="keyword">if</span> (e != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="type">Map</span>&lt;String, Object&gt; <span class="variable">map</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;id&quot;</span>, emp.getId());          <span class="comment">// ⚠ 见下方&quot;易错点&quot;：建议改用 e.getId()</span></span><br><span class="line">        map.put(<span class="string">&quot;username&quot;</span>, emp.getUsername());</span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> JwtUtils.generateToken(map);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">LoginInfo</span>(e.getId(), e.getUsername(), e.getName(), token);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>前端拿到 token 后存 <code>localStorage</code>（不是 cookie），后续每个请求在请求头 <code>token</code> 字段带上。</p>
+</blockquote>
+<hr>
+<h2 id="五、统一拦截方案一：Filter-过滤器"><a href="#五、统一拦截方案一：Filter-过滤器" class="headerlink" title="五、统一拦截方案一：Filter 过滤器"></a>五、统一拦截方案一：Filter 过滤器</h2><h3 id="1-是什么-1"><a href="#1-是什么-1" class="headerlink" title="1. 是什么"></a>1. 是什么</h3><p>Filter 是 <strong>JavaWeb 三大组件</strong>（Servlet、Filter、Listener）之一，能把对资源的请求拦下来做通用操作（登录校验、统一编码、敏感字符处理等）。要先经过 Filter，才能访问后面的资源。</p>
+<h3 id="2-入门三步"><a href="#2-入门三步" class="headerlink" title="2. 入门三步"></a>2. 入门三步</h3><ol>
+<li>定义类实现 <code>Filter</code> 接口，重写 <code>init</code> &#x2F; <code>doFilter</code> &#x2F; <code>destroy</code>。</li>
+<li>类上加 <code>@WebFilter(urlPatterns = &quot;/*&quot;)</code> 配置拦截路径。</li>
+<li>启动类加 <code>@ServletComponentScan</code> 开启 Servlet 组件支持。</li>
+</ol>
+<p>三个方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>调用时机</th>
+<th>调用次数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>init</code></td>
+<td>web 服务器启动创建 Filter 实例时</td>
+<td>1 次</td>
+</tr>
+<tr>
+<td><code>doFilter</code></td>
+<td>每次拦截到请求</td>
+<td>多次</td>
+</tr>
+<tr>
+<td><code>destroy</code></td>
+<td>web 服务器关闭时</td>
+<td>1 次</td>
+</tr>
+</tbody></table>
+<p><strong>放行</strong>：<code>chain.doFilter(request, response);</code> —— 不调用就到不了后面的资源。</p>
+<h3 id="3-执行流程（放行前-放行后）"><a href="#3-执行流程（放行前-放行后）" class="headerlink" title="3. 执行流程（放行前 &#x2F; 放行后）"></a>3. 执行流程（放行前 &#x2F; 放行后）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest req, ServletResponse resp, FilterChain chain)</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;放行前逻辑.....&quot;</span>);</span><br><span class="line">    chain.doFilter(req, resp);          <span class="comment">// 放行，访问 web 资源</span></span><br><span class="line">    System.out.println(<span class="string">&quot;放行后逻辑.....&quot;</span>); <span class="comment">// 资源处理完回到这里</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-拦截路径配置"><a href="#4-拦截路径配置" class="headerlink" title="4. 拦截路径配置"></a>4. 拦截路径配置</h3><table>
+<thead>
+<tr>
+<th>拦截路径</th>
+<th>urlPatterns</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>具体路径</td>
+<td><code>/login</code></td>
+<td>只拦截 &#x2F;login</td>
+</tr>
+<tr>
+<td>目录拦截</td>
+<td><code>/emps/*</code></td>
+<td>拦截 &#x2F;emps 下所有资源</td>
+</tr>
+<tr>
+<td>拦截所有</td>
+<td><code>/*</code></td>
+<td>拦截所有资源</td>
+</tr>
+</tbody></table>
+<h3 id="5-过滤器链"><a href="#5-过滤器链" class="headerlink" title="5. 过滤器链"></a>5. 过滤器链</h3><p>多个 Filter 形成链，一个接一个执行；放行后回来时<strong>顺序相反</strong>。注解配置的 Filter，执行顺序按<strong>类名字符串自然排序</strong>（AbcFilter 先于 DemoFilter）。</p>
+<h3 id="6-登录校验六步（项目类：TokenFilter，全限定类名-com-zhang-filter-TokenFilter）"><a href="#6-登录校验六步（项目类：TokenFilter，全限定类名-com-zhang-filter-TokenFilter）" class="headerlink" title="6. 登录校验六步（项目类：TokenFilter，全限定类名 com.zhang.filter.TokenFilter）"></a>6. 登录校验六步（项目类：<code>TokenFilter</code>，全限定类名 <code>com.zhang.filter.TokenFilter</code>）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 获取请求 URI</span><br><span class="line">2. 包含 /login → 放行（登录请求例外）</span><br><span class="line">3. 取请求头 token</span><br><span class="line">4. token 为空 → 响应 401</span><br><span class="line">5. 解析 token 失败 → 响应 401</span><br><span class="line">6. 解析成功 → 放行</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 项目 TokenFilter 核心逻辑（注意：本项目中此 Filter 未启用，见&quot;项目现状&quot;）</span></span><br><span class="line"><span class="type">String</span> <span class="variable">uri</span> <span class="operator">=</span> request.getRequestURI().toString();</span><br><span class="line"><span class="keyword">if</span> (uri.contains(<span class="string">&quot;/login&quot;</span>)) &#123;</span><br><span class="line">    filterChain.doFilter(servletRequest, servletResponse);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">String</span> <span class="variable">jwt</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;token&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (jwt == <span class="literal">null</span> || jwt.isEmpty()) &#123;</span><br><span class="line">    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);  <span class="comment">// 401</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    JwtUtils.parseToken(jwt);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">filterChain.doFilter(servletRequest, servletResponse);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="六、统一拦截方案二：Interceptor-拦截器"><a href="#六、统一拦截方案二：Interceptor-拦截器" class="headerlink" title="六、统一拦截方案二：Interceptor 拦截器"></a>六、统一拦截方案二：Interceptor 拦截器</h2><h3 id="1-是什么-2"><a href="#1-是什么-2" class="headerlink" title="1. 是什么"></a>1. 是什么</h3><p>Interceptor 是 <strong>Spring 框架</strong>提供的，动态拦截 <strong>Controller 方法</strong>的执行。作用和 Filter 类似，但只拦 Spring 环境内的资源。</p>
+<h3 id="2-入门两步"><a href="#2-入门两步" class="headerlink" title="2. 入门两步"></a>2. 入门两步</h3><ol>
+<li>定义类实现 <code>HandlerInterceptor</code>，重写三个方法，加 <code>@Component</code>。</li>
+<li>写配置类 <code>WebConfig implements WebMvcConfigurer</code>，重写 <code>addInterceptors</code> 注册拦截器。必须加@Configuration</li>
+</ol>
+<p>三个方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>调用时机</th>
+<th>返回值含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>preHandle</code></td>
+<td>目标方法<strong>执行前</strong></td>
+<td><code>true</code> 放行；<code>false</code> 不放行（Controller 不执行）</td>
+</tr>
+<tr>
+<td><code>postHandle</code></td>
+<td>目标方法<strong>执行后</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>afterCompletion</code></td>
+<td>视图渲染完毕后，<strong>最后</strong>执行</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<h3 id="3-注册配置（项目类：WebConfig，全限定类名-com-zhang-config-WebConfig）"><a href="#3-注册配置（项目类：WebConfig，全限定类名-com-zhang-config-WebConfig）" class="headerlink" title="3. 注册配置（项目类：WebConfig，全限定类名 com.zhang.config.WebConfig）"></a>3. 注册配置（项目类：<code>WebConfig</code>，全限定类名 <code>com.zhang.config.WebConfig</code>）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebConfig</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> TokenInterceptor tokenInterceptor;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> &#123;</span><br><span class="line">        registry.addInterceptor(tokenInterceptor)</span><br><span class="line">                .addPathPatterns(<span class="string">&quot;/**&quot;</span>)              <span class="comment">// 拦截所有</span></span><br><span class="line">                <span class="comment">// .excludePathPatterns(&quot;/login&quot;)   // 也可用排除方式放过登录</span></span><br><span class="line">        ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-拦截路径配置-1"><a href="#4-拦截路径配置-1" class="headerlink" title="4. 拦截路径配置"></a>4. 拦截路径配置</h3><table>
+<thead>
+<tr>
+<th>拦截路径</th>
+<th>含义</th>
+<th>能匹配</th>
+<th>不能匹配</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/*</code></td>
+<td>一级路径</td>
+<td>&#x2F;depts、&#x2F;login</td>
+<td>&#x2F;depts&#x2F;1</td>
+</tr>
+<tr>
+<td><code>/**</code></td>
+<td>任意级路径</td>
+<td>&#x2F;depts、&#x2F;depts&#x2F;1、&#x2F;depts&#x2F;1&#x2F;2</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>/depts/*</code></td>
+<td>&#x2F;depts 下一级</td>
+<td>&#x2F;depts&#x2F;1</td>
+<td>&#x2F;depts&#x2F;1&#x2F;2、&#x2F;depts</td>
+</tr>
+<tr>
+<td><code>/depts/**</code></td>
+<td>&#x2F;depts 下任意级</td>
+<td>&#x2F;depts、&#x2F;depts&#x2F;1、&#x2F;depts&#x2F;1&#x2F;2</td>
+<td>&#x2F;emps&#x2F;1</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>排除登录请求有两种写法：① 拦截器里 <code>uri.contains(&quot;login&quot;)</code> 判断放行（项目用法）；② 配置里 <code>excludePathPatterns(&quot;/login&quot;)</code>。</p>
+</blockquote>
+<h3 id="5-登录校验-Interceptor（项目类：TokenInterceptor，全限定类名-com-zhang-interceptor-TokenInterceptor）"><a href="#5-登录校验-Interceptor（项目类：TokenInterceptor，全限定类名-com-zhang-interceptor-TokenInterceptor）" class="headerlink" title="5. 登录校验 Interceptor（项目类：TokenInterceptor，全限定类名 com.zhang.interceptor.TokenInterceptor）"></a>5. 登录校验 Interceptor（项目类：<code>TokenInterceptor</code>，全限定类名 <code>com.zhang.interceptor.TokenInterceptor</code>）</h3><p>逻辑与 Filter 完全一致，只是返回 boolean：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TokenInterceptor</span> <span class="keyword">implements</span> <span class="title class_">HandlerInterceptor</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">uri</span> <span class="operator">=</span> request.getRequestURI().toString();</span><br><span class="line">        <span class="keyword">if</span> (uri.contains(<span class="string">&quot;/login&quot;</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;                         <span class="comment">// 登录请求放行</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">String</span> <span class="variable">jwt</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;token&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (jwt == <span class="literal">null</span> || jwt.isEmpty()) &#123;</span><br><span class="line">            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            JwtUtils.parseToken(jwt);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="七、Filter-vs-Interceptor-对比（高频考点）"><a href="#七、Filter-vs-Interceptor-对比（高频考点）" class="headerlink" title="七、Filter vs Interceptor 对比（高频考点）"></a>七、Filter vs Interceptor 对比（高频考点）</h2><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>Filter 过滤器</th>
+<th>Interceptor 拦截器</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>接口规范</strong></td>
+<td>实现 <code>jakarta.servlet.Filter</code></td>
+<td>实现 <code>HandlerInterceptor</code></td>
+</tr>
+<tr>
+<td><strong>拦截范围</strong></td>
+<td>拦截<strong>所有资源</strong>（包括静态资源、JSP 等）</td>
+<td>只拦 <strong>Spring 环境</strong>中的资源（Controller）</td>
+</tr>
+<tr>
+<td><strong>归属</strong></td>
+<td>JavaWeb 三大组件（Servlet 规范）</td>
+<td>Spring 框架提供</td>
+</tr>
+<tr>
+<td><strong>配置方式</strong></td>
+<td><code>@WebFilter</code> + <code>@ServletComponentScan</code></td>
+<td><code>WebMvcConfigurer.addInterceptors</code></td>
+</tr>
+<tr>
+<td><strong>核心方法</strong></td>
+<td><code>doFilter</code>（放行 <code>chain.doFilter</code>）</td>
+<td><code>preHandle</code> 返回 boolean</td>
+</tr>
+<tr>
+<td><strong>执行时机</strong></td>
+<td>DispatcherServlet 之前</td>
+<td>DispatcherServlet 之后、Controller 之前</td>
+</tr>
+</tbody></table>
+<p>执行顺序（重要）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">浏览器 → Filter(放行前) → DispatcherServlet → Interceptor.preHandle → Controller</span><br><span class="line">       → Interceptor.postHandle → Interceptor.afterCompletion → Filter(放行后) → 浏览器</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>本项目<strong>二选一用了 Interceptor</strong>，Filter 仅作示例保留（见下）。</p>
+</blockquote>
+<hr>
+<h2 id="八、项目现状速查（重点！）"><a href="#八、项目现状速查（重点！）" class="headerlink" title="八、项目现状速查（重点！）"></a>八、项目现状速查（重点！）</h2><blockquote>
+<p>复习时最容易把”示例代码”和”项目真正生效的校验链路”搞混，这里专门列清。</p>
+</blockquote>
+<h3 id="1-实际生效的校验链路"><a href="#1-实际生效的校验链路" class="headerlink" title="1. 实际生效的校验链路"></a>1. 实际生效的校验链路</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请求 → TokenInterceptor.preHandle (校验 token) → Controller → Service → Mapper</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>校验组件：<code>TokenInterceptor</code>（<code>com.zhang.interceptor.TokenInterceptor</code>，加了 <code>@Component</code>）</li>
+<li>注册位置：<code>WebConfig</code>（<code>com.zhang.config.WebConfig</code>，<code>addPathPatterns(&quot;/**&quot;)</code> 注册拦截器）</li>
+</ul>
+<h3 id="2-Filter-是”保留示例”，未启用"><a href="#2-Filter-是”保留示例”，未启用" class="headerlink" title="2. Filter 是”保留示例”，未启用"></a>2. Filter 是”保留示例”，未启用</h3><p><code>TokenFilter</code>（<code>com.zhang.filter.TokenFilter</code>）里 <code>@WebFilter(urlPatterns = &quot;/*&quot;)</code> <strong>被注释掉了</strong>，也没有 <code>@Component</code>，所以<strong>不会生效</strong>。讲义里也明确：”登录校验的过滤器和拦截器，我们只需要使用其中的一种就可以了。”</p>
+<h3 id="3-项目与讲义的命名差异"><a href="#3-项目与讲义的命名差异" class="headerlink" title="3. 项目与讲义的命名差异"></a>3. 项目与讲义的命名差异</h3><table>
+<thead>
+<tr>
+<th>讲义命名</th>
+<th>项目命名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>JwtUtils.generateJwt</code></td>
+<td><code>JwtUtils.generateToken</code></td>
+<td>同功能，方法名不同</td>
+</tr>
+<tr>
+<td><code>JwtUtils.parseJWT</code></td>
+<td><code>JwtUtils.parseToken</code></td>
+<td>同功能，方法名不同</td>
+</tr>
+<tr>
+<td><code>empMapper.getUsernameAndPassword</code></td>
+<td><code>empMapper.getByUsernamePassword</code></td>
+<td>同 SQL，方法名不同</td>
+</tr>
+<tr>
+<td><code>LoginInfo</code> 字段 <code>token</code></td>
+<td>同</td>
+<td>一致</td>
+</tr>
+</tbody></table>
+<h3 id="4-项目涉及文件清单"><a href="#4-项目涉及文件清单" class="headerlink" title="4. 项目涉及文件清单"></a>4. 项目涉及文件清单</h3><table>
+<thead>
+<tr>
+<th>层</th>
+<th>全限定类名 &#x2F; 类</th>
+<th>本节做了什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pojo</td>
+<td><code>com.zhang.pojo.LoginInfo</code></td>
+<td>新增：登录响应封装（<code>id</code>、<code>username</code>、<code>name</code>、<code>token</code>）</td>
+</tr>
+<tr>
+<td>utils</td>
+<td><code>com.zhang.utils.JwtUtils</code></td>
+<td>新增：JWT 工具类（<code>generateToken</code>、<code>parseToken</code>）</td>
+</tr>
+<tr>
+<td>controller</td>
+<td><code>com.zhang.controller.LoginController</code></td>
+<td>新增：<code>POST /login</code> 接口</td>
+</tr>
+<tr>
+<td>service</td>
+<td><code>com.zhang.service.impl.EmpServiceImpl</code></td>
+<td>新增 <code>login(Emp)</code>：查库 → 生成 JWT → 组装 <code>LoginInfo</code></td>
+</tr>
+<tr>
+<td>mapper</td>
+<td><code>com.zhang.mapper.EmpMapper</code></td>
+<td>新增 <code>getByUsernamePassword(Emp)</code>：按用户名密码查询</td>
+</tr>
+<tr>
+<td>interceptor</td>
+<td><code>com.zhang.interceptor.TokenInterceptor</code></td>
+<td>新增：token 校验拦截器（当前<strong>生效</strong>）</td>
+</tr>
+<tr>
+<td>filter</td>
+<td><code>com.zhang.filter.TokenFilter</code></td>
+<td>新增：token 校验过滤器（<strong>未启用</strong>，仅示例）</td>
+</tr>
+<tr>
+<td>config</td>
+<td><code>com.zhang.config.WebConfig</code></td>
+<td>新增：注册 <code>TokenInterceptor</code>，拦截 <code>/**</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="九、易错点-复习提醒"><a href="#九、易错点-复习提醒" class="headerlink" title="九、易错点 &amp; 复习提醒"></a>九、易错点 &amp; 复习提醒</h2><ol>
+<li><p><strong>生成 token 时取 id 的来源</strong>：项目 <code>EmpServiceImpl.login</code> 里写的是 <code>map.put(&quot;id&quot;, emp.getId())</code>，但 <code>emp</code> 是请求体对象，登录时前端不会传 id，所以这里的 id 实际是 null。<strong>更稳的写法是用查询结果 <code>e.getId()</code></strong>（讲义示例就是这么写的）。不影响 token 是否生成，但 token 载荷里的 id 会丢。</p>
+</li>
+<li><p><strong>登录请求必须放行</strong>：拦截器&#x2F;过滤器第一件事就是判断 <code>uri.contains(&quot;/login&quot;)</code> 放行，否则永远登不进去拿不到 token。</p>
+</li>
+<li><p><strong>token 的传递字段是请求头 <code>token</code></strong>，不是 <code>Authorization</code>，也不是 cookie。前后端要约定一致（本项目前端在 <code>token</code> 头里带）。</p>
+</li>
+<li><p><strong>401 状态码</strong>：未登录、token 为空、token 解析失败，都返回 <code>SC_UNAUTHORIZED</code>（401）。前端拿到 401 会自动跳登录页。</p>
+</li>
+<li><p><strong>JWT 秘钥必须配套</strong>：生成和解析用同一个 <code>signKey</code>，换了就全部失效。</p>
+</li>
+<li><p><strong>JWT 不是加密</strong>：Payload 是 base64 编码，<strong>能直接解码出来</strong>，所以<strong>别往里放密码等敏感信息</strong>。签名只是防篡改，不是防查看。</p>
+</li>
+<li><p><strong>Filter 和 Interceptor 不要同时启用做同一件事</strong>：本项目 Filter 注释掉了，只用 Interceptor。两个都开会导致重复校验。</p>
+</li>
+<li><p><strong><code>@WebFilter</code> 方式需要 <code>@ServletComponentScan</code></strong>；如果用 <code>@Component</code> + <code>FilterRegistrationBean</code> 则不需要。本项目 Interceptor 走的是 Spring 的 <code>WebMvcConfigurer</code> 注册方式。</p>
+</li>
+<li><p><strong>拦截路径 <code>/*</code> vs <code>/**</code></strong>：Filter 用 <code>/*</code>（Servlet 规范）；Interceptor 用 <code>/**</code>（Spring Ant 风格）。两者<strong>含义不同</strong>，别混。</p>
+</li>
+</ol>
+<hr>
+<h2 id="十、一图回顾整条链路"><a href="#十、一图回顾整条链路" class="headerlink" title="十、一图回顾整条链路"></a>十、一图回顾整条链路</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">┌───────── 登录 ─────────┐</span><br><span class="line">│ POST /login            │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ LoginController        │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ EmpServiceImpl.login   │</span><br><span class="line">│   ├─ EmpMapper 查库    │</span><br><span class="line">│   └─ JwtUtils 生成 token│</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ 返回 LoginInfo&#123;token&#125;  │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ 前端存 localStorage    │</span><br><span class="line">└────────────────────────┘</span><br><span class="line"></span><br><span class="line">┌──────── 后续请求 ──────┐</span><br><span class="line">│ 请求头带 token         │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ TokenInterceptor       │</span><br><span class="line">│ .preHandle             │</span><br><span class="line">│   ├─ /login → 放行     │</span><br><span class="line">│   ├─ 无 token → 401    │</span><br><span class="line">│   ├─ 解析失败 → 401    │</span><br><span class="line">│   └─ 合法 → return true│</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ Controller → Service   │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ 返回结果               │</span><br><span class="line">└────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        <!-- Post license / copyright -->
         
           
 
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day1%20IO%E6%B5%81/">day1 IO流</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">day1计划
-今天学完IO
-
-笔记1.File
-File的3个构造方法
-表示什么：路径，可以表示文件或文件夹
-常用方法
-判断，获取
-创建，删除
-遍历
-
-
-不能读写数据，读写需要用到IO流
-
-2.IO流1.字节流
-计算机数据的最小单位是字节
-字节流可以操作任何文件
-字节流读取文本文件，需要读取为byte[]，指定编码方式转为字符串，否则中文字符会出现乱码。
-字节流没有缓冲区，可以用byte数组来做缓</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        2 min
-      </span>
-      
-    </div>
+<!-- Support & Share Widget -->
+<div class="post-share-donate-box">
+  <div class="share-donate-left-icon">
+    <span class="material-symbols-outlined">favorite</span>
   </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day1%20IO%E6%B5%81/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
+  <div class="share-donate-content">
+    <div class="share-donate-title">支持与分享</div>
+    <div class="share-donate-desc">如果这篇文章对你有帮助，欢迎分享给更多人或打赏支持！</div>
+  </div>
+  <div class="share-donate-actions">
+    <button class="share-donate-btn share-btn-outline" id="share-post-btn">
+      <span class="material-symbols-outlined">share</span>
+      <span>分享</span>
+    </button>
+    <a href="/donate/" class="share-donate-btn donate-btn-filled">
+      <span>打赏</span>
+      <span class="material-symbols-outlined">arrow_right_alt</span>
     </a>
   </div>
+</div>
+
+<!-- Copyright Card -->
+<div class="post-copyright-box">
+  <div class="copyright-watermark">CC</div>
+  <div class="copyright-header">
+    <span class="copyright-title">day15-2 登录认证</span>
+    <a class="copyright-link" href="https://www.blog-x.cc.cd/2026/08/25/day15-2%20%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/" target="_blank" rel="noopener noreferrer">
+      https://www.blog-x.cc.cd/2026/08/25/day15-2%20%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/
+    </a>
+  </div>
+  <div class="copyright-meta">
+    <div class="copyright-meta-item">
+      <span class="meta-label">author</span>
+      <span class="meta-value">John Doe</span>
+    </div>
+    <div class="copyright-meta-item">
+      <span class="meta-label">发布于</span>
+      <span class="meta-value">2026-08-25</span>
+    </div>
+    <div class="copyright-meta-item">
+      <span class="meta-label">许可协议</span>
+      <span class="meta-value">
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener noreferrer">
+          CC BY-NC-SA 4.0
+        </a>
+      </span>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const shareBtn = document.getElementById('share-post-btn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', function() {
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        showToast('链接已复制到剪贴板，快去分享给好友吧！');
+      }).catch(function() {
+        showToast('复制失败，请手动复制链接');
+      });
+    });
+  }
   
-</article>
+  function showToast(message) {
+    let toast = document.getElementById('firefly-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'firefly-toast';
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(1rem);
+        background: oklch(0.25 0.12 var(--hue));
+        color: #fff;
+        padding: 0.65rem 1.5rem;
+        border-radius: 9999px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        font-size: 0.875rem;
+        font-weight: 600;
+        z-index: 99999;
+        opacity: 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+      `;
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    setTimeout(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+    }, 50);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(1rem)';
+    }, 2500);
+  }
+});
+</script>
 
         
-          
 
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/">day11 部门管理实战</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">day11计划
-前后端分离开发规范与REST风格
-工程搭建与基础代码结构
-部门管理CRUD功能实现
-参数接收方式详解
-MyBatis结果映射与驼峰命名
-Nginx部署与前后端联调
-Logback日志技术
-
-笔记1.前后端分离开发前后端分离将工程拆分为前端工程和后端工程，各自独立开发、独立部署。前端通过异步请求获取数据，后端根据接口文档提供数据。
-开发流程
-需求分析 → 理解产品原型和需求文档
-接口</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        20 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
+        <!-- Post meta bottom: tags, last modified -->
         
-          
 
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
+<footer class="post-meta-bottom">
+  <!-- Tags list -->
   
 
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/">day10 Java操作数据库</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">计划
-JDBC基础入门
-JDBC查询与增删改
-SQL注入与预编译SQL
-MyBatis快速入门
-MyBatis注解写法与XML映射
-SpringBoot配置文件与数据库连接池
-
-笔记1.JDBC概述JDBC是什么
-JDBC：Java DataBase Connectivity，使用Java语言操作关系型数据库的一套API
-本质：Sun公司定义的一套接口规范，数据库厂商提供驱动jar包实现接口
-执行</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        20 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
+  <!-- Categories list at bottom -->
   
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
+
+  <!-- Last modified date -->
+  
+  <div class="post-last-modified">
+    <span class="material-symbols-outlined" aria-hidden="true">edit</span>
+    最后编辑于 2026-08-25 11:44
   </div>
   
-</article>
+</footer>
 
-        
-          
+      </div>
 
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
+      <!-- Share buttons -->
+      
+
+      <!-- Footer widgets (Alert, Prev/Next Navigation, Smart Related & Random Articles) -->
+      
+
+<div class="post-footer-widgets">
+  <!-- Warning Info Alert -->
   
 
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day2%20IO%E6%B5%81/">day2 IO流</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
+  <!-- Prev / Next Navigation -->
+  <nav class="post-footer-navigation">
+    <div class="post-nav-card-wrapper">
       
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
+      <a href="/2026/08/25/day17%20SpringBoot%E5%8E%9F%E7%90%86%E4%B8%8EMaven%E9%AB%98%E7%BA%A7-%E6%80%BB%E7%BB%93/" class="post-nav-card card-base prev-nav-card" title="day17 SpringBoot原理与Maven高级-总结">
+        <span class="material-symbols-outlined nav-arrow">chevron_left</span>
+        <span class="nav-card-title">day17 SpringBoot原理与Maven高级-总结</span>
+      </a>
       
     </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">day2计划
-学完IO流
-
-笔记1.缓冲流字节缓冲流
-缓冲流默认缓冲区大小为8192字节（8KB）
-使用方式：在基本流外包装一层缓冲流
-关闭缓冲流时，底层基本流也会自动关闭
-性能对比
-缓冲流逐字节读取复制：35ms（内部缓冲区已优化磁盘I&amp;#x2F;O）
-缓冲流配合 byte[] 数组读取复制：4ms
-
-
-缓冲流与缓冲数组同时使用是不必要的
-缓冲流内部已有 8KB 缓冲区，逐字节读取时已通过内部缓</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
+    <div class="post-nav-card-wrapper">
       
-      
-      <span class="post-card-reading-time">
-        4 min
-      </span>
+      <a href="/2026/08/25/day16%20%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/" class="post-nav-card card-base next-nav-card" title="day16 面向切面编程">
+        <span class="nav-card-title">day16 面向切面编程</span>
+        <span class="material-symbols-outlined nav-arrow">chevron_right</span>
+      </a>
       
     </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day2%20IO%E6%B5%81/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-          
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/">day20 Redis入门与店铺状态设置</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">前几天陆陆续续写了苍穹外卖的员工管理,菜品,分类,套餐管理等,未坚持每日学习,未写复盘
-1. 今天做了什么(day5的内容)
-
-Redis入门
-安装
-Redis里的数据类型:字符串,哈希,集合,有序集合,列表
-Redis操作的命令
-java程序中操作Redis数据库:使用Spring Data Redis
-配置
-使用
-
-
-
-
-店铺相关接口 , 使用Redis存储
-设置店铺营业状态
-获取店铺状态(用</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        3 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-          
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day22%20%E7%BC%93%E5%AD%98/">day22 缓存</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">1. 今天做了什么外卖day7的一部分
-
-缓存菜品
-缓存套餐
-
-2. 核心知识点
-两种实现缓存的方式
-使用Redis自己实现缓存
-根据分类id查询菜品,将分类id作为key,将查询到的集合作为value
-查询时先查缓存是否存在,存在直接返回,不存在则查询后存入缓存返回
-一旦管理端发生新增,修改,删除,起售停售,都要对缓存进行清理
-
-
-使用Spring Cache实现缓存
-完全使用注解实现,很方便</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        3 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day22%20%E7%BC%93%E5%AD%98/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-          
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/">day21 微信登录</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">1. 今天做了什么(外卖day6的内容)
-
-HttpClient的使用
-微信小程序开发入门
-项目目录结构
-获取头像与昵称
-获取授权码
-
-
-微信登录
-流程:小程序获取授权码-&amp;gt;携带授权码向服务端发起请求-&amp;gt;服务端使用授权码向微信的接口发起请求,获取openid(微信用户唯一标识)-&amp;gt;查询若为新用户则1创建-&amp;gt;创建jwt令牌,与用户基本信息一起返回给小程序
-设置拦截器,对除登录</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        1 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-          
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/">day3 多线程</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">计划多线程
-总结1.线程创建3种方式
-继承Thread
-实现Runnable
-实现Callable
-
-特点：3可以有返回值，1，2无返回值1因为单继承，无法继承其他类
-方法：设置&amp;#x2F;获取线程名，获取当前线程名，出让，插入，睡眠等
-2.同步安全问题原因
-大多操作系统对线程采用抢占式调度
-线程之间会争夺CPU执行权
-多个线程对同一资源进行操作的过程中，CUP执行权随时会被夺走，被其他线程占用，</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        6 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-          
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/">day23 购物车与用户下单</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">1. 今天做了什么(外卖day07,day08)
-
-购物车相关接口
-用户下单相关接口
-
-2. 核心知识点
-订单表与订单明细表的设计
-订单表存储订单相关的信息
-订单明细表存储订单中的菜品,套餐的单价,数量等数据,一条菜品或套餐对应一条数据
-二者是一对多的
-
-
-冗余字段
-数据表中某些字段可以通过其他字段在其他表中查询到
-为什么设计冗余字段
-在插入数据时将冗余字段从其他表查出来,一并插入其中
-以后查询的</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        1 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-      
-    </div>
-
-    <!-- Pagination -->
-    
-
-
-<div class="pagination-wrapper">
-  <nav class="pagination" aria-label="pagination">
-    
-    <span class="pagination-item pagination-prev pagination-disabled" aria-disabled="true">
-      <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
-      <span>上一页</span>
-    </span>
-    
-
-    <span class="pagination-info">
-      <span class="page-number">1</span>
-      <span class="page-divider">/</span>
-      <span class="page-total">3</span>
-    </span>
-
-    
-    <a
-      href="/page/2/"
-      class="pagination-item pagination-next"
-      rel="next"
-      aria-label="下一页"
-    >
-      <span>下一页</span>
-      <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-    </a>
-    
   </nav>
+
+  <!-- Side-by-Side Recommendations Grid -->
+  <div class="post-recommendations-row">
+    <!-- Left Column: Related Posts -->
+    <div class="recommendations-column card-base">
+      <div class="recommendations-column-header">
+        <div class="column-header-title">
+          <span class="material-symbols-outlined">schema</span>
+          <h3>相关文章</h3>
+        </div>
+        <span class="recommend-badge smart-badge">智能推荐</span>
+      </div>
+      <ul class="recommend-list">
+        
+          
+          <li>
+            <a href="/2026/08/25/hello/" class="recommend-item">
+              <span class="recommend-index-badge first-index">1</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">hello</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day1%20IO%E6%B5%81/" class="recommend-item">
+              <span class="recommend-index-badge ">2</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day1 IO流</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day1计划 今天学完IO 笔记1.File File的3个构造方法...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/" class="recommend-item">
+              <span class="recommend-index-badge ">3</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day11 部门管理实战</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day11计划 前后端分离开发规范与REST风格 工程搭建与基础代码结...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" class="recommend-item">
+              <span class="recommend-index-badge ">4</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day10 Java操作数据库</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">计划 JDBC基础入门 JDBC查询与增删改 SQL注入与预编译SQL...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day2%20IO%E6%B5%81/" class="recommend-item">
+              <span class="recommend-index-badge ">5</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day2 IO流</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day2计划 学完IO流 笔记1.缓冲流字节缓冲流 缓冲流默认缓冲区大...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <!-- Right Column: Random Posts -->
+    <div class="recommendations-column card-base">
+      <div class="recommendations-column-header">
+        <div class="column-header-title">
+          <span class="material-symbols-outlined">explore</span>
+          <h3>随机文章</h3>
+        </div>
+        <span class="recommend-badge random-badge">随机推荐</span>
+      </div>
+      <ul class="recommend-list">
+        
+          
+          <li>
+            <a href="/2026/08/25/day22%20%E7%BC%93%E5%AD%98/" class="recommend-item">
+              <span class="recommend-index-badge first-index">1</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day22 缓存</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">1. 今天做了什么外卖day7的一部分 缓存菜品 缓存套餐 2. 核心...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day7%20Maven%E7%9A%84%E4%BD%BF%E7%94%A8,%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="recommend-item">
+              <span class="recommend-index-badge ">2</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day7 Maven的使用,单元测试</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day7计划 Maven项目构建与管理入门 笔记1.Maven概述 作...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day8%20SpringBootWeb%E5%85%A5%E9%97%A8%E3%80%81HTTP%E5%8D%8F%E8%AE%AE%E4%B8%8E%E5%88%86%E5%B1%82%E8%A7%A3%E8%80%A6/" class="recommend-item">
+              <span class="recommend-index-badge ">3</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day8 SpringBootWeb入门、HTTP协议与分层解耦</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day8计划 SpringBootWeb入门 HTTP协议学习 Spr...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day1%20IO%E6%B5%81/" class="recommend-item">
+              <span class="recommend-index-badge ">4</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day1 IO流</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day1计划 今天学完IO 笔记1.File File的3个构造方法...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/" class="recommend-item">
+              <span class="recommend-index-badge ">5</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day11 部门管理实战</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day11计划 前后端分离开发规范与REST风格 工程搭建与基础代码结...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+    </article>
+
+    <!-- Comments section -->
+    
+    <section class="post-comments" aria-label="评论">
+      
+<div class="comments-container">
+  <div class="comments-title">评论</div>
+  <div class="giscus-wrapper">
+    <script src="https://giscus.app/client.js"
+      data-repo="lkdenchin/hexo-blog-comments"
+      data-repo-id="R_kgDORXaOrA"
+      data-category="Announcements"
+      data-category-id="DIC_kwDORXaOrM4C3F8Y"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="1"
+      data-input-position="top"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
 </div>
 
 
+    </section>
+    
   </main>
 
   <!-- ===== Right Sidebar ===== -->
   
   <aside class="sidebar-right" aria-label="右侧边栏">
     
+      
 
 <!-- Right sidebar widgets -->
 <div class="sidebar-widgets sidebar-right-widgets">
@@ -2152,6 +2408,23 @@ document.addEventListener('DOMContentLoaded', function() {
   
 </div>
 
+    
+    
+      
+
+
+<div id="toc" class="toc-widget">
+  <div class="toc-header">
+    <span>目录</span>
+  </div>
+  <div class="toc-body" id="toc-body">
+    <!-- Populated by client-side JavaScript -->
+  </div>
+</div>
+
+
+    
+    
   </aside>
   
 
@@ -2554,6 +2827,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
+
+  <!-- Floating TOC (always available via JS, appears as a floating widget on scroll) -->
+  
 
   
 

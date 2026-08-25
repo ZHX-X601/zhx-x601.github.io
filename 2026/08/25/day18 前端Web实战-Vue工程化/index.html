@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 
-<title>Hexo</title>
+<title>day18 前端Web实战-Vue工程化 - Hexo</title>
 
 
 
@@ -14,10 +14,10 @@
 
 
 <!-- Open Graph -->
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="day18 前端Web实战-Vue工程化 - Hexo">
 <meta property="og:description" content="">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.blog-x.cc.cd">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.blog-x.cc.cd/2026/08/25/day18%20%E5%89%8D%E7%AB%AFWeb%E5%AE%9E%E6%88%98-Vue%E5%B7%A5%E7%A8%8B%E5%8C%96/">
 <meta property="og:site_name" content="Hexo">
 
 <meta property="og:image" content="/img/favicon.ico">
@@ -25,7 +25,7 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="day18 前端Web实战-Vue工程化 - Hexo">
 <meta name="twitter:description" content="">
 
 <meta name="twitter:image" content="/img/favicon.ico">
@@ -101,13 +101,13 @@
 
 
 <!-- Canonical URL -->
-<link rel="canonical" href="https://www.blog-x.cc.cd">
+<link rel="canonical" href="https://www.blog-x.cc.cd/2026/08/25/day18%20%E5%89%8D%E7%AB%AFWeb%E5%AE%9E%E6%88%98-Vue%E5%B7%A5%E7%A8%8B%E5%8C%96/">
 
 <!-- No-Referrer Domain Script -->
 
 
 <meta name="generator" content="Hexo 8.1.2"></head>
-<body class="min-h-screen is-home sticky-navbar enable-card-border " style="--bannerOffset: 15vh; --banner-height-home: 73vh; --banner-height: 67vh; --configHue: 165; --page-width: 100rem;">
+<body class="min-h-screen  sticky-navbar enable-card-border " style="--bannerOffset: 15vh; --banner-height-home: 73vh; --banner-height: 67vh; --configHue: 165; --page-width: 100rem;">
   <script>
     (function() {
       var BANNER_HEIGHT_EXTEND = 6;
@@ -238,7 +238,7 @@
       <ul class="navbar-links">
         <!-- Home (LinkPreset.Home) -->
         <li class="navbar-link-item" role="none">
-          <a href="/" class="navbar-link active" role="menuitem">
+          <a href="/" class="navbar-link" role="menuitem">
             <span class="navbar-link-content">
               <span class="material-symbols-outlined">home</span>
               <span>首页</span>
@@ -481,17 +481,36 @@
   <!-- Banner Overlay Container -->
   <div id="banner-overlay-container">
     
-    <!-- Home Page Text Overlay -->
-    <div class="home-text-overlay">
-      
-      <h1 class="home-text-title">Lovely firefly!</h1>
-      
-      
-      <span class="typewriter home-text-subtitle" data-text="In Reddened Chrysalis, I Once Rest">In Reddened Chrysalis, I Once Rest</span>
-      
-    </div>
-    
 
+    
+    <!-- Post Meta Overlay -->
+    <div class="post-meta-overlay banner-post-meta">
+      <h1 class="post-meta-title">day18 前端Web实战-Vue工程化</h1>
+      <div class="post-meta-info meta-info">
+        
+        <span class="post-meta-date">
+          <span class="material-symbols-outlined md-18">calendar_today</span>
+          发布于: 2026-08-25
+        </span>
+        
+        
+        <span class="post-meta-updated">
+          <span class="material-symbols-outlined md-18">edit</span>
+          更新于: 2026-08-25 11:44
+        </span>
+        
+        
+        <span class="post-meta-word-count">
+          <span class="material-symbols-outlined md-18">description</span>
+          13087 字
+        </span>
+        <span class="post-meta-reading-time">
+          <span class="material-symbols-outlined md-18">schedule</span>
+          27 min
+        </span>
+        
+      </div>
+    </div>
     
 
     
@@ -519,7 +538,7 @@
 
 
   <!-- Main Content Area with grid wrappers -->
-  <div id="main-content-wrapper" class="absolute w-full z-30 pointer-events-none ">
+  <div id="main-content-wrapper" class="absolute w-full z-30 pointer-events-none mobile-main-no-banner">
     <div class="relative w-full xl:w-[92vw] max-w-[var(--page-width)] mx-auto pointer-events-auto">
       
 
@@ -528,6 +547,7 @@
   
   <aside class="sidebar-left" aria-label="左侧边栏">
     
+      
 
 <!-- Left sidebar widgets -->
 <div class="sidebar-widgets sidebar-left-widgets">
@@ -747,20 +767,23 @@
   
 </div>
 
+    
+    
+    
+      
+
+
+
+    
   </aside>
   
 
   <!-- ===== Main Content ===== -->
-  <main
-    id="main-content"
-    class="post-list-container"
-    data-layout="list"
-    aria-label="文章列表"
-  >
+  <main id="main-content" aria-label="文章">
     
 <div class="content-nav-bar card-base">
   <!-- Home button -->
-  <a href="/" class="content-nav-item content-nav-home active" aria-label="Home" title="首页">
+  <a href="/" class="content-nav-item content-nav-home" aria-label="Home" title="首页">
     <span class="material-symbols-outlined">home</span>
   </a>
   
@@ -775,711 +798,902 @@
 
   <!-- Layout Toggle (right-aligned spacer + buttons) -->
   
-  <span class="content-nav-spacer"></span>
-  <div class="layout-buttons" style="display:flex;gap:0.25rem;">
-    <button data-layout="list" class="active" title="列表">
-      <span class="material-symbols-outlined">view_list</span>
-    </button>
-    <button data-layout="grid" class="" title="网格">
-      <span class="material-symbols-outlined">grid_view</span>
-    </button>
-  </div>
-  
 </div>
 
-    <!-- Category navigation bar at top (if enabled) -->
-    
+    <article class="post-container" itemscope itemtype="http://schema.org/Article">
 
-    <!-- Page title (shown on paginated pages > 1 or when configured) -->
-    
 
-    <!-- Post list -->
-    <div class="post-list" data-mode="list">
-      
+      <div class="post-content-card">
+        <!-- Post meta top: title, date, author, reading time, word count, categories -->
         
+
+
+  <header class="post-meta-top">
+    <!-- Top row: Word count & Reading time pills -->
+    <div class="post-header-badges-top">
+      
+      <span class="post-meta-badge badge-wordcount">
+        <span class="material-symbols-outlined" aria-hidden="true">trending_up</span>
+        <span>13087 字</span>
+      </span>
+      
+
+      
+      <span class="post-meta-badge badge-reading-time">
+        <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+        <span>
           
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/hello/">hello</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        1 min
+          
+          33 分钟
+        </span>
       </span>
       
     </div>
-  </div>
 
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/hello/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
+    <!-- Title with CSS-styled vertical bar prefix -->
+    <h1 class="post-title post-title-custom">
+      <strong>day18 前端Web实战-Vue工程化</strong>
+    </h1>
 
+    <!-- Bottom row: Date & Categories/Tags path -->
+    <div class="post-header-badges-bottom">
+      
+      <span class="post-meta-badge badge-date">
+        <span class="material-symbols-outlined" aria-hidden="true">calendar_month</span>
+        <time datetime="2026-08-25 11:29" pubdate>
+          2026-08-25
+        </time>
+      </span>
+      
+
+      <!-- Categories & Tags Breadcrumb Path -->
+      
+      
+    </div>
+
+    <!-- Post updated notice -->
+    
+    <div class="post-updated-note">
+      <span class="material-symbols-outlined" aria-hidden="true">update</span>
+      更新于 2026-08-25 11:44
+    </div>
+    
+  </header>
+
+
+
+        <!-- Post content -->
+        <div
+          class="post-content markdown-body custom-md"
+          itemprop="articleBody"
+        >
+          <h1 id="实战总结：Vue-工程化"><a href="#实战总结：Vue-工程化" class="headerlink" title="实战总结：Vue 工程化"></a>实战总结：Vue 工程化</h1><blockquote>
+<p>本文是对《15-前端Web实战(Vue工程化+ElementPlus)》讲义中 <strong>Vue 工程化部分</strong> 的总结，并补充了自行了解的”侧边栏 + 动态组件加载”实现。<br>这一天是前端开发从”脚本式引入 Vue”迈向”工程化开发”的转折点，目标：掌握 Vue 脚手架项目结构、组合式 API 写法，理解单文件组件开发流程。</p>
+</blockquote>
+<hr>
+<h1 id="上篇：Vue-工程化"><a href="#上篇：Vue-工程化" class="headerlink" title="上篇：Vue 工程化"></a>上篇：Vue 工程化</h1><h2 id="一、为什么需要前端工程化"><a href="#一、为什么需要前端工程化" class="headerlink" title="一、为什么需要前端工程化"></a>一、为什么需要前端工程化</h2><h3 id="1-传统开发模式的问题"><a href="#1-传统开发模式的问题" class="headerlink" title="1. 传统开发模式的问题"></a>1. 传统开发模式的问题</h3><p>之前在 HTML 中直接用 <code>&lt;script src=&quot;vue.js&quot;&gt;</code> 引入 Vue &#x2F; Axios，存在三大痛点：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>不规范</strong></td>
+<td>每次开发从零开始，无统一标准</td>
+</tr>
+<tr>
+<td><strong>难复用</strong></td>
+<td>多个页面中的组件共用性差</td>
+</tr>
+<tr>
+<td><strong>难维护</strong></td>
+<td>js、图片等资源无规范化存储目录</td>
+</tr>
+</tbody></table>
+<h3 id="2-工程化的-4-个特点"><a href="#2-工程化的-4-个特点" class="headerlink" title="2. 工程化的 4 个特点"></a>2. 工程化的 4 个特点</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">模块化  →  将 js/css 做成可复用模块</span><br><span class="line">组件化  →  将 UI + 样式 + 行为封装成组件</span><br><span class="line">规范化  →  统一目录结构与编码规范</span><br><span class="line">自动化  →  构建/测试/部署自动完成</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>一句话</strong>：前端工程化就是把开发所需的工具、技术、流程、经验进行<strong>规范化和标准化</strong>，从而统一规范、提效、降难、提复用。</p>
+</blockquote>
+<hr>
+<h2 id="二、环境准备"><a href="#二、环境准备" class="headerlink" title="二、环境准备"></a>二、环境准备</h2><h3 id="1-create-vue-脚手架介绍"><a href="#1-create-vue-脚手架介绍" class="headerlink" title="1. create-vue 脚手架介绍"></a>1. create-vue 脚手架介绍</h3><ul>
+<li><strong>create-vue</strong> 是 Vue 官方最新的脚手架工具，用于快速生成工程化 Vue 项目。</li>
+<li>提供功能：统一目录结构、本地调试、热部署、单元测试、集成打包上线。</li>
+<li>依赖环境：<strong>必须先安装 NodeJS</strong>。</li>
+</ul>
+<h3 id="2-NodeJS-安装要点"><a href="#2-NodeJS-安装要点" class="headerlink" title="2. NodeJS 安装要点"></a>2. NodeJS 安装要点</h3><table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>关键点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>安装目录</td>
+<td><strong>没有中文、没有空格</strong>（如 <code>D:\develop\NodeJS</code>）</td>
+</tr>
+<tr>
+<td>验证安装</td>
+<td>命令行执行 <code>node -v</code></td>
+</tr>
+<tr>
+<td>配置全局路径</td>
+<td><code>npm config set prefix &quot;D:\develop\NodeJS&quot;</code>（<strong>用管理员身份</strong>运行）</td>
+</tr>
+<tr>
+<td>切换淘宝镜像</td>
+<td><code>npm config set registry https://registry.npmmirror.com</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚠️ <strong>重点提醒</strong>：<code>prefix</code> 后的路径必须是 NodeJS 的安装目录，配置错误会导致全局包安装位置错乱。</p>
+</blockquote>
+<h3 id="3-npm-介绍"><a href="#3-npm-介绍" class="headerlink" title="3. npm 介绍"></a>3. npm 介绍</h3><ul>
+<li><strong>npm</strong> &#x3D; Node Package Manager，NodeJS 的软件包管理器。</li>
+<li>开发中需要的依赖通过 <code>npm install xxx</code> 从远程仓库下载到本地。</li>
+</ul>
+<hr>
+<h2 id="三、Vue-项目创建与结构"><a href="#三、Vue-项目创建与结构" class="headerlink" title="三、Vue 项目创建与结构"></a>三、Vue 项目创建与结构</h2><h3 id="1-创建命令"><a href="#1-创建命令" class="headerlink" title="1. 创建命令"></a>1. 创建命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm create vue@3.3.4</span><br></pre></td></tr></table></figure>
+
+<p>执行后的交互选项（默认值基本都是 No，按需开启）：</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+<th>默认</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Project name</td>
+<td>项目名称</td>
+<td>vue-project</td>
+</tr>
+<tr>
+<td>Add TypeScript</td>
+<td>是否加入 TS</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Add JSX Support</td>
+<td>是否加入 JSX 支持</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Add Vue Router</td>
+<td>是否添加路由（单页应用）</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Add Pinia</td>
+<td>是否添加状态管理</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Add Vitest</td>
+<td>是否添加单元测试</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Add E2E testing</td>
+<td>是否添加端到端测试</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Add ESLint</td>
+<td>是否添加代码质量检查</td>
+<td>No</td>
+</tr>
+</tbody></table>
+<h3 id="2-项目结构"><a href="#2-项目结构" class="headerlink" title="2. 项目结构"></a>2. 项目结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vue-project/</span><br><span class="line">├── index.html          # 页面入口，包含 #app 挂载点</span><br><span class="line">├── package.json        # 项目依赖和脚本</span><br><span class="line">├── vite.config.js      # Vite 配置（插件、别名等）</span><br><span class="line">└── src/                # ← 核心开发目录</span><br><span class="line">    ├── main.js         # 应用入口：创建并挂载根组件</span><br><span class="line">    ├── App.vue         # 根组件</span><br><span class="line">    ├── views/          # 页面级组件</span><br><span class="line">    ├── components/     # 可复用组件</span><br><span class="line">    └── assets/         # 静态资源（CSS、图片）</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>📌 <strong>重点</strong>：以后操作最多的就是 <code>src</code> 目录，前端代码都在这里写。</p>
+</blockquote>
+<h3 id="3-启动项目"><a href="#3-启动项目" class="headerlink" title="3. 启动项目"></a>3. 启动项目</h3><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>命令&#x2F;操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>命令行</td>
+<td><code>npm run dev</code></td>
+</tr>
+<tr>
+<td>VSCode 图形化</td>
+<td>点击 NPM 脚本中 <code>dev</code> 后的运行按钮</td>
+</tr>
+</tbody></table>
+<p>启动后访问：<code>http://localhost:5173</code></p>
+<hr>
+<h2 id="四、Vue-项目开发流程（SFC）"><a href="#四、Vue-项目开发流程（SFC）" class="headerlink" title="四、Vue 项目开发流程（SFC）"></a>四、Vue 项目开发流程（SFC）</h2><h3 id="1-什么是-SFC"><a href="#1-什么是-SFC" class="headerlink" title="1. 什么是 SFC"></a>1. 什么是 SFC</h3><p><strong>SFC</strong>（Single-File Components，单文件组件）：Vue 将一个组件的<strong>逻辑 (JS)、模板 (HTML)、样式 (CSS)</strong> 封装在同一个 <code>*.vue</code> 文件里。</p>
+<h3 id="2-vue-文件三段式结构"><a href="#2-vue-文件三段式结构" class="headerlink" title="2. .vue 文件三段式结构"></a>2. .vue 文件三段式结构</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 1. 逻辑：导入、响应式数据、函数、钩子</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 2. 模板：HTML 结构 + Vue 指令 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">  <span class="comment">/* 3. 样式：scoped 表示只作用于当前组件 */</span></span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="五、API-风格（重点对比）"><a href="#五、API-风格（重点对比）" class="headerlink" title="五、API 风格（重点对比）"></a>五、API 风格（重点对比）</h2><p>Vue 组件有两种写法：<strong>组合式 API</strong> 和 <strong>选项式 API</strong>。</p>
+<h3 id="1-组合式-API（Vue3-推荐）"><a href="#1-组合式-API（Vue3-推荐）" class="headerlink" title="1. 组合式 API（Vue3 推荐）"></a>1. 组合式 API（Vue3 推荐）</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> &#123; ref, onMounted &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">const</span> count = <span class="title function_">ref</span>(<span class="number">0</span>);              <span class="comment">// 响应式变量</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">function</span> <span class="title function_">increment</span>(<span class="params"></span>) &#123;              <span class="comment">// 普通函数</span></span></span><br><span class="line"><span class="language-javascript">  count.<span class="property">value</span>++;</span></span><br><span class="line"><span class="language-javascript">&#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="title function_">onMounted</span>(<span class="function">() =&gt;</span> &#123;                   <span class="comment">// 钩子函数</span></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Vue Mounted....&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">&#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;increment&quot;</span>&gt;</span> Count : &#123;&#123; count &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-选项式-API（Vue2-风格）"><a href="#2-选项式-API（Vue2-风格）" class="headerlink" title="2. 选项式 API（Vue2 风格）"></a>2. 选项式 API（Vue2 风格）</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="language-javascript">  <span class="title function_">data</span>(<span class="params"></span>) &#123;                          <span class="comment">// 数据</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">return</span> &#123; <span class="attr">count</span>: <span class="number">0</span> &#125;</span></span><br><span class="line"><span class="language-javascript">  &#125;,</span></span><br><span class="line"><span class="language-javascript">  <span class="attr">methods</span>: &#123;                        <span class="comment">// 方法</span></span></span><br><span class="line"><span class="language-javascript">    <span class="attr">increment</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="variable language_">this</span>.<span class="property">count</span>++ &#125;</span></span><br><span class="line"><span class="language-javascript">  &#125;,</span></span><br><span class="line"><span class="language-javascript">  <span class="title function_">mounted</span>(<span class="params"></span>) &#123;                       <span class="comment">// 钩子</span></span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;vue mounted.....&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript">&#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-两种风格对比"><a href="#3-两种风格对比" class="headerlink" title="3. 两种风格对比"></a>3. 两种风格对比</h3><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>组合式 API</th>
+<th>选项式 API</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>标识</td>
+<td><code>&lt;script setup&gt;</code></td>
+<td><code>&lt;script&gt;</code> + <code>export default</code></td>
+</tr>
+<tr>
+<td>数据定义</td>
+<td><code>const x = ref(值)</code></td>
+<td><code>data() &#123; return &#123;...&#125; &#125;</code></td>
+</tr>
+<tr>
+<td>方法定义</td>
+<td>普通函数 <code>function fn() &#123;&#125;</code></td>
+<td>写在 <code>methods</code> 选项里</td>
+</tr>
+<tr>
+<td>钩子函数</td>
+<td><code>onMounted(() =&gt; &#123;&#125;)</code></td>
+<td><code>mounted() &#123;&#125;</code></td>
+</tr>
+<tr>
+<td><code>this</code> 指向</td>
+<td><strong>没有 this</strong>（undefined）</td>
+<td>指向当前组件实例</td>
+</tr>
+<tr>
+<td>访问响应式值</td>
+<td><code>count.value</code></td>
+<td><code>this.count</code></td>
+</tr>
+<tr>
+<td>推荐度</td>
+<td>✅ Vue3 主推</td>
+<td>兼容 Vue2 老项目</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚠️ <strong>易混淆</strong>：组合式 API 中<strong>没有 <code>this</code></strong>！访问 ref 变量必须用 <code>.value</code>（模板里除外，模板自动解包）。</p>
+</blockquote>
+<hr>
+<h2 id="六、案例：UserList-vue（组合式-API-Axios）"><a href="#六、案例：UserList-vue（组合式-API-Axios）" class="headerlink" title="六、案例：UserList.vue（组合式 API + Axios）"></a>六、案例：UserList.vue（组合式 API + Axios）</h2><h3 id="1-安装-axios"><a href="#1-安装-axios" class="headerlink" title="1. 安装 axios"></a>1. 安装 axios</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install axios</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-views-UserList-vue-完整代码"><a href="#2-views-UserList-vue-完整代码" class="headerlink" title="2. views&#x2F;UserList.vue 完整代码"></a>2. views&#x2F;UserList.vue 完整代码</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> &#123; ref, onMounted &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="comment">// 1. 声明响应式数据</span></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">const</span> userList = <span class="title function_">ref</span>([])        <span class="comment">// 员工列表</span></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">const</span> name = <span class="title function_">ref</span>(<span class="string">&#x27;&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript"><span class="keyword">const</span> gender = <span class="title function_">ref</span>(<span class="string">&#x27;&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript"><span class="keyword">const</span> job = <span class="title function_">ref</span>(<span class="string">&#x27;&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="comment">// 2. 声明查询函数</span></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">const</span> <span class="title function_">search</span> = (<span class="params"></span>) =&gt; &#123;</span></span><br><span class="line"><span class="language-javascript">  axios.<span class="title function_">get</span>(<span class="string">`https://web-server.itheima.net/emps/list?name=<span class="subst">$&#123;name.value&#125;</span>&amp;gender=<span class="subst">$&#123;gender.value&#125;</span>&amp;job=<span class="subst">$&#123;job.value&#125;</span>`</span>)</span></span><br><span class="line"><span class="language-javascript">    .<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">      userList.<span class="property">value</span> = res.<span class="property">data</span>.<span class="property">data</span></span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript">&#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="comment">// 3. 钩子：页面加载完毕自动查询</span></span></span><br><span class="line"><span class="language-javascript"><span class="title function_">onMounted</span>(<span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">  <span class="title function_">search</span>()</span></span><br><span class="line"><span class="language-javascript">&#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;center&quot;</span>&gt;</span></span><br><span class="line">    姓名: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;name&quot;</span>&gt;</span></span><br><span class="line">    性别:</span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">v-model</span>=<span class="string">&quot;gender&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>&gt;</span>男<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;2&quot;</span>&gt;</span>女<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    职位:</span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">v-model</span>=<span class="string">&quot;job&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>&gt;</span>班主任<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;2&quot;</span>&gt;</span>讲师<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;3&quot;</span>&gt;</span>其他<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;查询&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;search&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>序号<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span>姓名<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span>头像<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span>性别<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">th</span>&gt;</span>职位<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span>入职时间<span class="tag">&lt;/<span class="name">th</span>&gt;</span><span class="tag">&lt;<span class="name">th</span>&gt;</span>更新时间<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span> <span class="attr">v-for</span>=<span class="string">&quot;(user, index) in userList&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;user.id&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; index + 1 &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; user.name &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">:src</span>=<span class="string">&quot;user.image&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-if</span>=<span class="string">&quot;user.gender == 1&quot;</span>&gt;</span>男<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-else-if</span>=<span class="string">&quot;user.gender == 2&quot;</span>&gt;</span>女<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-else</span>&gt;</span>其他<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-show</span>=<span class="string">&quot;user.job == 1&quot;</span>&gt;</span>班主任<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-show</span>=<span class="string">&quot;user.job == 2&quot;</span>&gt;</span>讲师<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-show</span>=<span class="string">&quot;user.job != 1 &amp;&amp; user.job != 2&quot;</span>&gt;</span>其他<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; user.entrydate &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; user.updatetime &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">  <span class="selector-tag">table</span>, <span class="selector-tag">th</span>, <span class="selector-tag">td</span> &#123; <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>; <span class="attribute">border-collapse</span>: collapse; <span class="attribute">line-height</span>: <span class="number">50px</span>; <span class="attribute">text-align</span>: center; &#125;</span></span><br><span class="line"><span class="language-css">  <span class="selector-id">#center</span>, <span class="selector-tag">table</span> &#123; <span class="attribute">width</span>: <span class="number">60%</span>; <span class="attribute">margin</span>: auto; &#125;</span></span><br><span class="line"><span class="language-css">  <span class="selector-id">#center</span> &#123; <span class="attribute">margin-bottom</span>: <span class="number">20px</span>; &#125;</span></span><br><span class="line"><span class="language-css">  <span class="selector-tag">img</span> &#123; <span class="attribute">width</span>: <span class="number">50px</span>; &#125;</span></span><br><span class="line"><span class="language-css">  <span class="selector-tag">input</span>, <span class="selector-tag">select</span> &#123; <span class="attribute">width</span>: <span class="number">17%</span>; <span class="attribute">padding</span>: <span class="number">10px</span>; <span class="attribute">margin-right</span>: <span class="number">30px</span>; <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ccc</span>; <span class="attribute">border-radius</span>: <span class="number">4px</span>; &#125;</span></span><br><span class="line"><span class="language-css">  <span class="selector-class">.btn</span> &#123; <span class="attribute">background-color</span>: <span class="number">#ccc</span>; &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-App-vue-引入组件"><a href="#3-App-vue-引入组件" class="headerlink" title="3. App.vue 引入组件"></a>3. App.vue 引入组件</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> <span class="title class_">UserList</span> <span class="keyword">from</span> <span class="string">&#x27;./views/UserList.vue&#x27;</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">UserList</span>&gt;</span><span class="tag">&lt;/<span class="name">UserList</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-数据驱动流程"><a href="#4-数据驱动流程" class="headerlink" title="4. 数据驱动流程"></a>4. 数据驱动流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">声明数据 (ref)</span><br><span class="line">    ↓</span><br><span class="line">onMounted 自动调用 search()</span><br><span class="line">    ↓</span><br><span class="line">axios 异步请求 → 赋值 userList.value</span><br><span class="line">    ↓</span><br><span class="line">Vue 响应式更新 → v-for 重新渲染表格</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="扩展篇：侧边栏-动态组件加载（自行了解）"><a href="#扩展篇：侧边栏-动态组件加载（自行了解）" class="headerlink" title="扩展篇：侧边栏 + 动态组件加载（自行了解）"></a>扩展篇：侧边栏 + 动态组件加载（自行了解）</h1><blockquote>
+<p>这部分是讲义之外，基于”侧边栏菜单切换不同页面”需求自己研究的实现方式。</p>
+</blockquote>
+<h2 id="一、需求场景"><a href="#一、需求场景" class="headerlink" title="一、需求场景"></a>一、需求场景</h2><p>很多后台管理系统都有这种布局：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">┌──────────┬──────────────────────┐</span><br><span class="line">│  侧边栏   │     内容区            │</span><br><span class="line">│ ─主页    │                      │</span><br><span class="line">│ ─热门    │  (点击菜单切换内容)    │</span><br><span class="line">│ ─我的    │                      │</span><br><span class="line">└──────────┴──────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p>核心难点：<strong>点击左侧菜单，右侧内容区切换成不同组件</strong>，但整个页面不刷新。</p>
+<hr>
+<h2 id="二、动态组件"><a href="#二、动态组件" class="headerlink" title="二、动态组件 &lt;component :is=&quot;...&quot;&gt;"></a>二、动态组件 <code>&lt;component :is=&quot;...&quot;&gt;</code></h2><h3 id="1-是什么"><a href="#1-是什么" class="headerlink" title="1. 是什么"></a>1. 是什么</h3><p><code>&lt;component&gt;</code> 是 Vue 内置的<strong>特殊组件</strong>，不是 HTML 原生标签。它通过 <code>:is</code> 属性决定渲染哪个组件。</p>
+<h3 id="2-基本写法"><a href="#2-基本写法" class="headerlink" title="2. 基本写法"></a>2. 基本写法</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">&quot;当前要显示的组件&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>:is</code> 后面跟的是<strong>组件对象</strong>（不是字符串）。</li>
+<li>当 <code>:is</code> 的值变化时，右侧渲染的组件自动切换。</li>
+</ul>
+<h3 id="3-配合菜单数据使用"><a href="#3-配合菜单数据使用" class="headerlink" title="3. 配合菜单数据使用"></a>3. 配合菜单数据使用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">HomeView</span> <span class="keyword">from</span> <span class="string">&#x27;./views/HomeView.vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">HotView</span> <span class="keyword">from</span> <span class="string">&#x27;./views/HotView.vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">MineView</span> <span class="keyword">from</span> <span class="string">&#x27;./views/MineView.vue&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 菜单数据：name 是显示文字，component 是组件对象</span></span><br><span class="line"><span class="keyword">const</span> menus = [</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">&#x27;主页&#x27;</span>, <span class="attr">component</span>: <span class="title class_">HomeView</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">&#x27;热门&#x27;</span>, <span class="attr">component</span>: <span class="title class_">HotView</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">&#x27;我的&#x27;</span>, <span class="attr">component</span>: <span class="title class_">MineView</span> &#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> activeIndex = <span class="title function_">ref</span>(<span class="number">0</span>)   <span class="comment">// 当前选中菜单的索引</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 右侧动态渲染选中菜单对应的组件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">&quot;menus[activeIndex].component&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>📌 <code>component</code> 是自定义字段名，可改成 <code>comp</code>、<code>view</code> 等，但模板中要保持一致。</p>
+</blockquote>
+<hr>
+<h2 id="三、侧边栏布局实现"><a href="#三、侧边栏布局实现" class="headerlink" title="三、侧边栏布局实现"></a>三、侧边栏布局实现</h2><h3 id="1-App-vue-完整结构"><a href="#1-App-vue-完整结构" class="headerlink" title="1. App.vue 完整结构"></a>1. App.vue 完整结构</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> <span class="title class_">HomeView</span> <span class="keyword">from</span> <span class="string">&#x27;./views/HomeView.vue&#x27;</span></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> <span class="title class_">HotView</span> <span class="keyword">from</span> <span class="string">&#x27;./views/HotView.vue&#x27;</span></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> <span class="title class_">MineView</span> <span class="keyword">from</span> <span class="string">&#x27;./views/MineView.vue&#x27;</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">const</span> menus = [</span></span><br><span class="line"><span class="language-javascript">  &#123; <span class="attr">name</span>: <span class="string">&#x27;主页&#x27;</span>, <span class="attr">component</span>: <span class="title class_">HomeView</span> &#125;,</span></span><br><span class="line"><span class="language-javascript">  &#123; <span class="attr">name</span>: <span class="string">&#x27;热门&#x27;</span>, <span class="attr">component</span>: <span class="title class_">HotView</span> &#125;,</span></span><br><span class="line"><span class="language-javascript">  &#123; <span class="attr">name</span>: <span class="string">&#x27;我的&#x27;</span>, <span class="attr">component</span>: <span class="title class_">MineView</span> &#125;,</span></span><br><span class="line"><span class="language-javascript">]</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">const</span> activeIndex = <span class="title function_">ref</span>(<span class="number">0</span>)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layout&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 侧边栏 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aside</span> <span class="attr">class</span>=<span class="string">&quot;sidebar&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span></span></span><br><span class="line"><span class="tag">          <span class="attr">v-for</span>=<span class="string">&quot;(item, index) in menus&quot;</span></span></span><br><span class="line"><span class="tag">          <span class="attr">:key</span>=<span class="string">&quot;item.name&quot;</span></span></span><br><span class="line"><span class="tag">          <span class="attr">:class</span>=<span class="string">&quot;&#123; active: index === activeIndex &#125;&quot;</span></span></span><br><span class="line"><span class="tag">          @<span class="attr">click</span>=<span class="string">&quot;activeIndex = index&quot;</span></span></span><br><span class="line"><span class="tag">        &gt;</span></span><br><span class="line">          &#123;&#123; item.name &#125;&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aside</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 内容区：动态组件 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">main</span> <span class="attr">class</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">&quot;menus[activeIndex].component&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-class">.layout</span> &#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">display</span>: flex;          <span class="comment">/* 侧边栏 + 内容区水平排列 */</span></span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-class">.sidebar</span> &#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">width</span>: <span class="number">180px</span>;           <span class="comment">/* 侧边栏固定宽度 */</span></span></span><br><span class="line"><span class="language-css">  <span class="attribute">background</span>: <span class="number">#f5f5f5</span>;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-class">.sidebar</span> <span class="selector-tag">li</span> &#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">padding</span>: <span class="number">15px</span>;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">cursor</span>: pointer;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">list-style</span>: none;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-class">.sidebar</span> <span class="selector-tag">li</span><span class="selector-class">.active</span> &#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">background</span>: <span class="number">#409eff</span>;    <span class="comment">/* 选中项高亮 */</span></span></span><br><span class="line"><span class="language-css">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-class">.content</span> &#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">flex</span>: <span class="number">1</span>;                <span class="comment">/* 占据剩余空间 */</span></span></span><br><span class="line"><span class="language-css">  <span class="attribute">padding</span>: <span class="number">20px</span>;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-关键语法点拆解"><a href="#2-关键语法点拆解" class="headerlink" title="2. 关键语法点拆解"></a>2. 关键语法点拆解</h3><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>作用</th>
+<th>本例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>v-for=&quot;(item, index) in menus&quot;</code></td>
+<td>循环渲染菜单</td>
+<td>生成每个 <code>&lt;li&gt;</code></td>
+</tr>
+<tr>
+<td><code>:key=&quot;item.name&quot;</code></td>
+<td>列表项唯一标识（优化性能）</td>
+<td>用 name 作 key</td>
+</tr>
+<tr>
+<td><code>:class=&quot;&#123; active: index === activeIndex &#125;&quot;</code></td>
+<td>动态绑定 class</td>
+<td>选中项加 active 类</td>
+</tr>
+<tr>
+<td><code>@click=&quot;activeIndex = index&quot;</code></td>
+<td>点击修改索引</td>
+<td>切换高亮 + 切换组件</td>
+</tr>
+<tr>
+<td><code>&lt;component :is=&quot;...&quot;&gt;</code></td>
+<td>动态组件</td>
+<td>渲染对应页面</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="四、数据驱动流程图"><a href="#四、数据驱动流程图" class="headerlink" title="四、数据驱动流程图"></a>四、数据驱动流程图</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">数据定义</span><br><span class="line">  menus (菜单数组) + activeIndex (选中索引, ref(0))</span><br><span class="line">        ↓</span><br><span class="line">模板渲染</span><br><span class="line">  v-for 生成菜单 &lt;li&gt;</span><br><span class="line">  :class 根据 activeIndex 高亮当前项</span><br><span class="line">  &lt;component :is&gt; 渲染 menus[0].component</span><br><span class="line">        ↓</span><br><span class="line">用户点击菜单</span><br><span class="line">  @click=&quot;activeIndex = index&quot;</span><br><span class="line">        ↓</span><br><span class="line">Vue 响应式触发</span><br><span class="line">  activeIndex 变化 → :class 重新计算 → 高亮切换</span><br><span class="line">                  → :is 重新计算 → 组件切换</span><br><span class="line">        ↓</span><br><span class="line">视图更新</span><br><span class="line">  右侧内容区换成新组件</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="五、进阶：keep-alive-缓存组件状态"><a href="#五、进阶：keep-alive-缓存组件状态" class="headerlink" title="五、进阶：keep-alive 缓存组件状态"></a>五、进阶：keep-alive 缓存组件状态</h2><p><strong>问题</strong>：默认情况下，<code>&lt;component :is&gt;</code> 切换组件时，旧组件会被销毁，新组件重新创建。如果组件内有输入数据（如表单），切换回来会丢失。</p>
+<p><strong>解决</strong>：用 <code>&lt;keep-alive&gt;</code> 包裹动态组件，缓存不活动的组件实例。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">main</span> <span class="attr">class</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">keep-alive</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">&quot;menus[activeIndex].component&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>对比</th>
+<th>不用 keep-alive</th>
+<th>用 keep-alive</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>切换时</td>
+<td>销毁旧组件 → 创建新组件</td>
+<td>缓存旧组件 → 复用</td>
+</tr>
+<tr>
+<td>状态保留</td>
+<td>❌ 丢失（如表单输入）</td>
+<td>✅ 保留</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>切换频繁、状态不重要</td>
+<td>需保留状态（如表单、滚动位置）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="六、如何新增菜单项"><a href="#六、如何新增菜单项" class="headerlink" title="六、如何新增菜单项"></a>六、如何新增菜单项</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 在 src/views/ 下新建 NewView.vue</span><br><span class="line">2. 在 App.vue 中 import NewView from &#x27;./views/NewView.vue&#x27;</span><br><span class="line">3. 在 menus 数组中追加：</span><br><span class="line">   &#123; name: &#x27;新菜单&#x27;, component: NewView &#125;</span><br><span class="line">4. 无需改其他代码，菜单自动出现</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="常见问题-易混淆点"><a href="#常见问题-易混淆点" class="headerlink" title="常见问题 &amp; 易混淆点"></a>常见问题 &amp; 易混淆点</h1><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>答案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>import</code> 何时用 <code>&#123;&#125;</code>？</td>
+<td><strong>具名导出</strong>用 <code>&#123;&#125;</code>（如 <code>import &#123; ref &#125; from &#39;vue&#39;</code>）；<strong>默认导出</strong>不用（如 <code>import App from &#39;./App.vue&#39;</code>）</td>
+</tr>
+<tr>
+<td><code>.vue</code> 文件是默认还是具名导出？</td>
+<td>默认导出</td>
+</tr>
+<tr>
+<td><code>&lt;component&gt;</code> 是 HTML 原生标签吗？</td>
+<td>❌ 不是，是 Vue 内置特殊组件</td>
+</tr>
+<tr>
+<td><code>:is</code> 后面跟字符串还是组件对象？</td>
+<td><strong>组件对象</strong>（导入的变量）</td>
+</tr>
+<tr>
+<td>组合式 API 里有 <code>this</code> 吗？</td>
+<td>❌ 没有，<code>this</code> 是 undefined</td>
+</tr>
+<tr>
+<td><code>ref</code> 变量在 JS 中怎么访问值？</td>
+<td>用 <code>.value</code>（如 <code>count.value</code>）；模板中自动解包</td>
+</tr>
+<tr>
+<td><code>scoped</code> 的作用？</td>
+<td>样式只作用于当前组件，不污染全局</td>
+</tr>
+<tr>
+<td>侧边栏宽度在哪改？</td>
+<td><code>.sidebar</code> 的 <code>width</code> 属性</td>
+</tr>
+<tr>
+<td>内容区如何占满剩余宽度？</td>
+<td><code>flex: 1</code></td>
+</tr>
+<tr>
+<td>动态组件切换后状态丢失？</td>
+<td>用 <code>&lt;keep-alive&gt;</code> 包裹</td>
+</tr>
+<tr>
+<td><code>v-if</code> 和 <code>v-show</code> 区别？</td>
+<td><code>v-if</code> 销毁&#x2F;创建 DOM；<code>v-show</code> 只切换 <code>display</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="常用命令速查"><a href="#常用命令速查" class="headerlink" title="常用命令速查"></a>常用命令速查</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 环境配置</span></span><br><span class="line">npm config <span class="built_in">set</span> prefix <span class="string">&quot;NodeJS安装目录&quot;</span>        <span class="comment"># 配置全局安装路径</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npmmirror.com   <span class="comment"># 淘宝镜像</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 项目创建与运行</span></span><br><span class="line">npm create vue@3.3.4                          <span class="comment"># 创建 Vue 项目</span></span><br><span class="line">npm install                                   <span class="comment"># 安装项目依赖</span></span><br><span class="line">npm run dev                                   <span class="comment"># 启动开发服务器</span></span><br><span class="line">npm run build                                 <span class="comment"># 构建生产版本</span></span><br><span class="line">npm run preview                               <span class="comment"># 预览构建结果</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 依赖安装</span></span><br><span class="line">npm install axios                             <span class="comment"># 安装 axios</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="Vue-核心模板语法速查表"><a href="#Vue-核心模板语法速查表" class="headerlink" title="Vue 核心模板语法速查表"></a>Vue 核心模板语法速查表</h1><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&#123;&#123; 表达式 &#125;&#125;</code></td>
+<td>文本插值</td>
+<td><code>&#123;&#123; user.name &#125;&#125;</code></td>
+</tr>
+<tr>
+<td><code>v-model</code></td>
+<td>双向数据绑定</td>
+<td><code>&lt;input v-model=&quot;name&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><code>v-for</code></td>
+<td>列表循环</td>
+<td><code>v-for=&quot;(item, index) in menus&quot;</code></td>
+</tr>
+<tr>
+<td><code>:key</code></td>
+<td>列表项唯一标识</td>
+<td><code>:key=&quot;item.id&quot;</code></td>
+</tr>
+<tr>
+<td><code>:class</code></td>
+<td>动态绑定类名</td>
+<td><code>:class=&quot;&#123; active: isActive &#125;&quot;</code></td>
+</tr>
+<tr>
+<td><code>:src</code></td>
+<td>动态绑定属性</td>
+<td><code>&lt;img :src=&quot;user.image&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><code>@click</code></td>
+<td>监听点击</td>
+<td><code>@click=&quot;activeIndex = index&quot;</code></td>
+</tr>
+<tr>
+<td><code>v-if / v-else-if / v-else</code></td>
+<td>条件渲染（销毁&#x2F;创建）</td>
+<td><code>v-if=&quot;user.gender == 1&quot;</code></td>
+</tr>
+<tr>
+<td><code>v-show</code></td>
+<td>条件显示（display 切换）</td>
+<td><code>v-show=&quot;user.job == 1&quot;</code></td>
+</tr>
+<tr>
+<td><code>&lt;component :is&gt;</code></td>
+<td>动态组件</td>
+<td><code>&lt;component :is=&quot;menus[i].component&quot; /&gt;</code></td>
+</tr>
+</tbody></table>
+<hr>
+<blockquote>
+<p>📌 <strong>复习建议</strong>：</p>
+<ol>
+<li>对照本文，理解 Vue 工程化项目每个文件的作用（<code>main.js</code> &#x2F; <code>App.vue</code> &#x2F; <code>views/</code>）。</li>
+<li>组合式 API 是后续开发主力，重点掌握 <code>ref</code>、<code>onMounted</code>、<code>&lt;script setup&gt;</code> 写法。</li>
+<li>侧边栏 + 动态组件是后台管理系统的经典布局，建议手敲一遍加深理解。</li>
+<li>动手试试：新增一个菜单项、改侧边栏宽度、用 keep-alive 缓存组件状态。</li>
+</ol>
+</blockquote>
+
+        </div>
+
+        <!-- Post license / copyright -->
         
           
 
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day1%20IO%E6%B5%81/">day1 IO流</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">day1计划
-今天学完IO
-
-笔记1.File
-File的3个构造方法
-表示什么：路径，可以表示文件或文件夹
-常用方法
-判断，获取
-创建，删除
-遍历
-
-
-不能读写数据，读写需要用到IO流
-
-2.IO流1.字节流
-计算机数据的最小单位是字节
-字节流可以操作任何文件
-字节流读取文本文件，需要读取为byte[]，指定编码方式转为字符串，否则中文字符会出现乱码。
-字节流没有缓冲区，可以用byte数组来做缓</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        2 min
-      </span>
-      
-    </div>
+<!-- Support & Share Widget -->
+<div class="post-share-donate-box">
+  <div class="share-donate-left-icon">
+    <span class="material-symbols-outlined">favorite</span>
   </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day1%20IO%E6%B5%81/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
+  <div class="share-donate-content">
+    <div class="share-donate-title">支持与分享</div>
+    <div class="share-donate-desc">如果这篇文章对你有帮助，欢迎分享给更多人或打赏支持！</div>
+  </div>
+  <div class="share-donate-actions">
+    <button class="share-donate-btn share-btn-outline" id="share-post-btn">
+      <span class="material-symbols-outlined">share</span>
+      <span>分享</span>
+    </button>
+    <a href="/donate/" class="share-donate-btn donate-btn-filled">
+      <span>打赏</span>
+      <span class="material-symbols-outlined">arrow_right_alt</span>
     </a>
   </div>
+</div>
+
+<!-- Copyright Card -->
+<div class="post-copyright-box">
+  <div class="copyright-watermark">CC</div>
+  <div class="copyright-header">
+    <span class="copyright-title">day18 前端Web实战-Vue工程化</span>
+    <a class="copyright-link" href="https://www.blog-x.cc.cd/2026/08/25/day18%20%E5%89%8D%E7%AB%AFWeb%E5%AE%9E%E6%88%98-Vue%E5%B7%A5%E7%A8%8B%E5%8C%96/" target="_blank" rel="noopener noreferrer">
+      https://www.blog-x.cc.cd/2026/08/25/day18%20%E5%89%8D%E7%AB%AFWeb%E5%AE%9E%E6%88%98-Vue%E5%B7%A5%E7%A8%8B%E5%8C%96/
+    </a>
+  </div>
+  <div class="copyright-meta">
+    <div class="copyright-meta-item">
+      <span class="meta-label">author</span>
+      <span class="meta-value">John Doe</span>
+    </div>
+    <div class="copyright-meta-item">
+      <span class="meta-label">发布于</span>
+      <span class="meta-value">2026-08-25</span>
+    </div>
+    <div class="copyright-meta-item">
+      <span class="meta-label">许可协议</span>
+      <span class="meta-value">
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener noreferrer">
+          CC BY-NC-SA 4.0
+        </a>
+      </span>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const shareBtn = document.getElementById('share-post-btn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', function() {
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        showToast('链接已复制到剪贴板，快去分享给好友吧！');
+      }).catch(function() {
+        showToast('复制失败，请手动复制链接');
+      });
+    });
+  }
   
-</article>
+  function showToast(message) {
+    let toast = document.getElementById('firefly-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'firefly-toast';
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(1rem);
+        background: oklch(0.25 0.12 var(--hue));
+        color: #fff;
+        padding: 0.65rem 1.5rem;
+        border-radius: 9999px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        font-size: 0.875rem;
+        font-weight: 600;
+        z-index: 99999;
+        opacity: 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+      `;
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    setTimeout(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+    }, 50);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(1rem)';
+    }, 2500);
+  }
+});
+</script>
 
         
-          
 
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/">day11 部门管理实战</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">day11计划
-前后端分离开发规范与REST风格
-工程搭建与基础代码结构
-部门管理CRUD功能实现
-参数接收方式详解
-MyBatis结果映射与驼峰命名
-Nginx部署与前后端联调
-Logback日志技术
-
-笔记1.前后端分离开发前后端分离将工程拆分为前端工程和后端工程，各自独立开发、独立部署。前端通过异步请求获取数据，后端根据接口文档提供数据。
-开发流程
-需求分析 → 理解产品原型和需求文档
-接口</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        20 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
+        <!-- Post meta bottom: tags, last modified -->
         
-          
 
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
+<footer class="post-meta-bottom">
+  <!-- Tags list -->
   
 
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/">day10 Java操作数据库</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">计划
-JDBC基础入门
-JDBC查询与增删改
-SQL注入与预编译SQL
-MyBatis快速入门
-MyBatis注解写法与XML映射
-SpringBoot配置文件与数据库连接池
-
-笔记1.JDBC概述JDBC是什么
-JDBC：Java DataBase Connectivity，使用Java语言操作关系型数据库的一套API
-本质：Sun公司定义的一套接口规范，数据库厂商提供驱动jar包实现接口
-执行</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        20 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
+  <!-- Categories list at bottom -->
   
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
+
+  <!-- Last modified date -->
+  
+  <div class="post-last-modified">
+    <span class="material-symbols-outlined" aria-hidden="true">edit</span>
+    最后编辑于 2026-08-25 11:44
   </div>
   
-</article>
+</footer>
 
-        
-          
+      </div>
 
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
+      <!-- Share buttons -->
+      
+
+      <!-- Footer widgets (Alert, Prev/Next Navigation, Smart Related & Random Articles) -->
+      
+
+<div class="post-footer-widgets">
+  <!-- Warning Info Alert -->
   
 
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day2%20IO%E6%B5%81/">day2 IO流</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
+  <!-- Prev / Next Navigation -->
+  <nav class="post-footer-navigation">
+    <div class="post-nav-card-wrapper">
       
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
+      <a href="/2026/08/25/day16%20%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/" class="post-nav-card card-base prev-nav-card" title="day16 面向切面编程">
+        <span class="material-symbols-outlined nav-arrow">chevron_left</span>
+        <span class="nav-card-title">day16 面向切面编程</span>
+      </a>
       
     </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">day2计划
-学完IO流
-
-笔记1.缓冲流字节缓冲流
-缓冲流默认缓冲区大小为8192字节（8KB）
-使用方式：在基本流外包装一层缓冲流
-关闭缓冲流时，底层基本流也会自动关闭
-性能对比
-缓冲流逐字节读取复制：35ms（内部缓冲区已优化磁盘I&amp;#x2F;O）
-缓冲流配合 byte[] 数组读取复制：4ms
-
-
-缓冲流与缓冲数组同时使用是不必要的
-缓冲流内部已有 8KB 缓冲区，逐字节读取时已通过内部缓</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
+    <div class="post-nav-card-wrapper">
       
-      
-      <span class="post-card-reading-time">
-        4 min
-      </span>
+      <a href="/2026/08/25/day19%20%E5%89%8D%E7%AB%AFWeb%E5%AE%9E%E6%88%98-ElementPlus/" class="post-nav-card card-base next-nav-card" title="day19 前端Web实战-ElementPlus">
+        <span class="nav-card-title">day19 前端Web实战-ElementPlus</span>
+        <span class="material-symbols-outlined nav-arrow">chevron_right</span>
+      </a>
       
     </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day2%20IO%E6%B5%81/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-          
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/">day20 Redis入门与店铺状态设置</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">前几天陆陆续续写了苍穹外卖的员工管理,菜品,分类,套餐管理等,未坚持每日学习,未写复盘
-1. 今天做了什么(day5的内容)
-
-Redis入门
-安装
-Redis里的数据类型:字符串,哈希,集合,有序集合,列表
-Redis操作的命令
-java程序中操作Redis数据库:使用Spring Data Redis
-配置
-使用
-
-
-
-
-店铺相关接口 , 使用Redis存储
-设置店铺营业状态
-获取店铺状态(用</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        3 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-          
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day22%20%E7%BC%93%E5%AD%98/">day22 缓存</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">1. 今天做了什么外卖day7的一部分
-
-缓存菜品
-缓存套餐
-
-2. 核心知识点
-两种实现缓存的方式
-使用Redis自己实现缓存
-根据分类id查询菜品,将分类id作为key,将查询到的集合作为value
-查询时先查缓存是否存在,存在直接返回,不存在则查询后存入缓存返回
-一旦管理端发生新增,修改,删除,起售停售,都要对缓存进行清理
-
-
-使用Spring Cache实现缓存
-完全使用注解实现,很方便</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        3 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day22%20%E7%BC%93%E5%AD%98/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-          
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/">day21 微信登录</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">1. 今天做了什么(外卖day6的内容)
-
-HttpClient的使用
-微信小程序开发入门
-项目目录结构
-获取头像与昵称
-获取授权码
-
-
-微信登录
-流程:小程序获取授权码-&amp;gt;携带授权码向服务端发起请求-&amp;gt;服务端使用授权码向微信的接口发起请求,获取openid(微信用户唯一标识)-&amp;gt;查询若为新用户则1创建-&amp;gt;创建jwt令牌,与用户基本信息一起返回给小程序
-设置拦截器,对除登录</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        1 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-          
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/">day3 多线程</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">计划多线程
-总结1.线程创建3种方式
-继承Thread
-实现Runnable
-实现Callable
-
-特点：3可以有返回值，1，2无返回值1因为单继承，无法继承其他类
-方法：设置&amp;#x2F;获取线程名，获取当前线程名，出让，插入，睡眠等
-2.同步安全问题原因
-大多操作系统对线程采用抢占式调度
-线程之间会争夺CPU执行权
-多个线程对同一资源进行操作的过程中，CUP执行权随时会被夺走，被其他线程占用，</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        6 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-          
-
-<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
-  <!-- Cover image area -->
-  
-
-  <!-- Content area -->
-  <div class="post-card-content">
-    <!-- Title -->
-    <h2 class="post-card-title">
-      <a href="/2026/08/25/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/">day23 购物车与用户下单</a>
-    </h2>
-
-    <!-- Meta line: date, category -->
-    <div class="post-card-meta">
-      
-      
-      <time datetime="2026-08-25" pubdate>
-        <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-25</span>
-      </time>
-      
-      
-    </div>
-
-    <!-- Description / excerpt -->
-    
-    <p class="post-card-excerpt">1. 今天做了什么(外卖day07,day08)
-
-购物车相关接口
-用户下单相关接口
-
-2. 核心知识点
-订单表与订单明细表的设计
-订单表存储订单相关的信息
-订单明细表存储订单中的菜品,套餐的单价,数量等数据,一条菜品或套餐对应一条数据
-二者是一对多的
-
-
-冗余字段
-数据表中某些字段可以通过其他字段在其他表中查询到
-为什么设计冗余字段
-在插入数据时将冗余字段从其他表查出来,一并插入其中
-以后查询的</p>
-    
-
-    <!-- Footer: tags & reading time -->
-    <div class="post-card-footer">
-      
-      
-      <span class="post-card-reading-time">
-        1 min
-      </span>
-      
-    </div>
-  </div>
-
-  <!-- Right side chevron panel for coverless cards -->
-  
-  <div class="post-card-arrow">
-    <a href="/2026/08/25/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/" aria-hidden="true" tabindex="-1">
-      <span class="material-symbols-outlined">chevron_right</span>
-    </a>
-  </div>
-  
-</article>
-
-        
-      
-    </div>
-
-    <!-- Pagination -->
-    
-
-
-<div class="pagination-wrapper">
-  <nav class="pagination" aria-label="pagination">
-    
-    <span class="pagination-item pagination-prev pagination-disabled" aria-disabled="true">
-      <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
-      <span>上一页</span>
-    </span>
-    
-
-    <span class="pagination-info">
-      <span class="page-number">1</span>
-      <span class="page-divider">/</span>
-      <span class="page-total">3</span>
-    </span>
-
-    
-    <a
-      href="/page/2/"
-      class="pagination-item pagination-next"
-      rel="next"
-      aria-label="下一页"
-    >
-      <span>下一页</span>
-      <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-    </a>
-    
   </nav>
+
+  <!-- Side-by-Side Recommendations Grid -->
+  <div class="post-recommendations-row">
+    <!-- Left Column: Related Posts -->
+    <div class="recommendations-column card-base">
+      <div class="recommendations-column-header">
+        <div class="column-header-title">
+          <span class="material-symbols-outlined">schema</span>
+          <h3>相关文章</h3>
+        </div>
+        <span class="recommend-badge smart-badge">智能推荐</span>
+      </div>
+      <ul class="recommend-list">
+        
+          
+          <li>
+            <a href="/2026/08/25/hello/" class="recommend-item">
+              <span class="recommend-index-badge first-index">1</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">hello</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day1%20IO%E6%B5%81/" class="recommend-item">
+              <span class="recommend-index-badge ">2</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day1 IO流</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day1计划 今天学完IO 笔记1.File File的3个构造方法...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/" class="recommend-item">
+              <span class="recommend-index-badge ">3</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day11 部门管理实战</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day11计划 前后端分离开发规范与REST风格 工程搭建与基础代码结...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" class="recommend-item">
+              <span class="recommend-index-badge ">4</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day10 Java操作数据库</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">计划 JDBC基础入门 JDBC查询与增删改 SQL注入与预编译SQL...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day2%20IO%E6%B5%81/" class="recommend-item">
+              <span class="recommend-index-badge ">5</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day2 IO流</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day2计划 学完IO流 笔记1.缓冲流字节缓冲流 缓冲流默认缓冲区大...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <!-- Right Column: Random Posts -->
+    <div class="recommendations-column card-base">
+      <div class="recommendations-column-header">
+        <div class="column-header-title">
+          <span class="material-symbols-outlined">explore</span>
+          <h3>随机文章</h3>
+        </div>
+        <span class="recommend-badge random-badge">随机推荐</span>
+      </div>
+      <ul class="recommend-list">
+        
+          
+          <li>
+            <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/" class="recommend-item">
+              <span class="recommend-index-badge first-index">1</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day21 微信登录</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">1. 今天做了什么(外卖day6的内容) HttpClient的使用...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" class="recommend-item">
+              <span class="recommend-index-badge ">2</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day10 Java操作数据库</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">计划 JDBC基础入门 JDBC查询与增删改 SQL注入与预编译SQL...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="recommend-item">
+              <span class="recommend-index-badge ">3</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day3 多线程</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">计划多线程 总结1.线程创建3种方式 继承Thread 实现Runna...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/" class="recommend-item">
+              <span class="recommend-index-badge ">4</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day11 部门管理实战</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day11计划 前后端分离开发规范与REST风格 工程搭建与基础代码结...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day8%20SpringBootWeb%E5%85%A5%E9%97%A8%E3%80%81HTTP%E5%8D%8F%E8%AE%AE%E4%B8%8E%E5%88%86%E5%B1%82%E8%A7%A3%E8%80%A6/" class="recommend-item">
+              <span class="recommend-index-badge ">5</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title">day8 SpringBootWeb入门、HTTP协议与分层解耦</span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day8计划 SpringBootWeb入门 HTTP协议学习 Spr...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+    </article>
+
+    <!-- Comments section -->
+    
+    <section class="post-comments" aria-label="评论">
+      
+<div class="comments-container">
+  <div class="comments-title">评论</div>
+  <div class="giscus-wrapper">
+    <script src="https://giscus.app/client.js"
+      data-repo="lkdenchin/hexo-blog-comments"
+      data-repo-id="R_kgDORXaOrA"
+      data-category="Announcements"
+      data-category-id="DIC_kwDORXaOrM4C3F8Y"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="1"
+      data-input-position="top"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
 </div>
 
 
+    </section>
+    
   </main>
 
   <!-- ===== Right Sidebar ===== -->
   
   <aside class="sidebar-right" aria-label="右侧边栏">
     
+      
 
 <!-- Right sidebar widgets -->
 <div class="sidebar-widgets sidebar-right-widgets">
@@ -2152,6 +2366,23 @@ document.addEventListener('DOMContentLoaded', function() {
   
 </div>
 
+    
+    
+      
+
+
+<div id="toc" class="toc-widget">
+  <div class="toc-header">
+    <span>目录</span>
+  </div>
+  <div class="toc-body" id="toc-body">
+    <!-- Populated by client-side JavaScript -->
+  </div>
+</div>
+
+
+    
+    
   </aside>
   
 
@@ -2554,6 +2785,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
+
+  <!-- Floating TOC (always available via JS, appears as a floating widget on scroll) -->
+  
 
   
 
