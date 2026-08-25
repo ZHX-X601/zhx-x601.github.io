@@ -148,6 +148,640 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day17%20SpringBoot%E5%8E%9F%E7%90%86%E4%B8%8EMaven%E9%AB%98%E7%BA%A7-%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/25/day17%20SpringBoot%E5%8E%9F%E7%90%86%E4%B8%8EMaven%E9%AB%98%E7%BA%A7-%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">day17 SpringBoot原理与Maven高级-总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="实战总结：SpringBoot-原理-Maven-高级"><a href="#实战总结：SpringBoot-原理-Maven-高级" class="headerlink" title="实战总结：SpringBoot 原理 + Maven 高级"></a>实战总结：SpringBoot 原理 + Maven 高级</h1><blockquote>
+<p>本文是对《14-1 后端Web进阶(SpringBoot原理)》和《14-2 后端Web进阶(Maven高级)》两份讲义的总结。<br>这一天是后端开发的最后一个篇章，偏向底层原理与工程化，目标：理解 SpringBoot 为什么”开箱即用”，掌握大型项目模块化管理。</p>
+</blockquote>
+<hr>
+<h1 id="上篇：SpringBoot-原理"><a href="#上篇：SpringBoot-原理" class="headerlink" title="上篇：SpringBoot 原理"></a>上篇：SpringBoot 原理</h1><h2 id="一、配置优先级（5-种配置方式）"><a href="#一、配置优先级（5-种配置方式）" class="headerlink" title="一、配置优先级（5 种配置方式）"></a>一、配置优先级（5 种配置方式）</h2><h3 id="1-三种配置文件优先级"><a href="#1-三种配置文件优先级" class="headerlink" title="1. 三种配置文件优先级"></a>1. 三种配置文件优先级</h3><p>SpringBoot 支持 <code>properties</code>、<code>yml</code>、<code>yaml</code> 三种格式，同时存在时优先级（从高到低）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. application.properties   ← 最高</span><br><span class="line">2. application.yml</span><br><span class="line">3. application.yaml         ← 最低</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>建议</strong>：项目内统一使用一种格式，yml 是主流。</p>
+</blockquote>
+<h3 id="2-五种配置方式总览"><a href="#2-五种配置方式总览" class="headerlink" title="2. 五种配置方式总览"></a>2. 五种配置方式总览</h3><p>除配置文件外，SpringBoot 还支持两种外部配置：</p>
+<table>
+<thead>
+<tr>
+<th>配置方式</th>
+<th>格式</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>命令行参数</td>
+<td><code>--key=value</code></td>
+<td><code>--server.port=10010</code></td>
+</tr>
+<tr>
+<td>Java 系统属性</td>
+<td><code>-Dkey=value</code></td>
+<td><code>-Dserver.port=9000</code></td>
+</tr>
+<tr>
+<td>properties 文件</td>
+<td><code>key=value</code></td>
+<td><code>server.port=8081</code></td>
+</tr>
+<tr>
+<td>yml 文件</td>
+<td>缩进式</td>
+<td><code>server:\n  port: 8082</code></td>
+</tr>
+<tr>
+<td>yaml 文件</td>
+<td>缩进式</td>
+<td>同 yml</td>
+</tr>
+</tbody></table>
+<h3 id="3-优先级排名（从高到低）"><a href="#3-优先级排名（从高到低）" class="headerlink" title="3. 优先级排名（从高到低）"></a>3. 优先级排名（从高到低）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">命令行参数 &gt; Java系统属性 &gt; properties &gt; yml &gt; yaml</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-打包后指定参数"><a href="#4-打包后指定参数" class="headerlink" title="4. 打包后指定参数"></a>4. 打包后指定参数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 同时设置系统属性和命令行参数</span></span><br><span class="line">java -Dserver.port=9000 -jar XXXXX.jar --server.port=10010</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最终生效的是命令行参数 --server.port=10010</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-注意事项"><a href="#5-注意事项" class="headerlink" title="5. 注意事项"></a>5. 注意事项</h3><ul>
+<li>SpringBoot 打包需要 <code>spring-boot-maven-plugin</code> 插件（官网骨架自动添加）。</li>
+<li>IDEA 中通过 <code>Modify options → Add VM options / Program arguments</code> 设置。</li>
+</ul>
+<hr>
+<h2 id="二、Bean-的管理"><a href="#二、Bean-的管理" class="headerlink" title="二、Bean 的管理"></a>二、Bean 的管理</h2><h3 id="1-Bean-的作用域（-Scope）"><a href="#1-Bean-的作用域（-Scope）" class="headerlink" title="1. Bean 的作用域（@Scope）"></a>1. Bean 的作用域（@Scope）</h3><table>
+<thead>
+<tr>
+<th>作用域</th>
+<th>说明</th>
+<th>创建时机</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>singleton</strong></td>
+<td>单例（默认），容器内同名称 bean 只有一个</td>
+<td>容器启动时</td>
+</tr>
+<tr>
+<td><strong>prototype</strong></td>
+<td>每次使用都创建新实例</td>
+<td>第一次获取时</td>
+</tr>
+<tr>
+<td>request</td>
+<td>每个请求范围创建新实例（web 环境）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>session</td>
+<td>每个会话范围创建新实例（web 环境）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>application</td>
+<td>每个应用范围创建新实例（web 环境）</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<p><strong>用法</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Scope(&quot;prototype&quot;)</span> <span class="comment">// 改为非单例</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeptController</span> &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>重点提醒</strong>：</p>
+<ul>
+<li>默认 singleton 的 bean 在<strong>容器启动时</strong>创建，可用 <code>@Lazy</code> 延迟到第一次使用时创建。</li>
+<li>实际开发中绝大部分 bean 是单例，<strong>不需要配置 scope</strong>。</li>
+<li>prototype 的 bean 每次使用都会创建新实例。</li>
+</ul>
+<h3 id="2-第三方-Bean-的管理（-Bean）"><a href="#2-第三方-Bean-的管理（-Bean）" class="headerlink" title="2. 第三方 Bean 的管理（@Bean）"></a>2. 第三方 Bean 的管理（@Bean）</h3><h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><p>第三方依赖中的类（如阿里云 OSS 工具类），无法在源码上加 <code>@Component</code>，需要用 <code>@Bean</code> 注解声明。</p>
+<h4 id="方式一：直接写在启动类（不推荐）"><a href="#方式一：直接写在启动类（不推荐）" class="headerlink" title="方式一：直接写在启动类（不推荐）"></a>方式一：直接写在启动类（不推荐）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">AliyunOSSOperator</span> <span class="title function_">aliyunOSSOperator</span><span class="params">(AliyunOSSProperties props)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AliyunOSSOperator</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="方式二：配置类（推荐）"><a href="#方式二：配置类（推荐）" class="headerlink" title="方式二：配置类（推荐）"></a>方式二：配置类（推荐）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OSSConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">AliyunOSSOperator</span> <span class="title function_">aliyunOSSOperator</span><span class="params">(AliyunOSSProperties props)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AliyunOSSOperator</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
+<li><code>@Bean</code> 默认 bean 名称 &#x3D; 方法名，可用 <code>name</code>&#x2F;<code>value</code> 属性自定义。</li>
+<li>第三方 bean 需要依赖其他 bean 时，直接在方法<strong>形参</strong>中声明，Spring 自动按类型装配。</li>
+</ul>
+<hr>
+<h2 id="三、SpringBoot-原理剖析"><a href="#三、SpringBoot-原理剖析" class="headerlink" title="三、SpringBoot 原理剖析"></a>三、SpringBoot 原理剖析</h2><h3 id="1-SpringBoot-的两大核心"><a href="#1-SpringBoot-的两大核心" class="headerlink" title="1. SpringBoot 的两大核心"></a>1. SpringBoot 的两大核心</h3><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>解决的问题</th>
+<th>原理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>起步依赖</strong></td>
+<td>依赖配置繁琐</td>
+<td>Maven 依赖传递</td>
+</tr>
+<tr>
+<td><strong>自动配置</strong></td>
+<td>bean 声明和配置繁琐</td>
+<td>@Import + 配置文件 + @Conditional</td>
+</tr>
+</tbody></table>
+<h3 id="2-起步依赖原理"><a href="#2-起步依赖原理" class="headerlink" title="2. 起步依赖原理"></a>2. 起步依赖原理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">引入 spring-boot-starter-web</span><br><span class="line">        ↓</span><br><span class="line">Maven 依赖传递特性</span><br><span class="line">        ↓</span><br><span class="line">自动引入 json、web、webmvc、tomcat 等所有 web 开发常见依赖</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>本质就是 Maven 的依赖传递，把 web 开发所需的常见依赖都预先集成好。</p>
+</blockquote>
+<h3 id="3-自动配置原理（核心！）"><a href="#3-自动配置原理（核心！）" class="headerlink" title="3. 自动配置原理（核心！）"></a>3. 自动配置原理（核心！）</h3><h4 id="①-问题引入"><a href="#①-问题引入" class="headerlink" title="① 问题引入"></a>① 问题引入</h4><p>引入第三方依赖后，第三方包中的 <code>@Component</code> 类<strong>不会</strong>被扫描到，因为 <code>@SpringBootApplication</code> 只扫描启动类所在包及子包。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">启动类包：com.itheima   ← 能扫描</span><br><span class="line">第三方包：com.example   ← 扫描不到</span><br></pre></td></tr></table></figure>
+
+<h4 id="②-四种解决方案对比"><a href="#②-四种解决方案对比" class="headerlink" title="② 四种解决方案对比"></a>② 四种解决方案对比</h4><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>写法</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>① <code>@ComponentScan</code></td>
+<td><code>@ComponentScan({&quot;com.itheima&quot;,&quot;com.example&quot;})</code></td>
+<td>繁琐、性能低</td>
+</tr>
+<tr>
+<td>② <code>@Import</code> 普通类</td>
+<td><code>@Import(TokenParser.class)</code></td>
+<td>需要知道类名</td>
+</tr>
+<tr>
+<td>③ <code>@Import</code> 配置类</td>
+<td><code>@Import(HeaderConfig.class)</code></td>
+<td>需要知道配置类</td>
+</tr>
+<tr>
+<td>④ <code>@Import</code> ImportSelector</td>
+<td><code>@Import(MyImportSelector.class)</code></td>
+<td>需要写实现类</td>
+</tr>
+<tr>
+<td>⑤ <code>@EnableXxxxx</code>（最优）</td>
+<td>第三方提供，封装了 @Import</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>SpringBoot 采用的是 <strong>方案④&#x2F;⑤</strong> 的思路。</p>
+</blockquote>
+<h4 id="③-源码跟踪：-SpringBootApplication"><a href="#③-源码跟踪：-SpringBootApplication" class="headerlink" title="③ 源码跟踪：@SpringBootApplication"></a>③ 源码跟踪：<code>@SpringBootApplication</code></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">    ├── @SpringBootConfiguration   → 声明启动类是配置类</span><br><span class="line">    ├── @ComponentScan             → 包扫描（启动类所在包及子包）</span><br><span class="line">    └── @EnableAutoConfiguration   → 自动配置核心！</span><br><span class="line">            └── @Import(AutoConfigurationImportSelector.class)</span><br><span class="line">                    └── selectImports()</span><br><span class="line">                            └── getAutoConfigurationEntry()</span><br><span class="line">                                    └── getCandidateConfigurations()</span><br><span class="line">                                            └── 读取 META-INF/spring/</span><br><span class="line">                                                org.springframework.boot.autoconfigure.AutoConfiguration.imports</span><br></pre></td></tr></table></figure>
+
+<h4 id="④-自动配置执行流程"><a href="#④-自动配置执行流程" class="headerlink" title="④ 自动配置执行流程"></a>④ 自动配置执行流程</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">SpringBoot 启动</span><br><span class="line">    ↓</span><br><span class="line">@SpringBootApplication 中的 @EnableAutoConfiguration</span><br><span class="line">    ↓</span><br><span class="line">@Import 导入 AutoConfigurationImportSelector</span><br><span class="line">    ↓</span><br><span class="line">selectImports() 方法读取所有依赖 jar 包中的</span><br><span class="line">META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports 文件</span><br><span class="line">    ↓</span><br><span class="line">获取文件中定义的所有自动配置类的全限定名</span><br><span class="line">    ↓</span><br><span class="line">通过 @Import 将这些配置类加载到 IOC 容器</span><br><span class="line">    ↓</span><br><span class="line">配置类中 @Bean 标识的方法被调用，返回值注册为 bean</span><br><span class="line">    ↓</span><br><span class="line">@Conditional 条件装配：满足条件才真正注册</span><br></pre></td></tr></table></figure>
+
+<h4 id="⑤-关键文件位置"><a href="#⑤-关键文件位置" class="headerlink" title="⑤ 关键文件位置"></a>⑤ 关键文件位置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">任意 SpringBoot 起步依赖 jar 包内：</span><br><span class="line">META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports</span><br></pre></td></tr></table></figure>
+
+<p>文件内容示例（每行一个配置类全限定名）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration</span><br><span class="line">org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-Conditional-条件装配"><a href="#4-Conditional-条件装配" class="headerlink" title="4. @Conditional 条件装配"></a>4. @Conditional 条件装配</h3><p>自动配置类中声明 bean 时，常加 <code>@Conditional</code> 系列注解，<strong>满足条件才注册</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>判断条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@ConditionalOnClass</code></td>
+<td>环境中存在指定字节码文件时才注册</td>
+</tr>
+<tr>
+<td><code>@ConditionalOnMissingBean</code></td>
+<td>环境中不存在指定类型&#x2F;名称的 bean 时才注册</td>
+</tr>
+<tr>
+<td><code>@ConditionalOnProperty</code></td>
+<td>配置文件中存在指定属性和值时才注册</td>
+</tr>
+</tbody></table>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HeaderConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnClass(name = &quot;io.jsonwebtoken.Jwts&quot;)</span></span><br><span class="line">    <span class="comment">// 项目中存在 Jwts 类时才注册</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">HeaderParser</span> <span class="title function_">headerParser</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">HeaderParser</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">    <span class="comment">// 容器中没有 HeaderParser 类型的 bean 时才注册</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">HeaderParser</span> <span class="title function_">headerParser2</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">HeaderParser</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnProperty(name = &quot;name&quot;, havingValue = &quot;itheima&quot;)</span></span><br><span class="line">    <span class="comment">// application.yml 中有 name: itheima 时才注册</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">HeaderParser</span> <span class="title function_">headerParser3</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">HeaderParser</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这就是为什么 <code>imports</code> 文件中定义了上百个配置类，但并不是所有 bean 都会被注册——只有条件满足的才会真正生效。</p>
+</blockquote>
+<h3 id="5-自动配置原理总结图"><a href="#5-自动配置原理总结图" class="headerlink" title="5. 自动配置原理总结图"></a>5. 自动配置原理总结图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────────────────────────────┐</span><br><span class="line">│  @SpringBootApplication                                      │</span><br><span class="line">│    ├─ @SpringBootConfiguration  (启动类=配置类)              │</span><br><span class="line">│    ├─ @ComponentScan            (扫描启动类包及子包)         │</span><br><span class="line">│    └─ @EnableAutoConfiguration  ★自动配置核心               │</span><br><span class="line">│         └─ @Import(AutoConfigurationImportSelector)         │</span><br><span class="line">│              └─ 读取 imports 文件                           │</span><br><span class="line">│                   └─ 加载所有自动配置类                      │</span><br><span class="line">│                        └─ @Conditional 条件装配             │</span><br><span class="line">│                             └─ 满足条件 → 注册到 IOC 容器    │</span><br><span class="line">└─────────────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="四、自定义-Starter"><a href="#四、自定义-Starter" class="headerlink" title="四、自定义 Starter"></a>四、自定义 Starter</h2><h3 id="1-为什么需要自定义-Starter"><a href="#1-为什么需要自定义-Starter" class="headerlink" title="1. 为什么需要自定义 Starter"></a>1. 为什么需要自定义 Starter</h3><p>第三方技术（如阿里云 OSS）官方未提供 starter 时，每个项目都要重复配置：引入依赖 + 写配置类 + 写工具类。封装成 starter 后，<strong>引入一个依赖即可使用</strong>。</p>
+<h3 id="2-命名规范"><a href="#2-命名规范" class="headerlink" title="2. 命名规范"></a>2. 命名规范</h3><table>
+<thead>
+<tr>
+<th>来源</th>
+<th>命名规则</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SpringBoot 官方</td>
+<td><code>spring-boot-starter-xxxx</code></td>
+<td><code>spring-boot-starter-web</code></td>
+</tr>
+<tr>
+<td>第三方组织</td>
+<td><code>xxxx-spring-boot-starter</code></td>
+<td><code>aliyun-oss-spring-boot-starter</code></td>
+</tr>
+</tbody></table>
+<h3 id="3-模块结构（两个模块）"><a href="#3-模块结构（两个模块）" class="headerlink" title="3. 模块结构（两个模块）"></a>3. 模块结构（两个模块）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">aliyun-oss-spring-boot-starter          （依赖管理）</span><br><span class="line">    └── 依赖 aliyun-oss-spring-boot-autoconfigure</span><br><span class="line"></span><br><span class="line">aliyun-oss-spring-boot-autoconfigure    （自动配置）</span><br><span class="line">    ├── AliyunOSSAutoConfiguration      （自动配置类）</span><br><span class="line">    ├── AliyunOSSProperties             （配置属性类）</span><br><span class="line">    ├── AliyunOSSOperator               （工具类）</span><br><span class="line">    └── resources/META-INF/spring/</span><br><span class="line">        └── org.springframework.boot.autoconfigure.AutoConfiguration.imports</span><br><span class="line">            └── 内容：com.aliyun.oss.AliyunOSSAutoConfiguration</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-实现步骤"><a href="#4-实现步骤" class="headerlink" title="4. 实现步骤"></a>4. 实现步骤</h3><h4 id="①-创建-starter-模块（仅-pom-xml）"><a href="#①-创建-starter-模块（仅-pom-xml）" class="headerlink" title="① 创建 starter 模块（仅 pom.xml）"></a>① 创建 starter 模块（仅 pom.xml）</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.aliyun.oss<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aliyun-oss-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.aliyun.oss<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aliyun-oss-spring-boot-autoconfigure<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="②-创建-autoconfigure-模块"><a href="#②-创建-autoconfigure-模块" class="headerlink" title="② 创建 autoconfigure 模块"></a>② 创建 autoconfigure 模块</h4><p><strong>配置属性类</strong>（去掉 <code>@Component</code>）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;aliyun.oss&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AliyunOSSProperties</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String endpoint;</span><br><span class="line">    <span class="keyword">private</span> String bucketName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>工具类</strong>（去掉 <code>@Component</code> 和 <code>@Autowired</code>，改为构造器注入）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AliyunOSSOperator</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> AliyunOSSProperties aliyunOSSProperties;</span><br><span class="line"></span><br><span class="line">    <span class="type">public</span> <span class="title function_">AliyunOSSOperator</span><span class="params">(AliyunOSSProperties aliyunOSSProperties)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.aliyunOSSProperties = aliyunOSSProperties;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ... 业务方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>自动配置类</strong>（核心）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties(AliyunOSSProperties.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AliyunOSSAutoConfiguration</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">AliyunOSSOperator</span> <span class="title function_">aliyunOSSOperator</span><span class="params">(AliyunOSSProperties props)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AliyunOSSOperator</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="③-创建-imports-配置文件"><a href="#③-创建-imports-配置文件" class="headerlink" title="③ 创建 imports 配置文件"></a>③ 创建 imports 配置文件</h4><p>文件路径：<code>src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports</code></p>
+<p>文件内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">com.aliyun.oss.AliyunOSSAutoConfiguration</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-使用方式"><a href="#5-使用方式" class="headerlink" title="5. 使用方式"></a>5. 使用方式</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引入起步依赖 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.aliyun.oss<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aliyun-oss-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># application.yml 配置属性</span></span><br><span class="line"><span class="attr">aliyun:</span></span><br><span class="line">  <span class="attr">oss:</span></span><br><span class="line">    <span class="attr">endpoint:</span> <span class="string">https://oss-cn-beijing.aliyuncs.com</span></span><br><span class="line">    <span class="attr">bucketName:</span> <span class="string">java422-web-ai</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接注入使用</span></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> AliyunOSSOperator aliyunOSSOperator;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="下篇：Maven-高级"><a href="#下篇：Maven-高级" class="headerlink" title="下篇：Maven 高级"></a>下篇：Maven 高级</h1><h2 id="五、分模块设计与开发"><a href="#五、分模块设计与开发" class="headerlink" title="五、分模块设计与开发"></a>五、分模块设计与开发</h2><h3 id="1-为什么分模块"><a href="#1-为什么分模块" class="headerlink" title="1. 为什么分模块"></a>1. 为什么分模块</h3><p><strong>不分模块的问题</strong>：</p>
+<ul>
+<li>项目庞大，难以管理和维护</li>
+<li>通用组件难以复用（业务代码混在一起，依赖会引入全部代码）</li>
+</ul>
+<p><strong>分模块的好处</strong>：</p>
+<ul>
+<li>方便项目管理维护、扩展</li>
+<li>方便模块间相互调用、资源共享</li>
+</ul>
+<h3 id="2-拆分策略"><a href="#2-拆分策略" class="headerlink" title="2. 拆分策略"></a>2. 拆分策略</h3><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>按功能模块拆分</td>
+<td>公共组件、商品模块、搜索模块、订单模块</td>
+</tr>
+<tr>
+<td>按层拆分</td>
+<td>公共组件、实体类、控制层、业务层、数据访问层</td>
+</tr>
+<tr>
+<td>功能 + 层混合</td>
+<td>综合以上两种</td>
+</tr>
+</tbody></table>
+<h3 id="3-案例：tlias-项目拆分"><a href="#3-案例：tlias-项目拆分" class="headerlink" title="3. 案例：tlias 项目拆分"></a>3. 案例：tlias 项目拆分</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tlias-web-management   （主业务模块，依赖 pojo 和 utils）</span><br><span class="line">    ├── tlias-pojo    （实体类：Result、PageBean、Emp、Dept...）</span><br><span class="line">    └── tlias-utils   （工具类：JwtUtils、AliyunOSSOperator...）</span><br></pre></td></tr></table></figure>
+
+<p><strong>拆分步骤</strong>（以 pojo 为例）：</p>
+<ol>
+<li>创建 Maven 模块 <code>tlias-pojo</code></li>
+<li>创建包 <code>com.itheima.pojo</code>（与原项目包名一致）</li>
+<li>复制实体类到新模块</li>
+<li>在新模块 pom.xml 中引入所需依赖（lombok、spring-boot-starter）</li>
+<li>删除原项目的 pojo 包</li>
+<li>在原项目 pom.xml 中引入 <code>tlias-pojo</code> 坐标</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：实际开发是先设计模块再编码，不会先开发完再拆分。</p>
+</blockquote>
+<hr>
+<h2 id="六、继承与聚合"><a href="#六、继承与聚合" class="headerlink" title="六、继承与聚合"></a>六、继承与聚合</h2><h3 id="1-继承"><a href="#1-继承" class="headerlink" title="1. 继承"></a>1. 继承</h3><h4 id="①-作用"><a href="#①-作用" class="headerlink" title="① 作用"></a>① 作用</h4><p>简化依赖配置、统一管理依赖。子工程继承父工程后，自动继承父工程的依赖。</p>
+<h4 id="②-多重继承（SpringBoot-项目特殊处理）"><a href="#②-多重继承（SpringBoot-项目特殊处理）" class="headerlink" title="② 多重继承（SpringBoot 项目特殊处理）"></a>② 多重继承（SpringBoot 项目特殊处理）</h4><p>由于 Maven 不支持多继承，而 SpringBoot 项目必须继承 <code>spring-boot-starter-parent</code>，所以采用<strong>多重继承</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring-boot-starter-parent</span><br><span class="line">        ↑ 继承</span><br><span class="line">tlias-parent               （自定义父工程）</span><br><span class="line">        ↑ 继承</span><br><span class="line">tlias-pojo / tlias-utils / tlias-web-management</span><br></pre></td></tr></table></figure>
+
+<h4 id="③-父工程配置"><a href="#③-父工程配置" class="headerlink" title="③ 父工程配置"></a>③ 父工程配置</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.itheima<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tlias-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span>  <span class="comment">&lt;!-- 父工程必须是 pom --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="④-子工程配置"><a href="#④-子工程配置" class="headerlink" title="④ 子工程配置"></a>④ 子工程配置</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.itheima<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tlias-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">relativePath</span>&gt;</span>../tlias-parent/pom.xml<span class="tag">&lt;/<span class="name">relativePath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tlias-utils<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- groupId 可省略，自动继承父工程 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-版本锁定（dependencyManagement）"><a href="#2-版本锁定（dependencyManagement）" class="headerlink" title="2. 版本锁定（dependencyManagement）"></a>2. 版本锁定（dependencyManagement）</h3><h4 id="①-场景"><a href="#①-场景" class="headerlink" title="① 场景"></a>① 场景</h4><p>部分依赖不是所有模块都用到（如 jwt 只有 web 模块用），不能直接放父工程的 <code>&lt;dependencies&gt;</code>。但又要保证多模块使用同一依赖时版本一致。</p>
+<h4 id="②-父工程配置"><a href="#②-父工程配置" class="headerlink" title="② 父工程配置"></a>② 父工程配置</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 只锁定版本，不会真正引入 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.jsonwebtoken<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jjwt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="③-子工程配置"><a href="#③-子工程配置" class="headerlink" title="③ 子工程配置"></a>③ 子工程配置</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.jsonwebtoken<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jjwt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 不需要写 version，由父工程统一管理 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="④-面试题：-vs"><a href="#④-面试题：-vs" class="headerlink" title="④ 面试题：&lt;dependencies&gt; vs &lt;dependencyManagement&gt;"></a>④ 面试题：<code>&lt;dependencies&gt;</code> vs <code>&lt;dependencyManagement&gt;</code></h4><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th><code>&lt;dependencies&gt;</code></th>
+<th><code>&lt;dependencyManagement&gt;</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>作用</td>
+<td>直接依赖</td>
+<td>统一管理版本</td>
+</tr>
+<tr>
+<td>子工程是否自动继承</td>
+<td>是（直接引入）</td>
+<td>否（需要自己引入，但无需版本号）</td>
+</tr>
+<tr>
+<td>父工程是否引入该依赖</td>
+<td>是</td>
+<td>否</td>
+</tr>
+</tbody></table>
+<h3 id="3-属性配置（properties）"><a href="#3-属性配置（properties）" class="headerlink" title="3. 属性配置（properties）"></a>3. 属性配置（properties）</h3><p>集中管理版本号，修改时只需改一处：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">lombok.version</span>&gt;</span>1.18.34<span class="tag">&lt;/<span class="name">lombok.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">jwt.version</span>&gt;</span>0.9.1<span class="tag">&lt;/<span class="name">jwt.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aliyun.oss.version</span>&gt;</span>3.17.4<span class="tag">&lt;/<span class="name">aliyun.oss.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.jsonwebtoken<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jjwt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;jwt.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  <span class="comment">&lt;!-- 引用属性 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这就是为什么 SpringBoot 项目中很多依赖都不需要写 <code>&lt;version&gt;</code>——父工程 <code>spring-boot-starter-parent</code> 已经用 <code>dependencyManagement</code> 统一管理了。</p>
+</blockquote>
+<h3 id="4-聚合"><a href="#4-聚合" class="headerlink" title="4. 聚合"></a>4. 聚合</h3><h4 id="①-作用-1"><a href="#①-作用-1" class="headerlink" title="① 作用"></a>① 作用</h4><p>将多个模块组织成一个整体，<strong>一键构建</strong>（清理、编译、测试、打包、安装），无需按依赖关系手动一个个构建。</p>
+<h4 id="②-配置"><a href="#②-配置" class="headerlink" title="② 配置"></a>② 配置</h4><p>在聚合工程（通常是父工程）的 pom.xml 中：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>../tlias-pojo<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>../tlias-utils<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>../tlias-web-management<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="③-效果"><a href="#③-效果" class="headerlink" title="③ 效果"></a>③ 效果</h4><p>在 <code>tlias-parent</code> 上执行 <code>package</code>，所有聚合的子模块都会自动执行 package。</p>
+<h3 id="5-继承与聚合对比"><a href="#5-继承与聚合对比" class="headerlink" title="5. 继承与聚合对比"></a>5. 继承与聚合对比</h3><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>继承</th>
+<th>聚合</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>作用</strong></td>
+<td>简化依赖配置、统一管理依赖</td>
+<td>快速构建项目</td>
+</tr>
+<tr>
+<td><strong>配置位置</strong></td>
+<td>子工程配置 <code>&lt;parent&gt;</code></td>
+<td>聚合工程配置 <code>&lt;modules&gt;</code></td>
+</tr>
+<tr>
+<td><strong>感知关系</strong></td>
+<td>父工程<strong>无法感知</strong>哪些子模块继承了自己</td>
+<td>聚合工程<strong>能感知</strong>参与聚合的模块</td>
+</tr>
+<tr>
+<td><strong>打包方式</strong></td>
+<td>都是 <code>pom</code></td>
+<td>都是 <code>pom</code></td>
+</tr>
+<tr>
+<td><strong>共同点</strong></td>
+<td>都是设计型模块，无实际业务内容</td>
+<td>同左</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>实际开发中，父工程通常同时是聚合工程，两种关系制作在同一个 pom.xml 中。</p>
+</blockquote>
+<h3 id="6-Maven-三种打包方式"><a href="#6-Maven-三种打包方式" class="headerlink" title="6. Maven 三种打包方式"></a>6. Maven 三种打包方式</h3><table>
+<thead>
+<tr>
+<th>打包方式</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>jar</strong></td>
+<td>普通模块（默认），SpringBoot 项目基本是 jar（内嵌 tomcat）</td>
+</tr>
+<tr>
+<td><strong>war</strong></td>
+<td>需部署到外部 tomcat 的 web 程序</td>
+</tr>
+<tr>
+<td><strong>pom</strong></td>
+<td>父工程或聚合工程，不写代码，仅做依赖管理</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="七、私服"><a href="#七、私服" class="headerlink" title="七、私服"></a>七、私服</h2><h3 id="1-私服是什么"><a href="#1-私服是什么" class="headerlink" title="1. 私服是什么"></a>1. 私服是什么</h3><ul>
+<li>架设在公司<strong>局域网内部</strong>的仓库服务，是一种特殊的远程仓库。</li>
+<li>用来代理位于外部的中央仓库，解决<strong>团队内部资源共享</strong>问题。</li>
+<li>一个公司&#x2F;项目只需一台私服（无需自己搭建，会使用即可）。</li>
+</ul>
+<h3 id="2-依赖查找顺序"><a href="#2-依赖查找顺序" class="headerlink" title="2. 依赖查找顺序"></a>2. 依赖查找顺序</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 本地仓库     （没有就找私服）</span><br><span class="line">2. 私服仓库     （没有就找中央仓库）</span><br><span class="line">3. 中央仓库     （下载后存到私服和本地仓库）</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-私服仓库类型"><a href="#3-私服仓库类型" class="headerlink" title="3. 私服仓库类型"></a>3. 私服仓库类型</h3><table>
+<thead>
+<tr>
+<th>仓库</th>
+<th>存储内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>RELEASE</strong></td>
+<td>自己开发的发布版本（稳定）</td>
+</tr>
+<tr>
+<td><strong>SNAPSHOT</strong></td>
+<td>自己开发的快照版本（开发中）</td>
+</tr>
+<tr>
+<td><strong>Central</strong></td>
+<td>从中央仓库下载的第三方依赖</td>
+</tr>
+</tbody></table>
+<h3 id="4-项目版本说明"><a href="#4-项目版本说明" class="headerlink" title="4. 项目版本说明"></a>4. 项目版本说明</h3><table>
+<thead>
+<tr>
+<th>版本类型</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>RELEASE</strong>（发布版本）</td>
+<td>功能稳定、可发行，存入 RELEASE 仓库</td>
+</tr>
+<tr>
+<td><strong>SNAPSHOT</strong>（快照版本）</td>
+<td>功能不稳定、开发中，存入 SNAPSHOT 仓库</td>
+</tr>
+</tbody></table>
+<h3 id="5-资源上传与下载（三步配置-一条指令）"><a href="#5-资源上传与下载（三步配置-一条指令）" class="headerlink" title="5. 资源上传与下载（三步配置 + 一条指令）"></a>5. 资源上传与下载（三步配置 + 一条指令）</h3><h4 id="①-配置私服访问用户名-密码（settings-xml-的-servers）"><a href="#①-配置私服访问用户名-密码（settings-xml-的-servers）" class="headerlink" title="① 配置私服访问用户名&#x2F;密码（settings.xml 的 servers）"></a>① 配置私服访问用户名&#x2F;密码（settings.xml 的 servers）</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">password</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">password</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="②-配置私服下载地址（settings-xml-的-mirrors）"><a href="#②-配置私服下载地址（settings-xml-的-mirrors）" class="headerlink" title="② 配置私服下载地址（settings.xml 的 mirrors）"></a>② 配置私服下载地址（settings.xml 的 mirrors）</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-public<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://localhost:8081/repository/maven-public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="③-配置项目上传地址（项目-pom-xml-的-distributionManagement）"><a href="#③-配置项目上传地址（项目-pom-xml-的-distributionManagement）" class="headerlink" title="③ 配置项目上传地址（项目 pom.xml 的 distributionManagement）"></a>③ 配置项目上传地址（项目 pom.xml 的 distributionManagement）</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">distributionManagement</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- release 版本上传地址 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://localhost:8081/repository/maven-releases/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- snapshot 版本上传地址 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">snapshotRepository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://localhost:8081/repository/maven-snapshots/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">snapshotRepository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">distributionManagement</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="④-执行-deploy-指令"><a href="#④-执行-deploy-指令" class="headerlink" title="④ 执行 deploy 指令"></a>④ 执行 deploy 指令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn deploy</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在聚合工程（tlias-parent）上执行 deploy，所有子模块都会上传到私服。</p>
+</blockquote>
+<h3 id="6-完整流程图"><a href="#6-完整流程图" class="headerlink" title="6. 完整流程图"></a>6. 完整流程图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">┌─── A 团队开发 tlias-utils ───┐</span><br><span class="line">│  1. mvn deploy               │</span><br><span class="line">│  2. 上传到私服 SNAPSHOT 仓库 │</span><br><span class="line">└──────────────────────────────┘</span><br><span class="line">            ↓</span><br><span class="line">┌─── 私服（局域网内） ─────────┐</span><br><span class="line">│  maven-snapshots 仓库        │</span><br><span class="line">│  存有 tlias-utils-x.x.jar   │</span><br><span class="line">└──────────────────────────────┘</span><br><span class="line">            ↓</span><br><span class="line">┌─── B 团队使用 tlias-utils ───┐</span><br><span class="line">│  1. pom.xml 引入坐标         │</span><br><span class="line">│  2. 本地仓库没有 → 私服下载  │</span><br><span class="line">│  3. 直接使用工具类           │</span><br><span class="line">└──────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="速查篇：高频考点与易错点"><a href="#速查篇：高频考点与易错点" class="headerlink" title="速查篇：高频考点与易错点"></a>速查篇：高频考点与易错点</h1><h2 id="一、SpringBoot-原理速查"><a href="#一、SpringBoot-原理速查" class="headerlink" title="一、SpringBoot 原理速查"></a>一、SpringBoot 原理速查</h2><h3 id="1-配置优先级口诀"><a href="#1-配置优先级口诀" class="headerlink" title="1. 配置优先级口诀"></a>1. 配置优先级口诀</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">命令行参数 &gt; 系统属性 &gt; properties &gt; yml &gt; yaml</span><br><span class="line">   --          -D          文件       文件    文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-SpringBootApplication-三大注解"><a href="#2-SpringBootApplication-三大注解" class="headerlink" title="2. @SpringBootApplication 三大注解"></a>2. @SpringBootApplication 三大注解</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">    ├─ @SpringBootConfiguration  → 启动类是配置类</span><br><span class="line">    ├─ @ComponentScan            → 包扫描（启动类包及子包）</span><br><span class="line">    └─ @EnableAutoConfiguration  → 自动配置核心</span><br><span class="line">         └─ @Import(AutoConfigurationImportSelector)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-自动配置关键文件"><a href="#3-自动配置关键文件" class="headerlink" title="3. 自动配置关键文件"></a>3. 自动配置关键文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-Conditional-三兄弟"><a href="#4-Conditional-三兄弟" class="headerlink" title="4. @Conditional 三兄弟"></a>4. @Conditional 三兄弟</h3><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>判断什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@ConditionalOnClass</code></td>
+<td>类路径有没有这个类</td>
+</tr>
+<tr>
+<td><code>@ConditionalOnMissingBean</code></td>
+<td>容器里有没有这个 bean</td>
+</tr>
+<tr>
+<td><code>@ConditionalOnProperty</code></td>
+<td>配置文件有没有这个属性值</td>
+</tr>
+</tbody></table>
+<h2 id="二、Maven-高级速查"><a href="#二、Maven-高级速查" class="headerlink" title="二、Maven 高级速查"></a>二、Maven 高级速查</h2><h3 id="1-父工程必要配置"><a href="#1-父工程必要配置" class="headerlink" title="1. 父工程必要配置"></a>1. 父工程必要配置</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 聚合 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>子模块相对路径<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 版本锁定 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>...<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 属性 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">xxx.version</span>&gt;</span>x.x.x<span class="tag">&lt;/<span class="name">xxx.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 上传私服 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">distributionManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">repository</span>&gt;</span>...<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">snapshotRepository</span>&gt;</span>...<span class="tag">&lt;/<span class="name">snapshotRepository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">distributionManagement</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-settings-xml-三处配置"><a href="#2-settings-xml-三处配置" class="headerlink" title="2. settings.xml 三处配置"></a>2. settings.xml 三处配置</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servers</span>&gt;</span>      <span class="comment">&lt;!-- 私服账号密码 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span>      <span class="comment">&lt;!-- 私服下载镜像 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span>     <span class="comment">&lt;!-- 仓库地址配置 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Maven-生命周期对应操作"><a href="#3-Maven-生命周期对应操作" class="headerlink" title="3. Maven 生命周期对应操作"></a>3. Maven 生命周期对应操作</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>clean</code></td>
+<td>清理 target</td>
+</tr>
+<tr>
+<td><code>compile</code></td>
+<td>编译</td>
+</tr>
+<tr>
+<td><code>test</code></td>
+<td>测试</td>
+</tr>
+<tr>
+<td><code>package</code></td>
+<td>打包</td>
+</tr>
+<tr>
+<td><code>install</code></td>
+<td>安装到本地仓库</td>
+</tr>
+<tr>
+<td><code>deploy</code></td>
+<td>上传到私服</td>
+</tr>
+</tbody></table>
+<h2 id="三、易错点提醒"><a href="#三、易错点提醒" class="headerlink" title="三、易错点提醒"></a>三、易错点提醒</h2><ol>
+<li><p><strong>配置优先级不是固定的</strong>：5 种方式同时存在时，按 <code>命令行 &gt; 系统属性 &gt; properties &gt; yml &gt; yaml</code> 生效。</p>
+</li>
+<li><p><strong>prototype bean 不会在启动时创建</strong>：而是在第一次 <code>getBean()</code> 时创建，每次都新建。</p>
+</li>
+<li><p><strong>@Bean 方法形参就是依赖注入</strong>：第三方 bean 需要其他 bean 时，直接在方法参数中声明，Spring 自动装配。</p>
+</li>
+<li><p><strong>@ComponentScan 扫描范围有限</strong>：只扫启动类所在包及子包，第三方包扫不到，所以才需要 @Import 机制。</p>
+</li>
+<li><p><strong>imports 文件路径要准确</strong>：必须是 <code>META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports</code>，路径错一点都不会加载。</p>
+</li>
+<li><p><strong>@ConditionalOnMissingBean 的妙用</strong>：自定义配置覆盖默认配置就是靠它——当用户自己定义了 bean，SpringBoot 默认的就不注册。</p>
+</li>
+<li><p><strong>自定义 starter 必须两个模块</strong>：starter（依赖管理）+ autoconfigure（自动配置），缺一不可。</p>
+</li>
+<li><p><strong>autoconfigure 模块中不能再用 @Component</strong>：因为包扫描扫不到，必须用 @Configuration + @Bean + imports 文件。</p>
+</li>
+<li><p><strong>父工程 packaging 必须是 pom</strong>：否则无法被子工程继承。</p>
+</li>
+<li><p><strong>dependencyManagement 不会真正引入依赖</strong>：子工程还需要自己在 <code>&lt;dependencies&gt;</code> 中声明，只是不需要写 version。</p>
+</li>
+<li><p><strong>relativePath</strong>：子工程配置父工程时，<code>&lt;relativePath&gt;../tlias-parent/pom.xml&lt;/relativePath&gt;</code> 指定父 pom 相对位置；不指定则从本地&#x2F;远程仓库查找。</p>
+</li>
+<li><p><strong>聚合工程能感知子模块，继承不能感知</strong>：聚合是父知道子，继承是子知道父。</p>
+</li>
+<li><p><strong>deploy 前 settings.xml 必须配好 servers 的 id</strong>：id 要和 pom.xml 中 distributionManagement 的 repository id 一致（如 <code>maven-releases</code>）。</p>
+</li>
+<li><p><strong>SNAPSHOT vs RELEASE</strong>：版本号带 <code>-SNAPSHOT</code> 上传到 snapshots 仓库，不带则上传到 releases 仓库。</p>
+</li>
+</ol>
+<hr>
+<h1 id="一图回顾全天知识"><a href="#一图回顾全天知识" class="headerlink" title="一图回顾全天知识"></a>一图回顾全天知识</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────── SpringBoot 原理 ───────────────────┐</span><br><span class="line">│                                                       │</span><br><span class="line">│  配置优先级 (5种)                                      │</span><br><span class="line">│    命令行 &gt; 系统属性 &gt; properties &gt; yml &gt; yaml         │</span><br><span class="line">│                                                       │</span><br><span class="line">│  Bean 管理                                            │</span><br><span class="line">│    ├─ 作用域: singleton(默认) / prototype / ...        │</span><br><span class="line">│    └─ 第三方Bean: @Bean + @Configuration              │</span><br><span class="line">│                                                       │</span><br><span class="line">│  自动配置原理                                          │</span><br><span class="line">│    @SpringBootApplication                             │</span><br><span class="line">│      └─ @EnableAutoConfiguration                      │</span><br><span class="line">│           └─ @Import(AutoConfigurationImportSelector)  │</span><br><span class="line">│                └─ 读取 imports 文件                    │</span><br><span class="line">│                     └─ @Conditional 条件装配           │</span><br><span class="line">│                                                       │</span><br><span class="line">│  自定义 Starter                                        │</span><br><span class="line">│    ├─ starter 模块 (依赖管理)                          │</span><br><span class="line">│    └─ autoconfigure 模块                              │</span><br><span class="line">│         ├─ @Configuration + @Bean                     │</span><br><span class="line">│         └─ imports 文件                               │</span><br><span class="line">└───────────────────────────────────────────────────────┘</span><br><span class="line"></span><br><span class="line">┌─────────────────── Maven 高级 ────────────────────────┐</span><br><span class="line">│                                                       │</span><br><span class="line">│  分模块设计                                            │</span><br><span class="line">│    按功能 / 按层 / 混合                                │</span><br><span class="line">│                                                       │</span><br><span class="line">│  继承 (简化配置)                                       │</span><br><span class="line">│    ├─ 父工程 packaging=pom                            │</span><br><span class="line">│    ├─ dependencyManagement (锁版本不引入)              │</span><br><span class="line">│    └─ properties (集中管理版本号)                      │</span><br><span class="line">│                                                       │</span><br><span class="line">│  聚合 (一键构建)                                       │</span><br><span class="line">│    └─ &lt;modules&gt; 子模块列表                            │</span><br><span class="line">│                                                       │</span><br><span class="line">│  私服 (团队共享)                                       │</span><br><span class="line">│    ├─ settings.xml: servers/mirrors/profiles          │</span><br><span class="line">│    ├─ pom.xml: distributionManagement                 │</span><br><span class="line">│    └─ mvn deploy                                      │</span><br><span class="line">└───────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="附：复习自测清单"><a href="#附：复习自测清单" class="headerlink" title="附：复习自测清单"></a>附：复习自测清单</h2><h3 id="SpringBoot-原理"><a href="#SpringBoot-原理" class="headerlink" title="SpringBoot 原理"></a>SpringBoot 原理</h3><ul>
+<li><input disabled="" type="checkbox"> 能说出 5 种配置方式及其优先级</li>
+<li><input disabled="" type="checkbox"> 能说出 Bean 的 5 种作用域及默认值</li>
+<li><input disabled="" type="checkbox"> 能用 <code>@Bean</code> + <code>@Configuration</code> 管理第三方 bean</li>
+<li><input disabled="" type="checkbox"> 能画出 <code>@SpringBootApplication</code> 的三大注解及其作用</li>
+<li><input disabled="" type="checkbox"> 能说出自动配置的完整流程（imports 文件 → @Import → @Conditional）</li>
+<li><input disabled="" type="checkbox"> 能说出三种 <code>@Conditional</code> 子注解的作用</li>
+<li><input disabled="" type="checkbox"> 能独立实现一个自定义 starter</li>
+</ul>
+<h3 id="Maven-高级"><a href="#Maven-高级" class="headerlink" title="Maven 高级"></a>Maven 高级</h3><ul>
+<li><input disabled="" type="checkbox"> 能说出分模块设计的两种策略</li>
+<li><input disabled="" type="checkbox"> 能配置父工程继承关系（多重继承）</li>
+<li><input disabled="" type="checkbox"> 能区分 <code>&lt;dependencies&gt;</code> 和 <code>&lt;dependencyManagement&gt;</code></li>
+<li><input disabled="" type="checkbox"> 能用 properties 集中管理版本号</li>
+<li><input disabled="" type="checkbox"> 能配置聚合关系并一键构建</li>
+<li><input disabled="" type="checkbox"> 能说出继承与聚合的相同点和不同点</li>
+<li><input disabled="" type="checkbox"> 能配置私服的三步配置并执行 deploy</li>
+<li><input disabled="" type="checkbox"> 能区分 RELEASE 和 SNAPSHOT 版本</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day19%20%E5%89%8D%E7%AB%AFWeb%E5%AE%9E%E6%88%98-ElementPlus/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -756,943 +1390,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day2%20IO%E6%B5%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/25/day2%20IO%E6%B5%81/" class="post-title-link" itemprop="url">day2 IO流</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="day2"><a href="#day2" class="headerlink" title="day2"></a>day2</h1><h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><ol>
-<li>学完IO流</li>
-</ol>
-<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="1-缓冲流"><a href="#1-缓冲流" class="headerlink" title="1.缓冲流"></a>1.缓冲流</h3><h5 id="字节缓冲流"><a href="#字节缓冲流" class="headerlink" title="字节缓冲流"></a>字节缓冲流</h5><ol>
-<li>缓冲流默认缓冲区大小为8192字节（8KB）</li>
-<li>使用方式：在基本流外包装一层缓冲流</li>
-<li>关闭缓冲流时，底层基本流也会自动关闭</li>
-<li>性能对比<ol>
-<li>缓冲流逐字节读取复制：35ms（内部缓冲区已优化磁盘I&#x2F;O）</li>
-<li>缓冲流配合 byte[] 数组读取复制：4ms</li>
-</ol>
-</li>
-<li>缓冲流与缓冲数组同时使用是不必要的<ol>
-<li>缓冲流内部已有 8KB 缓冲区，逐字节读取时已通过内部缓冲区大幅减少磁盘 I&#x2F;O，这是性能提升的核心</li>
-<li>在缓冲流之上再使用 byte[] 数组，相当于多了一层冗余的缓冲层级，增加了内存占用和代码复杂度</li>
-<li>实际开发中，单独使用缓冲流即可，或直接使用基本流配合自己的缓冲区，没必要两层都用</li>
-</ol>
-</li>
-</ol>
-<h5 id="字符缓冲流"><a href="#字符缓冲流" class="headerlink" title="字符缓冲流"></a>字符缓冲流</h5><ol>
-<li>BufferedReader 特有方法：<code>readLine()</code>，读取一行文本，遇到文件末尾返回 null</li>
-<li>BufferedWriter 特有方法：<code>newLine()</code>，用于多平台换行（Windows: \r\n, Linux: \n）</li>
-<li>字符缓冲流也可以指定编码格式</li>
-</ol>
-<h3 id="2-转换流"><a href="#2-转换流" class="headerlink" title="2.转换流"></a>2.转换流</h3><ol>
-<li>InputStreamReader：将字节输入流转换为字符输入流</li>
-<li>OutputStreamWriter：将字节输出流转换为字符输出流</li>
-<li>可以指定编码格式，解决乱码问题</li>
-<li>常与缓冲流配合使用，形成：<code>BufferedReader -&gt; InputStreamReader -&gt; FileInputStream</code></li>
-<li>Java 11+ FileReader&#x2F;FileWriter 已支持指定编码，但转换流仍有用武之地<ol>
-<li>处理非文件来源的字节流（如网络流、内存流）</li>
-<li>需要精确控制编码转换场景</li>
-</ol>
-</li>
-</ol>
-<h3 id="3-序列化流与反序列化流"><a href="#3-序列化流与反序列化流" class="headerlink" title="3.序列化流与反序列化流"></a>3.序列化流与反序列化流</h3><ol>
-<li>对象序列化：将对象写入文件，需要实现 <code>Serializable</code> 接口</li>
-<li>对象反序列化：从文件读取对象</li>
-<li><code>serialVersionUID</code>：序列化版本号，确保反序列化时类版本一致<ol>
-<li>如果类结构发生变化（如新增字段），版本号不匹配会抛出 <code>InvalidClassException</code></li>
-<li>建议显式声明版本号，避免编译器自动生成导致的兼容性问题</li>
-</ol>
-</li>
-<li><code>transient</code> 关键字：修饰的成员变量不参与序列化，反序列化时为默认值</li>
-<li>序列化集合对象：将整个集合写入文件，便于批量操作</li>
-</ol>
-<h3 id="4-压缩流与解压缩流"><a href="#4-压缩流与解压缩流" class="headerlink" title="4.压缩流与解压缩流"></a>4.压缩流与解压缩流</h3><h5 id="ZipEntry"><a href="#ZipEntry" class="headerlink" title="ZipEntry"></a>ZipEntry</h5><ol>
-<li>表示压缩包里的每个文件或目录</li>
-<li>压缩流与解压流中有一个当前条目的概念，就是你最近获取到的或创建的ZipEntry对象</li>
-<li>所以必须要及时关闭当前条目</li>
-</ol>
-<h5 id="解压缩"><a href="#解压缩" class="headerlink" title="解压缩"></a>解压缩</h5><ol>
-<li>使用 <code>ZipInputStream</code> 读取压缩包</li>
-<li><code>getNextEntry()</code> 获取下一个 ZipEntry</li>
-<li>判断是目录还是文件，分别处理</li>
-<li>读取完成后调用 <code>closeEntry()</code> 关闭当前条目</li>
-</ol>
-<h5 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h5><ol>
-<li>使用 <code>ZipOutputStream</code> 写入压缩包</li>
-<li><code>putNextEntry()</code> 创建新的 ZipEntry</li>
-<li>递归处理目录结构，保持原有的层级关系<ol>
-<li>遍历目录下所有文件和子目录</li>
-<li>文件则直接写入压缩条目</li>
-<li>目录则递归调用，传入更新后的路径名</li>
-</ol>
-</li>
-<li>每个文件写入完成后调用 <code>closeEntry()</code></li>
-</ol>
-<h3 id="5-打印流"><a href="#5-打印流" class="headerlink" title="5.打印流"></a>5.打印流</h3><ol>
-<li>PrintStream：字节打印流，<code>System.out</code> 就是 PrintStream 的实例</li>
-<li>PrintWriter：字符打印流</li>
-<li>特点<ol>
-<li>可以直接打印各种类型的数据（int、double、String、对象等）</li>
-<li>可以设置自动刷新（autoFlush），调用 <code>println()</code> 时自动刷新缓冲区，换行。</li>
-</ol>
-</li>
-</ol>
-<h3 id="6-URL网络读取"><a href="#6-URL网络读取" class="headerlink" title="6.URL网络读取"></a>6.URL网络读取</h3><ol>
-<li>使用 <code>URL</code> 和 <code>URLConnection</code> 建立网络连接</li>
-<li>通过 <code>getInputStream()</code> 获取输入流</li>
-<li>使用 <code>InputStreamReader</code> 按字符读取网页内容</li>
-<li>可以配合第三方工具包（如 Hutool）简化文件写入操作</li>
-</ol>
-<h3 id="7-工具包"><a href="#7-工具包" class="headerlink" title="7.工具包"></a>7.工具包</h3><ol>
-<li>commons-io</li>
-<li>hutool</li>
-<li>两个都是第三方工具包，提供了很多包装好的工具，导入即可直接使用。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day15-2%20%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/25/day15-2%20%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/" class="post-title-link" itemprop="url">day15-2 登录认证</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="实战总结：登录认证（登录功能-登录校验）"><a href="#实战总结：登录认证（登录功能-登录校验）" class="headerlink" title="实战总结：登录认证（登录功能 + 登录校验）"></a>实战总结：登录认证（登录功能 + 登录校验）</h1><blockquote>
-<p>本文是对《12-后端Web实战(登录认证)》的总结，记录”登录功能徒有其表 → 登录校验闭环”的完整链路。<br>项目地址：<code>project/tlias-web-management</code>（SpringBoot + MyBatis + JWT + Filter&#x2F;Interceptor）<br>对应讲义：<code>讲义/12-后端Web实战(登录认证).md</code></p>
-</blockquote>
-<hr>
-<h2 id="一、本节要解决的核心问题"><a href="#一、本节要解决的核心问题" class="headerlink" title="一、本节要解决的核心问题"></a>一、本节要解决的核心问题</h2><p>上一节做完基础登录后，会出现一个<strong>安全漏洞</strong>：浏览器直接访问 <code>http://localhost:90</code>，<strong>不登录也能进后台</strong>。</p>
-<p>原因：HTTP 是<strong>无状态协议</strong>，每次请求相互独立，服务器根本不知道”这次请求的员工登没登录过”。而部门管理、员工管理等接口在服务端<strong>没有任何登录判断</strong>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">登录功能(徒有其表)  ──►  需要登录校验(闭环)</span><br><span class="line">   只查账号密码              服务端统一拦截每一个请求</span><br><span class="line">   不存登录标记              先校验是否登录，再放行业务</span><br></pre></td></tr></table></figure>
-
-<p>登录校验的实现思路拆成两块：</p>
-<table>
-<thead>
-<tr>
-<th>关键点</th>
-<th>作用</th>
-<th>用到的技术</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>① 存登录标记</td>
-<td>登录成功后留一个”已登录”凭证，后续请求能带上</td>
-<td><strong>会话技术</strong>（令牌 JWT）</td>
-</tr>
-<tr>
-<td>② 统一拦截</td>
-<td>拦下所有请求，统一校验标记，避免每个接口都写一遍</td>
-<td><strong>Filter 过滤器 &#x2F; Interceptor 拦截器</strong></td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>为什么不能在每个 Controller 方法里手写校验？——相同逻辑会重复出现在所有增删改查接口里，代码繁琐。统一拦截是标准做法。</p>
-</blockquote>
-<hr>
-<h2 id="二、会话技术：三种方案对比"><a href="#二、会话技术：三种方案对比" class="headerlink" title="二、会话技术：三种方案对比"></a>二、会话技术：三种方案对比</h2><h3 id="1-概念澄清"><a href="#1-概念澄清" class="headerlink" title="1. 概念澄清"></a>1. 概念澄清</h3><ul>
-<li><strong>会话</strong>：浏览器与服务器之间的一次连接（从打开浏览器第一次访问，到任一方断开）。一次会话可包含多次请求响应。</li>
-<li><strong>会话跟踪</strong>：服务器识别”多次请求是否来自同一浏览器”，从而在同一次会话的多次请求间<strong>共享数据</strong>。</li>
-<li>为什么要共享数据？因为 HTTP 无状态，后一次请求拿不到前一次请求生成的数据。</li>
-</ul>
-<h3 id="2-三种方案横向对比"><a href="#2-三种方案横向对比" class="headerlink" title="2. 三种方案横向对比"></a>2. 三种方案横向对比</h3><table>
-<thead>
-<tr>
-<th>方案</th>
-<th>存储位置</th>
-<th>底层依赖</th>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>Cookie</strong></td>
-<td>客户端浏览器</td>
-<td>HTTP 协议自带（Set-Cookie 响应头 &#x2F; Cookie 请求头）</td>
-<td>浏览器自动收发，无需手写</td>
-<td>移动端 APP 不可用；不安全（可禁用）；<strong>不能跨域</strong></td>
-</tr>
-<tr>
-<td><strong>Session</strong></td>
-<td>服务端</td>
-<td>底层基于 Cookie（JSESSIONID）</td>
-<td>数据在服务端，相对安全</td>
-<td>集群环境下无法直接用；移动端不可用；可被禁用；不能跨域</td>
-</tr>
-<tr>
-<td><strong>令牌 Token</strong></td>
-<td>客户端（如 localStorage）</td>
-<td>自己实现生成&#x2F;传递&#x2F;校验</td>
-<td>支持 PC + 移动端；解决集群认证；不占服务端存储</td>
-<td>需自己实现整套逻辑</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p><strong>企业开发首选第三种令牌技术</strong>，前两种已很少使用。本项目也采用令牌。</p>
-</blockquote>
-<h3 id="3-跨域速记"><a href="#3-跨域速记" class="headerlink" title="3. 跨域速记"></a>3. 跨域速记</h3><p>三个维度（协议 &#x2F; IP(域名) &#x2F; 端口）<strong>任意一个不同</strong>就是跨域。Cookie 无法跨域，这是 Cookie&#x2F;Session 方案在前后端分离部署时失效的直接原因。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.150.200/login.html  →  https://192.168.150.200/login   协议不同 → 跨域</span><br><span class="line">http://192.168.150.200/login.html  →  http://192.168.150.100/login     IP不同   → 跨域</span><br><span class="line">http://192.168.150.200/login.html  →  http://192.168.150.200:8080/login 端口不同 → 跨域</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-集群环境为何-Session-失效"><a href="#4-集群环境为何-Session-失效" class="headerlink" title="4. 集群环境为何 Session 失效"></a>4. 集群环境为何 Session 失效</h3><p>部署多份 Tomcat + 负载均衡时：登录请求落到 Tomcat1 创建 Session，下一次查询请求可能被分到 Tomcat2，Tomcat2 里没有这个 JSESSIONID 对应的 Session → 会话丢失。令牌方案把凭证存在客户端，每次请求自带，天然避开这个问题。</p>
-<hr>
-<h2 id="三、JWT-令牌"><a href="#三、JWT-令牌" class="headerlink" title="三、JWT 令牌"></a>三、JWT 令牌</h2><h3 id="1-是什么"><a href="#1-是什么" class="headerlink" title="1. 是什么"></a>1. 是什么</h3><p>JWT（JSON Web Token）：一种<strong>简洁、自包含</strong>的字符串格式，用于通信双方以 JSON 格式安全传输信息，靠<strong>数字签名</strong>保证可靠性。</p>
-<ul>
-<li><strong>简洁</strong>：就是一个字符串，可直接放请求参数或请求头。</li>
-<li><strong>自包含</strong>：可在令牌里存自定义数据（如 id、username），不用查服务端。</li>
-<li>本质：把原始 JSON 数据安全封装成字符串，传输时基于 base64 编码（<strong>编码 ≠ 加密</strong>）。</li>
-</ul>
-<h3 id="2-三段组成（用-分隔）"><a href="#2-三段组成（用-分隔）" class="headerlink" title="2. 三段组成（用 . 分隔）"></a>2. 三段组成（用 <code>.</code> 分隔）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAsInVzZXJuYW1lIjoiaXRoZWltYSIsImV4cCI6MTcwMTkwOTAxNX0.N-MD6DmoeIIY5lB5z73UFLN9u7veppx1K5_N_jS9Yko</span><br><span class="line">└── Header(头) ──┘  └── Payload(载荷) ──────────────────────────────┘  └── Signature(签名) ──────────────┘</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>部分</th>
-<th>内容</th>
-<th>举例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Header</td>
-<td>令牌类型 + 签名算法</td>
-<td><code>{&quot;alg&quot;:&quot;HS256&quot;,&quot;type&quot;:&quot;JWT&quot;}</code></td>
-</tr>
-<tr>
-<td>Payload</td>
-<td>自定义信息 + 默认信息（如 exp 过期时间）</td>
-<td><code>{&quot;id&quot;:1,&quot;username&quot;:&quot;Tom&quot;,&quot;exp&quot;:...}</code></td>
-</tr>
-<tr>
-<td>Signature</td>
-<td>Header + Payload + 秘钥，按指定算法计算，<strong>防篡改</strong></td>
-<td>签名串</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>关键结论：<strong>篡改令牌任意一个字符，解析都会报错</strong>；<strong>令牌过期后解析也报错</strong>（非法）。</p>
-</blockquote>
-<h3 id="3-生成与校验（讲义示例）"><a href="#3-生成与校验（讲义示例）" class="headerlink" title="3. 生成与校验（讲义示例）"></a>3. 生成与校验（讲义示例）</h3><p>依赖：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.jsonwebtoken<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jjwt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>生成 + 校验：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生成</span></span><br><span class="line"><span class="type">Map</span>&lt;String, Object&gt; <span class="variable">claims</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">claims.put(<span class="string">&quot;id&quot;</span>, <span class="number">10</span>);</span><br><span class="line">claims.put(<span class="string">&quot;username&quot;</span>, <span class="string">&quot;itheima&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">String</span> <span class="variable">jwt</span> <span class="operator">=</span> Jwts.builder()</span><br><span class="line">        .signWith(SignatureAlgorithm.HS256, <span class="string">&quot;aXRjYXN0&quot;</span>)        <span class="comment">// 签名算法 + 秘钥</span></span><br><span class="line">        .addClaims(claims)                                     <span class="comment">// 自定义载荷</span></span><br><span class="line">        .setExpiration(<span class="keyword">new</span> <span class="title class_">Date</span>(System.currentTimeMillis() + <span class="number">12</span> * <span class="number">3600</span> * <span class="number">1000</span>)) <span class="comment">// 过期时间</span></span><br><span class="line">        .compact();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 校验（解析失败就抛异常）</span></span><br><span class="line"><span class="type">Claims</span> <span class="variable">claims</span> <span class="operator">=</span> Jwts.parser()</span><br><span class="line">        .setSigningKey(<span class="string">&quot;aXRjYXN0&quot;</span>)   <span class="comment">// 必须和生成时同一秘钥</span></span><br><span class="line">        .parseClaimsJws(jwt)</span><br><span class="line">        .getBody();</span><br></pre></td></tr></table></figure>
-
-<p>两条铁律：</p>
-<ul>
-<li>校验用的签名秘钥，必须和生成时<strong>配套</strong>。</li>
-<li>解析报错 &#x3D; 令牌被篡改 或 已过期 &#x3D; 非法。</li>
-</ul>
-<hr>
-<h2 id="四、登录时下发令牌（项目实现）"><a href="#四、登录时下发令牌（项目实现）" class="headerlink" title="四、登录时下发令牌（项目实现）"></a>四、登录时下发令牌（项目实现）</h2><h3 id="1-整体流程"><a href="#1-整体流程" class="headerlink" title="1. 整体流程"></a>1. 整体流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">浏览器                服务端</span><br><span class="line">  │  POST /login &#123;username,password&#125;</span><br><span class="line">  │ ─────────────────────────────────► │  EmpService.login 查 emp 表</span><br><span class="line">  │                                     │  查到 → 生成 JWT 装进 LoginInfo</span><br><span class="line">  │  &#123;code:1, data:&#123;id,username,name,token&#125;&#125;</span><br><span class="line">  │ ◄───────────────────────────────── │</span><br><span class="line">  │  前端把 token 存到 localStorage</span><br><span class="line">  │                                     │</span><br><span class="line">  │  GET /depts  Header: token: xxx</span><br><span class="line">  │ ─────────────────────────────────► │  Filter/Interceptor 校验 token</span><br><span class="line">  │                                     │  合法 → 放行到 Controller</span><br><span class="line">  │  &#123;code:1, data:[...]&#125;</span><br><span class="line">  │ ◄───────────────────────────────── │</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-关键类与代码"><a href="#2-关键类与代码" class="headerlink" title="2. 关键类与代码"></a>2. 关键类与代码</h3><table>
-<thead>
-<tr>
-<th>类&#x2F;所在层</th>
-<th>全限定类名</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>pojo</td>
-<td><code>com.zhang.pojo.LoginInfo</code></td>
-<td>登录成功响应封装：<code>id</code>、<code>username</code>、<code>name</code>、<code>token</code></td>
-</tr>
-<tr>
-<td>utils</td>
-<td><code>com.zhang.utils.JwtUtils</code></td>
-<td>JWT 工具类：<code>generateToken</code> 生成、<code>parseToken</code> 解析</td>
-</tr>
-<tr>
-<td>controller</td>
-<td><code>com.zhang.controller.LoginController</code></td>
-<td><code>/login</code> 接口入口，返回 <code>Result.success(loginInfo)</code> 或 <code>Result.error(...)</code></td>
-</tr>
-<tr>
-<td>service</td>
-<td><code>com.zhang.service.impl.EmpServiceImpl</code></td>
-<td><code>login(Emp)</code>：根据用户名密码查库 → 生成 JWT → 组装 <code>LoginInfo</code></td>
-</tr>
-<tr>
-<td>mapper</td>
-<td><code>com.zhang.mapper.EmpMapper</code></td>
-<td><code>getByUsernamePassword(Emp)</code>：按 username + password 查询员工</td>
-</tr>
-</tbody></table>
-<p><strong>LoginInfo</strong>（响应封装）：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoginInfo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String token;   <span class="comment">// JWT 令牌</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>JwtUtils</strong>（项目版本，方法名是 <code>generateToken</code> &#x2F; <code>parseToken</code>）：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JwtUtils</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">signKey</span> <span class="operator">=</span> <span class="string">&quot;emhhbmctMjAyNg==&quot;</span>;   <span class="comment">// 签名秘钥</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">long</span> <span class="variable">expire</span> <span class="operator">=</span> <span class="number">12</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>;     <span class="comment">// 12 小时</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">String</span> <span class="title function_">generateToken</span><span class="params">(Map&lt;String, Object&gt; claims)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Jwts.builder()</span><br><span class="line">                .addClaims(claims)</span><br><span class="line">                .setExpiration(<span class="keyword">new</span> <span class="title class_">Date</span>(System.currentTimeMillis() + expire))</span><br><span class="line">                .signWith(SignatureAlgorithm.HS256, signKey)</span><br><span class="line">                .compact();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">Map</span>&lt;String, Object&gt; <span class="title function_">parseToken</span><span class="params">(String token)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Jwts.parser()</span><br><span class="line">                .setSigningKey(signKey)</span><br><span class="line">                .parseClaimsJws(token)</span><br><span class="line">                .getBody();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>LoginController</strong>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping(&quot;/login&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">Result</span> <span class="title function_">login</span><span class="params">(<span class="meta">@RequestBody</span> Emp emp)</span> &#123;</span><br><span class="line">    log.info(<span class="string">&quot;登录请求 emp:&#123;&#125;&quot;</span>, emp);</span><br><span class="line">    <span class="type">LoginInfo</span> <span class="variable">loginInfo</span> <span class="operator">=</span> empService.login(emp);</span><br><span class="line">    <span class="keyword">if</span> (loginInfo != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> Result.success(loginInfo);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Result.error(<span class="string">&quot;用户名或密码错误&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>EmpServiceImpl.login</strong>（查库 + 生成 token）：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">LoginInfo</span> <span class="title function_">login</span><span class="params">(Emp emp)</span> &#123;</span><br><span class="line">    <span class="type">Emp</span> <span class="variable">e</span> <span class="operator">=</span> empMapper.getByUsernamePassword(emp);   <span class="comment">// select id,username,name from emp where username=? and password=?</span></span><br><span class="line">    <span class="keyword">if</span> (e != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="type">Map</span>&lt;String, Object&gt; <span class="variable">map</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;id&quot;</span>, emp.getId());          <span class="comment">// ⚠ 见下方&quot;易错点&quot;：建议改用 e.getId()</span></span><br><span class="line">        map.put(<span class="string">&quot;username&quot;</span>, emp.getUsername());</span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> JwtUtils.generateToken(map);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">LoginInfo</span>(e.getId(), e.getUsername(), e.getName(), token);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>前端拿到 token 后存 <code>localStorage</code>（不是 cookie），后续每个请求在请求头 <code>token</code> 字段带上。</p>
-</blockquote>
-<hr>
-<h2 id="五、统一拦截方案一：Filter-过滤器"><a href="#五、统一拦截方案一：Filter-过滤器" class="headerlink" title="五、统一拦截方案一：Filter 过滤器"></a>五、统一拦截方案一：Filter 过滤器</h2><h3 id="1-是什么-1"><a href="#1-是什么-1" class="headerlink" title="1. 是什么"></a>1. 是什么</h3><p>Filter 是 <strong>JavaWeb 三大组件</strong>（Servlet、Filter、Listener）之一，能把对资源的请求拦下来做通用操作（登录校验、统一编码、敏感字符处理等）。要先经过 Filter，才能访问后面的资源。</p>
-<h3 id="2-入门三步"><a href="#2-入门三步" class="headerlink" title="2. 入门三步"></a>2. 入门三步</h3><ol>
-<li>定义类实现 <code>Filter</code> 接口，重写 <code>init</code> &#x2F; <code>doFilter</code> &#x2F; <code>destroy</code>。</li>
-<li>类上加 <code>@WebFilter(urlPatterns = &quot;/*&quot;)</code> 配置拦截路径。</li>
-<li>启动类加 <code>@ServletComponentScan</code> 开启 Servlet 组件支持。</li>
-</ol>
-<p>三个方法：</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>调用时机</th>
-<th>调用次数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>init</code></td>
-<td>web 服务器启动创建 Filter 实例时</td>
-<td>1 次</td>
-</tr>
-<tr>
-<td><code>doFilter</code></td>
-<td>每次拦截到请求</td>
-<td>多次</td>
-</tr>
-<tr>
-<td><code>destroy</code></td>
-<td>web 服务器关闭时</td>
-<td>1 次</td>
-</tr>
-</tbody></table>
-<p><strong>放行</strong>：<code>chain.doFilter(request, response);</code> —— 不调用就到不了后面的资源。</p>
-<h3 id="3-执行流程（放行前-放行后）"><a href="#3-执行流程（放行前-放行后）" class="headerlink" title="3. 执行流程（放行前 &#x2F; 放行后）"></a>3. 执行流程（放行前 &#x2F; 放行后）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest req, ServletResponse resp, FilterChain chain)</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;放行前逻辑.....&quot;</span>);</span><br><span class="line">    chain.doFilter(req, resp);          <span class="comment">// 放行，访问 web 资源</span></span><br><span class="line">    System.out.println(<span class="string">&quot;放行后逻辑.....&quot;</span>); <span class="comment">// 资源处理完回到这里</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-拦截路径配置"><a href="#4-拦截路径配置" class="headerlink" title="4. 拦截路径配置"></a>4. 拦截路径配置</h3><table>
-<thead>
-<tr>
-<th>拦截路径</th>
-<th>urlPatterns</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>具体路径</td>
-<td><code>/login</code></td>
-<td>只拦截 &#x2F;login</td>
-</tr>
-<tr>
-<td>目录拦截</td>
-<td><code>/emps/*</code></td>
-<td>拦截 &#x2F;emps 下所有资源</td>
-</tr>
-<tr>
-<td>拦截所有</td>
-<td><code>/*</code></td>
-<td>拦截所有资源</td>
-</tr>
-</tbody></table>
-<h3 id="5-过滤器链"><a href="#5-过滤器链" class="headerlink" title="5. 过滤器链"></a>5. 过滤器链</h3><p>多个 Filter 形成链，一个接一个执行；放行后回来时<strong>顺序相反</strong>。注解配置的 Filter，执行顺序按<strong>类名字符串自然排序</strong>（AbcFilter 先于 DemoFilter）。</p>
-<h3 id="6-登录校验六步（项目类：TokenFilter，全限定类名-com-zhang-filter-TokenFilter）"><a href="#6-登录校验六步（项目类：TokenFilter，全限定类名-com-zhang-filter-TokenFilter）" class="headerlink" title="6. 登录校验六步（项目类：TokenFilter，全限定类名 com.zhang.filter.TokenFilter）"></a>6. 登录校验六步（项目类：<code>TokenFilter</code>，全限定类名 <code>com.zhang.filter.TokenFilter</code>）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 获取请求 URI</span><br><span class="line">2. 包含 /login → 放行（登录请求例外）</span><br><span class="line">3. 取请求头 token</span><br><span class="line">4. token 为空 → 响应 401</span><br><span class="line">5. 解析 token 失败 → 响应 401</span><br><span class="line">6. 解析成功 → 放行</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 项目 TokenFilter 核心逻辑（注意：本项目中此 Filter 未启用，见&quot;项目现状&quot;）</span></span><br><span class="line"><span class="type">String</span> <span class="variable">uri</span> <span class="operator">=</span> request.getRequestURI().toString();</span><br><span class="line"><span class="keyword">if</span> (uri.contains(<span class="string">&quot;/login&quot;</span>)) &#123;</span><br><span class="line">    filterChain.doFilter(servletRequest, servletResponse);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">String</span> <span class="variable">jwt</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;token&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (jwt == <span class="literal">null</span> || jwt.isEmpty()) &#123;</span><br><span class="line">    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);  <span class="comment">// 401</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    JwtUtils.parseToken(jwt);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">filterChain.doFilter(servletRequest, servletResponse);</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="六、统一拦截方案二：Interceptor-拦截器"><a href="#六、统一拦截方案二：Interceptor-拦截器" class="headerlink" title="六、统一拦截方案二：Interceptor 拦截器"></a>六、统一拦截方案二：Interceptor 拦截器</h2><h3 id="1-是什么-2"><a href="#1-是什么-2" class="headerlink" title="1. 是什么"></a>1. 是什么</h3><p>Interceptor 是 <strong>Spring 框架</strong>提供的，动态拦截 <strong>Controller 方法</strong>的执行。作用和 Filter 类似，但只拦 Spring 环境内的资源。</p>
-<h3 id="2-入门两步"><a href="#2-入门两步" class="headerlink" title="2. 入门两步"></a>2. 入门两步</h3><ol>
-<li>定义类实现 <code>HandlerInterceptor</code>，重写三个方法，加 <code>@Component</code>。</li>
-<li>写配置类 <code>WebConfig implements WebMvcConfigurer</code>，重写 <code>addInterceptors</code> 注册拦截器。必须加@Configuration</li>
-</ol>
-<p>三个方法：</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>调用时机</th>
-<th>返回值含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>preHandle</code></td>
-<td>目标方法<strong>执行前</strong></td>
-<td><code>true</code> 放行；<code>false</code> 不放行（Controller 不执行）</td>
-</tr>
-<tr>
-<td><code>postHandle</code></td>
-<td>目标方法<strong>执行后</strong></td>
-<td>—</td>
-</tr>
-<tr>
-<td><code>afterCompletion</code></td>
-<td>视图渲染完毕后，<strong>最后</strong>执行</td>
-<td>—</td>
-</tr>
-</tbody></table>
-<h3 id="3-注册配置（项目类：WebConfig，全限定类名-com-zhang-config-WebConfig）"><a href="#3-注册配置（项目类：WebConfig，全限定类名-com-zhang-config-WebConfig）" class="headerlink" title="3. 注册配置（项目类：WebConfig，全限定类名 com.zhang.config.WebConfig）"></a>3. 注册配置（项目类：<code>WebConfig</code>，全限定类名 <code>com.zhang.config.WebConfig</code>）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebConfig</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> TokenInterceptor tokenInterceptor;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> &#123;</span><br><span class="line">        registry.addInterceptor(tokenInterceptor)</span><br><span class="line">                .addPathPatterns(<span class="string">&quot;/**&quot;</span>)              <span class="comment">// 拦截所有</span></span><br><span class="line">                <span class="comment">// .excludePathPatterns(&quot;/login&quot;)   // 也可用排除方式放过登录</span></span><br><span class="line">        ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-拦截路径配置-1"><a href="#4-拦截路径配置-1" class="headerlink" title="4. 拦截路径配置"></a>4. 拦截路径配置</h3><table>
-<thead>
-<tr>
-<th>拦截路径</th>
-<th>含义</th>
-<th>能匹配</th>
-<th>不能匹配</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>/*</code></td>
-<td>一级路径</td>
-<td>&#x2F;depts、&#x2F;login</td>
-<td>&#x2F;depts&#x2F;1</td>
-</tr>
-<tr>
-<td><code>/**</code></td>
-<td>任意级路径</td>
-<td>&#x2F;depts、&#x2F;depts&#x2F;1、&#x2F;depts&#x2F;1&#x2F;2</td>
-<td>—</td>
-</tr>
-<tr>
-<td><code>/depts/*</code></td>
-<td>&#x2F;depts 下一级</td>
-<td>&#x2F;depts&#x2F;1</td>
-<td>&#x2F;depts&#x2F;1&#x2F;2、&#x2F;depts</td>
-</tr>
-<tr>
-<td><code>/depts/**</code></td>
-<td>&#x2F;depts 下任意级</td>
-<td>&#x2F;depts、&#x2F;depts&#x2F;1、&#x2F;depts&#x2F;1&#x2F;2</td>
-<td>&#x2F;emps&#x2F;1</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>排除登录请求有两种写法：① 拦截器里 <code>uri.contains(&quot;login&quot;)</code> 判断放行（项目用法）；② 配置里 <code>excludePathPatterns(&quot;/login&quot;)</code>。</p>
-</blockquote>
-<h3 id="5-登录校验-Interceptor（项目类：TokenInterceptor，全限定类名-com-zhang-interceptor-TokenInterceptor）"><a href="#5-登录校验-Interceptor（项目类：TokenInterceptor，全限定类名-com-zhang-interceptor-TokenInterceptor）" class="headerlink" title="5. 登录校验 Interceptor（项目类：TokenInterceptor，全限定类名 com.zhang.interceptor.TokenInterceptor）"></a>5. 登录校验 Interceptor（项目类：<code>TokenInterceptor</code>，全限定类名 <code>com.zhang.interceptor.TokenInterceptor</code>）</h3><p>逻辑与 Filter 完全一致，只是返回 boolean：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TokenInterceptor</span> <span class="keyword">implements</span> <span class="title class_">HandlerInterceptor</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">uri</span> <span class="operator">=</span> request.getRequestURI().toString();</span><br><span class="line">        <span class="keyword">if</span> (uri.contains(<span class="string">&quot;/login&quot;</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;                         <span class="comment">// 登录请求放行</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">String</span> <span class="variable">jwt</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;token&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (jwt == <span class="literal">null</span> || jwt.isEmpty()) &#123;</span><br><span class="line">            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            JwtUtils.parseToken(jwt);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="七、Filter-vs-Interceptor-对比（高频考点）"><a href="#七、Filter-vs-Interceptor-对比（高频考点）" class="headerlink" title="七、Filter vs Interceptor 对比（高频考点）"></a>七、Filter vs Interceptor 对比（高频考点）</h2><table>
-<thead>
-<tr>
-<th>对比项</th>
-<th>Filter 过滤器</th>
-<th>Interceptor 拦截器</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>接口规范</strong></td>
-<td>实现 <code>jakarta.servlet.Filter</code></td>
-<td>实现 <code>HandlerInterceptor</code></td>
-</tr>
-<tr>
-<td><strong>拦截范围</strong></td>
-<td>拦截<strong>所有资源</strong>（包括静态资源、JSP 等）</td>
-<td>只拦 <strong>Spring 环境</strong>中的资源（Controller）</td>
-</tr>
-<tr>
-<td><strong>归属</strong></td>
-<td>JavaWeb 三大组件（Servlet 规范）</td>
-<td>Spring 框架提供</td>
-</tr>
-<tr>
-<td><strong>配置方式</strong></td>
-<td><code>@WebFilter</code> + <code>@ServletComponentScan</code></td>
-<td><code>WebMvcConfigurer.addInterceptors</code></td>
-</tr>
-<tr>
-<td><strong>核心方法</strong></td>
-<td><code>doFilter</code>（放行 <code>chain.doFilter</code>）</td>
-<td><code>preHandle</code> 返回 boolean</td>
-</tr>
-<tr>
-<td><strong>执行时机</strong></td>
-<td>DispatcherServlet 之前</td>
-<td>DispatcherServlet 之后、Controller 之前</td>
-</tr>
-</tbody></table>
-<p>执行顺序（重要）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">浏览器 → Filter(放行前) → DispatcherServlet → Interceptor.preHandle → Controller</span><br><span class="line">       → Interceptor.postHandle → Interceptor.afterCompletion → Filter(放行后) → 浏览器</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>本项目<strong>二选一用了 Interceptor</strong>，Filter 仅作示例保留（见下）。</p>
-</blockquote>
-<hr>
-<h2 id="八、项目现状速查（重点！）"><a href="#八、项目现状速查（重点！）" class="headerlink" title="八、项目现状速查（重点！）"></a>八、项目现状速查（重点！）</h2><blockquote>
-<p>复习时最容易把”示例代码”和”项目真正生效的校验链路”搞混，这里专门列清。</p>
-</blockquote>
-<h3 id="1-实际生效的校验链路"><a href="#1-实际生效的校验链路" class="headerlink" title="1. 实际生效的校验链路"></a>1. 实际生效的校验链路</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请求 → TokenInterceptor.preHandle (校验 token) → Controller → Service → Mapper</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>校验组件：<code>TokenInterceptor</code>（<code>com.zhang.interceptor.TokenInterceptor</code>，加了 <code>@Component</code>）</li>
-<li>注册位置：<code>WebConfig</code>（<code>com.zhang.config.WebConfig</code>，<code>addPathPatterns(&quot;/**&quot;)</code> 注册拦截器）</li>
-</ul>
-<h3 id="2-Filter-是”保留示例”，未启用"><a href="#2-Filter-是”保留示例”，未启用" class="headerlink" title="2. Filter 是”保留示例”，未启用"></a>2. Filter 是”保留示例”，未启用</h3><p><code>TokenFilter</code>（<code>com.zhang.filter.TokenFilter</code>）里 <code>@WebFilter(urlPatterns = &quot;/*&quot;)</code> <strong>被注释掉了</strong>，也没有 <code>@Component</code>，所以<strong>不会生效</strong>。讲义里也明确：”登录校验的过滤器和拦截器，我们只需要使用其中的一种就可以了。”</p>
-<h3 id="3-项目与讲义的命名差异"><a href="#3-项目与讲义的命名差异" class="headerlink" title="3. 项目与讲义的命名差异"></a>3. 项目与讲义的命名差异</h3><table>
-<thead>
-<tr>
-<th>讲义命名</th>
-<th>项目命名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>JwtUtils.generateJwt</code></td>
-<td><code>JwtUtils.generateToken</code></td>
-<td>同功能，方法名不同</td>
-</tr>
-<tr>
-<td><code>JwtUtils.parseJWT</code></td>
-<td><code>JwtUtils.parseToken</code></td>
-<td>同功能，方法名不同</td>
-</tr>
-<tr>
-<td><code>empMapper.getUsernameAndPassword</code></td>
-<td><code>empMapper.getByUsernamePassword</code></td>
-<td>同 SQL，方法名不同</td>
-</tr>
-<tr>
-<td><code>LoginInfo</code> 字段 <code>token</code></td>
-<td>同</td>
-<td>一致</td>
-</tr>
-</tbody></table>
-<h3 id="4-项目涉及文件清单"><a href="#4-项目涉及文件清单" class="headerlink" title="4. 项目涉及文件清单"></a>4. 项目涉及文件清单</h3><table>
-<thead>
-<tr>
-<th>层</th>
-<th>全限定类名 &#x2F; 类</th>
-<th>本节做了什么</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>pojo</td>
-<td><code>com.zhang.pojo.LoginInfo</code></td>
-<td>新增：登录响应封装（<code>id</code>、<code>username</code>、<code>name</code>、<code>token</code>）</td>
-</tr>
-<tr>
-<td>utils</td>
-<td><code>com.zhang.utils.JwtUtils</code></td>
-<td>新增：JWT 工具类（<code>generateToken</code>、<code>parseToken</code>）</td>
-</tr>
-<tr>
-<td>controller</td>
-<td><code>com.zhang.controller.LoginController</code></td>
-<td>新增：<code>POST /login</code> 接口</td>
-</tr>
-<tr>
-<td>service</td>
-<td><code>com.zhang.service.impl.EmpServiceImpl</code></td>
-<td>新增 <code>login(Emp)</code>：查库 → 生成 JWT → 组装 <code>LoginInfo</code></td>
-</tr>
-<tr>
-<td>mapper</td>
-<td><code>com.zhang.mapper.EmpMapper</code></td>
-<td>新增 <code>getByUsernamePassword(Emp)</code>：按用户名密码查询</td>
-</tr>
-<tr>
-<td>interceptor</td>
-<td><code>com.zhang.interceptor.TokenInterceptor</code></td>
-<td>新增：token 校验拦截器（当前<strong>生效</strong>）</td>
-</tr>
-<tr>
-<td>filter</td>
-<td><code>com.zhang.filter.TokenFilter</code></td>
-<td>新增：token 校验过滤器（<strong>未启用</strong>，仅示例）</td>
-</tr>
-<tr>
-<td>config</td>
-<td><code>com.zhang.config.WebConfig</code></td>
-<td>新增：注册 <code>TokenInterceptor</code>，拦截 <code>/**</code></td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="九、易错点-复习提醒"><a href="#九、易错点-复习提醒" class="headerlink" title="九、易错点 &amp; 复习提醒"></a>九、易错点 &amp; 复习提醒</h2><ol>
-<li><p><strong>生成 token 时取 id 的来源</strong>：项目 <code>EmpServiceImpl.login</code> 里写的是 <code>map.put(&quot;id&quot;, emp.getId())</code>，但 <code>emp</code> 是请求体对象，登录时前端不会传 id，所以这里的 id 实际是 null。<strong>更稳的写法是用查询结果 <code>e.getId()</code></strong>（讲义示例就是这么写的）。不影响 token 是否生成，但 token 载荷里的 id 会丢。</p>
-</li>
-<li><p><strong>登录请求必须放行</strong>：拦截器&#x2F;过滤器第一件事就是判断 <code>uri.contains(&quot;/login&quot;)</code> 放行，否则永远登不进去拿不到 token。</p>
-</li>
-<li><p><strong>token 的传递字段是请求头 <code>token</code></strong>，不是 <code>Authorization</code>，也不是 cookie。前后端要约定一致（本项目前端在 <code>token</code> 头里带）。</p>
-</li>
-<li><p><strong>401 状态码</strong>：未登录、token 为空、token 解析失败，都返回 <code>SC_UNAUTHORIZED</code>（401）。前端拿到 401 会自动跳登录页。</p>
-</li>
-<li><p><strong>JWT 秘钥必须配套</strong>：生成和解析用同一个 <code>signKey</code>，换了就全部失效。</p>
-</li>
-<li><p><strong>JWT 不是加密</strong>：Payload 是 base64 编码，<strong>能直接解码出来</strong>，所以<strong>别往里放密码等敏感信息</strong>。签名只是防篡改，不是防查看。</p>
-</li>
-<li><p><strong>Filter 和 Interceptor 不要同时启用做同一件事</strong>：本项目 Filter 注释掉了，只用 Interceptor。两个都开会导致重复校验。</p>
-</li>
-<li><p><strong><code>@WebFilter</code> 方式需要 <code>@ServletComponentScan</code></strong>；如果用 <code>@Component</code> + <code>FilterRegistrationBean</code> 则不需要。本项目 Interceptor 走的是 Spring 的 <code>WebMvcConfigurer</code> 注册方式。</p>
-</li>
-<li><p><strong>拦截路径 <code>/*</code> vs <code>/**</code></strong>：Filter 用 <code>/*</code>（Servlet 规范）；Interceptor 用 <code>/**</code>（Spring Ant 风格）。两者<strong>含义不同</strong>，别混。</p>
-</li>
-</ol>
-<hr>
-<h2 id="十、一图回顾整条链路"><a href="#十、一图回顾整条链路" class="headerlink" title="十、一图回顾整条链路"></a>十、一图回顾整条链路</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">┌───────── 登录 ─────────┐</span><br><span class="line">│ POST /login            │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ LoginController        │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ EmpServiceImpl.login   │</span><br><span class="line">│   ├─ EmpMapper 查库    │</span><br><span class="line">│   └─ JwtUtils 生成 token│</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ 返回 LoginInfo&#123;token&#125;  │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ 前端存 localStorage    │</span><br><span class="line">└────────────────────────┘</span><br><span class="line"></span><br><span class="line">┌──────── 后续请求 ──────┐</span><br><span class="line">│ 请求头带 token         │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ TokenInterceptor       │</span><br><span class="line">│ .preHandle             │</span><br><span class="line">│   ├─ /login → 放行     │</span><br><span class="line">│   ├─ 无 token → 401    │</span><br><span class="line">│   ├─ 解析失败 → 401    │</span><br><span class="line">│   └─ 合法 → return true│</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ Controller → Service   │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ 返回结果               │</span><br><span class="line">└────────────────────────┘</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day22%20%E7%BC%93%E5%AD%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/25/day22%20%E7%BC%93%E5%AD%98/" class="post-title-link" itemprop="url">day22 缓存</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-今天做了什么"><a href="#1-今天做了什么" class="headerlink" title="1. 今天做了什么"></a>1. 今天做了什么</h2><p>外卖day7的一部分</p>
-<ol>
-<li>缓存菜品</li>
-<li>缓存套餐</li>
-</ol>
-<h2 id="2-核心知识点"><a href="#2-核心知识点" class="headerlink" title="2. 核心知识点"></a>2. 核心知识点</h2><ol>
-<li>两种实现缓存的方式<ol>
-<li>使用Redis自己实现缓存<ol>
-<li>根据分类id查询菜品,将分类id作为key,将查询到的集合作为value</li>
-<li>查询时先查缓存是否存在,存在直接返回,不存在则查询后存入缓存返回</li>
-<li>一旦管理端发生新增,修改,删除,起售停售,都要对缓存进行清理</li>
-</ol>
-</li>
-<li>使用Spring Cache实现缓存<ol>
-<li>完全使用注解实现,很方便</li>
-<li>在启动类使用注解进行开启</li>
-<li>在相应查询接口上添加注解,实现查询时先查缓存是否存在,存在直接返回,不存在则查询后存入缓存返回</li>
-<li>在管理端新增,修改,删除操作添加清除缓存的注解</li>
-<li>Spring Cache底层可以用多种方式实现,这里使用Redis,添加了Redis的依赖,可以自动识别</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="3-深度思考"><a href="#3-深度思考" class="headerlink" title="3. 深度思考"></a>3. 深度思考</h2><ol>
-<li>为什么要做缓存<ol>
-<li>在业务执行过程中,数据库查询操作从磁盘读取数据,比较耗时</li>
-<li>用户使用量比较大时加载较慢,影响使用体验</li>
-<li>在Redis中做缓存,从内存中读取速度很快</li>
-</ol>
-</li>
-</ol>
-<h2 id="4-踩过的坑"><a href="#4-踩过的坑" class="headerlink" title="4. 踩过的坑"></a>4. 踩过的坑</h2><ol>
-<li>redisTemplate.delete()不支持通配符,redisTemplate.keys()支持,先查询keys,再删除</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiOperation(&quot;修改菜品&quot;)</span>  </span><br><span class="line"><span class="meta">@PutMapping</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="type">Result</span> <span class="title function_">update</span><span class="params">(<span class="meta">@RequestBody</span> DishDTO dishDTO)</span>&#123;  </span><br><span class="line">    log.info(<span class="string">&quot;修改菜品：&#123;&#125;&quot;</span>, dishDTO);  </span><br><span class="line">    dishService.update(dishDTO);  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">//更新菜品后，清除缓存  </span></span><br><span class="line">    clearCache(<span class="string">&quot;dish_*&quot;</span>);  </span><br><span class="line">    <span class="keyword">return</span> Result.success();  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="type">void</span> <span class="title function_">clearCache</span><span class="params">(String pattern)</span>&#123;  </span><br><span class="line">    <span class="type">Set</span> <span class="variable">keys</span> <span class="operator">=</span> redisTemplate.keys(pattern);  </span><br><span class="line">    redisTemplate.delete(keys);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>Spring Cache的@CacheEvict注解,清除所有setmealcache的缓存:</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CacheEvict(cacheNames = &quot;setmealcache&quot;, allEntries = true)</span></span><br></pre></td></tr></table></figure>
-<h2 id="5-遗留问题-想不通"><a href="#5-遗留问题-想不通" class="headerlink" title="5. 遗留问题 &#x2F; 想不通"></a>5. 遗留问题 &#x2F; 想不通</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/25/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/" class="post-title-link" itemprop="url">day23 购物车与用户下单</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-今天做了什么"><a href="#1-今天做了什么" class="headerlink" title="1. 今天做了什么"></a>1. 今天做了什么</h2><p>(外卖day07,day08)</p>
-<ol>
-<li>购物车相关接口</li>
-<li>用户下单相关接口</li>
-</ol>
-<h2 id="2-核心知识点"><a href="#2-核心知识点" class="headerlink" title="2. 核心知识点"></a>2. 核心知识点</h2><ol>
-<li>订单表与订单明细表的设计<ol>
-<li>订单表存储订单相关的信息</li>
-<li>订单明细表存储订单中的菜品,套餐的单价,数量等数据,一条菜品或套餐对应一条数据</li>
-<li>二者是一对多的</li>
-</ol>
-</li>
-<li>冗余字段<ol>
-<li>数据表中某些字段可以通过其他字段在其他表中查询到</li>
-<li>为什么设计冗余字段<ol>
-<li>在插入数据时将冗余字段从其他表查出来,一并插入其中</li>
-<li>以后查询的时候可以直接从表中查到,不用进行多表联查</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="3-深度思考"><a href="#3-深度思考" class="headerlink" title="3. 深度思考"></a>3. 深度思考</h2><h2 id="4-踩过的坑"><a href="#4-踩过的坑" class="headerlink" title="4. 踩过的坑"></a>4. 踩过的坑</h2><ol>
-<li>多表操作一定要开启事务</li>
-</ol>
-<h2 id="5-遗留问题-想不通"><a href="#5-遗留问题-想不通" class="headerlink" title="5. 遗留问题 &#x2F; 想不通"></a>5. 遗留问题 &#x2F; 想不通</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/" class="post-title-link" itemprop="url">day21 微信登录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-今天做了什么"><a href="#1-今天做了什么" class="headerlink" title="1. 今天做了什么"></a>1. 今天做了什么</h2><p>(外卖day6的内容)</p>
-<ol>
-<li>HttpClient的使用</li>
-<li>微信小程序开发入门<ol>
-<li>项目目录结构</li>
-<li>获取头像与昵称</li>
-<li>获取授权码</li>
-</ol>
-</li>
-<li>微信登录<ol>
-<li>流程:小程序获取授权码-&gt;携带授权码向服务端发起请求-&gt;服务端使用授权码向微信的接口发起请求,获取openid(微信用户唯一标识)-&gt;查询若为新用户则1创建-&gt;创建jwt令牌,与用户基本信息一起返回给小程序</li>
-<li>设置拦截器,对除登录与获取营业状态的其他来自用户端的请求进行令牌校验</li>
-</ol>
-</li>
-</ol>
-<h2 id="2-核心知识点"><a href="#2-核心知识点" class="headerlink" title="2. 核心知识点"></a>2. 核心知识点</h2><ol>
-<li>HttpClient的使用</li>
-<li>登录流程</li>
-</ol>
-<h2 id="3-深度思考"><a href="#3-深度思考" class="headerlink" title="3. 深度思考"></a>3. 深度思考</h2><h2 id="4-踩过的坑"><a href="#4-踩过的坑" class="headerlink" title="4. 踩过的坑"></a>4. 踩过的坑</h2><ol>
-<li>从json字符串中解析出信息:</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">JSONObject</span> <span class="variable">jsonObject</span> <span class="operator">=</span> JSON.parseObject(resultJson);<span class="comment">//将json字符串转换为json对象  </span></span><br><span class="line"><span class="type">String</span> <span class="variable">openid</span> <span class="operator">=</span> jsonObject.getString(<span class="string">&quot;openid&quot;</span>);<span class="comment">//从json对象中获取openid</span></span><br></pre></td></tr></table></figure>
-<h2 id="5-遗留问题-想不通"><a href="#5-遗留问题-想不通" class="headerlink" title="5. 遗留问题 &#x2F; 想不通"></a>5. 遗留问题 &#x2F; 想不通</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day18%20%E5%89%8D%E7%AB%AFWeb%E5%AE%9E%E6%88%98-Vue%E5%B7%A5%E7%A8%8B%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2180,6 +1877,87 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/" class="post-title-link" itemprop="url">day21 微信登录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-今天做了什么"><a href="#1-今天做了什么" class="headerlink" title="1. 今天做了什么"></a>1. 今天做了什么</h2><p>(外卖day6的内容)</p>
+<ol>
+<li>HttpClient的使用</li>
+<li>微信小程序开发入门<ol>
+<li>项目目录结构</li>
+<li>获取头像与昵称</li>
+<li>获取授权码</li>
+</ol>
+</li>
+<li>微信登录<ol>
+<li>流程:小程序获取授权码-&gt;携带授权码向服务端发起请求-&gt;服务端使用授权码向微信的接口发起请求,获取openid(微信用户唯一标识)-&gt;查询若为新用户则1创建-&gt;创建jwt令牌,与用户基本信息一起返回给小程序</li>
+<li>设置拦截器,对除登录与获取营业状态的其他来自用户端的请求进行令牌校验</li>
+</ol>
+</li>
+</ol>
+<h2 id="2-核心知识点"><a href="#2-核心知识点" class="headerlink" title="2. 核心知识点"></a>2. 核心知识点</h2><ol>
+<li>HttpClient的使用</li>
+<li>登录流程</li>
+</ol>
+<h2 id="3-深度思考"><a href="#3-深度思考" class="headerlink" title="3. 深度思考"></a>3. 深度思考</h2><h2 id="4-踩过的坑"><a href="#4-踩过的坑" class="headerlink" title="4. 踩过的坑"></a>4. 踩过的坑</h2><ol>
+<li>从json字符串中解析出信息:</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">JSONObject</span> <span class="variable">jsonObject</span> <span class="operator">=</span> JSON.parseObject(resultJson);<span class="comment">//将json字符串转换为json对象  </span></span><br><span class="line"><span class="type">String</span> <span class="variable">openid</span> <span class="operator">=</span> jsonObject.getString(<span class="string">&quot;openid&quot;</span>);<span class="comment">//从json对象中获取openid</span></span><br></pre></td></tr></table></figure>
+<h2 id="5-遗留问题-想不通"><a href="#5-遗留问题-想不通" class="headerlink" title="5. 遗留问题 &#x2F; 想不通"></a>5. 遗留问题 &#x2F; 想不通</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2284,7 +2062,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day5%20html%E4%B8%8Ecss%E5%85%A5%E9%97%A8/">
+    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -2298,7 +2076,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/25/day5%20html%E4%B8%8Ecss%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">day5 html与css入门</a>
+            <a href="/2026/08/25/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/" class="post-title-link" itemprop="url">day23 购物车与用户下单</a>
         </h2>
 
         <div class="post-meta">
@@ -2323,161 +2101,274 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="day5"><a href="#day5" class="headerlink" title="day5"></a>day5</h1><h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><ol>
-<li>HTML入门基础学习</li>
+          <h2 id="1-今天做了什么"><a href="#1-今天做了什么" class="headerlink" title="1. 今天做了什么"></a>1. 今天做了什么</h2><p>(外卖day07,day08)</p>
+<ol>
+<li>购物车相关接口</li>
+<li>用户下单相关接口</li>
 </ol>
-<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="1-HTML基础结构"><a href="#1-HTML基础结构" class="headerlink" title="1.HTML基础结构"></a>1.HTML基础结构</h3><ol>
-<li><strong>文档声明</strong>：<code>&lt;!DOCTYPE html&gt;</code>，声明文件类型为HTML5</li>
-<li><strong>根元素</strong>：<code>&lt;html&gt;</code>，包含整个HTML文档</li>
-<li><strong>头部</strong>：<code>&lt;head&gt;</code>，存放页面元信息<ul>
-<li><code>&lt;title&gt;</code>：页面标题，显示在浏览器标签栏</li>
-<li><code>&lt;meta&gt;</code>：元数据，如字符集<code>&lt;meta charset=&quot;UTF-8&quot;&gt;</code>、视口设置<code>&lt;meta name=&quot;viewport&quot;&gt;</code></li>
-<li><code>&lt;style&gt;</code>：内部样式表</li>
-<li><code>&lt;link&gt;</code>：引入外部样式表</li>
-</ul>
+<h2 id="2-核心知识点"><a href="#2-核心知识点" class="headerlink" title="2. 核心知识点"></a>2. 核心知识点</h2><ol>
+<li>订单表与订单明细表的设计<ol>
+<li>订单表存储订单相关的信息</li>
+<li>订单明细表存储订单中的菜品,套餐的单价,数量等数据,一条菜品或套餐对应一条数据</li>
+<li>二者是一对多的</li>
+</ol>
 </li>
-<li><strong>主体</strong>：<code>&lt;body&gt;</code>，页面可见内容区域</li>
+<li>冗余字段<ol>
+<li>数据表中某些字段可以通过其他字段在其他表中查询到</li>
+<li>为什么设计冗余字段<ol>
+<li>在插入数据时将冗余字段从其他表查出来,一并插入其中</li>
+<li>以后查询的时候可以直接从表中查到,不用进行多表联查</li>
 </ol>
-<h3 id="2-常用HTML标签"><a href="#2-常用HTML标签" class="headerlink" title="2.常用HTML标签"></a>2.常用HTML标签</h3><h5 id="文本标签"><a href="#文本标签" class="headerlink" title="文本标签"></a>文本标签</h5><ol>
-<li><code>&lt;h1&gt;-&lt;h6&gt;</code>：标题标签，h1最大，h6最小</li>
-<li><code>&lt;p&gt;</code>：段落标签</li>
-<li><code>&lt;span&gt;</code>：行内容器，不换行</li>
-<li><code>&lt;div&gt;</code>：块级容器，独占一行</li>
-<li><code>&lt;b&gt;</code>：加粗文本</li>
-</ol>
-<h5 id="媒体标签"><a href="#媒体标签" class="headerlink" title="媒体标签"></a>媒体标签</h5><ol>
-<li><code>&lt;img&gt;</code>：图片标签<ul>
-<li><code>src</code>：图片路径（相对路径如<code>./img/1.png</code>或绝对路径）</li>
-<li><code>alt</code>：图片加载失败时的替代文本</li>
-</ul>
-</li>
-<li><code>&lt;video&gt;</code>：视频标签<ul>
-<li><code>src</code>：视频路径</li>
-<li><code>controls</code>：显示播放控制条</li>
-</ul>
 </li>
 </ol>
-<h5 id="链接标签"><a href="#链接标签" class="headerlink" title="链接标签"></a>链接标签</h5><ol>
-<li><code>&lt;a&gt;</code>：超链接标签<ul>
-<li><code>href</code>：目标URL</li>
-<li><code>target=&quot;_blank&quot;</code>：在新窗口打开</li>
-</ul>
 </li>
 </ol>
-<h3 id="3-CSS样式"><a href="#3-CSS样式" class="headerlink" title="3.CSS样式"></a>3.CSS样式</h3><h5 id="三种引入方式"><a href="#三种引入方式" class="headerlink" title="三种引入方式"></a>三种引入方式</h5><ol>
-<li><strong>行内样式</strong>：通过标签的<code>style</code>属性直接设置，优先级最高 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&quot;color: red;&quot;</span>&gt;</span>红色文字<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><strong>内部样式</strong>：在<code>&lt;style&gt;</code>标签内定义，作用于当前页面</li>
-<li><strong>外部样式</strong>：通过<code>&lt;link&gt;</code>标签引入外部CSS文件，可复用 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;css/test01.css&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<h2 id="3-深度思考"><a href="#3-深度思考" class="headerlink" title="3. 深度思考"></a>3. 深度思考</h2><h2 id="4-踩过的坑"><a href="#4-踩过的坑" class="headerlink" title="4. 踩过的坑"></a>4. 踩过的坑</h2><ol>
+<li>多表操作一定要开启事务</li>
 </ol>
-<h5 id="CSS选择器"><a href="#CSS选择器" class="headerlink" title="CSS选择器"></a>CSS选择器</h5><ol>
-<li><strong>元素选择器</strong>：直接使用标签名，选中所有该标签 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">span</span> &#123; <span class="attribute">color</span>: red; &#125;</span><br></pre></td></tr></table></figure></li>
-<li><strong>类选择器</strong>：使用<code>.类名</code>，可选中多个元素（类名可重复） <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.time</span> &#123; <span class="attribute">color</span>: <span class="number">#b7b7b7</span>; &#125;</span><br></pre></td></tr></table></figure></li>
-<li><strong>ID选择器</strong>：使用<code>#ID名</code>，只能选中一个元素（ID唯一） <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#a001</span> &#123; <span class="attribute">text-decoration</span>: none; &#125;</span><br></pre></td></tr></table></figure></li>
+<h2 id="5-遗留问题-想不通"><a href="#5-遗留问题-想不通" class="headerlink" title="5. 遗留问题 &#x2F; 想不通"></a>5. 遗留问题 &#x2F; 想不通</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day22%20%E7%BC%93%E5%AD%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/25/day22%20%E7%BC%93%E5%AD%98/" class="post-title-link" itemprop="url">day22 缓存</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-今天做了什么"><a href="#1-今天做了什么" class="headerlink" title="1. 今天做了什么"></a>1. 今天做了什么</h2><p>外卖day7的一部分</p>
+<ol>
+<li>缓存菜品</li>
+<li>缓存套餐</li>
 </ol>
-<h3 id="4-盒子模型"><a href="#4-盒子模型" class="headerlink" title="4.盒子模型"></a>4.盒子模型</h3><ol>
-<li><strong>核心概念</strong>：每个元素都是一个盒子，由内容(content)、内边距(padding)、边框(border)、外边距(margin)组成</li>
-<li><strong>box-sizing</strong>：控制盒子尺寸计算方式<ul>
-<li><code>content-box</code>（默认）：width&#x2F;height仅包含内容</li>
-<li><code>border-box</code>：width&#x2F;height包含内容+内边距+边框，便于布局计算</li>
-</ul>
-</li>
-<li><strong>margin</strong>：外边距，控制元素间距<ul>
-<li><code>margin: 0 auto;</code>：上下边距为0，左右自动，实现块级元素居中</li>
-</ul>
-</li>
+<h2 id="2-核心知识点"><a href="#2-核心知识点" class="headerlink" title="2. 核心知识点"></a>2. 核心知识点</h2><ol>
+<li>两种实现缓存的方式<ol>
+<li>使用Redis自己实现缓存<ol>
+<li>根据分类id查询菜品,将分类id作为key,将查询到的集合作为value</li>
+<li>查询时先查缓存是否存在,存在直接返回,不存在则查询后存入缓存返回</li>
+<li>一旦管理端发生新增,修改,删除,起售停售,都要对缓存进行清理</li>
 </ol>
-<h3 id="5-Flexbox弹性布局"><a href="#5-Flexbox弹性布局" class="headerlink" title="5.Flexbox弹性布局"></a>5.Flexbox弹性布局</h3><ol>
-<li><strong>开启方式</strong>：父元素设置<code>display: flex;</code></li>
-<li><strong>主轴方向</strong>：<code>flex-direction</code><ul>
-<li><code>row</code>（默认）：水平方向</li>
-<li><code>column</code>：垂直方向</li>
-</ul>
 </li>
-<li><strong>主轴对齐</strong>：<code>justify-content</code><ul>
-<li><code>space-between</code>：两端对齐，项目之间间距相等</li>
-<li><code>center</code>：居中对齐</li>
-<li><code>space-around</code>：均匀分布，项目两侧间距相等</li>
-</ul>
-</li>
-<li><strong>交叉轴对齐</strong>：<code>align-items</code><ul>
-<li><code>center</code>：垂直居中</li>
-<li><code>flex-start</code>：顶部对齐</li>
-<li><code>flex-end</code>：底部对齐</li>
-</ul>
-</li>
+<li>使用Spring Cache实现缓存<ol>
+<li>完全使用注解实现,很方便</li>
+<li>在启动类使用注解进行开启</li>
+<li>在相应查询接口上添加注解,实现查询时先查缓存是否存在,存在直接返回,不存在则查询后存入缓存返回</li>
+<li>在管理端新增,修改,删除操作添加清除缓存的注解</li>
+<li>Spring Cache底层可以用多种方式实现,这里使用Redis,添加了Redis的依赖,可以自动识别</li>
 </ol>
-<h3 id="6-表单与表单项"><a href="#6-表单与表单项" class="headerlink" title="6.表单与表单项"></a>6.表单与表单项</h3><h5 id="表单结构"><a href="#表单结构" class="headerlink" title="表单结构"></a>表单结构</h5><ol>
-<li><code>&lt;form&gt;</code>：表单容器<ul>
-<li><code>action</code>：提交地址</li>
-<li><code>method</code>：提交方式（get&#x2F;post）</li>
-</ul>
-</li>
-</ol>
-<h5 id="表单项类型"><a href="#表单项类型" class="headerlink" title="表单项类型"></a>表单项类型</h5><ol>
-<li><p><strong>文本输入类</strong></p>
-<ul>
-<li><code>text</code>：单行文本</li>
-<li><code>password</code>：密码输入（隐藏内容）</li>
-<li><code>email</code>：邮箱输入（自动验证格式）</li>
-<li><code>tel</code>：电话输入</li>
-<li><code>url</code>：网址输入</li>
-<li><code>textarea</code>：多行文本</li>
-</ul>
-</li>
-<li><p><strong>数字输入类</strong></p>
-<ul>
-<li><code>number</code>：数字输入（带上下箭头）</li>
-<li><code>range</code>：范围滑块</li>
-</ul>
-</li>
-<li><p><strong>日期时间类</strong></p>
-<ul>
-<li><code>date</code>：日期选择器</li>
-<li><code>time</code>：时间选择器</li>
-</ul>
-</li>
-<li><p><strong>选择类</strong></p>
-<ul>
-<li><code>select</code>：下拉列表（配合<code>&lt;option&gt;</code>使用）</li>
-<li><code>radio</code>：单选按钮（同一组name相同，互斥）</li>
-<li><code>checkbox</code>：复选框（可多选）</li>
-</ul>
-</li>
-<li><p><strong>文件上传</strong></p>
-<ul>
-<li><code>file</code>：文件选择，<code>multiple</code>属性支持多文件</li>
-</ul>
-</li>
-<li><p><strong>按钮类</strong></p>
-<ul>
-<li><code>submit</code>：提交表单</li>
-<li><code>reset</code>：重置表单</li>
-<li><code>button</code>：普通按钮</li>
-</ul>
 </li>
 </ol>
-<h3 id="7-表格"><a href="#7-表格" class="headerlink" title="7.表格"></a>7.表格</h3><ol>
-<li><code>&lt;table&gt;</code>：表格容器</li>
-<li><code>&lt;thead&gt;</code>：表头区域</li>
-<li><code>&lt;tbody&gt;</code>：表体区域</li>
-<li><code>&lt;tr&gt;</code>：表格行</li>
-<li><code>&lt;th&gt;</code>：表头单元格（默认加粗居中）</li>
-<li><code>&lt;td&gt;</code>：表格数据单元格</li>
-<li><strong>边框合并</strong>：<code>border-collapse: collapse;</code></li>
-</ol>
-<h3 id="8-综合页面实践"><a href="#8-综合页面实践" class="headerlink" title="8.综合页面实践"></a>8.综合页面实践</h3><ol>
-<li><strong>页面布局</strong>：使用<code>div</code>划分区域（导航栏、内容区、页脚）</li>
-<li><strong>响应式设置</strong>：<code>&lt;meta name=&quot;viewport&quot;&gt;</code>适配移动端</li>
-<li><strong>样式优先级</strong>：行内样式 &gt; ID选择器 &gt; 类选择器 &gt; 元素选择器</li>
-<li><strong>常用CSS属性</strong><ul>
-<li><code>text-indent: 2em;</code>：首行缩进2个字符</li>
-<li><code>line-height</code>：行高</li>
-<li><code>text-decoration: none;</code>：取消下划线</li>
-<li><code>border-radius</code>：圆角</li>
-<li><code>cursor: pointer;</code>：鼠标悬停显示手型</li>
-<li><code>transition</code>：过渡动画效果</li>
-</ul>
 </li>
+</ol>
+<h2 id="3-深度思考"><a href="#3-深度思考" class="headerlink" title="3. 深度思考"></a>3. 深度思考</h2><ol>
+<li>为什么要做缓存<ol>
+<li>在业务执行过程中,数据库查询操作从磁盘读取数据,比较耗时</li>
+<li>用户使用量比较大时加载较慢,影响使用体验</li>
+<li>在Redis中做缓存,从内存中读取速度很快</li>
+</ol>
+</li>
+</ol>
+<h2 id="4-踩过的坑"><a href="#4-踩过的坑" class="headerlink" title="4. 踩过的坑"></a>4. 踩过的坑</h2><ol>
+<li>redisTemplate.delete()不支持通配符,redisTemplate.keys()支持,先查询keys,再删除</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiOperation(&quot;修改菜品&quot;)</span>  </span><br><span class="line"><span class="meta">@PutMapping</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="type">Result</span> <span class="title function_">update</span><span class="params">(<span class="meta">@RequestBody</span> DishDTO dishDTO)</span>&#123;  </span><br><span class="line">    log.info(<span class="string">&quot;修改菜品：&#123;&#125;&quot;</span>, dishDTO);  </span><br><span class="line">    dishService.update(dishDTO);  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">//更新菜品后，清除缓存  </span></span><br><span class="line">    clearCache(<span class="string">&quot;dish_*&quot;</span>);  </span><br><span class="line">    <span class="keyword">return</span> Result.success();  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="type">void</span> <span class="title function_">clearCache</span><span class="params">(String pattern)</span>&#123;  </span><br><span class="line">    <span class="type">Set</span> <span class="variable">keys</span> <span class="operator">=</span> redisTemplate.keys(pattern);  </span><br><span class="line">    redisTemplate.delete(keys);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>Spring Cache的@CacheEvict注解,清除所有setmealcache的缓存:</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CacheEvict(cacheNames = &quot;setmealcache&quot;, allEntries = true)</span></span><br></pre></td></tr></table></figure>
+<h2 id="5-遗留问题-想不通"><a href="#5-遗留问题-想不通" class="headerlink" title="5. 遗留问题 &#x2F; 想不通"></a>5. 遗留问题 &#x2F; 想不通</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day2%20IO%E6%B5%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/25/day2%20IO%E6%B5%81/" class="post-title-link" itemprop="url">day2 IO流</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="day2"><a href="#day2" class="headerlink" title="day2"></a>day2</h1><h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><ol>
+<li>学完IO流</li>
+</ol>
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="1-缓冲流"><a href="#1-缓冲流" class="headerlink" title="1.缓冲流"></a>1.缓冲流</h3><h5 id="字节缓冲流"><a href="#字节缓冲流" class="headerlink" title="字节缓冲流"></a>字节缓冲流</h5><ol>
+<li>缓冲流默认缓冲区大小为8192字节（8KB）</li>
+<li>使用方式：在基本流外包装一层缓冲流</li>
+<li>关闭缓冲流时，底层基本流也会自动关闭</li>
+<li>性能对比<ol>
+<li>缓冲流逐字节读取复制：35ms（内部缓冲区已优化磁盘I&#x2F;O）</li>
+<li>缓冲流配合 byte[] 数组读取复制：4ms</li>
+</ol>
+</li>
+<li>缓冲流与缓冲数组同时使用是不必要的<ol>
+<li>缓冲流内部已有 8KB 缓冲区，逐字节读取时已通过内部缓冲区大幅减少磁盘 I&#x2F;O，这是性能提升的核心</li>
+<li>在缓冲流之上再使用 byte[] 数组，相当于多了一层冗余的缓冲层级，增加了内存占用和代码复杂度</li>
+<li>实际开发中，单独使用缓冲流即可，或直接使用基本流配合自己的缓冲区，没必要两层都用</li>
+</ol>
+</li>
+</ol>
+<h5 id="字符缓冲流"><a href="#字符缓冲流" class="headerlink" title="字符缓冲流"></a>字符缓冲流</h5><ol>
+<li>BufferedReader 特有方法：<code>readLine()</code>，读取一行文本，遇到文件末尾返回 null</li>
+<li>BufferedWriter 特有方法：<code>newLine()</code>，用于多平台换行（Windows: \r\n, Linux: \n）</li>
+<li>字符缓冲流也可以指定编码格式</li>
+</ol>
+<h3 id="2-转换流"><a href="#2-转换流" class="headerlink" title="2.转换流"></a>2.转换流</h3><ol>
+<li>InputStreamReader：将字节输入流转换为字符输入流</li>
+<li>OutputStreamWriter：将字节输出流转换为字符输出流</li>
+<li>可以指定编码格式，解决乱码问题</li>
+<li>常与缓冲流配合使用，形成：<code>BufferedReader -&gt; InputStreamReader -&gt; FileInputStream</code></li>
+<li>Java 11+ FileReader&#x2F;FileWriter 已支持指定编码，但转换流仍有用武之地<ol>
+<li>处理非文件来源的字节流（如网络流、内存流）</li>
+<li>需要精确控制编码转换场景</li>
+</ol>
+</li>
+</ol>
+<h3 id="3-序列化流与反序列化流"><a href="#3-序列化流与反序列化流" class="headerlink" title="3.序列化流与反序列化流"></a>3.序列化流与反序列化流</h3><ol>
+<li>对象序列化：将对象写入文件，需要实现 <code>Serializable</code> 接口</li>
+<li>对象反序列化：从文件读取对象</li>
+<li><code>serialVersionUID</code>：序列化版本号，确保反序列化时类版本一致<ol>
+<li>如果类结构发生变化（如新增字段），版本号不匹配会抛出 <code>InvalidClassException</code></li>
+<li>建议显式声明版本号，避免编译器自动生成导致的兼容性问题</li>
+</ol>
+</li>
+<li><code>transient</code> 关键字：修饰的成员变量不参与序列化，反序列化时为默认值</li>
+<li>序列化集合对象：将整个集合写入文件，便于批量操作</li>
+</ol>
+<h3 id="4-压缩流与解压缩流"><a href="#4-压缩流与解压缩流" class="headerlink" title="4.压缩流与解压缩流"></a>4.压缩流与解压缩流</h3><h5 id="ZipEntry"><a href="#ZipEntry" class="headerlink" title="ZipEntry"></a>ZipEntry</h5><ol>
+<li>表示压缩包里的每个文件或目录</li>
+<li>压缩流与解压流中有一个当前条目的概念，就是你最近获取到的或创建的ZipEntry对象</li>
+<li>所以必须要及时关闭当前条目</li>
+</ol>
+<h5 id="解压缩"><a href="#解压缩" class="headerlink" title="解压缩"></a>解压缩</h5><ol>
+<li>使用 <code>ZipInputStream</code> 读取压缩包</li>
+<li><code>getNextEntry()</code> 获取下一个 ZipEntry</li>
+<li>判断是目录还是文件，分别处理</li>
+<li>读取完成后调用 <code>closeEntry()</code> 关闭当前条目</li>
+</ol>
+<h5 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h5><ol>
+<li>使用 <code>ZipOutputStream</code> 写入压缩包</li>
+<li><code>putNextEntry()</code> 创建新的 ZipEntry</li>
+<li>递归处理目录结构，保持原有的层级关系<ol>
+<li>遍历目录下所有文件和子目录</li>
+<li>文件则直接写入压缩条目</li>
+<li>目录则递归调用，传入更新后的路径名</li>
+</ol>
+</li>
+<li>每个文件写入完成后调用 <code>closeEntry()</code></li>
+</ol>
+<h3 id="5-打印流"><a href="#5-打印流" class="headerlink" title="5.打印流"></a>5.打印流</h3><ol>
+<li>PrintStream：字节打印流，<code>System.out</code> 就是 PrintStream 的实例</li>
+<li>PrintWriter：字符打印流</li>
+<li>特点<ol>
+<li>可以直接打印各种类型的数据（int、double、String、对象等）</li>
+<li>可以设置自动刷新（autoFlush），调用 <code>println()</code> 时自动刷新缓冲区，换行。</li>
+</ol>
+</li>
+</ol>
+<h3 id="6-URL网络读取"><a href="#6-URL网络读取" class="headerlink" title="6.URL网络读取"></a>6.URL网络读取</h3><ol>
+<li>使用 <code>URL</code> 和 <code>URLConnection</code> 建立网络连接</li>
+<li>通过 <code>getInputStream()</code> 获取输入流</li>
+<li>使用 <code>InputStreamReader</code> 按字符读取网页内容</li>
+<li>可以配合第三方工具包（如 Hutool）简化文件写入操作</li>
+</ol>
+<h3 id="7-工具包"><a href="#7-工具包" class="headerlink" title="7.工具包"></a>7.工具包</h3><ol>
+<li>commons-io</li>
+<li>hutool</li>
+<li>两个都是第三方工具包，提供了很多包装好的工具，导入即可直接使用。</li>
 </ol>
 
       
@@ -2725,6 +2616,182 @@
 <li><strong>异常封装</strong>：将具体异常统一转为业务异常</li>
 <li><strong>远程调用（RPC）</strong>：本地调用方法，实际通过网络发给远程服务器执行</li>
 <li><strong>AOP（面向切面编程）</strong>：解耦业务逻辑与通用增强逻辑</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/25/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-title-link" itemprop="url">day3 多线程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h1><p>多线程</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h3 id="1-线程创建"><a href="#1-线程创建" class="headerlink" title="1.线程创建"></a>1.线程创建</h3><h5 id="3种方式"><a href="#3种方式" class="headerlink" title="3种方式"></a>3种方式</h5><ol>
+<li>继承Thread</li>
+<li>实现Runnable</li>
+<li>实现Callable</li>
+</ol>
+<h5 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h5><p>3可以有返回值，1，2无返回值<br>1因为单继承，无法继承其他类</p>
+<h5 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h5><p>设置&#x2F;获取线程名，获取当前线程名，出让，插入，睡眠等</p>
+<h3 id="2-同步安全问题"><a href="#2-同步安全问题" class="headerlink" title="2.同步安全问题"></a>2.同步安全问题</h3><h5 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h5><ol>
+<li>大多操作系统对线程采用抢占式调度</li>
+<li>线程之间会争夺CPU执行权</li>
+<li>多个线程对同一资源进行操作的过程中，CUP执行权随时会被夺走，被其他线程占用，从而造成安全问题</li>
+</ol>
+<h5 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h5><ol>
+<li>对操作共享资源的代码采用锁，只有线程拿到锁，才能进入，执行代码，操作相应资源。未拿到锁的线程即使拿到CPU执行权也无法进入。</li>
+<li>同步代码块<ol>
+<li>对一段代码设置锁，锁对象可以自己指定</li>
+<li>代码执行完锁会自动释放</li>
+</ol>
+</li>
+<li>同步方法<ol>
+<li>非静态方法以this作为锁对象</li>
+<li>静态方法以类名.class做为锁对象</li>
+</ol>
+</li>
+<li>Lock锁<ol>
+<li>需要手动设置锁与释放锁</li>
+<li>为确保锁被释放，可将释放语句写进try的finally中</li>
+</ol>
+</li>
+</ol>
+<h5 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h5><ol>
+<li>CPU执行权的抢夺与锁的抢夺是独立的<ol>
+<li>线程只有拿到CPU执行权才可以去抢夺锁</li>
+<li>线程即使抢到锁，也随时可能被夺走CPU执行权，但因为锁未释放，其他线程无法进入同步代码块，只有等下次锁被释放</li>
+</ol>
+</li>
+<li>避免锁的嵌套，防止出现死锁，即外层锁与内层锁被不同线程拿到，全部陷入阻塞</li>
+</ol>
+<h3 id="3-等待唤醒机制"><a href="#3-等待唤醒机制" class="headerlink" title="3.等待唤醒机制"></a>3.等待唤醒机制</h3><h5 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h5><ol>
+<li>生产者产出资源，消费者消耗资源</li>
+<li>生产者<ol>
+<li>有资源：等待</li>
+<li>无资源<ol>
+<li>生产资源</li>
+<li>唤醒正在等待的线程（消费者）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>消费者<ol>
+<li>无资源：等待</li>
+<li>有资源：<ol>
+<li>消耗资源</li>
+<li>唤醒正在等待的进程（生产者）</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h5 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h5><ol>
+<li>等待与唤醒都需要通过同个锁对象（任意类），唤醒的时候才能唤醒所有通过该锁对象进入等待的线程</li>
+<li>进程进入等待时，释放锁，并交出CPU执行权。在被唤醒时，继续抢夺锁，拿到锁后继续执行后续语句。</li>
+</ol>
+<h5 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h5><ol>
+<li>自己用同步代码块synchronized实现，对操作共享资源的代码设置锁</li>
+<li>可以使用阻塞队列，阻塞队列内时线程安全的。内部也实现了等待与唤醒。没一个放入与取出操作时一定会成功执行的，无法放入进入等待，下次唤醒会继续放入。</li>
+</ol>
+<h3 id="4-线程池"><a href="#4-线程池" class="headerlink" title="4.线程池"></a>4.线程池</h3><h5 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h5><ol>
+<li><strong>降低资源消耗</strong>：复用已创建的线程，避免频繁创建和销毁线程（<code>new Thread</code> + <code>start()</code>）带来的性能开销</li>
+<li><strong>提高响应速度</strong>：任务到达时，无需等待线程创建，可直接使用空闲线程立即执行</li>
+<li><strong>提高线程可管理性</strong>：线程是稀缺资源，统一分配、调优和监控，防止无限制创建导致系统崩溃（OOM）</li>
+</ol>
+<h5 id="核心参数（ThreadPoolExecutor-的7个参数）"><a href="#核心参数（ThreadPoolExecutor-的7个参数）" class="headerlink" title="核心参数（ThreadPoolExecutor 的7个参数）"></a>核心参数（<code>ThreadPoolExecutor</code> 的7个参数）</h5><ol>
+<li><strong>核心线程数（corePoolSize）</strong>：线程池中一直存活的线程数，即使空闲也不会被回收（除非设置了<code>allowCoreThreadTimeOut</code>）</li>
+<li><strong>最大线程数（maximumPoolSize）</strong>：线程池中允许的最大线程数</li>
+<li><strong>存活时间（keepAliveTime）</strong>：非核心线程空闲超过该时间会被回收</li>
+<li><strong>时间单位（unit）</strong>：<code>keepAliveTime</code> 的时间单位（如 <code>TimeUnit.SECONDS</code>）</li>
+<li><strong>阻塞队列（workQueue）</strong>：存放等待执行的任务（如 <code>ArrayBlockingQueue</code>、<code>LinkedBlockingQueue</code>）</li>
+<li><strong>线程工厂（threadFactory）</strong>：创建线程的工厂，可自定义线程名、优先级等（默认 <code>Executors.defaultThreadFactory()</code>）</li>
+<li><strong>拒绝策略（handler）</strong>：当线程池和队列都满时，对新提交的任务的处理方式</li>
+</ol>
+<h5 id="执行流程（任务提交后的流转）"><a href="#执行流程（任务提交后的流转）" class="headerlink" title="执行流程（任务提交后的流转）"></a>执行流程（任务提交后的流转）</h5><ol>
+<li><strong>核心线程</strong>：当前线程数 &lt; 核心线程数 → 创建新线程执行任务</li>
+<li><strong>阻塞队列</strong>：核心线程已满 → 任务放入队列等待</li>
+<li><strong>最大线程</strong>：队列已满 → 创建非核心线程执行任务（直到达到最大线程数）</li>
+<li><strong>拒绝策略</strong>：最大线程也满了 → 执行拒绝策略<blockquote>
+<p><strong>注意</strong>：流程是 <strong>核心 → 队列 → 最大</strong>，而非很多人误以为的<strong>核心 → 最大 → 队列</strong></p>
+</blockquote>
+</li>
+</ol>
+<h5 id="拒绝策略（4种内置实现）"><a href="#拒绝策略（4种内置实现）" class="headerlink" title="拒绝策略（4种内置实现）"></a>拒绝策略（4种内置实现）</h5><ol>
+<li><strong><code>AbortPolicy</code>（默认）</strong>：直接抛出 <code>RejectedExecutionException</code>，阻止系统正常运行</li>
+<li><strong><code>CallerRunsPolicy</code></strong>：由调用者线程（提交任务的线程）自己执行该任务，提供反馈机制，减缓任务提交速度</li>
+<li><strong><code>DiscardPolicy</code></strong>：直接丢弃任务，不抛出异常（丢失任务）</li>
+<li><strong><code>DiscardOldestPolicy</code></strong>：丢弃队列中最旧的任务，然后重试提交当前任务</li>
+</ol>
+<h5 id="提交任务的两种方式"><a href="#提交任务的两种方式" class="headerlink" title="提交任务的两种方式"></a>提交任务的两种方式</h5><ol>
+<li><strong><code>execute(Runnable command)</code></strong><ul>
+<li>提交无返回值的任务</li>
+<li>异常直接抛出（控制台打印），调用者无法捕获</li>
+</ul>
+</li>
+<li><strong><code>submit(Callable/Runnable task)</code></strong><ul>
+<li>提交有返回值（<code>Callable</code>）或无返回值（<code>Runnable</code>）的任务</li>
+<li>返回 <code>Future</code> 对象，可通过 <code>future.get()</code> 获取结果或捕获异常</li>
+<li><code>Runnable</code> 提交时，<code>Future.get()</code> 返回 <code>null</code></li>
+<li><code>Runnable</code> + 指定结果：<code>submit(Runnable task, T result)</code>，<code>Future.get()</code> 返回指定的 <code>result</code></li>
+</ul>
+</li>
+</ol>
+<h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5><ol>
+<li><strong>线程池中的线程是复用的</strong>：底层 <code>Worker</code> 通过 <code>while</code> 循环不断从队列中取任务执行，执行完一个任务后不会销毁，而是继续取下一个任务</li>
+<li><strong><code>Thread</code> 对象与内核线程</strong>：<code>Thread</code> 对象只是堆内存中的普通对象，真正执行能力来自操作系统内核线程（LWP）。线程池复用的是<strong>内核线程</strong>，而不是 <code>Thread</code> 对象本身</li>
+<li><strong>不能直接操作池中某个线程</strong>：线程池封装了线程的个体操作，应通过 <code>Future</code> 控制任务（如 <code>future.cancel(true)</code> 中断任务），而非直接操作线程</li>
+<li><strong><code>execute</code> 与 <code>submit</code> 底层关系</strong>：<code>submit</code> 底层也是调用 <code>execute</code>，但会将 <code>Runnable</code>&#x2F;<code>Callable</code> 包装成 <code>RunnableFuture</code>（即 <code>FutureTask</code>），从而支持返回值和异常捕获</li>
+<li><strong>线程池关闭</strong>：使用 <code>shutdown()</code> 优雅关闭（不再接收新任务，等待已提交任务执行完毕），或 <code>shutdownNow()</code> 立即停止（尝试中断正在执行的任务，返回未执行的任务列表）</li>
 </ol>
 
       
