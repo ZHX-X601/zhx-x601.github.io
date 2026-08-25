@@ -199,7 +199,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="实战总结：登录认证（登录功能-登录校验）"><a href="#实战总结：登录认证（登录功能-登录校验）" class="headerlink" title="实战总结：登录认证（登录功能 + 登录校验）"></a>实战总结：登录认证（登录功能 + 登录校验）</h1><blockquote>
+      <div class="post-body" itemprop="articleBody"><h1 id="实战总结：登录认证（登录功能-登录校验）"><a href="#实战总结：登录认证（登录功能-登录校验）" class="headerlink" title="实战总结：登录认证（登录功能 + 登录校验）"></a>实战总结：登录认证（登录功能 + 登录校验）</h1><blockquote>
 <p>本文是对《12-后端Web实战(登录认证)》的总结，记录”登录功能徒有其表 → 登录校验闭环”的完整链路。<br>项目地址：<code>project/tlias-web-management</code>（SpringBoot + MyBatis + JWT + Filter&#x2F;Interceptor）<br>对应讲义：<code>讲义/12-后端Web实战(登录认证).md</code></p>
 </blockquote>
 <hr>
@@ -671,8 +671,9 @@
 <h2 id="十、一图回顾整条链路"><a href="#十、一图回顾整条链路" class="headerlink" title="十、一图回顾整条链路"></a>十、一图回顾整条链路</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">┌───────── 登录 ─────────┐</span><br><span class="line">│ POST /login            │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ LoginController        │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ EmpServiceImpl.login   │</span><br><span class="line">│   ├─ EmpMapper 查库    │</span><br><span class="line">│   └─ JwtUtils 生成 token│</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ 返回 LoginInfo&#123;token&#125;  │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ 前端存 localStorage    │</span><br><span class="line">└────────────────────────┘</span><br><span class="line"></span><br><span class="line">┌──────── 后续请求 ──────┐</span><br><span class="line">│ 请求头带 token         │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ TokenInterceptor       │</span><br><span class="line">│ .preHandle             │</span><br><span class="line">│   ├─ /login → 放行     │</span><br><span class="line">│   ├─ 无 token → 401    │</span><br><span class="line">│   ├─ 解析失败 → 401    │</span><br><span class="line">│   └─ 合法 → return true│</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ Controller → Service   │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ 返回结果               │</span><br><span class="line">└────────────────────────┘</span><br></pre></td></tr></table></figure>
 
 
-    </div>
+      </div>
 
+    
     
     
     

@@ -199,7 +199,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="实战总结：AOP-面向切面编程"><a href="#实战总结：AOP-面向切面编程" class="headerlink" title="实战总结：AOP 面向切面编程"></a>实战总结：AOP 面向切面编程</h1><blockquote>
+      <div class="post-body" itemprop="articleBody"><h1 id="实战总结：AOP-面向切面编程"><a href="#实战总结：AOP-面向切面编程" class="headerlink" title="实战总结：AOP 面向切面编程"></a>实战总结：AOP 面向切面编程</h1><blockquote>
 <p>本文是对《13-后端Web进阶(AOP)》的总结，记录 AOP 的核心概念、通知类型、切入点表达式以及在项目中的实战应用（操作日志记录）。<br>项目地址：<code>project/tlias-web-management</code>（SpringBoot + AOP）<br>对应讲义：<code>讲义/13-后端Web进阶(AOP).md</code></p>
 </blockquote>
 <hr>
@@ -464,8 +464,9 @@
 <h2 id="七、一图回顾-AOP-流程"><a href="#七、一图回顾-AOP-流程" class="headerlink" title="七、一图回顾 AOP 流程"></a>七、一图回顾 AOP 流程</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">┌──────────────── AOP 执行流程 ────────────────┐</span><br><span class="line">│                                                │</span><br><span class="line">│  请求到达 Controller 方法                     │</span><br><span class="line">│         ↓                                      │</span><br><span class="line">│  AOP 切面拦截（匹配 @LogOperation 注解）      │</span><br><span class="line">│         ↓                                      │</span><br><span class="line">│  @Around 环绕通知开始                         │</span><br><span class="line">│  ├── 记录开始时间                             │</span><br><span class="line">│  ├── 获取当前用户 ID（从 ThreadLocal）         │</span><br><span class="line">│  ├── 执行 pjp.proceed() → 原始业务方法        │</span><br><span class="line">│  ├── 获取方法参数、返回值                     │</span><br><span class="line">│  ├── 计算耗时                                 │</span><br><span class="line">│  ├── 构建 OperateLog 对象                     │</span><br><span class="line">│  └── 调用 OperateLogMapper 保存日志           │</span><br><span class="line">│         ↓                                      │</span><br><span class="line">│  返回原始方法结果给前端                       │</span><br><span class="line">│                                                │</span><br><span class="line">└────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
 
 
-    </div>
+      </div>
 
+    
     
     
     
