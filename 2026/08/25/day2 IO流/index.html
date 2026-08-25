@@ -2,10 +2,9 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
-
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -14,13 +13,14 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.blog-x.cc.cd","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.blog-x.cc.cd","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
-
-    <meta name="description" content="day2计划 学完IO流  笔记1.缓冲流字节缓冲流 缓冲流默认缓冲区大小为8192字节（8KB） 使用方式：在基本流外包装一层缓冲流 关闭缓冲流时，底层基本流也会自动关闭 性能对比 缓冲流逐字节读取复制：35ms（内部缓冲区已优化磁盘I&#x2F;O） 缓冲流配合 byte[] 数组读取复制：4ms   缓冲流与缓冲数组同时使用是不必要的 缓冲流内部已有 8KB 缓冲区，逐字节读取时已通过内部缓">
+  <meta name="description" content="day2计划 学完IO流  笔记1.缓冲流字节缓冲流 缓冲流默认缓冲区大小为8192字节（8KB） 使用方式：在基本流外包装一层缓冲流 关闭缓冲流时，底层基本流也会自动关闭 性能对比 缓冲流逐字节读取复制：35ms（内部缓冲区已优化磁盘I&#x2F;O） 缓冲流配合 byte[] 数组读取复制：4ms   缓冲流与缓冲数组同时使用是不必要的 缓冲流内部已有 8KB 缓冲区，逐字节读取时已通过内部缓">
 <meta property="og:type" content="article">
 <meta property="og:title" content="day2 IO流">
 <meta property="og:url" content="https://www.blog-x.cc.cd/2026/08/25/day2%20IO%E6%B5%81/index.html">
@@ -32,166 +32,152 @@
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-
 <link rel="canonical" href="https://www.blog-x.cc.cd/2026/08/25/day2%20IO%E6%B5%81/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.blog-x.cc.cd/2026/08/25/day2%20IO%E6%B5%81/","path":"2026/08/25/day2 IO流/","title":"day2 IO流"}</script>
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
 
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>day2 IO流 | Hexo</title>
+  <title>day2 IO流 | Hexo</title>
   
 
-
-
-
-
-
-
-
-  
-<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
-
-  
-
-
-
-
-
-
-  
 
 
 
 
 
   <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-search popup-trigger" aria-label="搜索" role="button">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">Hexo</p>
-      <i class="logo-line"></i>
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
     </a>
   </div>
 
-  <div class="site-nav-toggle" aria-label="切换导航栏" role="button">
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
 
 
 
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
 
 
 
-</header>
-        
-  
-  <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#day2"><span class="nav-number">1.</span> <span class="nav-text">day2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E5%88%92"><span class="nav-number">1.1.</span> <span class="nav-text">计划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%94%E8%AE%B0"><span class="nav-number">1.2.</span> <span class="nav-text">笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BC%93%E5%86%B2%E6%B5%81"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.缓冲流</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%BC%93%E5%86%B2%E6%B5%81"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">字节缓冲流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%BC%93%E5%86%B2%E6%B5%81"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">字符缓冲流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BD%AC%E6%8D%A2%E6%B5%81"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.转换流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%BA%8F%E5%88%97%E5%8C%96%E6%B5%81%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%B5%81"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.序列化流与反序列化流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%8E%8B%E7%BC%A9%E6%B5%81%E4%B8%8E%E8%A7%A3%E5%8E%8B%E7%BC%A9%E6%B5%81"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.压缩流与解压缩流</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ZipEntry"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">ZipEntry</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B%E7%BC%A9"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">解压缩</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">压缩</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%89%93%E5%8D%B0%E6%B5%81"><span class="nav-number">1.2.5.</span> <span class="nav-text">5.打印流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-URL%E7%BD%91%E7%BB%9C%E8%AF%BB%E5%8F%96"><span class="nav-number">1.2.6.</span> <span class="nav-text">6.URL网络读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%B7%A5%E5%85%B7%E5%8C%85"><span class="nav-number">1.2.7.</span> <span class="nav-text">7.工具包</span></a></li></ol></li></ol></li></ol></div>
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
-  <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">25</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-  </nav>
-</div>
-
-        </div>
-      </div>
-    </div>
+    </header>
 
     
-  </aside>
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
-    </div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
 
-    <div class="main-inner post posts-expand">
+          <div class="content post posts-expand">
+            
 
-
+    
   
-
-
-<div class="post-block">
   
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day2%20IO%E6%B5%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="day2 IO流 | Hexo">
-      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           day2 IO流
         </h1>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
 
-      <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
-    </span>
+              <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
+            </span>
 
-  
-</div>
+          
 
         </div>
       </header>
@@ -199,7 +185,10 @@
     
     
     
-      <div class="post-body" itemprop="articleBody"><h1 id="day2"><a href="#day2" class="headerlink" title="day2"></a>day2</h1><h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><ol>
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="day2"><a href="#day2" class="headerlink" title="day2"></a>day2</h1><h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><ol>
 <li>学完IO流</li>
 </ol>
 <h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="1-缓冲流"><a href="#1-缓冲流" class="headerlink" title="1.缓冲流"></a>1.缓冲流</h3><h5 id="字节缓冲流"><a href="#字节缓冲流" class="headerlink" title="字节缓冲流"></a>字节缓冲流</h5><ol>
@@ -288,72 +277,186 @@
 <li>两个都是第三方工具包，提供了很多包装好的工具，导入即可直接使用。</li>
 </ol>
 
-      </div>
+    </div>
 
     
     
     
-    
 
-    <footer class="post-footer">
+      <footer class="post-footer">
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/" rel="prev" title="day20 Redis入门与店铺状态设置">
-                  <i class="fa fa-angle-left"></i> day20 Redis入门与店铺状态设置
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="next" title="day10 Java操作数据库">
-                  day10 Java操作数据库 <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/" rel="prev" title="day20 Redis入门与店铺状态设置">
+      <i class="fa fa-chevron-left"></i> day20 Redis入门与店铺状态设置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="next" title="day10 Java操作数据库">
+      day10 Java操作数据库 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#day2"><span class="nav-number">1.</span> <span class="nav-text">day2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E5%88%92"><span class="nav-number">1.1.</span> <span class="nav-text">计划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%94%E8%AE%B0"><span class="nav-number">1.2.</span> <span class="nav-text">笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BC%93%E5%86%B2%E6%B5%81"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.缓冲流</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%BC%93%E5%86%B2%E6%B5%81"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">字节缓冲流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%BC%93%E5%86%B2%E6%B5%81"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">字符缓冲流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BD%AC%E6%8D%A2%E6%B5%81"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.转换流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%BA%8F%E5%88%97%E5%8C%96%E6%B5%81%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%B5%81"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.序列化流与反序列化流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%8E%8B%E7%BC%A9%E6%B5%81%E4%B8%8E%E8%A7%A3%E5%8E%8B%E7%BC%A9%E6%B5%81"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.压缩流与解压缩流</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ZipEntry"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">ZipEntry</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B%E7%BC%A9"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">解压缩</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">压缩</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%89%93%E5%8D%B0%E6%B5%81"><span class="nav-number">1.2.5.</span> <span class="nav-text">5.打印流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-URL%E7%BD%91%E7%BB%9C%E8%AF%BB%E5%8F%96"><span class="nav-number">1.2.6.</span> <span class="nav-text">6.URL网络读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%B7%A5%E5%85%B7%E5%8C%85"><span class="nav-number">1.2.7.</span> <span class="nav-text">7.工具包</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
 </div>
 
 
 
-
-
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-  <div class="copyright">
-    &copy; 
-    <span itemprop="copyrightYear">2026</span>
-    <span class="with-love">
-      <i class="fa fa-heart"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">John Doe</span>
-  </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
+      </div>
 
     </div>
-  </footer>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
 
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
 
 </body>
 </html>

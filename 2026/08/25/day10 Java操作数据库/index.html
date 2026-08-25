@@ -2,10 +2,9 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
-
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -14,13 +13,14 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.blog-x.cc.cd","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.blog-x.cc.cd","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
-
-    <meta name="description" content="计划 JDBC基础入门 JDBC查询与增删改 SQL注入与预编译SQL MyBatis快速入门 MyBatis注解写法与XML映射 SpringBoot配置文件与数据库连接池  笔记1.JDBC概述JDBC是什么 JDBC：Java DataBase Connectivity，使用Java语言操作关系型数据库的一套API 本质：Sun公司定义的一套接口规范，数据库厂商提供驱动jar包实现接口 执行">
+  <meta name="description" content="计划 JDBC基础入门 JDBC查询与增删改 SQL注入与预编译SQL MyBatis快速入门 MyBatis注解写法与XML映射 SpringBoot配置文件与数据库连接池  笔记1.JDBC概述JDBC是什么 JDBC：Java DataBase Connectivity，使用Java语言操作关系型数据库的一套API 本质：Sun公司定义的一套接口规范，数据库厂商提供驱动jar包实现接口 执行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="day10 Java操作数据库">
 <meta property="og:url" content="https://www.blog-x.cc.cd/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
@@ -32,166 +32,152 @@
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-
 <link rel="canonical" href="https://www.blog-x.cc.cd/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.blog-x.cc.cd/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/","path":"2026/08/25/day10 Java操作数据库/","title":"day10 Java操作数据库"}</script>
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
 
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>day10 Java操作数据库 | Hexo</title>
+  <title>day10 Java操作数据库 | Hexo</title>
   
 
-
-
-
-
-
-
-
-  
-<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
-
-  
-
-
-
-
-
-
-  
 
 
 
 
 
   <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-search popup-trigger" aria-label="搜索" role="button">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">Hexo</p>
-      <i class="logo-line"></i>
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
     </a>
   </div>
 
-  <div class="site-nav-toggle" aria-label="切换导航栏" role="button">
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
 
 
 
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
 
 
 
-</header>
-        
-  
-  <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E5%88%92"><span class="nav-number">1.</span> <span class="nav-text">计划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%94%E8%AE%B0"><span class="nav-number">2.</span> <span class="nav-text">笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-JDBC%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">1.JDBC概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#JDBC%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.1.1.</span> <span class="nav-text">JDBC是什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF"><span class="nav-number">2.1.2.</span> <span class="nav-text">Java操作数据库技术</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-JDBC%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">2.2.</span> <span class="nav-text">2.JDBC查询数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E9%9C%80%E6%B1%82"><span class="nav-number">2.2.1.</span> <span class="nav-text">查询需求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text">准备数据表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JDBC%E6%9F%A5%E8%AF%A2%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.2.3.</span> <span class="nav-text">JDBC查询步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ResultSet%E7%BB%93%E6%9E%9C%E9%9B%86"><span class="nav-number">2.2.4.</span> <span class="nav-text">ResultSet结果集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%A2%84%E7%BC%96%E8%AF%91SQL%E4%B8%8ESQL%E6%B3%A8%E5%85%A5"><span class="nav-number">2.3.</span> <span class="nav-text">3.预编译SQL与SQL注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%99%E6%80%81SQL%E4%B8%8E%E9%A2%84%E7%BC%96%E8%AF%91SQL"><span class="nav-number">2.3.1.</span> <span class="nav-text">静态SQL与预编译SQL</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PreparedStatement"><span class="nav-number">2.3.2.</span> <span class="nav-text">PreparedStatement</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SQL%E6%B3%A8%E5%85%A5"><span class="nav-number">2.3.3.</span> <span class="nav-text">SQL注入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-JDBC%E5%A2%9E%E5%88%A0%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="nav-number">2.4.</span> <span class="nav-text">4.JDBC增删改数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%A7%E8%A1%8CDML%E8%AF%AD%E5%8F%A5"><span class="nav-number">2.4.1.</span> <span class="nav-text">执行DML语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#executeQuery%E4%B8%8EexecuteUpdate"><span class="nav-number">2.4.2.</span> <span class="nav-text">executeQuery与executeUpdate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-MyBatis%E6%A6%82%E8%BF%B0"><span class="nav-number">2.5.</span> <span class="nav-text">5.MyBatis概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#MyBatis%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.5.1.</span> <span class="nav-text">MyBatis是什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JDBC%E7%9A%84%E4%B8%8D%E8%B6%B3"><span class="nav-number">2.5.2.</span> <span class="nav-text">JDBC的不足</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MyBatis%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="nav-number">2.5.3.</span> <span class="nav-text">MyBatis的改进</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-MyBatis%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">2.6.</span> <span class="nav-text">6.MyBatis快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.6.1.</span> <span class="nav-text">使用步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%85%B3%E7%B3%BB"><span class="nav-number">2.6.2.</span> <span class="nav-text">核心关系</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Mapper%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E6%A8%A1%E6%9D%BF"><span class="nav-number">2.6.3.</span> <span class="nav-text">Mapper接口基本模板</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-MyBatis%E6%B3%A8%E8%A7%A3%E5%86%99%E6%B3%95"><span class="nav-number">2.7.</span> <span class="nav-text">7.MyBatis注解写法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.7.1.</span> <span class="nav-text">适用场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.7.2.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">2.7.3.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E"><span class="nav-number">2.7.4.</span> <span class="nav-text">新增</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9"><span class="nav-number">2.7.5.</span> <span class="nav-text">修改</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-MyBatis-XML%E6%98%A0%E5%B0%84%E5%86%99%E6%B3%95"><span class="nav-number">2.8.</span> <span class="nav-text">8.MyBatis XML映射写法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF-1"><span class="nav-number">2.8.1.</span> <span class="nav-text">适用场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#XML%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83"><span class="nav-number">2.8.2.</span> <span class="nav-text">XML开发规范</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#XML%E5%9F%BA%E6%9C%AC%E6%A8%A1%E6%9D%BF"><span class="nav-number">2.8.3.</span> <span class="nav-text">XML基本模板</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%86%99%E6%B3%95"><span class="nav-number">2.8.4.</span> <span class="nav-text">查询写法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A2%9E%E5%88%A0%E6%94%B9%E5%86%99%E6%B3%95"><span class="nav-number">2.8.5.</span> <span class="nav-text">增删改写法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E6%B3%A8%E8%A7%A3%E5%86%99%E6%B3%95%E4%B8%8EXML%E5%86%99%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="nav-number">2.9.</span> <span class="nav-text">9.注解写法与XML写法对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-MyBatis%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E7%BB%86%E8%8A%82"><span class="nav-number">2.10.</span> <span class="nav-text">10.MyBatis参数传递细节</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8E"><span class="nav-number">2.10.1.</span> <span class="nav-text">#{...}与${...}</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8E%A8%E8%8D%90"><span class="nav-number">2.10.2.</span> <span class="nav-text">为什么推荐#{...}</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E6%9D%A5%E6%BA%90"><span class="nav-number">2.10.3.</span> <span class="nav-text">参数来源</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="nav-number">2.11.</span> <span class="nav-text">11.数据库连接池</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%BD%9C%E7%94%A8"><span class="nav-number">2.11.1.</span> <span class="nav-text">连接池作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%BC%98%E7%82%B9"><span class="nav-number">2.11.2.</span> <span class="nav-text">连接池优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="nav-number">2.11.3.</span> <span class="nav-text">常见连接池</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-SpringBoot%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.12.</span> <span class="nav-text">12.SpringBoot配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#properties%E4%B8%8Eyml"><span class="nav-number">2.12.1.</span> <span class="nav-text">properties与yml</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#yml%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99"><span class="nav-number">2.12.2.</span> <span class="nav-text">yml语法规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE%E6%A8%A1%E6%9D%BF"><span class="nav-number">2.12.3.</span> <span class="nav-text">数据源配置模板</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MyBatis%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE"><span class="nav-number">2.12.4.</span> <span class="nav-text">MyBatis日志配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-%E5%A4%8D%E4%B9%A0%E6%97%B6%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%E7%BB%86%E8%8A%82"><span class="nav-number">2.13.</span> <span class="nav-text">13.复习时容易忽略的细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93"><span class="nav-number">2.14.</span> <span class="nav-text">14.核心知识点总结</span></a></li></ol></li></ol></div>
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
-  <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">25</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-  </nav>
-</div>
-
-        </div>
-      </div>
-    </div>
+    </header>
 
     
-  </aside>
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
-    </div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
 
-    <div class="main-inner post posts-expand">
+          <div class="content post posts-expand">
+            
 
-
+    
   
-
-
-<div class="post-block">
   
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="day10 Java操作数据库 | Hexo">
-      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           day10 Java操作数据库
         </h1>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
 
-      <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
-    </span>
+              <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
+            </span>
 
-  
-</div>
+          
 
         </div>
       </header>
@@ -199,7 +185,10 @@
     
     
     
-      <div class="post-body" itemprop="articleBody"><h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><ol>
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><ol>
 <li>JDBC基础入门</li>
 <li>JDBC查询与增删改</li>
 <li>SQL注入与预编译SQL</li>
@@ -674,72 +663,186 @@
 </tr>
 </tbody></table>
 
-      </div>
+    </div>
 
     
     
     
-    
 
-    <footer class="post-footer">
+      <footer class="post-footer">
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2026/08/25/day2%20IO%E6%B5%81/" rel="prev" title="day2 IO流">
-                  <i class="fa fa-angle-left"></i> day2 IO流
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/" rel="next" title="day11 部门管理实战">
-                  day11 部门管理实战 <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/25/day2%20IO%E6%B5%81/" rel="prev" title="day2 IO流">
+      <i class="fa fa-chevron-left"></i> day2 IO流
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/" rel="next" title="day11 部门管理实战">
+      day11 部门管理实战 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E5%88%92"><span class="nav-number">1.</span> <span class="nav-text">计划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%94%E8%AE%B0"><span class="nav-number">2.</span> <span class="nav-text">笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-JDBC%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">1.JDBC概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#JDBC%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.1.1.</span> <span class="nav-text">JDBC是什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF"><span class="nav-number">2.1.2.</span> <span class="nav-text">Java操作数据库技术</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-JDBC%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">2.2.</span> <span class="nav-text">2.JDBC查询数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E9%9C%80%E6%B1%82"><span class="nav-number">2.2.1.</span> <span class="nav-text">查询需求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text">准备数据表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JDBC%E6%9F%A5%E8%AF%A2%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.2.3.</span> <span class="nav-text">JDBC查询步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ResultSet%E7%BB%93%E6%9E%9C%E9%9B%86"><span class="nav-number">2.2.4.</span> <span class="nav-text">ResultSet结果集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%A2%84%E7%BC%96%E8%AF%91SQL%E4%B8%8ESQL%E6%B3%A8%E5%85%A5"><span class="nav-number">2.3.</span> <span class="nav-text">3.预编译SQL与SQL注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%99%E6%80%81SQL%E4%B8%8E%E9%A2%84%E7%BC%96%E8%AF%91SQL"><span class="nav-number">2.3.1.</span> <span class="nav-text">静态SQL与预编译SQL</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PreparedStatement"><span class="nav-number">2.3.2.</span> <span class="nav-text">PreparedStatement</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SQL%E6%B3%A8%E5%85%A5"><span class="nav-number">2.3.3.</span> <span class="nav-text">SQL注入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-JDBC%E5%A2%9E%E5%88%A0%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="nav-number">2.4.</span> <span class="nav-text">4.JDBC增删改数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%A7%E8%A1%8CDML%E8%AF%AD%E5%8F%A5"><span class="nav-number">2.4.1.</span> <span class="nav-text">执行DML语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#executeQuery%E4%B8%8EexecuteUpdate"><span class="nav-number">2.4.2.</span> <span class="nav-text">executeQuery与executeUpdate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-MyBatis%E6%A6%82%E8%BF%B0"><span class="nav-number">2.5.</span> <span class="nav-text">5.MyBatis概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#MyBatis%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.5.1.</span> <span class="nav-text">MyBatis是什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JDBC%E7%9A%84%E4%B8%8D%E8%B6%B3"><span class="nav-number">2.5.2.</span> <span class="nav-text">JDBC的不足</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MyBatis%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="nav-number">2.5.3.</span> <span class="nav-text">MyBatis的改进</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-MyBatis%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">2.6.</span> <span class="nav-text">6.MyBatis快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.6.1.</span> <span class="nav-text">使用步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%85%B3%E7%B3%BB"><span class="nav-number">2.6.2.</span> <span class="nav-text">核心关系</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Mapper%E6%8E%A5%E5%8F%A3%E5%9F%BA%E6%9C%AC%E6%A8%A1%E6%9D%BF"><span class="nav-number">2.6.3.</span> <span class="nav-text">Mapper接口基本模板</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-MyBatis%E6%B3%A8%E8%A7%A3%E5%86%99%E6%B3%95"><span class="nav-number">2.7.</span> <span class="nav-text">7.MyBatis注解写法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.7.1.</span> <span class="nav-text">适用场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.7.2.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">2.7.3.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E"><span class="nav-number">2.7.4.</span> <span class="nav-text">新增</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9"><span class="nav-number">2.7.5.</span> <span class="nav-text">修改</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-MyBatis-XML%E6%98%A0%E5%B0%84%E5%86%99%E6%B3%95"><span class="nav-number">2.8.</span> <span class="nav-text">8.MyBatis XML映射写法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF-1"><span class="nav-number">2.8.1.</span> <span class="nav-text">适用场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#XML%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83"><span class="nav-number">2.8.2.</span> <span class="nav-text">XML开发规范</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#XML%E5%9F%BA%E6%9C%AC%E6%A8%A1%E6%9D%BF"><span class="nav-number">2.8.3.</span> <span class="nav-text">XML基本模板</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%86%99%E6%B3%95"><span class="nav-number">2.8.4.</span> <span class="nav-text">查询写法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A2%9E%E5%88%A0%E6%94%B9%E5%86%99%E6%B3%95"><span class="nav-number">2.8.5.</span> <span class="nav-text">增删改写法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E6%B3%A8%E8%A7%A3%E5%86%99%E6%B3%95%E4%B8%8EXML%E5%86%99%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="nav-number">2.9.</span> <span class="nav-text">9.注解写法与XML写法对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-MyBatis%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E7%BB%86%E8%8A%82"><span class="nav-number">2.10.</span> <span class="nav-text">10.MyBatis参数传递细节</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8E"><span class="nav-number">2.10.1.</span> <span class="nav-text">#{...}与${...}</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8E%A8%E8%8D%90"><span class="nav-number">2.10.2.</span> <span class="nav-text">为什么推荐#{...}</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E6%9D%A5%E6%BA%90"><span class="nav-number">2.10.3.</span> <span class="nav-text">参数来源</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="nav-number">2.11.</span> <span class="nav-text">11.数据库连接池</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%BD%9C%E7%94%A8"><span class="nav-number">2.11.1.</span> <span class="nav-text">连接池作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%BC%98%E7%82%B9"><span class="nav-number">2.11.2.</span> <span class="nav-text">连接池优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="nav-number">2.11.3.</span> <span class="nav-text">常见连接池</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-SpringBoot%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.12.</span> <span class="nav-text">12.SpringBoot配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#properties%E4%B8%8Eyml"><span class="nav-number">2.12.1.</span> <span class="nav-text">properties与yml</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#yml%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99"><span class="nav-number">2.12.2.</span> <span class="nav-text">yml语法规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE%E6%A8%A1%E6%9D%BF"><span class="nav-number">2.12.3.</span> <span class="nav-text">数据源配置模板</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MyBatis%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE"><span class="nav-number">2.12.4.</span> <span class="nav-text">MyBatis日志配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-%E5%A4%8D%E4%B9%A0%E6%97%B6%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%E7%BB%86%E8%8A%82"><span class="nav-number">2.13.</span> <span class="nav-text">13.复习时容易忽略的细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93"><span class="nav-number">2.14.</span> <span class="nav-text">14.核心知识点总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
 </div>
 
 
 
-
-
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-  <div class="copyright">
-    &copy; 
-    <span itemprop="copyrightYear">2026</span>
-    <span class="with-love">
-      <i class="fa fa-heart"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">John Doe</span>
-  </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
+      </div>
 
     </div>
-  </footer>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
 
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
 
 </body>
 </html>

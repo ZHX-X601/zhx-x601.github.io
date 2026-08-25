@@ -2,10 +2,9 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
-
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -14,13 +13,14 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.blog-x.cc.cd","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.blog-x.cc.cd","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
-
-    <meta name="description" content="实战总结：登录认证（登录功能 + 登录校验） 本文是对《12-后端Web实战(登录认证)》的总结，记录”登录功能徒有其表 → 登录校验闭环”的完整链路。项目地址：project&#x2F;tlias-web-management（SpringBoot + MyBatis + JWT + Filter&#x2F;Interceptor）对应讲义：讲义&#x2F;12-后端Web实战(登录认证).md   一、本节要解决">
+  <meta name="description" content="实战总结：登录认证（登录功能 + 登录校验） 本文是对《12-后端Web实战(登录认证)》的总结，记录”登录功能徒有其表 → 登录校验闭环”的完整链路。项目地址：project&#x2F;tlias-web-management（SpringBoot + MyBatis + JWT + Filter&#x2F;Interceptor）对应讲义：讲义&#x2F;12-后端Web实战(登录认证).md   一、本节要解决">
 <meta property="og:type" content="article">
 <meta property="og:title" content="day15-2 登录认证">
 <meta property="og:url" content="https://www.blog-x.cc.cd/2026/08/25/day15-2%20%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/index.html">
@@ -32,166 +32,152 @@
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-
 <link rel="canonical" href="https://www.blog-x.cc.cd/2026/08/25/day15-2%20%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.blog-x.cc.cd/2026/08/25/day15-2%20%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/","path":"2026/08/25/day15-2 登录认证/","title":"day15-2 登录认证"}</script>
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
 
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>day15-2 登录认证 | Hexo</title>
+  <title>day15-2 登录认证 | Hexo</title>
   
 
-
-
-
-
-
-
-
-  
-<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
-
-  
-
-
-
-
-
-
-  
 
 
 
 
 
   <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-search popup-trigger" aria-label="搜索" role="button">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">Hexo</p>
-      <i class="logo-line"></i>
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
     </a>
   </div>
 
-  <div class="site-nav-toggle" aria-label="切换导航栏" role="button">
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
 
 
 
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
 
 
 
-</header>
-        
-  
-  <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93%EF%BC%9A%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81%EF%BC%88%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD-%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">实战总结：登录认证（登录功能 + 登录校验）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%9C%AC%E8%8A%82%E8%A6%81%E8%A7%A3%E5%86%B3%E7%9A%84%E6%A0%B8%E5%BF%83%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">一、本节要解决的核心问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF%EF%BC%9A%E4%B8%89%E7%A7%8D%E6%96%B9%E6%A1%88%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.</span> <span class="nav-text">二、会话技术：三种方案对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5%E6%BE%84%E6%B8%85"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 概念澄清</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%89%E7%A7%8D%E6%96%B9%E6%A1%88%E6%A8%AA%E5%90%91%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 三种方案横向对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%B7%A8%E5%9F%9F%E9%80%9F%E8%AE%B0"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 跨域速记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E4%B8%BA%E4%BD%95-Session-%E5%A4%B1%E6%95%88"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. 集群环境为何 Session 失效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81JWT-%E4%BB%A4%E7%89%8C"><span class="nav-number">1.3.</span> <span class="nav-text">三、JWT 令牌</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%89%E6%AE%B5%E7%BB%84%E6%88%90%EF%BC%88%E7%94%A8-%E5%88%86%E9%9A%94%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 三段组成（用 . 分隔）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%94%9F%E6%88%90%E4%B8%8E%E6%A0%A1%E9%AA%8C%EF%BC%88%E8%AE%B2%E4%B9%89%E7%A4%BA%E4%BE%8B%EF%BC%89"><span class="nav-number">1.3.3.</span> <span class="nav-text">3. 生成与校验（讲义示例）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%99%BB%E5%BD%95%E6%97%B6%E4%B8%8B%E5%8F%91%E4%BB%A4%E7%89%8C%EF%BC%88%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">四、登录时下发令牌（项目实现）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. 整体流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%85%B3%E9%94%AE%E7%B1%BB%E4%B8%8E%E4%BB%A3%E7%A0%81"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. 关键类与代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E7%BB%9F%E4%B8%80%E6%8B%A6%E6%88%AA%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%9AFilter-%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-number">1.5.</span> <span class="nav-text">五、统一拦截方案一：Filter 过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%98%AF%E4%BB%80%E4%B9%88-1"><span class="nav-number">1.5.1.</span> <span class="nav-text">1. 是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%85%A5%E9%97%A8%E4%B8%89%E6%AD%A5"><span class="nav-number">1.5.2.</span> <span class="nav-text">2. 入门三步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%EF%BC%88%E6%94%BE%E8%A1%8C%E5%89%8D-%E6%94%BE%E8%A1%8C%E5%90%8E%EF%BC%89"><span class="nav-number">1.5.3.</span> <span class="nav-text">3. 执行流程（放行前 &#x2F; 放行后）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%8B%A6%E6%88%AA%E8%B7%AF%E5%BE%84%E9%85%8D%E7%BD%AE"><span class="nav-number">1.5.4.</span> <span class="nav-text">4. 拦截路径配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%BF%87%E6%BB%A4%E5%99%A8%E9%93%BE"><span class="nav-number">1.5.5.</span> <span class="nav-text">5. 过滤器链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%E5%85%AD%E6%AD%A5%EF%BC%88%E9%A1%B9%E7%9B%AE%E7%B1%BB%EF%BC%9ATokenFilter%EF%BC%8C%E5%85%A8%E9%99%90%E5%AE%9A%E7%B1%BB%E5%90%8D-com-zhang-filter-TokenFilter%EF%BC%89"><span class="nav-number">1.5.6.</span> <span class="nav-text">6. 登录校验六步（项目类：TokenFilter，全限定类名 com.zhang.filter.TokenFilter）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E7%BB%9F%E4%B8%80%E6%8B%A6%E6%88%AA%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9AInterceptor-%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="nav-number">1.6.</span> <span class="nav-text">六、统一拦截方案二：Interceptor 拦截器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%98%AF%E4%BB%80%E4%B9%88-2"><span class="nav-number">1.6.1.</span> <span class="nav-text">1. 是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%85%A5%E9%97%A8%E4%B8%A4%E6%AD%A5"><span class="nav-number">1.6.2.</span> <span class="nav-text">2. 入门两步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%B3%A8%E5%86%8C%E9%85%8D%E7%BD%AE%EF%BC%88%E9%A1%B9%E7%9B%AE%E7%B1%BB%EF%BC%9AWebConfig%EF%BC%8C%E5%85%A8%E9%99%90%E5%AE%9A%E7%B1%BB%E5%90%8D-com-zhang-config-WebConfig%EF%BC%89"><span class="nav-number">1.6.3.</span> <span class="nav-text">3. 注册配置（项目类：WebConfig，全限定类名 com.zhang.config.WebConfig）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%8B%A6%E6%88%AA%E8%B7%AF%E5%BE%84%E9%85%8D%E7%BD%AE-1"><span class="nav-number">1.6.4.</span> <span class="nav-text">4. 拦截路径配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C-Interceptor%EF%BC%88%E9%A1%B9%E7%9B%AE%E7%B1%BB%EF%BC%9ATokenInterceptor%EF%BC%8C%E5%85%A8%E9%99%90%E5%AE%9A%E7%B1%BB%E5%90%8D-com-zhang-interceptor-TokenInterceptor%EF%BC%89"><span class="nav-number">1.6.5.</span> <span class="nav-text">5. 登录校验 Interceptor（项目类：TokenInterceptor，全限定类名 com.zhang.interceptor.TokenInterceptor）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81Filter-vs-Interceptor-%E5%AF%B9%E6%AF%94%EF%BC%88%E9%AB%98%E9%A2%91%E8%80%83%E7%82%B9%EF%BC%89"><span class="nav-number">1.7.</span> <span class="nav-text">七、Filter vs Interceptor 对比（高频考点）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E9%A1%B9%E7%9B%AE%E7%8E%B0%E7%8A%B6%E9%80%9F%E6%9F%A5%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%81%EF%BC%89"><span class="nav-number">1.8.</span> <span class="nav-text">八、项目现状速查（重点！）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%9E%E9%99%85%E7%94%9F%E6%95%88%E7%9A%84%E6%A0%A1%E9%AA%8C%E9%93%BE%E8%B7%AF"><span class="nav-number">1.8.1.</span> <span class="nav-text">1. 实际生效的校验链路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Filter-%E6%98%AF%E2%80%9D%E4%BF%9D%E7%95%99%E7%A4%BA%E4%BE%8B%E2%80%9D%EF%BC%8C%E6%9C%AA%E5%90%AF%E7%94%A8"><span class="nav-number">1.8.2.</span> <span class="nav-text">2. Filter 是”保留示例”，未启用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%A1%B9%E7%9B%AE%E4%B8%8E%E8%AE%B2%E4%B9%89%E7%9A%84%E5%91%BD%E5%90%8D%E5%B7%AE%E5%BC%82"><span class="nav-number">1.8.3.</span> <span class="nav-text">3. 项目与讲义的命名差异</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%A1%B9%E7%9B%AE%E6%B6%89%E5%8F%8A%E6%96%87%E4%BB%B6%E6%B8%85%E5%8D%95"><span class="nav-number">1.8.4.</span> <span class="nav-text">4. 项目涉及文件清单</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81%E6%98%93%E9%94%99%E7%82%B9-%E5%A4%8D%E4%B9%A0%E6%8F%90%E9%86%92"><span class="nav-number">1.9.</span> <span class="nav-text">九、易错点 &amp; 复习提醒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81%E4%B8%80%E5%9B%BE%E5%9B%9E%E9%A1%BE%E6%95%B4%E6%9D%A1%E9%93%BE%E8%B7%AF"><span class="nav-number">1.10.</span> <span class="nav-text">十、一图回顾整条链路</span></a></li></ol></li></ol></div>
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
-  <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">25</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-  </nav>
-</div>
-
-        </div>
-      </div>
-    </div>
+    </header>
 
     
-  </aside>
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
-    </div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
 
-    <div class="main-inner post posts-expand">
+          <div class="content post posts-expand">
+            
 
-
+    
   
-
-
-<div class="post-block">
   
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/25/day15-2%20%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="day15-2 登录认证 | Hexo">
-      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           day15-2 登录认证
         </h1>
 
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
 
-      <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
-    </span>
+              <time title="创建时间：2026-08-25 11:29:15 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2026-08-25T11:29:15+08:00">2026-08-25</time>
+            </span>
 
-  
-</div>
+          
 
         </div>
       </header>
@@ -199,7 +185,10 @@
     
     
     
-      <div class="post-body" itemprop="articleBody"><h1 id="实战总结：登录认证（登录功能-登录校验）"><a href="#实战总结：登录认证（登录功能-登录校验）" class="headerlink" title="实战总结：登录认证（登录功能 + 登录校验）"></a>实战总结：登录认证（登录功能 + 登录校验）</h1><blockquote>
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="实战总结：登录认证（登录功能-登录校验）"><a href="#实战总结：登录认证（登录功能-登录校验）" class="headerlink" title="实战总结：登录认证（登录功能 + 登录校验）"></a>实战总结：登录认证（登录功能 + 登录校验）</h1><blockquote>
 <p>本文是对《12-后端Web实战(登录认证)》的总结，记录”登录功能徒有其表 → 登录校验闭环”的完整链路。<br>项目地址：<code>project/tlias-web-management</code>（SpringBoot + MyBatis + JWT + Filter&#x2F;Interceptor）<br>对应讲义：<code>讲义/12-后端Web实战(登录认证).md</code></p>
 </blockquote>
 <hr>
@@ -671,72 +660,186 @@
 <h2 id="十、一图回顾整条链路"><a href="#十、一图回顾整条链路" class="headerlink" title="十、一图回顾整条链路"></a>十、一图回顾整条链路</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">┌───────── 登录 ─────────┐</span><br><span class="line">│ POST /login            │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ LoginController        │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ EmpServiceImpl.login   │</span><br><span class="line">│   ├─ EmpMapper 查库    │</span><br><span class="line">│   └─ JwtUtils 生成 token│</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ 返回 LoginInfo&#123;token&#125;  │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ 前端存 localStorage    │</span><br><span class="line">└────────────────────────┘</span><br><span class="line"></span><br><span class="line">┌──────── 后续请求 ──────┐</span><br><span class="line">│ 请求头带 token         │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ TokenInterceptor       │</span><br><span class="line">│ .preHandle             │</span><br><span class="line">│   ├─ /login → 放行     │</span><br><span class="line">│   ├─ 无 token → 401    │</span><br><span class="line">│   ├─ 解析失败 → 401    │</span><br><span class="line">│   └─ 合法 → return true│</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ Controller → Service   │</span><br><span class="line">│   ↓                    │</span><br><span class="line">│ 返回结果               │</span><br><span class="line">└────────────────────────┘</span><br></pre></td></tr></table></figure>
 
 
-      </div>
+    </div>
 
     
     
     
-    
 
-    <footer class="post-footer">
+      <footer class="post-footer">
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2026/08/25/day16%20%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/" rel="prev" title="day16 面向切面编程">
-                  <i class="fa fa-angle-left"></i> day16 面向切面编程
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2026/08/25/day17%20SpringBoot%E5%8E%9F%E7%90%86%E4%B8%8EMaven%E9%AB%98%E7%BA%A7-%E6%80%BB%E7%BB%93/" rel="next" title="day17 SpringBoot原理与Maven高级-总结">
-                  day17 SpringBoot原理与Maven高级-总结 <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/25/day16%20%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/" rel="prev" title="day16 面向切面编程">
+      <i class="fa fa-chevron-left"></i> day16 面向切面编程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/08/25/day17%20SpringBoot%E5%8E%9F%E7%90%86%E4%B8%8EMaven%E9%AB%98%E7%BA%A7-%E6%80%BB%E7%BB%93/" rel="next" title="day17 SpringBoot原理与Maven高级-总结">
+      day17 SpringBoot原理与Maven高级-总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93%EF%BC%9A%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81%EF%BC%88%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD-%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">实战总结：登录认证（登录功能 + 登录校验）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%9C%AC%E8%8A%82%E8%A6%81%E8%A7%A3%E5%86%B3%E7%9A%84%E6%A0%B8%E5%BF%83%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">一、本节要解决的核心问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF%EF%BC%9A%E4%B8%89%E7%A7%8D%E6%96%B9%E6%A1%88%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.</span> <span class="nav-text">二、会话技术：三种方案对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5%E6%BE%84%E6%B8%85"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 概念澄清</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%89%E7%A7%8D%E6%96%B9%E6%A1%88%E6%A8%AA%E5%90%91%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 三种方案横向对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%B7%A8%E5%9F%9F%E9%80%9F%E8%AE%B0"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 跨域速记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E4%B8%BA%E4%BD%95-Session-%E5%A4%B1%E6%95%88"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. 集群环境为何 Session 失效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81JWT-%E4%BB%A4%E7%89%8C"><span class="nav-number">1.3.</span> <span class="nav-text">三、JWT 令牌</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%89%E6%AE%B5%E7%BB%84%E6%88%90%EF%BC%88%E7%94%A8-%E5%88%86%E9%9A%94%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 三段组成（用 . 分隔）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%94%9F%E6%88%90%E4%B8%8E%E6%A0%A1%E9%AA%8C%EF%BC%88%E8%AE%B2%E4%B9%89%E7%A4%BA%E4%BE%8B%EF%BC%89"><span class="nav-number">1.3.3.</span> <span class="nav-text">3. 生成与校验（讲义示例）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%99%BB%E5%BD%95%E6%97%B6%E4%B8%8B%E5%8F%91%E4%BB%A4%E7%89%8C%EF%BC%88%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">四、登录时下发令牌（项目实现）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. 整体流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%85%B3%E9%94%AE%E7%B1%BB%E4%B8%8E%E4%BB%A3%E7%A0%81"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. 关键类与代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E7%BB%9F%E4%B8%80%E6%8B%A6%E6%88%AA%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%9AFilter-%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-number">1.5.</span> <span class="nav-text">五、统一拦截方案一：Filter 过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%98%AF%E4%BB%80%E4%B9%88-1"><span class="nav-number">1.5.1.</span> <span class="nav-text">1. 是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%85%A5%E9%97%A8%E4%B8%89%E6%AD%A5"><span class="nav-number">1.5.2.</span> <span class="nav-text">2. 入门三步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%EF%BC%88%E6%94%BE%E8%A1%8C%E5%89%8D-%E6%94%BE%E8%A1%8C%E5%90%8E%EF%BC%89"><span class="nav-number">1.5.3.</span> <span class="nav-text">3. 执行流程（放行前 &#x2F; 放行后）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%8B%A6%E6%88%AA%E8%B7%AF%E5%BE%84%E9%85%8D%E7%BD%AE"><span class="nav-number">1.5.4.</span> <span class="nav-text">4. 拦截路径配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%BF%87%E6%BB%A4%E5%99%A8%E9%93%BE"><span class="nav-number">1.5.5.</span> <span class="nav-text">5. 过滤器链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%E5%85%AD%E6%AD%A5%EF%BC%88%E9%A1%B9%E7%9B%AE%E7%B1%BB%EF%BC%9ATokenFilter%EF%BC%8C%E5%85%A8%E9%99%90%E5%AE%9A%E7%B1%BB%E5%90%8D-com-zhang-filter-TokenFilter%EF%BC%89"><span class="nav-number">1.5.6.</span> <span class="nav-text">6. 登录校验六步（项目类：TokenFilter，全限定类名 com.zhang.filter.TokenFilter）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E7%BB%9F%E4%B8%80%E6%8B%A6%E6%88%AA%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9AInterceptor-%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="nav-number">1.6.</span> <span class="nav-text">六、统一拦截方案二：Interceptor 拦截器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%98%AF%E4%BB%80%E4%B9%88-2"><span class="nav-number">1.6.1.</span> <span class="nav-text">1. 是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%85%A5%E9%97%A8%E4%B8%A4%E6%AD%A5"><span class="nav-number">1.6.2.</span> <span class="nav-text">2. 入门两步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%B3%A8%E5%86%8C%E9%85%8D%E7%BD%AE%EF%BC%88%E9%A1%B9%E7%9B%AE%E7%B1%BB%EF%BC%9AWebConfig%EF%BC%8C%E5%85%A8%E9%99%90%E5%AE%9A%E7%B1%BB%E5%90%8D-com-zhang-config-WebConfig%EF%BC%89"><span class="nav-number">1.6.3.</span> <span class="nav-text">3. 注册配置（项目类：WebConfig，全限定类名 com.zhang.config.WebConfig）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%8B%A6%E6%88%AA%E8%B7%AF%E5%BE%84%E9%85%8D%E7%BD%AE-1"><span class="nav-number">1.6.4.</span> <span class="nav-text">4. 拦截路径配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C-Interceptor%EF%BC%88%E9%A1%B9%E7%9B%AE%E7%B1%BB%EF%BC%9ATokenInterceptor%EF%BC%8C%E5%85%A8%E9%99%90%E5%AE%9A%E7%B1%BB%E5%90%8D-com-zhang-interceptor-TokenInterceptor%EF%BC%89"><span class="nav-number">1.6.5.</span> <span class="nav-text">5. 登录校验 Interceptor（项目类：TokenInterceptor，全限定类名 com.zhang.interceptor.TokenInterceptor）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81Filter-vs-Interceptor-%E5%AF%B9%E6%AF%94%EF%BC%88%E9%AB%98%E9%A2%91%E8%80%83%E7%82%B9%EF%BC%89"><span class="nav-number">1.7.</span> <span class="nav-text">七、Filter vs Interceptor 对比（高频考点）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E9%A1%B9%E7%9B%AE%E7%8E%B0%E7%8A%B6%E9%80%9F%E6%9F%A5%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%81%EF%BC%89"><span class="nav-number">1.8.</span> <span class="nav-text">八、项目现状速查（重点！）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%9E%E9%99%85%E7%94%9F%E6%95%88%E7%9A%84%E6%A0%A1%E9%AA%8C%E9%93%BE%E8%B7%AF"><span class="nav-number">1.8.1.</span> <span class="nav-text">1. 实际生效的校验链路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Filter-%E6%98%AF%E2%80%9D%E4%BF%9D%E7%95%99%E7%A4%BA%E4%BE%8B%E2%80%9D%EF%BC%8C%E6%9C%AA%E5%90%AF%E7%94%A8"><span class="nav-number">1.8.2.</span> <span class="nav-text">2. Filter 是”保留示例”，未启用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%A1%B9%E7%9B%AE%E4%B8%8E%E8%AE%B2%E4%B9%89%E7%9A%84%E5%91%BD%E5%90%8D%E5%B7%AE%E5%BC%82"><span class="nav-number">1.8.3.</span> <span class="nav-text">3. 项目与讲义的命名差异</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%A1%B9%E7%9B%AE%E6%B6%89%E5%8F%8A%E6%96%87%E4%BB%B6%E6%B8%85%E5%8D%95"><span class="nav-number">1.8.4.</span> <span class="nav-text">4. 项目涉及文件清单</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81%E6%98%93%E9%94%99%E7%82%B9-%E5%A4%8D%E4%B9%A0%E6%8F%90%E9%86%92"><span class="nav-number">1.9.</span> <span class="nav-text">九、易错点 &amp; 复习提醒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81%E4%B8%80%E5%9B%BE%E5%9B%9E%E9%A1%BE%E6%95%B4%E6%9D%A1%E9%93%BE%E8%B7%AF"><span class="nav-number">1.10.</span> <span class="nav-text">十、一图回顾整条链路</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
 </div>
 
 
 
-
-
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-  <div class="copyright">
-    &copy; 
-    <span itemprop="copyrightYear">2026</span>
-    <span class="with-love">
-      <i class="fa fa-heart"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">John Doe</span>
-  </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
+      </div>
 
     </div>
-  </footer>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
 
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
 
 </body>
 </html>
