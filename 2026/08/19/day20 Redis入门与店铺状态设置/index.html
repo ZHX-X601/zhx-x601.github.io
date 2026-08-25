@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.blog-x.cc.cd","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前几天陆陆续续写了苍穹外卖的员工管理,菜品,分类,套餐管理等,未坚持每日学习,未写复盘 1. 今天做了什么(day5的内容)  Redis入门 安装 Redis里的数据类型:字符串,哈希,集合,有序集合,列表 Redis操作的命令 java程序中操作Redis数据库:使用Spring Data Redis 配置 使用     店铺相关接口 , 使用Redis存储 设置店铺营业状态 获取店铺状态(用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="day20 Redis入门与店铺状态设置">
+<meta property="og:url" content="https://www.blog-x.cc.cd/2026/08/19/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/index.html">
+<meta property="og:site_name" content="我的学习日记">
+<meta property="og:description" content="前几天陆陆续续写了苍穹外卖的员工管理,菜品,分类,套餐管理等,未坚持每日学习,未写复盘 1. 今天做了什么(day5的内容)  Redis入门 安装 Redis里的数据类型:字符串,哈希,集合,有序集合,列表 Redis操作的命令 java程序中操作Redis数据库:使用Spring Data Redis 配置 使用     店铺相关接口 , 使用Redis存储 设置店铺营业状态 获取店铺状态(用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-19T08:21:45.000Z">
+<meta property="article:modified_time" content="2026-08-25T09:27:49.116Z">
+<meta property="article:author" content="ZHX">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.blog-x.cc.cd/2026/08/19/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>day20 Redis入门与店铺状态设置 | 我的学习日记</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">我的学习日记</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">24</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">0</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+  <a href="https://github.com/ZHX-X601" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/19/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="ZHX">
+      <meta itemprop="description" content="记录编程学习、项目实战和踩坑笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的学习日记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          day20 Redis入门与店铺状态设置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-08-19 16:21:45" itemprop="dateCreated datePublished" datetime="2026-08-19T16:21:45+08:00">2026-08-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-25 17:27:49" itemprop="dateModified" datetime="2026-08-25T17:27:49+08:00">2026-08-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%8D%E7%9B%98/" itemprop="url" rel="index"><span itemprop="name">复盘</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%8D%E7%9B%98/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/" itemprop="url" rel="index"><span itemprop="name">苍穹外卖</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+      <div class="post-body" itemprop="articleBody">
+
+        
+          <p>前几天陆陆续续写了苍穹外卖的员工管理,菜品,分类,套餐管理等,未坚持每日学习,未写复盘</p>
+<h2 id="1-今天做了什么"><a href="#1-今天做了什么" class="headerlink" title="1. 今天做了什么"></a>1. 今天做了什么</h2><p>(day5的内容)</p>
+<ol>
+<li>Redis入门<ol>
+<li>安装</li>
+<li>Redis里的数据类型:字符串,哈希,集合,有序集合,列表</li>
+<li>Redis操作的命令</li>
+<li>java程序中操作Redis数据库:使用Spring Data Redis<ol>
+<li>配置</li>
+<li>使用</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>店铺相关接口 , 使用Redis存储<ol>
+<li>设置店铺营业状态</li>
+<li>获取店铺状态(用户端与管理端)</li>
+</ol>
+</li>
+<li>接口分组展示的配置</li>
+</ol>
+<h2 id="2-核心知识点"><a href="#2-核心知识点" class="headerlink" title="2. 核心知识点"></a>2. 核心知识点</h2><p>Redis的基础使用</p>
+<h2 id="3-深度思考"><a href="#3-深度思考" class="headerlink" title="3. 深度思考"></a>3. 深度思考</h2><ol>
+<li>为什么使用Redis<ol>
+<li>Redis将数据存在内存中,访问效率更高,可用于存方高频使用的数据</li>
+<li>店铺状态只有一个值,使用Redis需要为它单独创建一个一行一列的表,而使用Redis这种键值对的方式就很方便</li>
+</ol>
+</li>
+</ol>
+<h2 id="4-踩过的坑"><a href="#4-踩过的坑" class="headerlink" title="4. 踩过的坑"></a>4. 踩过的坑</h2><ol>
+<li>获取店铺状态有用户端与管理端,必须在使用@RestController(“userShopController”)注解是对其命名进行区分,否则会因为Bean对象名冲突报错</li>
+</ol>
+<h2 id="5-遗留问题-想不通"><a href="#5-遗留问题-想不通" class="headerlink" title="5. 遗留问题 &#x2F; 想不通"></a>5. 遗留问题 &#x2F; 想不通</h2><ol>
+<li>通过@Bean注解在配置类中配置的Bean,使用范围是?<ol>
+<li>只有该配置类在springboot扫描范围内,才会加入IOC容器管理</li>
+<li>只有被IOC容器管理的类,其非静态属性,才可以使用@Autowired注入Bean</li>
+</ol>
+</li>
+<li><code>redisTemplate.setKeySerializer(new StringRedisSerializer());</code>的作用<ol>
+<li>对key进行序列化</li>
+<li>java操作Redis时,使用java字符串作为key,所以为Key指定字符串序列化器,可以确保java字符串存进Redis还是该字符串</li>
+<li>若不指定序列化器,使用默认序列化器,存进Redis的key与java字符串会不一致</li>
+<li>也可以为Value设置序列化器<br>&#x2F;&#x2F; 设置 Value 的序列化器（通常用 Jackson，存 JSON 格式，方便其他语言读取）<br> redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer&lt;&gt;(Object.class));</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="type">RedisTemplate</span> <span class="title function_">redisTemplate</span><span class="params">(RedisConnectionFactory redisConnectionFactory)</span> &#123;  </span><br><span class="line">    <span class="type">RedisTemplate</span> <span class="variable">redisTemplate</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RedisTemplate</span>();  </span><br><span class="line">    redisTemplate.setConnectionFactory(redisConnectionFactory);  </span><br><span class="line">    redisTemplate.setKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());<span class="comment">// 设置key序列化器  </span></span><br><span class="line">    <span class="keyword">return</span> redisTemplate;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/07/day19%20%E5%89%8D%E7%AB%AFWeb%E5%AE%9E%E6%88%98-ElementPlus/" rel="prev" title="day19 前端Web实战-ElementPlus">
+      <i class="fa fa-chevron-left"></i> day19 前端Web实战-ElementPlus
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/08/21/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/" rel="next" title="day21 微信登录">
+      day21 微信登录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%8A%E5%A4%A9%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">1. 今天做了什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">2. 核心知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">3. 深度思考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91"><span class="nav-number">4.</span> <span class="nav-text">4. 踩过的坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%81%97%E7%95%99%E9%97%AE%E9%A2%98-%E6%83%B3%E4%B8%8D%E9%80%9A"><span class="nav-number">5.</span> <span class="nav-text">5. 遗留问题 &#x2F; 想不通</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZHX"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">ZHX</p>
+  <div class="site-description" itemprop="description">记录编程学习、项目实战和踩坑笔记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
