@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 
-<title>22 - Hexo</title>
+<title>Hexo</title>
 
 
 
@@ -14,10 +14,10 @@
 
 
 <!-- Open Graph -->
-<meta property="og:title" content="22 - Hexo">
+<meta property="og:title" content="Hexo">
 <meta property="og:description" content="">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://www.blog-x.cc.cd/2026/08/22/22/">
+<meta property="og:url" content="https://www.blog-x.cc.cd/2026/08/25/day1%20IO%E6%B5%81/">
 <meta property="og:site_name" content="Hexo">
 
 <meta property="og:image" content="/img/favicon.ico">
@@ -25,7 +25,7 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="22 - Hexo">
+<meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="">
 
 <meta name="twitter:image" content="/img/favicon.ico">
@@ -101,7 +101,7 @@
 
 
 <!-- Canonical URL -->
-<link rel="canonical" href="https://www.blog-x.cc.cd/2026/08/22/22/">
+<link rel="canonical" href="https://www.blog-x.cc.cd/2026/08/25/day1%20IO%E6%B5%81/">
 
 <!-- No-Referrer Domain Script -->
 
@@ -485,20 +485,29 @@
     
     <!-- Post Meta Overlay -->
     <div class="post-meta-overlay banner-post-meta">
-      <h1 class="post-meta-title">22</h1>
+      <h1 class="post-meta-title"></h1>
       <div class="post-meta-info meta-info">
         
         <span class="post-meta-date">
           <span class="material-symbols-outlined md-18">calendar_today</span>
-          发布于: 2026-08-22
+          发布于: 2026-08-25
         </span>
         
         
         <span class="post-meta-updated">
           <span class="material-symbols-outlined md-18">edit</span>
-          更新于: 2026-08-22 17:29
+          更新于: 2026-07-18 22:17
         </span>
         
+        
+        <span class="post-meta-word-count">
+          <span class="material-symbols-outlined md-18">description</span>
+          654 字
+        </span>
+        <span class="post-meta-reading-time">
+          <span class="material-symbols-outlined md-18">schedule</span>
+          2 min
+        </span>
         
       </div>
     </div>
@@ -781,7 +790,7 @@
   <!-- Archive button -->
   <a href="/archives" class="content-nav-item">
     <span class="nav-item-label">归档</span>
-    <span class="nav-item-count">5</span>
+    <span class="nav-item-count">15</span>
   </a>
 
   <!-- Dynamic Categories -->
@@ -805,7 +814,7 @@
       
       <span class="post-meta-badge badge-wordcount">
         <span class="material-symbols-outlined" aria-hidden="true">trending_up</span>
-        <span>0 字</span>
+        <span>654 字</span>
       </span>
       
 
@@ -815,7 +824,7 @@
         <span>
           
           
-          1 分钟
+          2 分钟
         </span>
       </span>
       
@@ -823,7 +832,7 @@
 
     <!-- Title with CSS-styled vertical bar prefix -->
     <h1 class="post-title post-title-custom">
-      <strong>22</strong>
+      <strong></strong>
     </h1>
 
     <!-- Bottom row: Date & Categories/Tags path -->
@@ -831,8 +840,8 @@
       
       <span class="post-meta-badge badge-date">
         <span class="material-symbols-outlined" aria-hidden="true">calendar_month</span>
-        <time datetime="2026-08-22 17:29" pubdate>
-          2026-08-22
+        <time datetime="2026-08-25 11:29" pubdate>
+          2026-08-25
         </time>
       </span>
       
@@ -844,11 +853,6 @@
 
     <!-- Post updated notice -->
     
-    <div class="post-updated-note">
-      <span class="material-symbols-outlined" aria-hidden="true">update</span>
-      更新于 2026-08-22 17:29
-    </div>
-    
   </header>
 
 
@@ -858,7 +862,48 @@
           class="post-content markdown-body custom-md"
           itemprop="articleBody"
         >
-          
+          <h1 id="day1"><a href="#day1" class="headerlink" title="day1"></a>day1</h1><h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><ol>
+<li>今天学完IO</li>
+</ol>
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="1-File"><a href="#1-File" class="headerlink" title="1.File"></a>1.File</h3><ol>
+<li>File的3个构造方法</li>
+<li>表示什么：路径，可以表示文件或文件夹</li>
+<li>常用方法<ol>
+<li>判断，获取</li>
+<li>创建，删除</li>
+<li>遍历</li>
+</ol>
+</li>
+<li>不能读写数据，读写需要用到IO流</li>
+</ol>
+<h3 id="2-IO流"><a href="#2-IO流" class="headerlink" title="2.IO流"></a>2.IO流</h3><h5 id="1-字节流"><a href="#1-字节流" class="headerlink" title="1.字节流"></a>1.字节流</h5><ol>
+<li>计算机数据的最小单位是字节</li>
+<li>字节流可以操作任何文件</li>
+<li>字节流读取文本文件，需要读取为<code>byte[]</code>，指定编码方式转为字符串，否则中文字符会出现乱码。</li>
+<li>字节流没有缓冲区，可以用byte数组来做缓冲区，提升读取的效率</li>
+</ol>
+<h5 id="2-字符流"><a href="#2-字符流" class="headerlink" title="2.字符流"></a>2.字符流</h5><ol>
+<li>字符集有ASCII，GBK，Unicode等<ol>
+<li>ASCII英文占用1字节</li>
+<li>GBK兼容ASCII，英文1字节，中文2字节。英文字节首位为0，中文高位字节首位为1，由此区分中英文</li>
+<li>Unicode编码方式多样<ol>
+<li>UTF-8，1-4字节表示字符，英文1，中文3</li>
+<li>UTF-16，2或4字节表示字符</li>
+<li>UTF-32，4字节表示字符</li>
+</ol>
+</li>
+<li>字符串转为<code>bite[]</code>可以指定编码方式，<code>bite[]</code>构建字符串也可以指定编码。</li>
+</ol>
+</li>
+<li>字符流底层通过解码器按指定字符集将字节转换为字符。以 UTF-8 为例，解码器会识别字节头，决定本次读取 1~4 个字节拼成一个字符。</li>
+<li>字符流可以在定义时指定编码格式，未指定就会用默认编码。</li>
+<li>字符流的输入，输出流都有缓冲区<ol>
+<li>输入流，会先填满缓冲区，优先读取缓冲区，读完缓冲区后才会再取数据填满缓冲区。即使文件清空，也会先读完缓冲区的数据。</li>
+<li>输出流，会先存到缓冲区，如果不调用 <code>flush()</code> 或 <code>close()</code>，数据会一直卡在内存中，直到缓冲区满了才会写入文件。</li>
+</ol>
+</li>
+</ol>
+
         </div>
 
         <!-- Post license / copyright -->
@@ -890,9 +935,9 @@
 <div class="post-copyright-box">
   <div class="copyright-watermark">CC</div>
   <div class="copyright-header">
-    <span class="copyright-title">22</span>
-    <a class="copyright-link" href="https://www.blog-x.cc.cd/2026/08/22/22/" target="_blank" rel="noopener noreferrer">
-      https://www.blog-x.cc.cd/2026/08/22/22/
+    <span class="copyright-title"></span>
+    <a class="copyright-link" href="https://www.blog-x.cc.cd/2026/08/25/day1%20IO%E6%B5%81/" target="_blank" rel="noopener noreferrer">
+      https://www.blog-x.cc.cd/2026/08/25/day1%20IO%E6%B5%81/
     </a>
   </div>
   <div class="copyright-meta">
@@ -902,7 +947,7 @@
     </div>
     <div class="copyright-meta-item">
       <span class="meta-label">发布于</span>
-      <span class="meta-value">2026-08-22</span>
+      <span class="meta-value">2026-08-25</span>
     </div>
     <div class="copyright-meta-item">
       <span class="meta-label">许可协议</span>
@@ -979,11 +1024,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   <!-- Last modified date -->
   
-  <div class="post-last-modified">
-    <span class="material-symbols-outlined" aria-hidden="true">edit</span>
-    最后编辑于 2026-08-22 17:29
-  </div>
-  
 </footer>
 
       </div>
@@ -997,21 +1037,31 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="post-footer-widgets">
   <!-- Warning Info Alert -->
   
+  <div class="post-footer-alert card-base">
+    <div class="footer-alert-icon">
+      <span class="material-symbols-outlined">history</span>
+    </div>
+    <div class="footer-alert-content">
+      <div class="footer-alert-title">最后更新于 2026-07-18，距今已过 37 天</div>
+      <div class="footer-alert-subtitle">部分内容可能已过时</div>
+    </div>
+  </div>
+  
 
   <!-- Prev / Next Navigation -->
   <nav class="post-footer-navigation">
     <div class="post-nav-card-wrapper">
       
-      <a href="/2026/08/22/eded/" class="post-nav-card card-base prev-nav-card" title="eded">
+      <a href="/2026/08/25/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-nav-card card-base prev-nav-card" title="">
         <span class="material-symbols-outlined nav-arrow">chevron_left</span>
-        <span class="nav-card-title">eded</span>
+        <span class="nav-card-title"></span>
       </a>
       
     </div>
     <div class="post-nav-card-wrapper">
       
-      <a href="/2026/08/22/hello-%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" class="post-nav-card card-base next-nav-card" title="hello,我的第一篇文章">
-        <span class="nav-card-title">hello,我的第一篇文章</span>
+      <a href="/2026/08/25/day2%20IO%E6%B5%81/" class="post-nav-card card-base next-nav-card" title="">
+        <span class="nav-card-title"></span>
         <span class="material-symbols-outlined nav-arrow">chevron_right</span>
       </a>
       
@@ -1033,12 +1083,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
           
           <li>
-            <a href="/2026/08/22/rt/" class="recommend-item">
+            <a href="/2026/08/25/day22%20%E7%BC%93%E5%AD%98/" class="recommend-item">
               <span class="recommend-index-badge first-index">1</span>
               <div class="recommend-item-info">
-                <span class="recommend-item-title">rt</span>
+                <span class="recommend-item-title"></span>
                 <div class="recommend-item-meta-row">
                   <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">1. 今天做了什么外卖day7的一部分 缓存菜品 缓存套餐 2. 核心...</span>
                   
                 </div>
               </div>
@@ -1048,14 +1100,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
           
           <li>
-            <a href="/2026/08/22/eded/" class="recommend-item">
+            <a href="/2026/08/25/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/" class="recommend-item">
               <span class="recommend-index-badge ">2</span>
               <div class="recommend-item-info">
-                <span class="recommend-item-title">eded</span>
+                <span class="recommend-item-title"></span>
                 <div class="recommend-item-meta-row">
                   <span class="recommend-item-category">默认分类</span>
                   
-                    <span class="recommend-item-excerpt">asdad...</span>
+                    <span class="recommend-item-excerpt">1. 今天做了什么(外卖day07,day08) 购物车相关接口 用户...</span>
                   
                 </div>
               </div>
@@ -1065,14 +1117,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
           
           <li>
-            <a href="/2026/08/22/hello-%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" class="recommend-item">
+            <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/" class="recommend-item">
               <span class="recommend-index-badge ">3</span>
               <div class="recommend-item-info">
-                <span class="recommend-item-title">hello,我的第一篇文章</span>
+                <span class="recommend-item-title"></span>
                 <div class="recommend-item-meta-row">
                   <span class="recommend-item-category">默认分类</span>
                   
-                    <span class="recommend-item-excerpt">hello今天自己尝试部署玩一下...</span>
+                    <span class="recommend-item-excerpt">1. 今天做了什么(外卖day6的内容) HttpClient的使用...</span>
                   
                 </div>
               </div>
@@ -1082,14 +1134,31 @@ document.addEventListener('DOMContentLoaded', function() {
         
           
           <li>
-            <a href="/2026/08/22/hello-world/" class="recommend-item">
+            <a href="/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/" class="recommend-item">
               <span class="recommend-index-badge ">4</span>
               <div class="recommend-item-info">
-                <span class="recommend-item-title">Hello World</span>
+                <span class="recommend-item-title"></span>
                 <div class="recommend-item-meta-row">
                   <span class="recommend-item-category">默认分类</span>
                   
-                    <span class="recommend-item-excerpt">Welcome to Hexo! This is your very...</span>
+                    <span class="recommend-item-excerpt">前几天陆陆续续写了苍穹外卖的员工管理,菜品,分类,套餐管理等,未坚持每...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/" class="recommend-item">
+              <span class="recommend-index-badge ">5</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day11计划 前后端分离开发规范与REST风格 工程搭建与基础代码结...</span>
                   
                 </div>
               </div>
@@ -1113,14 +1182,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
           
           <li>
-            <a href="/2026/08/22/hello-world/" class="recommend-item">
+            <a href="/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/" class="recommend-item">
               <span class="recommend-index-badge first-index">1</span>
               <div class="recommend-item-info">
-                <span class="recommend-item-title">Hello World</span>
+                <span class="recommend-item-title"></span>
                 <div class="recommend-item-meta-row">
                   <span class="recommend-item-category">默认分类</span>
                   
-                    <span class="recommend-item-excerpt">Welcome to Hexo! This is your very...</span>
+                    <span class="recommend-item-excerpt">前几天陆陆续续写了苍穹外卖的员工管理,菜品,分类,套餐管理等,未坚持每...</span>
                   
                 </div>
               </div>
@@ -1130,14 +1199,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
           
           <li>
-            <a href="/2026/08/22/hello-%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" class="recommend-item">
+            <a href="/2026/08/25/day7%20Maven%E7%9A%84%E4%BD%BF%E7%94%A8,%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="recommend-item">
               <span class="recommend-index-badge ">2</span>
               <div class="recommend-item-info">
-                <span class="recommend-item-title">hello,我的第一篇文章</span>
+                <span class="recommend-item-title"></span>
                 <div class="recommend-item-meta-row">
                   <span class="recommend-item-category">默认分类</span>
                   
-                    <span class="recommend-item-excerpt">hello今天自己尝试部署玩一下...</span>
+                    <span class="recommend-item-excerpt">day7计划 Maven项目构建与管理入门 笔记1.Maven概述 作...</span>
                   
                 </div>
               </div>
@@ -1147,12 +1216,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
           
           <li>
-            <a href="/2026/08/22/rt/" class="recommend-item">
+            <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/" class="recommend-item">
               <span class="recommend-index-badge ">3</span>
               <div class="recommend-item-info">
-                <span class="recommend-item-title">rt</span>
+                <span class="recommend-item-title"></span>
                 <div class="recommend-item-meta-row">
                   <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">1. 今天做了什么(外卖day6的内容) HttpClient的使用...</span>
                   
                 </div>
               </div>
@@ -1162,14 +1233,31 @@ document.addEventListener('DOMContentLoaded', function() {
         
           
           <li>
-            <a href="/2026/08/22/eded/" class="recommend-item">
+            <a href="/2026/08/25/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="recommend-item">
               <span class="recommend-index-badge ">4</span>
               <div class="recommend-item-info">
-                <span class="recommend-item-title">eded</span>
+                <span class="recommend-item-title"></span>
                 <div class="recommend-item-meta-row">
                   <span class="recommend-item-category">默认分类</span>
                   
-                    <span class="recommend-item-excerpt">asdad...</span>
+                    <span class="recommend-item-excerpt">计划多线程 总结1.线程创建3种方式 继承Thread 实现Runna...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day8%20SpringBootWeb%E5%85%A5%E9%97%A8%E3%80%81HTTP%E5%8D%8F%E8%AE%AE%E4%B8%8E%E5%88%86%E5%B1%82%E8%A7%A3%E8%80%A6/" class="recommend-item">
+              <span class="recommend-index-badge ">5</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day8计划 SpringBootWeb入门 HTTP协议学习 Spr...</span>
                   
                 </div>
               </div>
@@ -1253,7 +1341,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <span class="material-symbols-outlined stat-icon">description</span>
         <span>文章</span>
       </div>
-      <span class="stat-value">5</span>
+      <span class="stat-value">15</span>
     </div>
     
     <!-- Categories -->
@@ -1280,7 +1368,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <span class="material-symbols-outlined stat-icon">trending_up</span>
         <span>总字数</span>
       </div>
-      <span class="stat-value">88</span>
+      <span class="stat-value">18,658</span>
     </div>
     
     <!-- Running Days -->
@@ -1302,7 +1390,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <span>最后活动</span>
       </div>
       <div>
-        <span class="stat-value" id="site-last-active" data-latest-date="2026-08-22T15:07:28.000Z">--</span>
+        <span class="stat-value" id="site-last-active" data-latest-date="2026-08-25T03:29:15.063Z">--</span>
       </div>
     </div>
   </div>
@@ -1846,7 +1934,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <span class="material-symbols-outlined">schedule</span>
           </div>
           <div class="site-info-card-label">构建时间</div>
-          <div class="site-info-card-value">2026/8/22 23:07:36</div>
+          <div class="site-info-card-value">2026/8/25 11:29:30</div>
         </div>
 
         <!-- System Info -->
@@ -2101,7 +2189,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <span class="material-symbols-outlined stat-icon">description</span>
         <span>文章</span>
       </div>
-      <span class="stat-value">5</span>
+      <span class="stat-value">15</span>
     </div>
     
     <!-- Categories -->
@@ -2128,7 +2216,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <span class="material-symbols-outlined stat-icon">trending_up</span>
         <span>总字数</span>
       </div>
-      <span class="stat-value">88</span>
+      <span class="stat-value">18,658</span>
     </div>
     
     <!-- Running Days -->
@@ -2150,7 +2238,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <span>最后活动</span>
       </div>
       <div>
-        <span class="stat-value" id="site-last-active" data-latest-date="2026-08-22T15:07:28.000Z">--</span>
+        <span class="stat-value" id="site-last-active" data-latest-date="2026-08-25T03:29:15.063Z">--</span>
       </div>
     </div>
   </div>
@@ -2265,7 +2353,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <span class="material-symbols-outlined">schedule</span>
           </div>
           <div class="site-info-card-label">构建时间</div>
-          <div class="site-info-card-value">2026/8/22 23:07:36</div>
+          <div class="site-info-card-value">2026/8/25 11:29:30</div>
         </div>
 
         <!-- System Info -->

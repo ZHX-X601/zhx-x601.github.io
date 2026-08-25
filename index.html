@@ -767,7 +767,7 @@
   <!-- Archive button -->
   <a href="/archives" class="content-nav-item">
     <span class="nav-item-label">归档</span>
-    <span class="nav-item-count">5</span>
+    <span class="nav-item-count">15</span>
   </a>
 
   <!-- Dynamic Categories -->
@@ -807,16 +807,16 @@
   <div class="post-card-content">
     <!-- Title -->
     <h2 class="post-card-title">
-      <a href="/2026/08/22/rt/">rt</a>
+      <a href="/2026/08/25/day22%20%E7%BC%93%E5%AD%98/"></a>
     </h2>
 
     <!-- Meta line: date, category -->
     <div class="post-card-meta">
       
       
-      <time datetime="2026-08-22" pubdate>
+      <time datetime="2026-08-25" pubdate>
         <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-22</span>
+        <span>2026-08-25</span>
       </time>
       
       
@@ -824,13 +824,29 @@
 
     <!-- Description / excerpt -->
     
+    <p class="post-card-excerpt">1. 今天做了什么外卖day7的一部分
+
+缓存菜品
+缓存套餐
+
+2. 核心知识点
+两种实现缓存的方式
+使用Redis自己实现缓存
+根据分类id查询菜品,将分类id作为key,将查询到的集合作为value
+查询时先查缓存是否存在,存在直接返回,不存在则查询后存入缓存返回
+一旦管理端发生新增,修改,删除,起售停售,都要对缓存进行清理
+
+
+使用Spring Cache实现缓存
+完全使用注解实现,很方便</p>
+    
 
     <!-- Footer: tags & reading time -->
     <div class="post-card-footer">
       
       
       <span class="post-card-reading-time">
-        1 min
+        3 min
       </span>
       
     </div>
@@ -839,7 +855,7 @@
   <!-- Right side chevron panel for coverless cards -->
   
   <div class="post-card-arrow">
-    <a href="/2026/08/22/rt/" aria-hidden="true" tabindex="-1">
+    <a href="/2026/08/25/day22%20%E7%BC%93%E5%AD%98/" aria-hidden="true" tabindex="-1">
       <span class="material-symbols-outlined">chevron_right</span>
     </a>
   </div>
@@ -857,16 +873,16 @@
   <div class="post-card-content">
     <!-- Title -->
     <h2 class="post-card-title">
-      <a href="/2026/08/22/eded/">eded</a>
+      <a href="/2026/08/25/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/"></a>
     </h2>
 
     <!-- Meta line: date, category -->
     <div class="post-card-meta">
       
       
-      <time datetime="2026-08-22" pubdate>
+      <time datetime="2026-08-25" pubdate>
         <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-22</span>
+        <span>2026-08-25</span>
       </time>
       
       
@@ -874,7 +890,23 @@
 
     <!-- Description / excerpt -->
     
-    <p class="post-card-excerpt">asdad</p>
+    <p class="post-card-excerpt">1. 今天做了什么(外卖day07,day08)
+
+购物车相关接口
+用户下单相关接口
+
+2. 核心知识点
+订单表与订单明细表的设计
+订单表存储订单相关的信息
+订单明细表存储订单中的菜品,套餐的单价,数量等数据,一条菜品或套餐对应一条数据
+二者是一对多的
+
+
+冗余字段
+数据表中某些字段可以通过其他字段在其他表中查询到
+为什么设计冗余字段
+在插入数据时将冗余字段从其他表查出来,一并插入其中
+以后查询的</p>
     
 
     <!-- Footer: tags & reading time -->
@@ -891,7 +923,7 @@
   <!-- Right side chevron panel for coverless cards -->
   
   <div class="post-card-arrow">
-    <a href="/2026/08/22/eded/" aria-hidden="true" tabindex="-1">
+    <a href="/2026/08/25/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/" aria-hidden="true" tabindex="-1">
       <span class="material-symbols-outlined">chevron_right</span>
     </a>
   </div>
@@ -909,22 +941,35 @@
   <div class="post-card-content">
     <!-- Title -->
     <h2 class="post-card-title">
-      <a href="/2026/08/22/22/">22</a>
+      <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/"></a>
     </h2>
 
     <!-- Meta line: date, category -->
     <div class="post-card-meta">
       
       
-      <time datetime="2026-08-22" pubdate>
+      <time datetime="2026-08-25" pubdate>
         <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-22</span>
+        <span>2026-08-25</span>
       </time>
       
       
     </div>
 
     <!-- Description / excerpt -->
+    
+    <p class="post-card-excerpt">1. 今天做了什么(外卖day6的内容)
+
+HttpClient的使用
+微信小程序开发入门
+项目目录结构
+获取头像与昵称
+获取授权码
+
+
+微信登录
+流程:小程序获取授权码-&amp;gt;携带授权码向服务端发起请求-&amp;gt;服务端使用授权码向微信的接口发起请求,获取openid(微信用户唯一标识)-&amp;gt;查询若为新用户则1创建-&amp;gt;创建jwt令牌,与用户基本信息一起返回给小程序
+设置拦截器,对除登录</p>
     
 
     <!-- Footer: tags & reading time -->
@@ -941,7 +986,7 @@
   <!-- Right side chevron panel for coverless cards -->
   
   <div class="post-card-arrow">
-    <a href="/2026/08/22/22/" aria-hidden="true" tabindex="-1">
+    <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/" aria-hidden="true" tabindex="-1">
       <span class="material-symbols-outlined">chevron_right</span>
     </a>
   </div>
@@ -959,16 +1004,16 @@
   <div class="post-card-content">
     <!-- Title -->
     <h2 class="post-card-title">
-      <a href="/2026/08/22/hello-%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/">hello,我的第一篇文章</a>
+      <a href="/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/"></a>
     </h2>
 
     <!-- Meta line: date, category -->
     <div class="post-card-meta">
       
       
-      <time datetime="2026-08-22" pubdate>
+      <time datetime="2026-08-25" pubdate>
         <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-22</span>
+        <span>2026-08-25</span>
       </time>
       
       
@@ -976,7 +1021,23 @@
 
     <!-- Description / excerpt -->
     
-    <p class="post-card-excerpt">hello今天自己尝试部署玩一下</p>
+    <p class="post-card-excerpt">前几天陆陆续续写了苍穹外卖的员工管理,菜品,分类,套餐管理等,未坚持每日学习,未写复盘
+1. 今天做了什么(day5的内容)
+
+Redis入门
+安装
+Redis里的数据类型:字符串,哈希,集合,有序集合,列表
+Redis操作的命令
+java程序中操作Redis数据库:使用Spring Data Redis
+配置
+使用
+
+
+
+
+店铺相关接口 , 使用Redis存储
+设置店铺营业状态
+获取店铺状态(用</p>
     
 
     <!-- Footer: tags & reading time -->
@@ -984,7 +1045,7 @@
       
       
       <span class="post-card-reading-time">
-        1 min
+        3 min
       </span>
       
     </div>
@@ -993,7 +1054,7 @@
   <!-- Right side chevron panel for coverless cards -->
   
   <div class="post-card-arrow">
-    <a href="/2026/08/22/hello-%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" aria-hidden="true" tabindex="-1">
+    <a href="/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/" aria-hidden="true" tabindex="-1">
       <span class="material-symbols-outlined">chevron_right</span>
     </a>
   </div>
@@ -1011,16 +1072,16 @@
   <div class="post-card-content">
     <!-- Title -->
     <h2 class="post-card-title">
-      <a href="/2026/08/22/hello-world/">Hello World</a>
+      <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/"></a>
     </h2>
 
     <!-- Meta line: date, category -->
     <div class="post-card-meta">
       
       
-      <time datetime="2026-08-22" pubdate>
+      <time datetime="2026-08-25" pubdate>
         <span class="material-symbols-outlined md-18">calendar_today</span>
-        <span>2026-08-22</span>
+        <span>2026-08-25</span>
       </time>
       
       
@@ -1028,8 +1089,19 @@
 
     <!-- Description / excerpt -->
     
-    <p class="post-card-excerpt">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick</p>
+    <p class="post-card-excerpt">day11计划
+前后端分离开发规范与REST风格
+工程搭建与基础代码结构
+部门管理CRUD功能实现
+参数接收方式详解
+MyBatis结果映射与驼峰命名
+Nginx部署与前后端联调
+Logback日志技术
+
+笔记1.前后端分离开发前后端分离将工程拆分为前端工程和后端工程，各自独立开发、独立部署。前端通过异步请求获取数据，后端根据接口文档提供数据。
+开发流程
+需求分析 → 理解产品原型和需求文档
+接口</p>
     
 
     <!-- Footer: tags & reading time -->
@@ -1037,7 +1109,7 @@ Quick</p>
       
       
       <span class="post-card-reading-time">
-        1 min
+        20 min
       </span>
       
     </div>
@@ -1046,7 +1118,313 @@ Quick</p>
   <!-- Right side chevron panel for coverless cards -->
   
   <div class="post-card-arrow">
-    <a href="/2026/08/22/hello-world/" aria-hidden="true" tabindex="-1">
+    <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/" aria-hidden="true" tabindex="-1">
+      <span class="material-symbols-outlined">chevron_right</span>
+    </a>
+  </div>
+  
+</article>
+
+        
+          
+
+<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
+  <!-- Cover image area -->
+  
+
+  <!-- Content area -->
+  <div class="post-card-content">
+    <!-- Title -->
+    <h2 class="post-card-title">
+      <a href="/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/"></a>
+    </h2>
+
+    <!-- Meta line: date, category -->
+    <div class="post-card-meta">
+      
+      
+      <time datetime="2026-08-25" pubdate>
+        <span class="material-symbols-outlined md-18">calendar_today</span>
+        <span>2026-08-25</span>
+      </time>
+      
+      
+    </div>
+
+    <!-- Description / excerpt -->
+    
+    <p class="post-card-excerpt">计划
+JDBC基础入门
+JDBC查询与增删改
+SQL注入与预编译SQL
+MyBatis快速入门
+MyBatis注解写法与XML映射
+SpringBoot配置文件与数据库连接池
+
+笔记1.JDBC概述JDBC是什么
+JDBC：Java DataBase Connectivity，使用Java语言操作关系型数据库的一套API
+本质：Sun公司定义的一套接口规范，数据库厂商提供驱动jar包实现接口
+执行</p>
+    
+
+    <!-- Footer: tags & reading time -->
+    <div class="post-card-footer">
+      
+      
+      <span class="post-card-reading-time">
+        20 min
+      </span>
+      
+    </div>
+  </div>
+
+  <!-- Right side chevron panel for coverless cards -->
+  
+  <div class="post-card-arrow">
+    <a href="/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" aria-hidden="true" tabindex="-1">
+      <span class="material-symbols-outlined">chevron_right</span>
+    </a>
+  </div>
+  
+</article>
+
+        
+          
+
+<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
+  <!-- Cover image area -->
+  
+
+  <!-- Content area -->
+  <div class="post-card-content">
+    <!-- Title -->
+    <h2 class="post-card-title">
+      <a href="/2026/08/25/day7%20Maven%E7%9A%84%E4%BD%BF%E7%94%A8,%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"></a>
+    </h2>
+
+    <!-- Meta line: date, category -->
+    <div class="post-card-meta">
+      
+      
+      <time datetime="2026-08-25" pubdate>
+        <span class="material-symbols-outlined md-18">calendar_today</span>
+        <span>2026-08-25</span>
+      </time>
+      
+      
+    </div>
+
+    <!-- Description / excerpt -->
+    
+    <p class="post-card-excerpt">day7计划
+Maven项目构建与管理入门
+
+笔记1.Maven概述
+作用：项目构建、依赖管理、项目信息管理
+核心概念：基于项目对象模型（POM），通过pom.xml管理项目
+
+2.Maven项目结构12345678910111213maven-project01/├── pom.xml                 # Maven核心配置文件├── src/│   ├── main/│   │</p>
+    
+
+    <!-- Footer: tags & reading time -->
+    <div class="post-card-footer">
+      
+      
+      <span class="post-card-reading-time">
+        5 min
+      </span>
+      
+    </div>
+  </div>
+
+  <!-- Right side chevron panel for coverless cards -->
+  
+  <div class="post-card-arrow">
+    <a href="/2026/08/25/day7%20Maven%E7%9A%84%E4%BD%BF%E7%94%A8,%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" aria-hidden="true" tabindex="-1">
+      <span class="material-symbols-outlined">chevron_right</span>
+    </a>
+  </div>
+  
+</article>
+
+        
+          
+
+<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
+  <!-- Cover image area -->
+  
+
+  <!-- Content area -->
+  <div class="post-card-content">
+    <!-- Title -->
+    <h2 class="post-card-title">
+      <a href="/2026/08/25/day9%20%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ESQL%E8%AF%AD%E5%8F%A5/"></a>
+    </h2>
+
+    <!-- Meta line: date, category -->
+    <div class="post-card-meta">
+      
+      
+      <time datetime="2026-08-25" pubdate>
+        <span class="material-symbols-outlined md-18">calendar_today</span>
+        <span>2026-08-25</span>
+      </time>
+      
+      
+    </div>
+
+    <!-- Description / excerpt -->
+    
+    <p class="post-card-excerpt">计划
+MySQL概述
+SQL语句（DDL、DML、DQL）
+数据类型与约束
+表结构设计案例
+
+笔记1.MySQL概述相关概念
+数据库（DB）：存储和管理数据的仓库
+数据库管理系统（DBMS）：操作和管理数据库的大型软件
+SQL（结构化查询语言）：操作关系型数据库的编程语言，定义统一标准
+
+MySQL版本
+商业版本：收费，提供技术支持
+社区版本：免费开源，本课程使用MySQL 8.0.34社区版</p>
+    
+
+    <!-- Footer: tags & reading time -->
+    <div class="post-card-footer">
+      
+      
+      <span class="post-card-reading-time">
+        12 min
+      </span>
+      
+    </div>
+  </div>
+
+  <!-- Right side chevron panel for coverless cards -->
+  
+  <div class="post-card-arrow">
+    <a href="/2026/08/25/day9%20%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ESQL%E8%AF%AD%E5%8F%A5/" aria-hidden="true" tabindex="-1">
+      <span class="material-symbols-outlined">chevron_right</span>
+    </a>
+  </div>
+  
+</article>
+
+        
+          
+
+<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
+  <!-- Cover image area -->
+  
+
+  <!-- Content area -->
+  <div class="post-card-content">
+    <!-- Title -->
+    <h2 class="post-card-title">
+      <a href="/2026/08/25/day8%20SpringBootWeb%E5%85%A5%E9%97%A8%E3%80%81HTTP%E5%8D%8F%E8%AE%AE%E4%B8%8E%E5%88%86%E5%B1%82%E8%A7%A3%E8%80%A6/"></a>
+    </h2>
+
+    <!-- Meta line: date, category -->
+    <div class="post-card-meta">
+      
+      
+      <time datetime="2026-08-25" pubdate>
+        <span class="material-symbols-outlined md-18">calendar_today</span>
+        <span>2026-08-25</span>
+      </time>
+      
+      
+    </div>
+
+    <!-- Description / excerpt -->
+    
+    <p class="post-card-excerpt">day8计划
+SpringBootWeb入门
+HTTP协议学习
+SpringBootWeb案例
+分层解耦与IOC&amp;#x2F;DI
+
+笔记1.SpringBootWeb入门Spring家族简介
+SpringFramework：Spring家族最基础、最核心的框架，提供依赖注入、事务管理、Web开发支持等功能
+SpringBoot：简化配置、快速开发，是企业开发的主流方式
+Spring全家桶：Spri</p>
+    
+
+    <!-- Footer: tags & reading time -->
+    <div class="post-card-footer">
+      
+      
+      <span class="post-card-reading-time">
+        18 min
+      </span>
+      
+    </div>
+  </div>
+
+  <!-- Right side chevron panel for coverless cards -->
+  
+  <div class="post-card-arrow">
+    <a href="/2026/08/25/day8%20SpringBootWeb%E5%85%A5%E9%97%A8%E3%80%81HTTP%E5%8D%8F%E8%AE%AE%E4%B8%8E%E5%88%86%E5%B1%82%E8%A7%A3%E8%80%A6/" aria-hidden="true" tabindex="-1">
+      <span class="material-symbols-outlined">chevron_right</span>
+    </a>
+  </div>
+  
+</article>
+
+        
+          
+
+<article class="post-card-item card-base" data-pinned="false" data-has-cover="false">
+  <!-- Cover image area -->
+  
+
+  <!-- Content area -->
+  <div class="post-card-content">
+    <!-- Title -->
+    <h2 class="post-card-title">
+      <a href="/2026/08/25/day6%20js,vue,Ajax/"></a>
+    </h2>
+
+    <!-- Meta line: date, category -->
+    <div class="post-card-meta">
+      
+      
+      <time datetime="2026-08-25" pubdate>
+        <span class="material-symbols-outlined md-18">calendar_today</span>
+        <span>2026-08-25</span>
+      </time>
+      
+      
+    </div>
+
+    <!-- Description / excerpt -->
+    
+    <p class="post-card-excerpt">day6计划
+JS基础语法学习
+Vue3框架入门
+
+笔记1.JS引入方式
+内联式：直接在&amp;lt;script&amp;gt;标签内编写代码，写在body底部避免DOM未加载完成 123&amp;lt;script&amp;gt;  alert(&amp;#x27;hello world&amp;#x27;);&amp;lt;/script&amp;gt;
+外部式：通过src属性引入外部JS文件，利于代码复用和维护 1&amp;lt;script src=&amp;qu</p>
+    
+
+    <!-- Footer: tags & reading time -->
+    <div class="post-card-footer">
+      
+      
+      <span class="post-card-reading-time">
+        10 min
+      </span>
+      
+    </div>
+  </div>
+
+  <!-- Right side chevron panel for coverless cards -->
+  
+  <div class="post-card-arrow">
+    <a href="/2026/08/25/day6%20js,vue,Ajax/" aria-hidden="true" tabindex="-1">
       <span class="material-symbols-outlined">chevron_right</span>
     </a>
   </div>
@@ -1060,6 +1438,35 @@ Quick</p>
     <!-- Pagination -->
     
 
+
+<div class="pagination-wrapper">
+  <nav class="pagination" aria-label="pagination">
+    
+    <span class="pagination-item pagination-prev pagination-disabled" aria-disabled="true">
+      <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+      <span>上一页</span>
+    </span>
+    
+
+    <span class="pagination-info">
+      <span class="page-number">1</span>
+      <span class="page-divider">/</span>
+      <span class="page-total">2</span>
+    </span>
+
+    
+    <a
+      href="/page/2/"
+      class="pagination-item pagination-next"
+      rel="next"
+      aria-label="下一页"
+    >
+      <span>下一页</span>
+      <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+    </a>
+    
+  </nav>
+</div>
 
 
   </main>
@@ -1101,7 +1508,7 @@ Quick</p>
         <span class="material-symbols-outlined stat-icon">description</span>
         <span>文章</span>
       </div>
-      <span class="stat-value">5</span>
+      <span class="stat-value">15</span>
     </div>
     
     <!-- Categories -->
@@ -1128,7 +1535,7 @@ Quick</p>
         <span class="material-symbols-outlined stat-icon">trending_up</span>
         <span>总字数</span>
       </div>
-      <span class="stat-value">88</span>
+      <span class="stat-value">18,658</span>
     </div>
     
     <!-- Running Days -->
@@ -1150,7 +1557,7 @@ Quick</p>
         <span>最后活动</span>
       </div>
       <div>
-        <span class="stat-value" id="site-last-active" data-latest-date="2026-08-22T15:07:28.000Z">--</span>
+        <span class="stat-value" id="site-last-active" data-latest-date="2026-08-25T03:29:15.063Z">--</span>
       </div>
     </div>
   </div>
@@ -1694,7 +2101,7 @@ Quick</p>
             <span class="material-symbols-outlined">schedule</span>
           </div>
           <div class="site-info-card-label">构建时间</div>
-          <div class="site-info-card-value">2026/8/22 23:07:36</div>
+          <div class="site-info-card-value">2026/8/25 11:29:30</div>
         </div>
 
         <!-- System Info -->
@@ -1932,7 +2339,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <span class="material-symbols-outlined stat-icon">description</span>
         <span>文章</span>
       </div>
-      <span class="stat-value">5</span>
+      <span class="stat-value">15</span>
     </div>
     
     <!-- Categories -->
@@ -1959,7 +2366,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <span class="material-symbols-outlined stat-icon">trending_up</span>
         <span>总字数</span>
       </div>
-      <span class="stat-value">88</span>
+      <span class="stat-value">18,658</span>
     </div>
     
     <!-- Running Days -->
@@ -1981,7 +2388,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <span>最后活动</span>
       </div>
       <div>
-        <span class="stat-value" id="site-last-active" data-latest-date="2026-08-22T15:07:28.000Z">--</span>
+        <span class="stat-value" id="site-last-active" data-latest-date="2026-08-25T03:29:15.063Z">--</span>
       </div>
     </div>
   </div>
@@ -2096,7 +2503,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <span class="material-symbols-outlined">schedule</span>
           </div>
           <div class="site-info-card-label">构建时间</div>
-          <div class="site-info-card-value">2026/8/22 23:07:36</div>
+          <div class="site-info-card-value">2026/8/25 11:29:30</div>
         </div>
 
         <!-- System Info -->

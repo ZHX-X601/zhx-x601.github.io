@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 
-<title>动态 - Hexo</title>
+<title>Hexo</title>
 
 
 
@@ -14,10 +14,10 @@
 
 
 <!-- Open Graph -->
-<meta property="og:title" content="动态 - Hexo">
+<meta property="og:title" content="Hexo">
 <meta property="og:description" content="">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.blog-x.cc.cd">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.blog-x.cc.cd/2026/08/25/day9%20%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ESQL%E8%AF%AD%E5%8F%A5/">
 <meta property="og:site_name" content="Hexo">
 
 <meta property="og:image" content="/img/favicon.ico">
@@ -25,7 +25,7 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="动态 - Hexo">
+<meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="">
 
 <meta name="twitter:image" content="/img/favicon.ico">
@@ -101,7 +101,7 @@
 
 
 <!-- Canonical URL -->
-<link rel="canonical" href="https://www.blog-x.cc.cd">
+<link rel="canonical" href="https://www.blog-x.cc.cd/2026/08/25/day9%20%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ESQL%E8%AF%AD%E5%8F%A5/">
 
 <!-- No-Referrer Domain Script -->
 
@@ -483,14 +483,36 @@
     
 
     
-
-    
-    <!-- Page Title Overlay -->
-    <div class="page-title-overlay">
-      
-      <h1 class="page-title">动态</h1>
-      
+    <!-- Post Meta Overlay -->
+    <div class="post-meta-overlay banner-post-meta">
+      <h1 class="post-meta-title"></h1>
+      <div class="post-meta-info meta-info">
+        
+        <span class="post-meta-date">
+          <span class="material-symbols-outlined md-18">calendar_today</span>
+          发布于: 2026-08-25
+        </span>
+        
+        
+        <span class="post-meta-updated">
+          <span class="material-symbols-outlined md-18">edit</span>
+          更新于: 2026-07-28 20:29
+        </span>
+        
+        
+        <span class="post-meta-word-count">
+          <span class="material-symbols-outlined md-18">description</span>
+          5591 字
+        </span>
+        <span class="post-meta-reading-time">
+          <span class="material-symbols-outlined md-18">schedule</span>
+          12 min
+        </span>
+        
+      </div>
     </div>
+    
+
     
   </div>
 
@@ -525,6 +547,7 @@
   
   <aside class="sidebar-left" aria-label="左侧边栏">
     
+      
 
 <!-- Left sidebar widgets -->
 <div class="sidebar-widgets sidebar-left-widgets">
@@ -744,11 +767,19 @@
   
 </div>
 
+    
+    
+    
+      
+
+
+
+    
   </aside>
   
 
   <!-- ===== Main Content ===== -->
-  <main id="main-content" class="page-container">
+  <main id="main-content" aria-label="文章">
     
 <div class="content-nav-bar card-base">
   <!-- Home button -->
@@ -769,56 +800,907 @@
   
 </div>
 
-    
-    <div class="dynamic-page-container">
-      <!-- Dynamic Header -->
-      <header class="card-base dynamic-header-card">
-        <div class="dynamic-header-top">
-          <div class="dynamic-brand">
-            <div class="dynamic-header-icon">
-              <span class="material-symbols-outlined">forum</span>
-            </div>
-            <div class="dynamic-brand-text">
-              <h1 class="dynamic-title">动态</h1>
-              <p class="dynamic-subtitle">随手记下此刻的想法与日常。</p>
-            </div>
-          </div>
-          <div class="dynamic-header-badge">
-            <span class="material-symbols-outlined">description</span>
-            <span><span id="dynamic-count-num">0</span> 动态</span>
-          </div>
-        </div>
-        
-        <!-- Filters (Search + Year select) -->
-        <div class="dynamic-filters">
-          <div class="dynamic-search-wrapper">
-            <span class="material-symbols-outlined dynamic-search-icon">search</span>
-            <input type="text" id="dynamic-search-input" class="dynamic-search-input" placeholder="搜索动态...">
-          </div>
-          <div class="dynamic-year-select-wrapper">
-            <select id="dynamic-year-select" class="dynamic-year-select">
-              <option value="all">全部年份</option>
-              
-            </select>
-          </div>
-        </div>
-      </header>
+    <article class="post-container" itemscope itemtype="http://schema.org/Article">
 
-      <!-- Dynamics List -->
-      <section class="dynamic-list">
+
+      <div class="post-content-card">
+        <!-- Post meta top: title, date, author, reading time, word count, categories -->
         
-          <div class="card-base" style="padding: 3rem; text-align: center; color: var(--text-tertiary);">
-            <p>暂无动态更新~</p>
-          </div>
-        
-      </section>
+
+
+  <header class="post-meta-top">
+    <!-- Top row: Word count & Reading time pills -->
+    <div class="post-header-badges-top">
+      
+      <span class="post-meta-badge badge-wordcount">
+        <span class="material-symbols-outlined" aria-hidden="true">trending_up</span>
+        <span>5591 字</span>
+      </span>
+      
+
+      
+      <span class="post-meta-badge badge-reading-time">
+        <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+        <span>
+          
+          
+          14 分钟
+        </span>
+      </span>
+      
     </div>
+
+    <!-- Title with CSS-styled vertical bar prefix -->
+    <h1 class="post-title post-title-custom">
+      <strong></strong>
+    </h1>
+
+    <!-- Bottom row: Date & Categories/Tags path -->
+    <div class="post-header-badges-bottom">
+      
+      <span class="post-meta-badge badge-date">
+        <span class="material-symbols-outlined" aria-hidden="true">calendar_month</span>
+        <time datetime="2026-08-25 11:29" pubdate>
+          2026-08-25
+        </time>
+      </span>
+      
+
+      <!-- Categories & Tags Breadcrumb Path -->
+      
+      
+    </div>
+
+    <!-- Post updated notice -->
+    
+  </header>
+
+
+
+        <!-- Post content -->
+        <div
+          class="post-content markdown-body custom-md"
+          itemprop="articleBody"
+        >
+          <h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><ol>
+<li>MySQL概述</li>
+<li>SQL语句（DDL、DML、DQL）</li>
+<li>数据类型与约束</li>
+<li>表结构设计案例</li>
+</ol>
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="1-MySQL概述"><a href="#1-MySQL概述" class="headerlink" title="1.MySQL概述"></a>1.MySQL概述</h3><h5 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h5><ul>
+<li><strong>数据库（DB）</strong>：存储和管理数据的仓库</li>
+<li><strong>数据库管理系统（DBMS）</strong>：操作和管理数据库的大型软件</li>
+<li><strong>SQL（结构化查询语言）</strong>：操作关系型数据库的编程语言，定义统一标准</li>
+</ul>
+<h5 id="MySQL版本"><a href="#MySQL版本" class="headerlink" title="MySQL版本"></a>MySQL版本</h5><ul>
+<li><strong>商业版本</strong>：收费，提供技术支持</li>
+<li><strong>社区版本</strong>：免费开源，本课程使用MySQL 8.0.34社区版</li>
+</ul>
+<h5 id="连接方式"><a href="#连接方式" class="headerlink" title="连接方式"></a>连接方式</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 本地连接</span></span><br><span class="line">mysql <span class="operator">-</span>u用户名 <span class="operator">-</span>p密码</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 远程连接</span></span><br><span class="line">mysql <span class="operator">-</span>hIP地址 <span class="operator">-</span>P端口号 <span class="operator">-</span>u用户名 <span class="operator">-</span>p密码</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-SQL语句分类"><a href="#2-SQL语句分类" class="headerlink" title="2.SQL语句分类"></a>2.SQL语句分类</h3><p>SQL语句根据功能分为四大类：</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>全称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DDL</td>
+<td>Data Definition Language</td>
+<td>数据定义语言，定义数据库对象（数据库、表、字段）</td>
+</tr>
+<tr>
+<td>DML</td>
+<td>Data Manipulation Language</td>
+<td>数据操作语言，对表中数据进行增删改</td>
+</tr>
+<tr>
+<td>DQL</td>
+<td>Data Query Language</td>
+<td>数据查询语言，查询表记录</td>
+</tr>
+<tr>
+<td>DCL</td>
+<td>Data Control Language</td>
+<td>数据控制语言，创建用户、控制权限</td>
+</tr>
+</tbody></table>
+<h3 id="3-DDL语句"><a href="#3-DDL语句" class="headerlink" title="3.DDL语句"></a>3.DDL语句</h3><h5 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询所有数据库</span></span><br><span class="line"><span class="keyword">show</span> databases;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询当前数据库</span></span><br><span class="line"><span class="keyword">select</span> database();</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建数据库</span></span><br><span class="line"><span class="keyword">create</span> database [if <span class="keyword">not</span> <span class="keyword">exists</span>] 数据库名 [<span class="keyword">default</span> charset utf8mb4];</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用数据库</span></span><br><span class="line">use 数据库名;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除数据库</span></span><br><span class="line"><span class="keyword">drop</span> database [if <span class="keyword">exists</span>] 数据库名;</span><br></pre></td></tr></table></figure>
+
+<h5 id="表结构操作"><a href="#表结构操作" class="headerlink" title="表结构操作"></a>表结构操作</h5><p><strong>创建表</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create table</span> 表名(</span><br><span class="line">    字段<span class="number">1</span> 字段类型 [约束] [comment 注释],</span><br><span class="line">    字段<span class="number">2</span> 字段类型 [约束] [comment 注释],</span><br><span class="line">    ...</span><br><span class="line">) [comment 表注释];</span><br></pre></td></tr></table></figure>
+
+<p><strong>查询表</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询当前数据库所有表</span></span><br><span class="line"><span class="keyword">show</span> tables;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看表结构</span></span><br><span class="line"><span class="keyword">desc</span> 表名;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询建表语句</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">create table</span> 表名;</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改表</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 添加字段</span></span><br><span class="line"><span class="keyword">alter table</span> 表名 <span class="keyword">add</span> 字段名 类型(长度) [comment 注释] [约束];</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改字段类型</span></span><br><span class="line"><span class="keyword">alter table</span> 表名 modify 字段名 新类型(长度);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改字段名和类型</span></span><br><span class="line"><span class="keyword">alter table</span> 表名 change 旧字段名 新字段名 类型(长度) [comment 注释];</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除字段</span></span><br><span class="line"><span class="keyword">alter table</span> 表名 <span class="keyword">drop</span> 字段名;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 修改表名</span></span><br><span class="line">rename <span class="keyword">table</span> 表名 <span class="keyword">to</span> 新表名;</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除表</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> [if <span class="keyword">exists</span>] 表名;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-约束"><a href="#4-约束" class="headerlink" title="4.约束"></a>4.约束</h3><h5 id="约束概念"><a href="#约束概念" class="headerlink" title="约束概念"></a>约束概念</h5><p>约束是作用在表中字段上的规则，保证数据的正确性、有效性和完整性。</p>
+<h5 id="常用约束"><a href="#常用约束" class="headerlink" title="常用约束"></a>常用约束</h5><table>
+<thead>
+<tr>
+<th>约束</th>
+<th>描述</th>
+<th>关键字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>非空约束</td>
+<td>限制字段值不能为null</td>
+<td>not null</td>
+</tr>
+<tr>
+<td>唯一约束</td>
+<td>保证字段数据唯一不重复</td>
+<td>unique</td>
+</tr>
+<tr>
+<td>主键约束</td>
+<td>唯一标识一行数据，非空且唯一</td>
+<td>primary key</td>
+</tr>
+<tr>
+<td>默认约束</td>
+<td>未指定值时采用默认值</td>
+<td>default</td>
+</tr>
+<tr>
+<td>外键约束</td>
+<td>建立表间连接，保证数据一致性</td>
+<td>foreign key</td>
+</tr>
+</tbody></table>
+<h5 id="主键自增"><a href="#主键自增" class="headerlink" title="主键自增"></a>主键自增</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id <span class="type">int</span> <span class="keyword">primary key</span> auto_increment comment <span class="string">&#x27;ID,唯一标识&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-数据类型"><a href="#5-数据类型" class="headerlink" title="5.数据类型"></a>5.数据类型</h3><h5 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h5><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>小写</th>
+<th>大小</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TINYINT</td>
+<td>tinyint</td>
+<td>1byte</td>
+<td>小整数值</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>smallint</td>
+<td>2bytes</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>MEDIUMINT</td>
+<td>mediumint</td>
+<td>3bytes</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>INT&#x2F;INTEGER</td>
+<td>int&#x2F;integer</td>
+<td>4bytes</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>bigint</td>
+<td>8bytes</td>
+<td>极大整数值</td>
+</tr>
+<tr>
+<td>FLOAT</td>
+<td>float</td>
+<td>4bytes</td>
+<td>单精度浮点数值</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>double</td>
+<td>8bytes</td>
+<td>双精度浮点数值</td>
+</tr>
+<tr>
+<td>DECIMAL</td>
+<td>decimal</td>
+<td>-</td>
+<td>小数值（精确定点数）</td>
+</tr>
+</tbody></table>
+<p><strong>示例</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 年龄（无负数，不会太大）</span></span><br><span class="line">age tinyint unsigned</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 分数（最多1位小数）</span></span><br><span class="line">score <span class="keyword">double</span>(<span class="number">4</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h5><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>小写</th>
+<th>大小</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CHAR</td>
+<td>char</td>
+<td>0-255 bytes</td>
+<td>定长字符串</td>
+</tr>
+<tr>
+<td>VARCHAR</td>
+<td>varchar</td>
+<td>0-65535 bytes</td>
+<td>变长字符串</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>text</td>
+<td>0-65535 bytes</td>
+<td>长文本数据</td>
+</tr>
+</tbody></table>
+<p><strong>示例</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 用户名（长度不定，最长50）</span></span><br><span class="line">username <span class="type">varchar</span>(<span class="number">50</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 手机号（固定11位）</span></span><br><span class="line">phone <span class="type">char</span>(<span class="number">11</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="日期时间类型"><a href="#日期时间类型" class="headerlink" title="日期时间类型"></a>日期时间类型</h5><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>小写</th>
+<th>大小</th>
+<th>格式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DATE</td>
+<td>date</td>
+<td>3</td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>time</td>
+<td>3</td>
+<td>HH:MM:SS</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>datetime</td>
+<td>8</td>
+<td>YYYY-MM-DD HH:MM:SS</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>timestamp</td>
+<td>4</td>
+<td>YYYY-MM-DD HH:MM:SS</td>
+</tr>
+</tbody></table>
+<p><strong>示例</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 生日（只需年月日）</span></span><br><span class="line">birthday <span class="type">date</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建时间（需要精确到秒）</span></span><br><span class="line">create_time datetime</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-DML语句"><a href="#6-DML语句" class="headerlink" title="6.DML语句"></a>6.DML语句</h3><h5 id="添加数据（INSERT）"><a href="#添加数据（INSERT）" class="headerlink" title="添加数据（INSERT）"></a>添加数据（INSERT）</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 指定字段添加</span></span><br><span class="line"><span class="keyword">insert into</span> 表名 (字段<span class="number">1</span>, 字段<span class="number">2</span>) <span class="keyword">values</span> (值<span class="number">1</span>, 值<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 全部字段添加</span></span><br><span class="line"><span class="keyword">insert into</span> 表名 <span class="keyword">values</span> (值<span class="number">1</span>, 值<span class="number">2</span>, ...);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 批量添加</span></span><br><span class="line"><span class="keyword">insert into</span> 表名 (字段<span class="number">1</span>, 字段<span class="number">2</span>) <span class="keyword">values</span> (值<span class="number">1</span>, 值<span class="number">2</span>), (值<span class="number">1</span>, 值<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：</p>
+<ul>
+<li>字段顺序与值顺序要一一对应</li>
+<li>字符串和日期用引号包含</li>
+<li>数据大小在字段规定范围内</li>
+</ul>
+<h5 id="修改数据（UPDATE）"><a href="#修改数据（UPDATE）" class="headerlink" title="修改数据（UPDATE）"></a>修改数据（UPDATE）</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> 表名 <span class="keyword">set</span> 字段<span class="number">1</span> <span class="operator">=</span> 值<span class="number">1</span>, 字段<span class="number">2</span> <span class="operator">=</span> 值<span class="number">2</span> [<span class="keyword">where</span> 条件];</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：</p>
+<ul>
+<li>不加条件会修改整张表所有数据</li>
+<li>修改时建议同步更新<code>update_time</code>字段</li>
+</ul>
+<h5 id="删除数据（DELETE）"><a href="#删除数据（DELETE）" class="headerlink" title="删除数据（DELETE）"></a>删除数据（DELETE）</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> 表名 [<span class="keyword">where</span> 条件];</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：</p>
+<ul>
+<li>不加条件会删除整张表数据</li>
+<li>不能删除单个字段值（用UPDATE置为NULL）</li>
+</ul>
+<h3 id="7-DQL语句"><a href="#7-DQL语句" class="headerlink" title="7.DQL语句"></a>7.DQL语句</h3><h5 id="基本查询"><a href="#基本查询" class="headerlink" title="基本查询"></a>基本查询</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询指定字段</span></span><br><span class="line"><span class="keyword">select</span> 字段<span class="number">1</span>, 字段<span class="number">2</span> <span class="keyword">from</span> 表名;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询所有字段</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> 表名;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 设置别名</span></span><br><span class="line"><span class="keyword">select</span> 字段<span class="number">1</span> <span class="keyword">as</span> 别名<span class="number">1</span>, 字段<span class="number">2</span> <span class="keyword">as</span> 别名<span class="number">2</span> <span class="keyword">from</span> 表名;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 去除重复记录</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> 字段列表 <span class="keyword">from</span> 表名;</span><br></pre></td></tr></table></figure>
+
+<h5 id="条件查询（WHERE）"><a href="#条件查询（WHERE）" class="headerlink" title="条件查询（WHERE）"></a>条件查询（WHERE）</h5><p><strong>比较运算符</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&gt;, &gt;&#x3D;</td>
+<td>大于，大于等于</td>
+</tr>
+<tr>
+<td>&lt;, &lt;&#x3D;</td>
+<td>小于，小于等于</td>
+</tr>
+<tr>
+<td>&#x3D;</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>&lt;&gt; &#x2F; !&#x3D;</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>between … and …</td>
+<td>在范围内</td>
+</tr>
+<tr>
+<td>in(…)</td>
+<td>多选一</td>
+</tr>
+<tr>
+<td>like</td>
+<td>模糊匹配</td>
+</tr>
+<tr>
+<td>is null</td>
+<td>是null</td>
+</tr>
+</tbody></table>
+<p><strong>逻辑运算符</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>and &#x2F; &amp;&amp;</td>
+<td>并且</td>
+</tr>
+<tr>
+<td>or &#x2F; | |</td>
+<td>或者</td>
+</tr>
+<tr>
+<td>not &#x2F; !</td>
+<td>非</td>
+</tr>
+</tbody></table>
+<p><strong>示例</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询薪资大于5000的员工</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> salary <span class="operator">&gt;</span> <span class="number">5000</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询入职日期在2000-01-01到2010-01-01之间的员工</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> entry_date <span class="keyword">between</span> <span class="string">&#x27;2000-01-01&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;2010-01-01&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询姓名以&#x27;张&#x27;开头的员工</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> name <span class="keyword">like</span> <span class="string">&#x27;张%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h5><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>count</td>
+<td>统计数量</td>
+</tr>
+<tr>
+<td>max</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>min</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>avg</td>
+<td>平均值</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>求和</td>
+</tr>
+</tbody></table>
+<p><strong>示例</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 统计员工总数</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> emp;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 统计平均薪资</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">avg</span>(salary) <span class="keyword">from</span> emp;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 统计最高薪资</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">max</span>(salary) <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+
+<h5 id="分组查询（GROUP-BY）"><a href="#分组查询（GROUP-BY）" class="headerlink" title="分组查询（GROUP BY）"></a>分组查询（GROUP BY）</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表名 [<span class="keyword">where</span> 条件] <span class="keyword">group</span> <span class="keyword">by</span> 分组字段 [<span class="keyword">having</span> 分组后条件];</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 按性别分组统计人数</span></span><br><span class="line"><span class="keyword">select</span> gender, <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> gender;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询入职时间在2015年之前的员工，按职位分组，获取人数&gt;=2的职位</span></span><br><span class="line"><span class="keyword">select</span> job, <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> emp <span class="keyword">where</span> entry_date <span class="operator">&lt;=</span> <span class="string">&#x27;2015-01-01&#x27;</span> <span class="keyword">group</span> <span class="keyword">by</span> job <span class="keyword">having</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="operator">&gt;=</span> <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>where与having区别</strong>：</p>
+<ul>
+<li>where：分组前过滤，不能使用聚合函数</li>
+<li>having：分组后过滤，可以使用聚合函数</li>
+</ul>
+<h5 id="排序查询（ORDER-BY）"><a href="#排序查询（ORDER-BY）" class="headerlink" title="排序查询（ORDER BY）"></a>排序查询（ORDER BY）</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表名 <span class="keyword">order</span> <span class="keyword">by</span> 字段<span class="number">1</span> 排序方式<span class="number">1</span>, 字段<span class="number">2</span> 排序方式<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>排序方式</strong>：</p>
+<ul>
+<li>ASC：升序（默认）</li>
+<li>DESC：降序</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 按入职时间升序排序</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> entry_date;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 按入职时间升序，入职时间相同按更新时间降序</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> entry_date <span class="keyword">asc</span>, update_time <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="分页查询（LIMIT）"><a href="#分页查询（LIMIT）" class="headerlink" title="分页查询（LIMIT）"></a>分页查询（LIMIT）</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表名 limit 起始索引, 查询记录数;</span><br></pre></td></tr></table></figure>
+
+<p><strong>公式</strong>：起始索引 &#x3D; (页码 - 1) * 每页条数</p>
+<p><strong>示例</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询第1页，每页5条</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp limit <span class="number">0</span>, <span class="number">5</span>;</span><br><span class="line"><span class="comment">-- 简写</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp limit <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询第2页，每页5条</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp limit <span class="number">5</span>, <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询第3页，每页5条</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp limit <span class="number">10</span>, <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-表结构设计案例"><a href="#8-表结构设计案例" class="headerlink" title="8.表结构设计案例"></a>8.表结构设计案例</h3><h5 id="员工表设计"><a href="#员工表设计" class="headerlink" title="员工表设计"></a>员工表设计</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create table</span> emp(</span><br><span class="line">    id <span class="type">int</span> unsigned <span class="keyword">primary key</span> auto_increment comment <span class="string">&#x27;ID,主键&#x27;</span>,</span><br><span class="line">    username <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not null</span> <span class="keyword">unique</span> comment <span class="string">&#x27;用户名&#x27;</span>,</span><br><span class="line">    password <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">not null</span> comment <span class="string">&#x27;密码&#x27;</span>,</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">10</span>) <span class="keyword">not null</span> comment <span class="string">&#x27;姓名&#x27;</span>,</span><br><span class="line">    gender tinyint unsigned <span class="keyword">not null</span> comment <span class="string">&#x27;性别, 1:男, 2:女&#x27;</span>,</span><br><span class="line">    phone <span class="type">char</span>(<span class="number">11</span>) <span class="keyword">not null</span> <span class="keyword">unique</span> comment <span class="string">&#x27;手机号&#x27;</span>,</span><br><span class="line">    job tinyint unsigned comment <span class="string">&#x27;职位&#x27;</span>,</span><br><span class="line">    salary <span class="type">int</span> unsigned comment <span class="string">&#x27;薪资&#x27;</span>,</span><br><span class="line">    image <span class="type">varchar</span>(<span class="number">255</span>) comment <span class="string">&#x27;头像&#x27;</span>,</span><br><span class="line">    entry_date <span class="type">date</span> comment <span class="string">&#x27;入职日期&#x27;</span>,</span><br><span class="line">    create_time datetime comment <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">    update_time datetime comment <span class="string">&#x27;修改时间&#x27;</span></span><br><span class="line">) comment <span class="string">&#x27;员工表&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="设计流程"><a href="#设计流程" class="headerlink" title="设计流程"></a>设计流程</h5><ol>
+<li>阅读产品原型及需求文档</li>
+<li>确定字段（类型、长度、约束）</li>
+<li>添加基础字段（id、create_time、update_time）</li>
+</ol>
+<h3 id="9-核心知识点总结"><a href="#9-核心知识点总结" class="headerlink" title="9.核心知识点总结"></a>9.核心知识点总结</h3><table>
+<thead>
+<tr>
+<th>知识点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DDL</td>
+<td>数据定义语言，操作数据库和表结构</td>
+</tr>
+<tr>
+<td>DML</td>
+<td>数据操作语言，增删改数据</td>
+</tr>
+<tr>
+<td>DQL</td>
+<td>数据查询语言，查询数据</td>
+</tr>
+<tr>
+<td>primary key</td>
+<td>主键约束，唯一标识</td>
+</tr>
+<tr>
+<td>auto_increment</td>
+<td>主键自增</td>
+</tr>
+<tr>
+<td>not null</td>
+<td>非空约束</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>唯一约束</td>
+</tr>
+<tr>
+<td>default</td>
+<td>默认约束</td>
+</tr>
+<tr>
+<td>int &#x2F; varchar &#x2F; datetime</td>
+<td>常用数据类型</td>
+</tr>
+<tr>
+<td>where</td>
+<td>条件查询</td>
+</tr>
+<tr>
+<td>group by</td>
+<td>分组查询</td>
+</tr>
+<tr>
+<td>order by</td>
+<td>排序查询</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>分页查询</td>
+</tr>
+<tr>
+<td>count &#x2F; max &#x2F; min &#x2F; avg &#x2F; sum</td>
+<td>聚合函数</td>
+</tr>
+</tbody></table>
+
+        </div>
+
+        <!-- Post license / copyright -->
+        
+          
+
+<!-- Support & Share Widget -->
+<div class="post-share-donate-box">
+  <div class="share-donate-left-icon">
+    <span class="material-symbols-outlined">favorite</span>
+  </div>
+  <div class="share-donate-content">
+    <div class="share-donate-title">支持与分享</div>
+    <div class="share-donate-desc">如果这篇文章对你有帮助，欢迎分享给更多人或打赏支持！</div>
+  </div>
+  <div class="share-donate-actions">
+    <button class="share-donate-btn share-btn-outline" id="share-post-btn">
+      <span class="material-symbols-outlined">share</span>
+      <span>分享</span>
+    </button>
+    <a href="/donate/" class="share-donate-btn donate-btn-filled">
+      <span>打赏</span>
+      <span class="material-symbols-outlined">arrow_right_alt</span>
+    </a>
+  </div>
+</div>
+
+<!-- Copyright Card -->
+<div class="post-copyright-box">
+  <div class="copyright-watermark">CC</div>
+  <div class="copyright-header">
+    <span class="copyright-title"></span>
+    <a class="copyright-link" href="https://www.blog-x.cc.cd/2026/08/25/day9%20%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ESQL%E8%AF%AD%E5%8F%A5/" target="_blank" rel="noopener noreferrer">
+      https://www.blog-x.cc.cd/2026/08/25/day9%20%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ESQL%E8%AF%AD%E5%8F%A5/
+    </a>
+  </div>
+  <div class="copyright-meta">
+    <div class="copyright-meta-item">
+      <span class="meta-label">author</span>
+      <span class="meta-value">John Doe</span>
+    </div>
+    <div class="copyright-meta-item">
+      <span class="meta-label">发布于</span>
+      <span class="meta-value">2026-08-25</span>
+    </div>
+    <div class="copyright-meta-item">
+      <span class="meta-label">许可协议</span>
+      <span class="meta-value">
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener noreferrer">
+          CC BY-NC-SA 4.0
+        </a>
+      </span>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const shareBtn = document.getElementById('share-post-btn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', function() {
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        showToast('链接已复制到剪贴板，快去分享给好友吧！');
+      }).catch(function() {
+        showToast('复制失败，请手动复制链接');
+      });
+    });
+  }
+  
+  function showToast(message) {
+    let toast = document.getElementById('firefly-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'firefly-toast';
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(1rem);
+        background: oklch(0.25 0.12 var(--hue));
+        color: #fff;
+        padding: 0.65rem 1.5rem;
+        border-radius: 9999px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        font-size: 0.875rem;
+        font-weight: 600;
+        z-index: 99999;
+        opacity: 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+      `;
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    setTimeout(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+    }, 50);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(1rem)';
+    }, 2500);
+  }
+});
+</script>
+
+        
+
+        <!-- Post meta bottom: tags, last modified -->
+        
+
+<footer class="post-meta-bottom">
+  <!-- Tags list -->
+  
+
+  <!-- Categories list at bottom -->
+  
+
+  <!-- Last modified date -->
+  
+</footer>
+
+      </div>
+
+      <!-- Share buttons -->
+      
+
+      <!-- Footer widgets (Alert, Prev/Next Navigation, Smart Related & Random Articles) -->
+      
+
+<div class="post-footer-widgets">
+  <!-- Warning Info Alert -->
+  
+
+  <!-- Prev / Next Navigation -->
+  <nav class="post-footer-navigation">
+    <div class="post-nav-card-wrapper">
+      
+      <a href="/2026/08/25/day7%20Maven%E7%9A%84%E4%BD%BF%E7%94%A8,%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="post-nav-card card-base prev-nav-card" title="">
+        <span class="material-symbols-outlined nav-arrow">chevron_left</span>
+        <span class="nav-card-title"></span>
+      </a>
+      
+    </div>
+    <div class="post-nav-card-wrapper">
+      
+      <a href="/2026/08/25/day8%20SpringBootWeb%E5%85%A5%E9%97%A8%E3%80%81HTTP%E5%8D%8F%E8%AE%AE%E4%B8%8E%E5%88%86%E5%B1%82%E8%A7%A3%E8%80%A6/" class="post-nav-card card-base next-nav-card" title="">
+        <span class="nav-card-title"></span>
+        <span class="material-symbols-outlined nav-arrow">chevron_right</span>
+      </a>
+      
+    </div>
+  </nav>
+
+  <!-- Side-by-Side Recommendations Grid -->
+  <div class="post-recommendations-row">
+    <!-- Left Column: Related Posts -->
+    <div class="recommendations-column card-base">
+      <div class="recommendations-column-header">
+        <div class="column-header-title">
+          <span class="material-symbols-outlined">schema</span>
+          <h3>相关文章</h3>
+        </div>
+        <span class="recommend-badge smart-badge">智能推荐</span>
+      </div>
+      <ul class="recommend-list">
+        
+          
+          <li>
+            <a href="/2026/08/25/day22%20%E7%BC%93%E5%AD%98/" class="recommend-item">
+              <span class="recommend-index-badge first-index">1</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">1. 今天做了什么外卖day7的一部分 缓存菜品 缓存套餐 2. 核心...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/" class="recommend-item">
+              <span class="recommend-index-badge ">2</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">1. 今天做了什么(外卖day07,day08) 购物车相关接口 用户...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/" class="recommend-item">
+              <span class="recommend-index-badge ">3</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">1. 今天做了什么(外卖day6的内容) HttpClient的使用...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/" class="recommend-item">
+              <span class="recommend-index-badge ">4</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">前几天陆陆续续写了苍穹外卖的员工管理,菜品,分类,套餐管理等,未坚持每...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/" class="recommend-item">
+              <span class="recommend-index-badge ">5</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day11计划 前后端分离开发规范与REST风格 工程搭建与基础代码结...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <!-- Right Column: Random Posts -->
+    <div class="recommendations-column card-base">
+      <div class="recommendations-column-header">
+        <div class="column-header-title">
+          <span class="material-symbols-outlined">explore</span>
+          <h3>随机文章</h3>
+        </div>
+        <span class="recommend-badge random-badge">随机推荐</span>
+      </div>
+      <ul class="recommend-list">
+        
+          
+          <li>
+            <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/" class="recommend-item">
+              <span class="recommend-index-badge first-index">1</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">1. 今天做了什么(外卖day6的内容) HttpClient的使用...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day6%20js,vue,Ajax/" class="recommend-item">
+              <span class="recommend-index-badge ">2</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day6计划 JS基础语法学习 Vue3框架入门 笔记1.JS引入方式...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day4%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E3%80%81%E5%8F%8D%E5%B0%84%E4%B8%8E%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" class="recommend-item">
+              <span class="recommend-index-badge ">3</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">计划网络编程，反射与动态代理 总结1.网络编程1.InetAddres...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day7%20Maven%E7%9A%84%E4%BD%BF%E7%94%A8,%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="recommend-item">
+              <span class="recommend-index-badge ">4</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day7计划 Maven项目构建与管理入门 笔记1.Maven概述 作...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day10%20Java%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" class="recommend-item">
+              <span class="recommend-index-badge ">5</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">计划 JDBC基础入门 JDBC查询与增删改 SQL注入与预编译SQL...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+    </article>
+
+    <!-- Comments section -->
+    
+    <section class="post-comments" aria-label="评论">
+      
+<div class="comments-container">
+  <div class="comments-title">评论</div>
+  <div class="giscus-wrapper">
+    <script src="https://giscus.app/client.js"
+      data-repo="lkdenchin/hexo-blog-comments"
+      data-repo-id="R_kgDORXaOrA"
+      data-category="Announcements"
+      data-category-id="DIC_kwDORXaOrM4C3F8Y"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="1"
+      data-input-position="top"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+
+    </section>
+    
   </main>
 
   <!-- ===== Right Sidebar ===== -->
   
   <aside class="sidebar-right" aria-label="右侧边栏">
     
+      
 
 <!-- Right sidebar widgets -->
 <div class="sidebar-widgets sidebar-right-widgets">
@@ -1491,6 +2373,23 @@ document.addEventListener('DOMContentLoaded', function() {
   
 </div>
 
+    
+    
+      
+
+
+<div id="toc" class="toc-widget">
+  <div class="toc-header">
+    <span>目录</span>
+  </div>
+  <div class="toc-body" id="toc-body">
+    <!-- Populated by client-side JavaScript -->
+  </div>
+</div>
+
+
+    
+    
   </aside>
   
 
@@ -1893,7 +2792,10 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
+
+  <!-- Floating TOC (always available via JS, appears as a floating widget on scroll) -->
   
+
   
 
 <footer id="site-footer" class="site-footer" role="contentinfo">
@@ -1950,43 +2852,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </footer>
 
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const searchInput = document.getElementById('dynamic-search-input');
-  const yearSelect = document.getElementById('dynamic-year-select');
-  const cards = document.querySelectorAll('.dynamic-card');
-  const countEl = document.getElementById('dynamic-count-num');
-  
-  function filterDynamics() {
-    const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
-    const year = yearSelect ? yearSelect.value : 'all';
-    let visibleCount = 0;
-    
-    cards.forEach(card => {
-      const text = card.getAttribute('data-content');
-      const cardYear = card.getAttribute('data-year');
-      
-      const matchesSearch = text.includes(query);
-      const matchesYear = (year === 'all' || cardYear === year);
-      
-      if (matchesSearch && matchesYear) {
-        card.style.display = 'flex';
-        visibleCount++;
-      } else {
-        card.style.display = 'none';
-      }
-    });
-    
-    if (countEl) {
-      countEl.textContent = visibleCount;
-    }
-  }
-  
-  if (searchInput) searchInput.addEventListener('input', filterDynamics);
-  if (yearSelect) yearSelect.addEventListener('change', filterDynamics);
-});
-</script>
 
     </div>
   </div>

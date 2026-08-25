@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 
-<title>动态 - Hexo</title>
+<title>Hexo</title>
 
 
 
@@ -14,10 +14,10 @@
 
 
 <!-- Open Graph -->
-<meta property="og:title" content="动态 - Hexo">
+<meta property="og:title" content="Hexo">
 <meta property="og:description" content="">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.blog-x.cc.cd">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.blog-x.cc.cd/2026/08/25/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
 <meta property="og:site_name" content="Hexo">
 
 <meta property="og:image" content="/img/favicon.ico">
@@ -25,7 +25,7 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="动态 - Hexo">
+<meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="">
 
 <meta name="twitter:image" content="/img/favicon.ico">
@@ -101,7 +101,7 @@
 
 
 <!-- Canonical URL -->
-<link rel="canonical" href="https://www.blog-x.cc.cd">
+<link rel="canonical" href="https://www.blog-x.cc.cd/2026/08/25/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
 
 <!-- No-Referrer Domain Script -->
 
@@ -483,14 +483,36 @@
     
 
     
-
-    
-    <!-- Page Title Overlay -->
-    <div class="page-title-overlay">
-      
-      <h1 class="page-title">动态</h1>
-      
+    <!-- Post Meta Overlay -->
+    <div class="post-meta-overlay banner-post-meta">
+      <h1 class="post-meta-title"></h1>
+      <div class="post-meta-info meta-info">
+        
+        <span class="post-meta-date">
+          <span class="material-symbols-outlined md-18">calendar_today</span>
+          发布于: 2026-08-25
+        </span>
+        
+        
+        <span class="post-meta-updated">
+          <span class="material-symbols-outlined md-18">edit</span>
+          更新于: 2026-07-20 23:12
+        </span>
+        
+        
+        <span class="post-meta-word-count">
+          <span class="material-symbols-outlined md-18">description</span>
+          2538 字
+        </span>
+        <span class="post-meta-reading-time">
+          <span class="material-symbols-outlined md-18">schedule</span>
+          6 min
+        </span>
+        
+      </div>
     </div>
+    
+
     
   </div>
 
@@ -525,6 +547,7 @@
   
   <aside class="sidebar-left" aria-label="左侧边栏">
     
+      
 
 <!-- Left sidebar widgets -->
 <div class="sidebar-widgets sidebar-left-widgets">
@@ -744,11 +767,19 @@
   
 </div>
 
+    
+    
+    
+      
+
+
+
+    
   </aside>
   
 
   <!-- ===== Main Content ===== -->
-  <main id="main-content" class="page-container">
+  <main id="main-content" aria-label="文章">
     
 <div class="content-nav-bar card-base">
   <!-- Home button -->
@@ -769,56 +800,591 @@
   
 </div>
 
-    
-    <div class="dynamic-page-container">
-      <!-- Dynamic Header -->
-      <header class="card-base dynamic-header-card">
-        <div class="dynamic-header-top">
-          <div class="dynamic-brand">
-            <div class="dynamic-header-icon">
-              <span class="material-symbols-outlined">forum</span>
-            </div>
-            <div class="dynamic-brand-text">
-              <h1 class="dynamic-title">动态</h1>
-              <p class="dynamic-subtitle">随手记下此刻的想法与日常。</p>
-            </div>
-          </div>
-          <div class="dynamic-header-badge">
-            <span class="material-symbols-outlined">description</span>
-            <span><span id="dynamic-count-num">0</span> 动态</span>
-          </div>
-        </div>
-        
-        <!-- Filters (Search + Year select) -->
-        <div class="dynamic-filters">
-          <div class="dynamic-search-wrapper">
-            <span class="material-symbols-outlined dynamic-search-icon">search</span>
-            <input type="text" id="dynamic-search-input" class="dynamic-search-input" placeholder="搜索动态...">
-          </div>
-          <div class="dynamic-year-select-wrapper">
-            <select id="dynamic-year-select" class="dynamic-year-select">
-              <option value="all">全部年份</option>
-              
-            </select>
-          </div>
-        </div>
-      </header>
+    <article class="post-container" itemscope itemtype="http://schema.org/Article">
 
-      <!-- Dynamics List -->
-      <section class="dynamic-list">
+
+      <div class="post-content-card">
+        <!-- Post meta top: title, date, author, reading time, word count, categories -->
         
-          <div class="card-base" style="padding: 3rem; text-align: center; color: var(--text-tertiary);">
-            <p>暂无动态更新~</p>
-          </div>
-        
-      </section>
+
+
+  <header class="post-meta-top">
+    <!-- Top row: Word count & Reading time pills -->
+    <div class="post-header-badges-top">
+      
+      <span class="post-meta-badge badge-wordcount">
+        <span class="material-symbols-outlined" aria-hidden="true">trending_up</span>
+        <span>2538 字</span>
+      </span>
+      
+
+      
+      <span class="post-meta-badge badge-reading-time">
+        <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+        <span>
+          
+          
+          7 分钟
+        </span>
+      </span>
+      
     </div>
+
+    <!-- Title with CSS-styled vertical bar prefix -->
+    <h1 class="post-title post-title-custom">
+      <strong></strong>
+    </h1>
+
+    <!-- Bottom row: Date & Categories/Tags path -->
+    <div class="post-header-badges-bottom">
+      
+      <span class="post-meta-badge badge-date">
+        <span class="material-symbols-outlined" aria-hidden="true">calendar_month</span>
+        <time datetime="2026-08-25 11:29" pubdate>
+          2026-08-25
+        </time>
+      </span>
+      
+
+      <!-- Categories & Tags Breadcrumb Path -->
+      
+      
+    </div>
+
+    <!-- Post updated notice -->
+    
+  </header>
+
+
+
+        <!-- Post content -->
+        <div
+          class="post-content markdown-body custom-md"
+          itemprop="articleBody"
+        >
+          <h1 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h1><p>多线程</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h3 id="1-线程创建"><a href="#1-线程创建" class="headerlink" title="1.线程创建"></a>1.线程创建</h3><h5 id="3种方式"><a href="#3种方式" class="headerlink" title="3种方式"></a>3种方式</h5><ol>
+<li>继承Thread</li>
+<li>实现Runnable</li>
+<li>实现Callable</li>
+</ol>
+<h5 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h5><p>3可以有返回值，1，2无返回值<br>1因为单继承，无法继承其他类</p>
+<h5 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h5><p>设置&#x2F;获取线程名，获取当前线程名，出让，插入，睡眠等</p>
+<h3 id="2-同步安全问题"><a href="#2-同步安全问题" class="headerlink" title="2.同步安全问题"></a>2.同步安全问题</h3><h5 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h5><ol>
+<li>大多操作系统对线程采用抢占式调度</li>
+<li>线程之间会争夺CPU执行权</li>
+<li>多个线程对同一资源进行操作的过程中，CUP执行权随时会被夺走，被其他线程占用，从而造成安全问题</li>
+</ol>
+<h5 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h5><ol>
+<li>对操作共享资源的代码采用锁，只有线程拿到锁，才能进入，执行代码，操作相应资源。未拿到锁的线程即使拿到CPU执行权也无法进入。</li>
+<li>同步代码块<ol>
+<li>对一段代码设置锁，锁对象可以自己指定</li>
+<li>代码执行完锁会自动释放</li>
+</ol>
+</li>
+<li>同步方法<ol>
+<li>非静态方法以this作为锁对象</li>
+<li>静态方法以类名.class做为锁对象</li>
+</ol>
+</li>
+<li>Lock锁<ol>
+<li>需要手动设置锁与释放锁</li>
+<li>为确保锁被释放，可将释放语句写进try的finally中</li>
+</ol>
+</li>
+</ol>
+<h5 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h5><ol>
+<li>CPU执行权的抢夺与锁的抢夺是独立的<ol>
+<li>线程只有拿到CPU执行权才可以去抢夺锁</li>
+<li>线程即使抢到锁，也随时可能被夺走CPU执行权，但因为锁未释放，其他线程无法进入同步代码块，只有等下次锁被释放</li>
+</ol>
+</li>
+<li>避免锁的嵌套，防止出现死锁，即外层锁与内层锁被不同线程拿到，全部陷入阻塞</li>
+</ol>
+<h3 id="3-等待唤醒机制"><a href="#3-等待唤醒机制" class="headerlink" title="3.等待唤醒机制"></a>3.等待唤醒机制</h3><h5 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h5><ol>
+<li>生产者产出资源，消费者消耗资源</li>
+<li>生产者<ol>
+<li>有资源：等待</li>
+<li>无资源<ol>
+<li>生产资源</li>
+<li>唤醒正在等待的线程（消费者）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>消费者<ol>
+<li>无资源：等待</li>
+<li>有资源：<ol>
+<li>消耗资源</li>
+<li>唤醒正在等待的进程（生产者）</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h5 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h5><ol>
+<li>等待与唤醒都需要通过同个锁对象（任意类），唤醒的时候才能唤醒所有通过该锁对象进入等待的线程</li>
+<li>进程进入等待时，释放锁，并交出CPU执行权。在被唤醒时，继续抢夺锁，拿到锁后继续执行后续语句。</li>
+</ol>
+<h5 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h5><ol>
+<li>自己用同步代码块synchronized实现，对操作共享资源的代码设置锁</li>
+<li>可以使用阻塞队列，阻塞队列内时线程安全的。内部也实现了等待与唤醒。没一个放入与取出操作时一定会成功执行的，无法放入进入等待，下次唤醒会继续放入。</li>
+</ol>
+<h3 id="4-线程池"><a href="#4-线程池" class="headerlink" title="4.线程池"></a>4.线程池</h3><h5 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h5><ol>
+<li><strong>降低资源消耗</strong>：复用已创建的线程，避免频繁创建和销毁线程（<code>new Thread</code> + <code>start()</code>）带来的性能开销</li>
+<li><strong>提高响应速度</strong>：任务到达时，无需等待线程创建，可直接使用空闲线程立即执行</li>
+<li><strong>提高线程可管理性</strong>：线程是稀缺资源，统一分配、调优和监控，防止无限制创建导致系统崩溃（OOM）</li>
+</ol>
+<h5 id="核心参数（ThreadPoolExecutor-的7个参数）"><a href="#核心参数（ThreadPoolExecutor-的7个参数）" class="headerlink" title="核心参数（ThreadPoolExecutor 的7个参数）"></a>核心参数（<code>ThreadPoolExecutor</code> 的7个参数）</h5><ol>
+<li><strong>核心线程数（corePoolSize）</strong>：线程池中一直存活的线程数，即使空闲也不会被回收（除非设置了<code>allowCoreThreadTimeOut</code>）</li>
+<li><strong>最大线程数（maximumPoolSize）</strong>：线程池中允许的最大线程数</li>
+<li><strong>存活时间（keepAliveTime）</strong>：非核心线程空闲超过该时间会被回收</li>
+<li><strong>时间单位（unit）</strong>：<code>keepAliveTime</code> 的时间单位（如 <code>TimeUnit.SECONDS</code>）</li>
+<li><strong>阻塞队列（workQueue）</strong>：存放等待执行的任务（如 <code>ArrayBlockingQueue</code>、<code>LinkedBlockingQueue</code>）</li>
+<li><strong>线程工厂（threadFactory）</strong>：创建线程的工厂，可自定义线程名、优先级等（默认 <code>Executors.defaultThreadFactory()</code>）</li>
+<li><strong>拒绝策略（handler）</strong>：当线程池和队列都满时，对新提交的任务的处理方式</li>
+</ol>
+<h5 id="执行流程（任务提交后的流转）"><a href="#执行流程（任务提交后的流转）" class="headerlink" title="执行流程（任务提交后的流转）"></a>执行流程（任务提交后的流转）</h5><ol>
+<li><strong>核心线程</strong>：当前线程数 &lt; 核心线程数 → 创建新线程执行任务</li>
+<li><strong>阻塞队列</strong>：核心线程已满 → 任务放入队列等待</li>
+<li><strong>最大线程</strong>：队列已满 → 创建非核心线程执行任务（直到达到最大线程数）</li>
+<li><strong>拒绝策略</strong>：最大线程也满了 → 执行拒绝策略<blockquote>
+<p><strong>注意</strong>：流程是 <strong>核心 → 队列 → 最大</strong>，而非很多人误以为的<strong>核心 → 最大 → 队列</strong></p>
+</blockquote>
+</li>
+</ol>
+<h5 id="拒绝策略（4种内置实现）"><a href="#拒绝策略（4种内置实现）" class="headerlink" title="拒绝策略（4种内置实现）"></a>拒绝策略（4种内置实现）</h5><ol>
+<li><strong><code>AbortPolicy</code>（默认）</strong>：直接抛出 <code>RejectedExecutionException</code>，阻止系统正常运行</li>
+<li><strong><code>CallerRunsPolicy</code></strong>：由调用者线程（提交任务的线程）自己执行该任务，提供反馈机制，减缓任务提交速度</li>
+<li><strong><code>DiscardPolicy</code></strong>：直接丢弃任务，不抛出异常（丢失任务）</li>
+<li><strong><code>DiscardOldestPolicy</code></strong>：丢弃队列中最旧的任务，然后重试提交当前任务</li>
+</ol>
+<h5 id="提交任务的两种方式"><a href="#提交任务的两种方式" class="headerlink" title="提交任务的两种方式"></a>提交任务的两种方式</h5><ol>
+<li><strong><code>execute(Runnable command)</code></strong><ul>
+<li>提交无返回值的任务</li>
+<li>异常直接抛出（控制台打印），调用者无法捕获</li>
+</ul>
+</li>
+<li><strong><code>submit(Callable/Runnable task)</code></strong><ul>
+<li>提交有返回值（<code>Callable</code>）或无返回值（<code>Runnable</code>）的任务</li>
+<li>返回 <code>Future</code> 对象，可通过 <code>future.get()</code> 获取结果或捕获异常</li>
+<li><code>Runnable</code> 提交时，<code>Future.get()</code> 返回 <code>null</code></li>
+<li><code>Runnable</code> + 指定结果：<code>submit(Runnable task, T result)</code>，<code>Future.get()</code> 返回指定的 <code>result</code></li>
+</ul>
+</li>
+</ol>
+<h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5><ol>
+<li><strong>线程池中的线程是复用的</strong>：底层 <code>Worker</code> 通过 <code>while</code> 循环不断从队列中取任务执行，执行完一个任务后不会销毁，而是继续取下一个任务</li>
+<li><strong><code>Thread</code> 对象与内核线程</strong>：<code>Thread</code> 对象只是堆内存中的普通对象，真正执行能力来自操作系统内核线程（LWP）。线程池复用的是<strong>内核线程</strong>，而不是 <code>Thread</code> 对象本身</li>
+<li><strong>不能直接操作池中某个线程</strong>：线程池封装了线程的个体操作，应通过 <code>Future</code> 控制任务（如 <code>future.cancel(true)</code> 中断任务），而非直接操作线程</li>
+<li><strong><code>execute</code> 与 <code>submit</code> 底层关系</strong>：<code>submit</code> 底层也是调用 <code>execute</code>，但会将 <code>Runnable</code>&#x2F;<code>Callable</code> 包装成 <code>RunnableFuture</code>（即 <code>FutureTask</code>），从而支持返回值和异常捕获</li>
+<li><strong>线程池关闭</strong>：使用 <code>shutdown()</code> 优雅关闭（不再接收新任务，等待已提交任务执行完毕），或 <code>shutdownNow()</code> 立即停止（尝试中断正在执行的任务，返回未执行的任务列表）</li>
+</ol>
+
+        </div>
+
+        <!-- Post license / copyright -->
+        
+          
+
+<!-- Support & Share Widget -->
+<div class="post-share-donate-box">
+  <div class="share-donate-left-icon">
+    <span class="material-symbols-outlined">favorite</span>
+  </div>
+  <div class="share-donate-content">
+    <div class="share-donate-title">支持与分享</div>
+    <div class="share-donate-desc">如果这篇文章对你有帮助，欢迎分享给更多人或打赏支持！</div>
+  </div>
+  <div class="share-donate-actions">
+    <button class="share-donate-btn share-btn-outline" id="share-post-btn">
+      <span class="material-symbols-outlined">share</span>
+      <span>分享</span>
+    </button>
+    <a href="/donate/" class="share-donate-btn donate-btn-filled">
+      <span>打赏</span>
+      <span class="material-symbols-outlined">arrow_right_alt</span>
+    </a>
+  </div>
+</div>
+
+<!-- Copyright Card -->
+<div class="post-copyright-box">
+  <div class="copyright-watermark">CC</div>
+  <div class="copyright-header">
+    <span class="copyright-title"></span>
+    <a class="copyright-link" href="https://www.blog-x.cc.cd/2026/08/25/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" target="_blank" rel="noopener noreferrer">
+      https://www.blog-x.cc.cd/2026/08/25/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/
+    </a>
+  </div>
+  <div class="copyright-meta">
+    <div class="copyright-meta-item">
+      <span class="meta-label">author</span>
+      <span class="meta-value">John Doe</span>
+    </div>
+    <div class="copyright-meta-item">
+      <span class="meta-label">发布于</span>
+      <span class="meta-value">2026-08-25</span>
+    </div>
+    <div class="copyright-meta-item">
+      <span class="meta-label">许可协议</span>
+      <span class="meta-value">
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener noreferrer">
+          CC BY-NC-SA 4.0
+        </a>
+      </span>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const shareBtn = document.getElementById('share-post-btn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', function() {
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        showToast('链接已复制到剪贴板，快去分享给好友吧！');
+      }).catch(function() {
+        showToast('复制失败，请手动复制链接');
+      });
+    });
+  }
+  
+  function showToast(message) {
+    let toast = document.getElementById('firefly-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'firefly-toast';
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(1rem);
+        background: oklch(0.25 0.12 var(--hue));
+        color: #fff;
+        padding: 0.65rem 1.5rem;
+        border-radius: 9999px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        font-size: 0.875rem;
+        font-weight: 600;
+        z-index: 99999;
+        opacity: 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+      `;
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    setTimeout(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+    }, 50);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(1rem)';
+    }, 2500);
+  }
+});
+</script>
+
+        
+
+        <!-- Post meta bottom: tags, last modified -->
+        
+
+<footer class="post-meta-bottom">
+  <!-- Tags list -->
+  
+
+  <!-- Categories list at bottom -->
+  
+
+  <!-- Last modified date -->
+  
+</footer>
+
+      </div>
+
+      <!-- Share buttons -->
+      
+
+      <!-- Footer widgets (Alert, Prev/Next Navigation, Smart Related & Random Articles) -->
+      
+
+<div class="post-footer-widgets">
+  <!-- Warning Info Alert -->
+  
+  <div class="post-footer-alert card-base">
+    <div class="footer-alert-icon">
+      <span class="material-symbols-outlined">history</span>
+    </div>
+    <div class="footer-alert-content">
+      <div class="footer-alert-title">最后更新于 2026-07-20，距今已过 35 天</div>
+      <div class="footer-alert-subtitle">部分内容可能已过时</div>
+    </div>
+  </div>
+  
+
+  <!-- Prev / Next Navigation -->
+  <nav class="post-footer-navigation">
+    <div class="post-nav-card-wrapper">
+      
+      <a href="/2026/08/25/day4%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E3%80%81%E5%8F%8D%E5%B0%84%E4%B8%8E%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" class="post-nav-card card-base prev-nav-card" title="">
+        <span class="material-symbols-outlined nav-arrow">chevron_left</span>
+        <span class="nav-card-title"></span>
+      </a>
+      
+    </div>
+    <div class="post-nav-card-wrapper">
+      
+      <a href="/2026/08/25/day1%20IO%E6%B5%81/" class="post-nav-card card-base next-nav-card" title="">
+        <span class="nav-card-title"></span>
+        <span class="material-symbols-outlined nav-arrow">chevron_right</span>
+      </a>
+      
+    </div>
+  </nav>
+
+  <!-- Side-by-Side Recommendations Grid -->
+  <div class="post-recommendations-row">
+    <!-- Left Column: Related Posts -->
+    <div class="recommendations-column card-base">
+      <div class="recommendations-column-header">
+        <div class="column-header-title">
+          <span class="material-symbols-outlined">schema</span>
+          <h3>相关文章</h3>
+        </div>
+        <span class="recommend-badge smart-badge">智能推荐</span>
+      </div>
+      <ul class="recommend-list">
+        
+          
+          <li>
+            <a href="/2026/08/25/day22%20%E7%BC%93%E5%AD%98/" class="recommend-item">
+              <span class="recommend-index-badge first-index">1</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">1. 今天做了什么外卖day7的一部分 缓存菜品 缓存套餐 2. 核心...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/" class="recommend-item">
+              <span class="recommend-index-badge ">2</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">1. 今天做了什么(外卖day07,day08) 购物车相关接口 用户...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/" class="recommend-item">
+              <span class="recommend-index-badge ">3</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">1. 今天做了什么(外卖day6的内容) HttpClient的使用...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day20%20Redis%E5%85%A5%E9%97%A8%E4%B8%8E%E5%BA%97%E9%93%BA%E7%8A%B6%E6%80%81%E8%AE%BE%E7%BD%AE/" class="recommend-item">
+              <span class="recommend-index-badge ">4</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">前几天陆陆续续写了苍穹外卖的员工管理,菜品,分类,套餐管理等,未坚持每...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day11%20%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E6%88%98/" class="recommend-item">
+              <span class="recommend-index-badge ">5</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day11计划 前后端分离开发规范与REST风格 工程搭建与基础代码结...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <!-- Right Column: Random Posts -->
+    <div class="recommendations-column card-base">
+      <div class="recommendations-column-header">
+        <div class="column-header-title">
+          <span class="material-symbols-outlined">explore</span>
+          <h3>随机文章</h3>
+        </div>
+        <span class="recommend-badge random-badge">随机推荐</span>
+      </div>
+      <ul class="recommend-list">
+        
+          
+          <li>
+            <a href="/2026/08/25/day2%20IO%E6%B5%81/" class="recommend-item">
+              <span class="recommend-index-badge first-index">1</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day2计划 学完IO流 笔记1.缓冲流字节缓冲流 缓冲流默认缓冲区大...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day7%20Maven%E7%9A%84%E4%BD%BF%E7%94%A8,%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="recommend-item">
+              <span class="recommend-index-badge ">2</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">day7计划 Maven项目构建与管理入门 笔记1.Maven概述 作...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day22%20%E7%BC%93%E5%AD%98/" class="recommend-item">
+              <span class="recommend-index-badge ">3</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">1. 今天做了什么外卖day7的一部分 缓存菜品 缓存套餐 2. 核心...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day4%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E3%80%81%E5%8F%8D%E5%B0%84%E4%B8%8E%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" class="recommend-item">
+              <span class="recommend-index-badge ">4</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">计划网络编程，反射与动态代理 总结1.网络编程1.InetAddres...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+          
+          <li>
+            <a href="/2026/08/25/day9%20%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ESQL%E8%AF%AD%E5%8F%A5/" class="recommend-item">
+              <span class="recommend-index-badge ">5</span>
+              <div class="recommend-item-info">
+                <span class="recommend-item-title"></span>
+                <div class="recommend-item-meta-row">
+                  <span class="recommend-item-category">默认分类</span>
+                  
+                    <span class="recommend-item-excerpt">计划 MySQL概述 SQL语句（DDL、DML、DQL） 数据类型与...</span>
+                  
+                </div>
+              </div>
+              <span class="material-symbols-outlined recommend-item-chevron">chevron_right</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+    </article>
+
+    <!-- Comments section -->
+    
+    <section class="post-comments" aria-label="评论">
+      
+<div class="comments-container">
+  <div class="comments-title">评论</div>
+  <div class="giscus-wrapper">
+    <script src="https://giscus.app/client.js"
+      data-repo="lkdenchin/hexo-blog-comments"
+      data-repo-id="R_kgDORXaOrA"
+      data-category="Announcements"
+      data-category-id="DIC_kwDORXaOrM4C3F8Y"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="1"
+      data-input-position="top"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+
+    </section>
+    
   </main>
 
   <!-- ===== Right Sidebar ===== -->
   
   <aside class="sidebar-right" aria-label="右侧边栏">
     
+      
 
 <!-- Right sidebar widgets -->
 <div class="sidebar-widgets sidebar-right-widgets">
@@ -1491,6 +2057,23 @@ document.addEventListener('DOMContentLoaded', function() {
   
 </div>
 
+    
+    
+      
+
+
+<div id="toc" class="toc-widget">
+  <div class="toc-header">
+    <span>目录</span>
+  </div>
+  <div class="toc-body" id="toc-body">
+    <!-- Populated by client-side JavaScript -->
+  </div>
+</div>
+
+
+    
+    
   </aside>
   
 
@@ -1893,7 +2476,10 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
+
+  <!-- Floating TOC (always available via JS, appears as a floating widget on scroll) -->
   
+
   
 
 <footer id="site-footer" class="site-footer" role="contentinfo">
@@ -1950,43 +2536,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </footer>
 
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const searchInput = document.getElementById('dynamic-search-input');
-  const yearSelect = document.getElementById('dynamic-year-select');
-  const cards = document.querySelectorAll('.dynamic-card');
-  const countEl = document.getElementById('dynamic-count-num');
-  
-  function filterDynamics() {
-    const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
-    const year = yearSelect ? yearSelect.value : 'all';
-    let visibleCount = 0;
-    
-    cards.forEach(card => {
-      const text = card.getAttribute('data-content');
-      const cardYear = card.getAttribute('data-year');
-      
-      const matchesSearch = text.includes(query);
-      const matchesYear = (year === 'all' || cardYear === year);
-      
-      if (matchesSearch && matchesYear) {
-        card.style.display = 'flex';
-        visibleCount++;
-      } else {
-        card.style.display = 'none';
-      }
-    });
-    
-    if (countEl) {
-      countEl.textContent = visibleCount;
-    }
-  }
-  
-  if (searchInput) searchInput.addEventListener('input', filterDynamics);
-  if (yearSelect) yearSelect.addEventListener('change', filterDynamics);
-});
-</script>
 
     </div>
   </div>
