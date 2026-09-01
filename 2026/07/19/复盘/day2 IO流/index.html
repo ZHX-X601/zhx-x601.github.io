@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.blog-x.cc.cd","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="day2计划 学完IO流  笔记1.缓冲流字节缓冲流 缓冲流默认缓冲区大小为8192字节（8KB） 使用方式：在基本流外包装一层缓冲流 关闭缓冲流时，底层基本流也会自动关闭 性能对比 缓冲流逐字节读取复制：35ms（内部缓冲区已优化磁盘I&#x2F;O） 缓冲流配合 byte[] 数组读取复制：4ms   缓冲流与缓冲数组同时使用是不必要的 缓冲流内部已有 8KB 缓冲区，逐字节读取时已通过内部缓">
+<meta property="og:type" content="article">
+<meta property="og:title" content="day2 IO流">
+<meta property="og:url" content="https://www.blog-x.cc.cd/2026/07/19/%E5%A4%8D%E7%9B%98/day2%20IO%E6%B5%81/index.html">
+<meta property="og:site_name" content="我的学习日记">
+<meta property="og:description" content="day2计划 学完IO流  笔记1.缓冲流字节缓冲流 缓冲流默认缓冲区大小为8192字节（8KB） 使用方式：在基本流外包装一层缓冲流 关闭缓冲流时，底层基本流也会自动关闭 性能对比 缓冲流逐字节读取复制：35ms（内部缓冲区已优化磁盘I&#x2F;O） 缓冲流配合 byte[] 数组读取复制：4ms   缓冲流与缓冲数组同时使用是不必要的 缓冲流内部已有 8KB 缓冲区，逐字节读取时已通过内部缓">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-19T02:59:27.000Z">
+<meta property="article:modified_time" content="2026-08-25T09:27:49.116Z">
+<meta property="article:author" content="ZHX">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.blog-x.cc.cd/2026/07/19/%E5%A4%8D%E7%9B%98/day2%20IO%E6%B5%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>day2 IO流 | 我的学习日记</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">我的学习日记</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">26</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">0</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/07/19/%E5%A4%8D%E7%9B%98/day2%20IO%E6%B5%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="ZHX">
+      <meta itemprop="description" content="记录编程学习、项目实战和踩坑笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的学习日记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          day2 IO流
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-07-19 10:59:27" itemprop="dateCreated datePublished" datetime="2026-07-19T10:59:27+08:00">2026-07-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-08-25 17:27:49" itemprop="dateModified" datetime="2026-08-25T17:27:49+08:00">2026-08-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%8D%E7%9B%98/" itemprop="url" rel="index"><span itemprop="name">复盘</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%8D%E7%9B%98/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+      <div class="post-body" itemprop="articleBody">
+
+        
+          <h1 id="day2"><a href="#day2" class="headerlink" title="day2"></a>day2</h1><h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><ol>
+<li>学完IO流</li>
+</ol>
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="1-缓冲流"><a href="#1-缓冲流" class="headerlink" title="1.缓冲流"></a>1.缓冲流</h3><h5 id="字节缓冲流"><a href="#字节缓冲流" class="headerlink" title="字节缓冲流"></a>字节缓冲流</h5><ol>
+<li>缓冲流默认缓冲区大小为8192字节（8KB）</li>
+<li>使用方式：在基本流外包装一层缓冲流</li>
+<li>关闭缓冲流时，底层基本流也会自动关闭</li>
+<li>性能对比<ol>
+<li>缓冲流逐字节读取复制：35ms（内部缓冲区已优化磁盘I&#x2F;O）</li>
+<li>缓冲流配合 byte[] 数组读取复制：4ms</li>
+</ol>
+</li>
+<li>缓冲流与缓冲数组同时使用是不必要的<ol>
+<li>缓冲流内部已有 8KB 缓冲区，逐字节读取时已通过内部缓冲区大幅减少磁盘 I&#x2F;O，这是性能提升的核心</li>
+<li>在缓冲流之上再使用 byte[] 数组，相当于多了一层冗余的缓冲层级，增加了内存占用和代码复杂度</li>
+<li>实际开发中，单独使用缓冲流即可，或直接使用基本流配合自己的缓冲区，没必要两层都用</li>
+</ol>
+</li>
+</ol>
+<h5 id="字符缓冲流"><a href="#字符缓冲流" class="headerlink" title="字符缓冲流"></a>字符缓冲流</h5><ol>
+<li>BufferedReader 特有方法：<code>readLine()</code>，读取一行文本，遇到文件末尾返回 null</li>
+<li>BufferedWriter 特有方法：<code>newLine()</code>，用于多平台换行（Windows: \r\n, Linux: \n）</li>
+<li>字符缓冲流也可以指定编码格式</li>
+</ol>
+<h3 id="2-转换流"><a href="#2-转换流" class="headerlink" title="2.转换流"></a>2.转换流</h3><ol>
+<li>InputStreamReader：将字节输入流转换为字符输入流</li>
+<li>OutputStreamWriter：将字节输出流转换为字符输出流</li>
+<li>可以指定编码格式，解决乱码问题</li>
+<li>常与缓冲流配合使用，形成：<code>BufferedReader -&gt; InputStreamReader -&gt; FileInputStream</code></li>
+<li>Java 11+ FileReader&#x2F;FileWriter 已支持指定编码，但转换流仍有用武之地<ol>
+<li>处理非文件来源的字节流（如网络流、内存流）</li>
+<li>需要精确控制编码转换场景</li>
+</ol>
+</li>
+</ol>
+<h3 id="3-序列化流与反序列化流"><a href="#3-序列化流与反序列化流" class="headerlink" title="3.序列化流与反序列化流"></a>3.序列化流与反序列化流</h3><ol>
+<li>对象序列化：将对象写入文件，需要实现 <code>Serializable</code> 接口</li>
+<li>对象反序列化：从文件读取对象</li>
+<li><code>serialVersionUID</code>：序列化版本号，确保反序列化时类版本一致<ol>
+<li>如果类结构发生变化（如新增字段），版本号不匹配会抛出 <code>InvalidClassException</code></li>
+<li>建议显式声明版本号，避免编译器自动生成导致的兼容性问题</li>
+</ol>
+</li>
+<li><code>transient</code> 关键字：修饰的成员变量不参与序列化，反序列化时为默认值</li>
+<li>序列化集合对象：将整个集合写入文件，便于批量操作</li>
+</ol>
+<h3 id="4-压缩流与解压缩流"><a href="#4-压缩流与解压缩流" class="headerlink" title="4.压缩流与解压缩流"></a>4.压缩流与解压缩流</h3><h5 id="ZipEntry"><a href="#ZipEntry" class="headerlink" title="ZipEntry"></a>ZipEntry</h5><ol>
+<li>表示压缩包里的每个文件或目录</li>
+<li>压缩流与解压流中有一个当前条目的概念，就是你最近获取到的或创建的ZipEntry对象</li>
+<li>所以必须要及时关闭当前条目</li>
+</ol>
+<h5 id="解压缩"><a href="#解压缩" class="headerlink" title="解压缩"></a>解压缩</h5><ol>
+<li>使用 <code>ZipInputStream</code> 读取压缩包</li>
+<li><code>getNextEntry()</code> 获取下一个 ZipEntry</li>
+<li>判断是目录还是文件，分别处理</li>
+<li>读取完成后调用 <code>closeEntry()</code> 关闭当前条目</li>
+</ol>
+<h5 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h5><ol>
+<li>使用 <code>ZipOutputStream</code> 写入压缩包</li>
+<li><code>putNextEntry()</code> 创建新的 ZipEntry</li>
+<li>递归处理目录结构，保持原有的层级关系<ol>
+<li>遍历目录下所有文件和子目录</li>
+<li>文件则直接写入压缩条目</li>
+<li>目录则递归调用，传入更新后的路径名</li>
+</ol>
+</li>
+<li>每个文件写入完成后调用 <code>closeEntry()</code></li>
+</ol>
+<h3 id="5-打印流"><a href="#5-打印流" class="headerlink" title="5.打印流"></a>5.打印流</h3><ol>
+<li>PrintStream：字节打印流，<code>System.out</code> 就是 PrintStream 的实例</li>
+<li>PrintWriter：字符打印流</li>
+<li>特点<ol>
+<li>可以直接打印各种类型的数据（int、double、String、对象等）</li>
+<li>可以设置自动刷新（autoFlush），调用 <code>println()</code> 时自动刷新缓冲区，换行。</li>
+</ol>
+</li>
+</ol>
+<h3 id="6-URL网络读取"><a href="#6-URL网络读取" class="headerlink" title="6.URL网络读取"></a>6.URL网络读取</h3><ol>
+<li>使用 <code>URL</code> 和 <code>URLConnection</code> 建立网络连接</li>
+<li>通过 <code>getInputStream()</code> 获取输入流</li>
+<li>使用 <code>InputStreamReader</code> 按字符读取网页内容</li>
+<li>可以配合第三方工具包（如 Hutool）简化文件写入操作</li>
+</ol>
+<h3 id="7-工具包"><a href="#7-工具包" class="headerlink" title="7.工具包"></a>7.工具包</h3><ol>
+<li>commons-io</li>
+<li>hutool</li>
+<li>两个都是第三方工具包，提供了很多包装好的工具，导入即可直接使用。</li>
+</ol>
+
+      </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/07/18/%E5%A4%8D%E7%9B%98/day1%20IO%E6%B5%81/" rel="prev" title="day1 IO流">
+      <i class="fa fa-chevron-left"></i> day1 IO流
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/07/20/%E5%A4%8D%E7%9B%98/day3%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="next" title="day3 多线程">
+      day3 多线程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#day2"><span class="nav-number">1.</span> <span class="nav-text">day2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E5%88%92"><span class="nav-number">1.1.</span> <span class="nav-text">计划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%94%E8%AE%B0"><span class="nav-number">1.2.</span> <span class="nav-text">笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BC%93%E5%86%B2%E6%B5%81"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.缓冲流</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%BC%93%E5%86%B2%E6%B5%81"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">字节缓冲流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%BC%93%E5%86%B2%E6%B5%81"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">字符缓冲流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BD%AC%E6%8D%A2%E6%B5%81"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.转换流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%BA%8F%E5%88%97%E5%8C%96%E6%B5%81%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%B5%81"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.序列化流与反序列化流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%8E%8B%E7%BC%A9%E6%B5%81%E4%B8%8E%E8%A7%A3%E5%8E%8B%E7%BC%A9%E6%B5%81"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.压缩流与解压缩流</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ZipEntry"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">ZipEntry</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B%E7%BC%A9"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">解压缩</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">压缩</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%89%93%E5%8D%B0%E6%B5%81"><span class="nav-number">1.2.5.</span> <span class="nav-text">5.打印流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-URL%E7%BD%91%E7%BB%9C%E8%AF%BB%E5%8F%96"><span class="nav-number">1.2.6.</span> <span class="nav-text">6.URL网络读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%B7%A5%E5%85%B7%E5%8C%85"><span class="nav-number">1.2.7.</span> <span class="nav-text">7.工具包</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZHX"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">ZHX</p>
+  <div class="site-description" itemprop="description">记录编程学习、项目实战和踩坑笔记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
