@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.blog-x.cc.cd","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Day27 - ECharts 数据统计、SQL 优化与日期补齐一、Apache ECharts 快速了解Apache ECharts 是一款基于 JavaScript 的数据可视化图表库，用于将后端提供的数据以柱形图、饼形图、折线图等形式直观展示。 在苍穹外卖项目中，数据统计模块的折线图、柱形图全部通过 ECharts 渲染。使用时的核心关注点在于：后端返回的数据格式必须与前端图表要求的格式一致">
+<meta property="og:type" content="article">
+<meta property="og:title" content="day27 ECharts数据统计、SQL优化与日期补齐">
+<meta property="og:url" content="https://www.blog-x.cc.cd/2026/09/02/%E7%AC%94%E8%AE%B0/day27%20ECharts%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E3%80%81SQL%E4%BC%98%E5%8C%96%E4%B8%8E%E6%97%A5%E6%9C%9F%E8%A1%A5%E9%BD%90/index.html">
+<meta property="og:site_name" content="我的学习日记">
+<meta property="og:description" content="Day27 - ECharts 数据统计、SQL 优化与日期补齐一、Apache ECharts 快速了解Apache ECharts 是一款基于 JavaScript 的数据可视化图表库，用于将后端提供的数据以柱形图、饼形图、折线图等形式直观展示。 在苍穹外卖项目中，数据统计模块的折线图、柱形图全部通过 ECharts 渲染。使用时的核心关注点在于：后端返回的数据格式必须与前端图表要求的格式一致">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-02T12:49:26.000Z">
+<meta property="article:modified_time" content="2026-09-02T12:49:24.205Z">
+<meta property="article:author" content="ZHX">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.blog-x.cc.cd/2026/09/02/%E7%AC%94%E8%AE%B0/day27%20ECharts%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E3%80%81SQL%E4%BC%98%E5%8C%96%E4%B8%8E%E6%97%A5%E6%9C%9F%E8%A1%A5%E9%BD%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>day27 ECharts数据统计、SQL优化与日期补齐 | 我的学习日记</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">我的学习日记</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">30</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">0</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/09/02/%E7%AC%94%E8%AE%B0/day27%20ECharts%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E3%80%81SQL%E4%BC%98%E5%8C%96%E4%B8%8E%E6%97%A5%E6%9C%9F%E8%A1%A5%E9%BD%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="ZHX">
+      <meta itemprop="description" content="记录编程学习、项目实战和踩坑笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的学习日记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          day27 ECharts数据统计、SQL优化与日期补齐
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-09-02 20:49:26 / 修改时间：20:49:24" itemprop="dateCreated datePublished" datetime="2026-09-02T20:49:26+08:00">2026-09-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/" itemprop="url" rel="index"><span itemprop="name">苍穹外卖</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+      <div class="post-body" itemprop="articleBody">
+
+        
+          <h1 id="Day27-ECharts-数据统计、SQL-优化与日期补齐"><a href="#Day27-ECharts-数据统计、SQL-优化与日期补齐" class="headerlink" title="Day27 - ECharts 数据统计、SQL 优化与日期补齐"></a>Day27 - ECharts 数据统计、SQL 优化与日期补齐</h1><h2 id="一、Apache-ECharts-快速了解"><a href="#一、Apache-ECharts-快速了解" class="headerlink" title="一、Apache ECharts 快速了解"></a>一、Apache ECharts 快速了解</h2><p>Apache ECharts 是一款基于 JavaScript 的<strong>数据可视化图表库</strong>，用于将后端提供的数据以柱形图、饼形图、折线图等形式直观展示。</p>
+<p>在苍穹外卖项目中，数据统计模块的折线图、柱形图全部通过 ECharts 渲染。使用时的核心关注点在于：<strong>后端返回的数据格式必须与前端图表要求的格式一致</strong>，通常是日期列表与对应数值列表，两者通过逗号分隔以字符串形式返回。</p>
+<hr>
+<h2 id="二、四个数据统计接口的自实现思路"><a href="#二、四个数据统计接口的自实现思路" class="headerlink" title="二、四个数据统计接口的自实现思路"></a>二、四个数据统计接口的自实现思路</h2><p>未参考讲义答案，先独立实现了营业额、用户、订单、销量排名四个统计接口。整体思路统一采用 <strong><code>GROUP BY</code></strong> <strong>分组 SQL + Service 层组装 VO</strong>，与讲义的”按日 for 循环查 DB”思路完全不同。</p>
+<h3 id="2-1-营业额统计"><a href="#2-1-营业额统计" class="headerlink" title="2.1 营业额统计"></a>2.1 营业额统计</h3><p><strong>需求</strong>：统计 <code>[begin, end]</code> 区间内，每天**已完成订单（status&#x3D;5）**的金额合计。</p>
+<p><strong>实现思路</strong>：</p>
+<ol>
+<li>Mapper 层写一条分组 SQL，<code>GROUP BY date(order_time)</code> 返回每天日期和营业额，结果为 <code>List&lt;Map&lt;String, Object&gt;&gt;</code></li>
+<li>Service 层遍历 Map 列表，分别组装日期字符串列表和营业额字符串列表</li>
+<li>用 <code>String.join(&quot;,&quot;, list)</code> 拼成 VO 需要的逗号分隔字符串</li>
+</ol>
+<p>SQL 关键片段（已做索引优化后的写法）：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="type">date</span>(order_time) <span class="keyword">as</span> <span class="type">date</span>, <span class="built_in">sum</span>(amount) <span class="keyword">as</span> turnover</span><br><span class="line"><span class="keyword">from</span> orders</span><br><span class="line"><span class="keyword">where</span> status <span class="operator">=</span> <span class="number">5</span> <span class="keyword">and</span> order_time <span class="operator">&gt;=</span> #&#123;<span class="keyword">begin</span>&#125; <span class="keyword">and</span> order_time <span class="operator">&lt;</span> #&#123;endPlus1&#125;</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="type">date</span>(order_time)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="type">date</span>(order_time)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-用户统计"><a href="#2-2-用户统计" class="headerlink" title="2.2 用户统计"></a>2.2 用户统计</h3><p><strong>需求</strong>：折线图两根线——每日<strong>总用户数</strong>和每日<strong>新增用户数</strong>。</p>
+<p><strong>实现思路</strong>（自行设计，先查前期总数 + 分组累加，比讲义每日两次查询更优）：</p>
+<ol>
+<li>先单独查一次：<code>begin</code> 日期<strong>之前</strong>注册的用户总数 <code>previousTotalUser</code>，作为起始基数</li>
+<li>分组查询 <code>[begin, end]</code> 区间每天的新增用户数（<code>count(*)</code> 按 <code>date(create_time)</code> 分组）</li>
+<li>Service 层遍历每日新增，<strong>累加到</strong> <strong><code>totalUser</code></strong>，同步生成三个 list：日期、每日新增、累计总用户</li>
+</ol>
+<p>关键流程：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">previousTotalUser = 查询 begin 之前总数</span><br><span class="line">totalUser = previousTotalUser</span><br><span class="line"></span><br><span class="line">for 每一天的新增用户 newUser:</span><br><span class="line">    totalUser += newUser</span><br><span class="line">    dateList     += 当天日期</span><br><span class="line">    newUserList  += newUser</span><br><span class="line">    totalUserList += totalUser</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-订单统计"><a href="#2-3-订单统计" class="headerlink" title="2.3 订单统计"></a>2.3 订单统计</h3><p><strong>需求</strong>：折线图展示每日<strong>总订单数</strong> + <strong>有效订单数（已完成）</strong>，并返回整个区间的订单总数、有效订单数和<strong>订单完成率</strong>。</p>
+<p><strong>初始思路</strong>：分两次查询——一次查每天总订单数，一次查每天 status&#x3D;5 的有效订单数。</p>
+<p><strong>优化后（从 AI 学到的知识）</strong>：用 <code>sum(case when status=5 then 1 else 0 end)</code> 在一条 SQL 里<strong>同时查出两个指标</strong>，从两次查询合并为一次：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="type">date</span>(order_time) <span class="keyword">as</span> <span class="type">date</span>,</span><br><span class="line">       <span class="built_in">count</span>(<span class="operator">*</span>)                              <span class="keyword">as</span> orderCount,</span><br><span class="line">       <span class="built_in">sum</span>(<span class="keyword">case</span> <span class="keyword">when</span> status <span class="operator">=</span> <span class="number">5</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">end</span>) <span class="keyword">as</span> validOrderCount</span><br><span class="line"><span class="keyword">from</span> orders</span><br><span class="line"><span class="keyword">where</span> order_time <span class="operator">&gt;=</span> #&#123;<span class="keyword">begin</span>&#125; <span class="keyword">and</span> order_time <span class="operator">&lt;</span> #&#123;endPlus1&#125;</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="type">date</span>(order_time)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="type">date</span>(order_time)</span><br></pre></td></tr></table></figure>
+
+<p>Service 层遍历结果时同时维护两个全局累计值：<code>totalOrderCount</code>（订单总数）和 <code>validOrderCount</code>（有效订单总数），最后计算：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">orderCompletionRate = totalOrderCount == <span class="number">0</span></span><br><span class="line">    ? <span class="number">0.0</span></span><br><span class="line">    : validOrderCount.doubleValue() / totalOrderCount.doubleValue();</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-销量排名-Top10"><a href="#2-4-销量排名-Top10" class="headerlink" title="2.4 销量排名 Top10"></a>2.4 销量排名 Top10</h3><p><strong>需求</strong>：柱形图展示 <code>[begin, end]</code> 区间销量前 10 的商品（菜品 + 套餐），销量为商品销售份数。</p>
+<p><strong>SQL 思路</strong>：</p>
+<ul>
+<li><p><code>orders</code> 表 INNER JOIN <code>order_detail</code> 表，条件 <code>orders.status = 5</code>（只统计已完成订单中的明细）</p>
+</li>
+<li><p><code>GROUP BY order_detail.name</code> 后 <code>ORDER BY sum(number) DESC</code></p>
+</li>
+<li><p><code>LIMIT 10</code> 取前 10 名</p>
+</li>
+</ul>
+<p>这是四个接口中唯一一个<strong>从一开始就用了索引友好的时间范围写法</strong>的接口。</p>
+<hr>
+<h2 id="三、两个-SQL-优化技巧"><a href="#三、两个-SQL-优化技巧" class="headerlink" title="三、两个 SQL 优化技巧"></a>三、两个 SQL 优化技巧</h2><p>当天从 AI 处和自己思考中确认了两条通用的 SQL 性能优化原则，并落到了代码里。</p>
+<h3 id="3-1-用半开区间替代日期函数包裹列"><a href="#3-1-用半开区间替代日期函数包裹列" class="headerlink" title="3.1 用半开区间替代日期函数包裹列"></a>3.1 用半开区间替代日期函数包裹列</h3><table>
+<thead>
+<tr>
+<th>写法（❌ 不走索引）</th>
+<th>写法（✅ 走索引）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>date(order_time) between #{begin} and #{end}</code></td>
+<td><code>order_time &gt;= #{begin} and order_time &lt; #{endPlus1}</code></td>
+</tr>
+</tbody></table>
+<p><strong>原因</strong>：</p>
+<ul>
+<li><p>当 <code>order_time</code> 列上建立了索引时，<code>where</code> 条件中对列使用 <code>date()</code> 函数会<strong>导致索引失效</strong>，退化为全表扫描</p>
+</li>
+<li><p>改为直接比较列值时，MySQL 可以利用索引的有序性快速定位区间</p>
+</li>
+</ul>
+<p><strong>Service 层的配套处理</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">LocalDate</span> <span class="variable">endPlus1</span> <span class="operator">=</span> end.plusDays(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>传参时将结束日期<strong>往后加 1 天</strong>，配合 <code>&lt; endPlus1</code> 天然等于 <code>&lt;= end 当天 23:59:59.999</code>，不需要写 <code>LocalDateTime.of(date, LocalTime.MAX)</code> 这种容易出错的闭区间边界。</p>
+<blockquote>
+<p>这条优化原则从销量排名接口学到，后续在索引修复中统一应用到了营业额、用户、订单三个统计接口。</p>
+</blockquote>
+<h3 id="3-2-条件聚合：SUM-CASE-WHEN-一次查询代替多次"><a href="#3-2-条件聚合：SUM-CASE-WHEN-一次查询代替多次" class="headerlink" title="3.2 条件聚合：SUM(CASE WHEN ...) 一次查询代替多次"></a>3.2 条件聚合：<code>SUM(CASE WHEN ...)</code> 一次查询代替多次</h3><blockquote>
+<p><strong>今日首次接触的重点语法，在此单独强化记忆。</strong> 之前的写法是”同一张表、同一个时间范围、两个不同过滤条件 → 分两条 SQL 分别查”，今天学到用 <code>CASE WHEN</code> 嵌在聚合函数里，一条 SQL 同时出多个结果。</p>
+</blockquote>
+<h4 id="语法形态"><a href="#语法形态" class="headerlink" title="语法形态"></a>语法形态</h4><p>最核心的写法（订单统计中已实际使用）：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">count</span>(<span class="operator">*</span>)                                    <span class="keyword">as</span> orderCount,        <span class="comment">-- 全部行数，即总订单数</span></span><br><span class="line"><span class="built_in">sum</span>(<span class="keyword">case</span> <span class="keyword">when</span> status <span class="operator">=</span> <span class="number">5</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">end</span>) <span class="keyword">as</span> validOrderCount     <span class="comment">-- 只统计 status=5 的行数</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="执行逻辑（逐行理解）"><a href="#执行逻辑（逐行理解）" class="headerlink" title="执行逻辑（逐行理解）"></a>执行逻辑（逐行理解）</h4><p><code>CASE WHEN</code> 在 SQL 中的角色类似 Java 的三元表达式或 <code>if-else</code>，它是<strong>逐行求值</strong>，然后再交给外层的聚合函数：</p>
+<table>
+<thead>
+<tr>
+<th>某一行的 <code>status</code> 值</th>
+<th><code>case when status = 5 then 1 else 0 end</code> 的计算结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>1</code>（待付款）</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>2</code>（待接单）</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>3</code>（已接单）</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>5</code>（已完成）</td>
+<td><strong><code>1</code></strong></td>
+</tr>
+<tr>
+<td><code>6</code>（已取消）</td>
+<td><code>0</code></td>
+</tr>
+</tbody></table>
+<p>计算完每一行是 <code>0</code> 还是 <code>1</code> 后，外层 <code>SUM(...)</code> 再把所有值加起来——得到的恰好就是”满足 <code>status = 5</code> 的行数”，即有效订单数。</p>
+<blockquote>
+<p>等价的另一种写法：<code>count(case when status = 5 then 1 end)</code>。不写 <code>else 0</code> 时，不满足条件的行返回 <code>null</code>，<code>count</code> 会自动忽略 <code>null</code>，结果完全一样。两种写法都会用，<code>sum(… then 1 else 0 end)</code> 更直观。</p>
+</blockquote>
+<h4 id="为什么要聚合里嵌条件，而不是写两条-SQL？"><a href="#为什么要聚合里嵌条件，而不是写两条-SQL？" class="headerlink" title="为什么要聚合里嵌条件，而不是写两条 SQL？"></a>为什么要聚合里嵌条件，而不是写两条 SQL？</h4><p><strong>本质原因：两次查询会扫描两次表。</strong> 两条 SQL 虽然过滤条件只差一个 <code>status = 5</code>，但数据库要分别做两次：打开索引 → 定位范围 → 逐行读取 → 计数 → 返回结果集。用条件聚合并在一起后，<strong>整张表（或索引范围）只扫描一次</strong>，在遍历的过程中顺手把两种指标同时算出来。</p>
+<h4 id="收益"><a href="#收益" class="headerlink" title="收益"></a>收益</h4><p>回到订单统计场景，对比非常直观：</p>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th>扫描次数</th>
+<th>SQL 数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>讲义风格（每天查两次）</td>
+<td>7 天 × 2 次 &#x3D; 14 次扫描</td>
+<td>14 条</td>
+</tr>
+<tr>
+<td>你的初始想法（全区间查两次）</td>
+<td>2 次扫描</td>
+<td>2 条</td>
+</tr>
+<tr>
+<td><strong><code>SUM(CASE WHEN …)</code> 条件聚合</strong></td>
+<td><strong>1 次扫描</strong></td>
+<td><strong>1 条</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>条件聚合把查询次数从 2 次压缩到 1 次，并且是<strong>零额外成本</strong>的语法结构，数据库天然支持，所有主流关系型数据库（MySQL、PostgreSQL、Oracle、SQL Server）写法完全一致，通用度非常高。</p>
+<hr>
+<h2 id="四、踩坑：GROUP-BY-分组导致日期缺失"><a href="#四、踩坑：GROUP-BY-分组导致日期缺失" class="headerlink" title="四、踩坑：GROUP BY 分组导致日期缺失"></a>四、踩坑：GROUP BY 分组导致日期缺失</h2><h3 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h3><p>对照讲义后发现的核心功能性 BUG：</p>
+<p><code>GROUP BY date(order_time)</code> 只会返回<strong>实际有数据</strong>的日期。如果查询 8.25 ~ 8.31 共 7 天，但其中 8.27、8.28 两天没有订单&#x2F;用户，SQL 结果只返回 5 条记录。此时 VO 中的 <code>dateList</code> 只有 5 个日期，而前端折线图期望 7 天连续数据，导致 <strong>X 轴断档、图表与实际区间不一致</strong>。</p>
+<h3 id="解决方法：双-while-循环-currentDate-指针补齐"><a href="#解决方法：双-while-循环-currentDate-指针补齐" class="headerlink" title="解决方法：双 while 循环 + currentDate 指针补齐"></a>解决方法：双 while 循环 + <code>currentDate</code> 指针补齐</h3><p>营业额统计接口先自行修复，之后按同一模式套用到用户统计、订单统计。</p>
+<p><strong>核心结构</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">LocalDate</span> <span class="variable">currentDate</span> <span class="operator">=</span> begin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (Map&lt;String, Object&gt; map : mapList) &#123;</span><br><span class="line">    <span class="type">LocalDate</span> <span class="variable">date</span> <span class="operator">=</span> LocalDate.parse(map.get(<span class="string">&quot;date&quot;</span>).toString());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 内层 while：currentDate 和 date 之间缺的日期，逐条补 0</span></span><br><span class="line">    <span class="keyword">while</span> (currentDate.isBefore(date)) &#123;</span><br><span class="line">        dateList.add(currentDate.toString());</span><br><span class="line">        turnoverList.add(<span class="string">&quot;0&quot;</span>);</span><br><span class="line">        <span class="comment">// 其他指标同样补 0，总用户类指标保持不变</span></span><br><span class="line">        currentDate = currentDate.plusDays(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加当前这条真实数据</span></span><br><span class="line">    dateList.add(date.toString());</span><br><span class="line">    turnoverList.add(map.get(<span class="string">&quot;turnover&quot;</span>).toString());</span><br><span class="line">    <span class="comment">// 累计类指标在此处累加</span></span><br><span class="line">    currentDate = currentDate.plusDays(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 外层 while：SQL 最后一条记录到 end 之间的尾部缺失日期继续补 0</span></span><br><span class="line"><span class="keyword">while</span> (currentDate.isBefore(endPlus1)) &#123;</span><br><span class="line">    dateList.add(currentDate.toString());</span><br><span class="line">    turnoverList.add(<span class="string">&quot;0&quot;</span>);</span><br><span class="line">    currentDate = currentDate.plusDays(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>不同指标补 0 的注意点</strong>：</p>
+<ul>
+<li><p>营业额、订单数、新增用户这种<strong>当日流量型指标</strong>：缺失日直接补 <code>0</code></p>
+</li>
+<li><p>总用户数这种<strong>存量累计型指标</strong>：缺失日<strong>保持上一天的累计值不变</strong>，不能简单补 0</p>
+</li>
+</ul>
+<hr>
+<h2 id="五、自实现-vs-讲义实现-优劣对比"><a href="#五、自实现-vs-讲义实现-优劣对比" class="headerlink" title="五、自实现 vs 讲义实现 优劣对比"></a>五、自实现 vs 讲义实现 优劣对比</h2><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>自实现</th>
+<th>讲义实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SQL 查询次数</strong>（7 天为例）</td>
+<td>营业额 1 次 &#x2F; 用户 2 次 &#x2F; 订单 1 次</td>
+<td>营业额 7 次 &#x2F; 用户 14 次 &#x2F; 订单 14 次</td>
+</tr>
+<tr>
+<td><strong>DB 性能</strong></td>
+<td>显著更优，一次分组替代 N 次单点查询</td>
+<td>简单 for 循环逐天查询，大数据量下压力大</td>
+</tr>
+<tr>
+<td><strong>日期完整性</strong></td>
+<td>需额外用双 while 补齐，实现复杂度较高</td>
+<td>天然保证日期连续（先构造完整日期 List），无数据的日子自动是 0</td>
+</tr>
+<tr>
+<td><strong>代码结构</strong></td>
+<td>Service 层逻辑多，<code>List&lt;Map&gt;</code> + 手动转型类型弱，代码偏长</td>
+<td>结构清晰直白，Service 伪代码式易读，Mapper 用通用 <code>sumByMap</code> &#x2F; <code>countByMap</code> 复用性强</td>
+</tr>
+<tr>
+<td><strong>索引利用</strong></td>
+<td>修复后一致，统一半开区间写法</td>
+<td>修复前一致，修复前也是逐天查询无日期函数问题</td>
+</tr>
+<tr>
+<td><strong>类型安全</strong></td>
+<td><code>Map&lt;String, Object&gt;</code> 拿值需要 <code>((Number)map.get(&quot;x&quot;)).longValue()</code>，IDE 不提示字段错误</td>
+<td>直接 <code>Double</code>、<code>Integer</code> 单值返回，或用专用 DTO（如 <code>GoodsSalesDTO</code>），强类型</td>
+</tr>
+</tbody></table>
+<p><strong>我的理解</strong>：</p>
+<ul>
+<li><p>自实现强在<strong>性能</strong>，适合生产环境大数据量报表</p>
+</li>
+<li><p>讲义实现强在<strong>可靠性和可读性</strong>，”日期永远完整”这条在报表场景中是刚需</p>
+</li>
+<li><p>最优做法是两者结合：<strong>保留自实现的高性能 SQL 聚合思路 + 采用讲义的日期完整性骨架（先构造完整日期 List 再匹配结果，或双 while 补齐）</strong></p>
+</li>
+</ul>
+<hr>
+<h2 id="今日总结"><a href="#今日总结" class="headerlink" title="今日总结"></a>今日总结</h2><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>核心要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>ECharts</strong></td>
+<td>数据可视化图表库，后端只需按前端要求返回”逗号分隔日期列表 + 逗号分隔数值列表”即可</td>
+</tr>
+<tr>
+<td><strong>营业额统计</strong></td>
+<td><code>GROUP BY</code> 分组查每日已完成订单金额；配合双 while 保证日期完整</td>
+</tr>
+<tr>
+<td><strong>用户统计</strong></td>
+<td><code>begin</code> 前总用户数 + 每日新增累加 &#x3D; 每日总用户；<strong>注意累计型指标补日期时不能清零</strong></td>
+</tr>
+<tr>
+<td><strong>订单统计</strong></td>
+<td><code>count(*)</code> + <code>sum(case when status=5 then 1 else 0 end)</code> 一条 SQL 同时拿两个值；完成率要做分母为 0 的保护</td>
+</tr>
+<tr>
+<td><strong>销量 Top10</strong></td>
+<td>JOIN <code>order_detail</code> + <code>orders</code>，分组排序 <code>LIMIT 10</code>；这里最早用对了 <code>&gt;= begin and &lt; endPlus1</code> 的半开区间索引写法</td>
+</tr>
+<tr>
+<td><strong>SQL 优化 1</strong></td>
+<td>时间列比较禁止用 <code>date(col)</code> 包裹，改用 <code>col &gt;= start and col &lt; endPlus1</code> 走索引</td>
+</tr>
+<tr>
+<td><strong>SQL 优化 2</strong></td>
+<td>同维度多指标统计用条件聚合 <code>SUM(CASE WHEN ...)</code> 一次查出，不要分多次查</td>
+</tr>
+<tr>
+<td><strong>日期补齐</strong></td>
+<td><code>GROUP BY</code> 只返回有数据的日期，报表必须补齐无数据日期；双 while + <code>currentDate</code> 指针是可靠做法</td>
+</tr>
+<tr>
+<td><strong>优劣取舍</strong></td>
+<td>自实现性能好但需手动补齐日期；讲义循环查询代码简单。生产环境应采用”高性能 SQL + 日期完整性骨架”结合的方式</td>
+</tr>
+</tbody></table>
+
+      </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/02/%E5%A4%8D%E7%9B%98/day27%20ECharts%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E3%80%81SQL%E4%BC%98%E5%8C%96%E4%B8%8E%E6%97%A5%E6%9C%9F%E8%A1%A5%E9%BD%90/" rel="prev" title="day27 ECharts数据统计、SQL优化与日期补齐">
+      <i class="fa fa-chevron-left"></i> day27 ECharts数据统计、SQL优化与日期补齐
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Day27-ECharts-%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E3%80%81SQL-%E4%BC%98%E5%8C%96%E4%B8%8E%E6%97%A5%E6%9C%9F%E8%A1%A5%E9%BD%90"><span class="nav-number">1.</span> <span class="nav-text">Day27 - ECharts 数据统计、SQL 优化与日期补齐</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81Apache-ECharts-%E5%BF%AB%E9%80%9F%E4%BA%86%E8%A7%A3"><span class="nav-number">1.1.</span> <span class="nav-text">一、Apache ECharts 快速了解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%9B%9B%E4%B8%AA%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%E6%8E%A5%E5%8F%A3%E7%9A%84%E8%87%AA%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="nav-number">1.2.</span> <span class="nav-text">二、四个数据统计接口的自实现思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E8%90%A5%E4%B8%9A%E9%A2%9D%E7%BB%9F%E8%AE%A1"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 营业额统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E7%94%A8%E6%88%B7%E7%BB%9F%E8%AE%A1"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 用户统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E8%AE%A2%E5%8D%95%E7%BB%9F%E8%AE%A1"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 订单统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E9%94%80%E9%87%8F%E6%8E%92%E5%90%8D-Top10"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 销量排名 Top10</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%A4%E4%B8%AA-SQL-%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7"><span class="nav-number">1.3.</span> <span class="nav-text">三、两个 SQL 优化技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%94%A8%E5%8D%8A%E5%BC%80%E5%8C%BA%E9%97%B4%E6%9B%BF%E4%BB%A3%E6%97%A5%E6%9C%9F%E5%87%BD%E6%95%B0%E5%8C%85%E8%A3%B9%E5%88%97"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 用半开区间替代日期函数包裹列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88%EF%BC%9ASUM-CASE-WHEN-%E4%B8%80%E6%AC%A1%E6%9F%A5%E8%AF%A2%E4%BB%A3%E6%9B%BF%E5%A4%9A%E6%AC%A1"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 条件聚合：SUM(CASE WHEN ...) 一次查询代替多次</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%BD%A2%E6%80%81"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">语法形态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E9%80%BB%E8%BE%91%EF%BC%88%E9%80%90%E8%A1%8C%E7%90%86%E8%A7%A3%EF%BC%89"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">执行逻辑（逐行理解）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%81%9A%E5%90%88%E9%87%8C%E5%B5%8C%E6%9D%A1%E4%BB%B6%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E5%86%99%E4%B8%A4%E6%9D%A1-SQL%EF%BC%9F"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">为什么要聚合里嵌条件，而不是写两条 SQL？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%B6%E7%9B%8A"><span class="nav-number">1.3.2.4.</span> <span class="nav-text">收益</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E8%B8%A9%E5%9D%91%EF%BC%9AGROUP-BY-%E5%88%86%E7%BB%84%E5%AF%BC%E8%87%B4%E6%97%A5%E6%9C%9F%E7%BC%BA%E5%A4%B1"><span class="nav-number">1.4.</span> <span class="nav-text">四、踩坑：GROUP BY 分组导致日期缺失</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%8E%B0%E8%B1%A1"><span class="nav-number">1.4.1.</span> <span class="nav-text">问题现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%EF%BC%9A%E5%8F%8C-while-%E5%BE%AA%E7%8E%AF-currentDate-%E6%8C%87%E9%92%88%E8%A1%A5%E9%BD%90"><span class="nav-number">1.4.2.</span> <span class="nav-text">解决方法：双 while 循环 + currentDate 指针补齐</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E8%87%AA%E5%AE%9E%E7%8E%B0-vs-%E8%AE%B2%E4%B9%89%E5%AE%9E%E7%8E%B0-%E4%BC%98%E5%8A%A3%E5%AF%B9%E6%AF%94"><span class="nav-number">1.5.</span> <span class="nav-text">五、自实现 vs 讲义实现 优劣对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E6%80%BB%E7%BB%93"><span class="nav-number">1.6.</span> <span class="nav-text">今日总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZHX"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">ZHX</p>
+  <div class="site-description" itemprop="description">记录编程学习、项目实战和踩坑笔记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
