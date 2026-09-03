@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.blog-x.cc.cd","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Day28 - 工作台与 Apache POI 导出报表一、工作台1.1 功能概述工作台模块为管理端首页提供概览数据，包含四个接口：    接口 路径 返回内容    今日数据查询 &#x2F;admin&#x2F;workspace&#x2F;businessData 营业额、有效订单数、完成率、客单价、新增用户数   订单管理数据 &#x2F;admin&#x2F;workspace&#x2F;overviewOrders 各状态订单数量（待接单、待派">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day28 工作台与 Apache POI 导出报表">
+<meta property="og:url" content="https://www.blog-x.cc.cd/2026/09/03/%E7%AC%94%E8%AE%B0/Day28%20%E5%B7%A5%E4%BD%9C%E5%8F%B0%E4%B8%8E%20Apache%20POI%20%E5%AF%BC%E5%87%BA%E6%8A%A5%E8%A1%A8/index.html">
+<meta property="og:site_name" content="我的学习日记">
+<meta property="og:description" content="Day28 - 工作台与 Apache POI 导出报表一、工作台1.1 功能概述工作台模块为管理端首页提供概览数据，包含四个接口：    接口 路径 返回内容    今日数据查询 &#x2F;admin&#x2F;workspace&#x2F;businessData 营业额、有效订单数、完成率、客单价、新增用户数   订单管理数据 &#x2F;admin&#x2F;workspace&#x2F;overviewOrders 各状态订单数量（待接单、待派">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-03T05:11:53.000Z">
+<meta property="article:modified_time" content="2026-09-03T05:11:47.660Z">
+<meta property="article:author" content="ZHX">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.blog-x.cc.cd/2026/09/03/%E7%AC%94%E8%AE%B0/Day28%20%E5%B7%A5%E4%BD%9C%E5%8F%B0%E4%B8%8E%20Apache%20POI%20%E5%AF%BC%E5%87%BA%E6%8A%A5%E8%A1%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Day28 工作台与 Apache POI 导出报表 | 我的学习日记</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">我的学习日记</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">32</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">0</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/09/03/%E7%AC%94%E8%AE%B0/Day28%20%E5%B7%A5%E4%BD%9C%E5%8F%B0%E4%B8%8E%20Apache%20POI%20%E5%AF%BC%E5%87%BA%E6%8A%A5%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="ZHX">
+      <meta itemprop="description" content="记录编程学习、项目实战和踩坑笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的学习日记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day28 工作台与 Apache POI 导出报表
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-09-03 13:11:53 / 修改时间：13:11:47" itemprop="dateCreated datePublished" datetime="2026-09-03T13:11:53+08:00">2026-09-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/" itemprop="url" rel="index"><span itemprop="name">苍穹外卖</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+      <div class="post-body" itemprop="articleBody">
+
+        
+          <h1 id="Day28-工作台与-Apache-POI-导出报表"><a href="#Day28-工作台与-Apache-POI-导出报表" class="headerlink" title="Day28 - 工作台与 Apache POI 导出报表"></a>Day28 - 工作台与 Apache POI 导出报表</h1><h2 id="一、工作台"><a href="#一、工作台" class="headerlink" title="一、工作台"></a>一、工作台</h2><h3 id="1-1-功能概述"><a href="#1-1-功能概述" class="headerlink" title="1.1 功能概述"></a>1.1 功能概述</h3><p>工作台模块为管理端首页提供概览数据，包含四个接口：</p>
+<table>
+<thead>
+<tr>
+<th>接口</th>
+<th>路径</th>
+<th>返回内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>今日数据查询</td>
+<td><code>/admin/workspace/businessData</code></td>
+<td>营业额、有效订单数、完成率、客单价、新增用户数</td>
+</tr>
+<tr>
+<td>订单管理数据</td>
+<td><code>/admin/workspace/overviewOrders</code></td>
+<td>各状态订单数量（待接单、待派送、已完成、已取消、全部）</td>
+</tr>
+<tr>
+<td>菜品总览</td>
+<td><code>/admin/workspace/overviewDishes</code></td>
+<td>启售数量、停售数量</td>
+</tr>
+<tr>
+<td>套餐总览</td>
+<td><code>/admin/workspace/overviewSetmeals</code></td>
+<td>启售数量、停售数量</td>
+</tr>
+</tbody></table>
+<h3 id="1-2-实现方式"><a href="#1-2-实现方式" class="headerlink" title="1.2 实现方式"></a>1.2 实现方式</h3><p>工作台代码以”代码导入”方式引入，共三个核心类：</p>
+<ul>
+<li><p><code>WorkSpaceController</code>：接收请求，今日数据查询时自动计算当天的开始和结束时间</p>
+</li>
+<li><p><code>WorkspaceService</code> &#x2F; <code>WorkspaceServiceImpl</code>：调用各 Mapper 获取统计数据</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Controller 中自动计算当天时间范围</span></span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">begin</span> <span class="operator">=</span> LocalDateTime.now().with(LocalTime.MIN);</span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">end</span> <span class="operator">=</span> LocalDateTime.now().with(LocalTime.MAX);</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-工作台依赖的-Mapper-方法"><a href="#1-3-工作台依赖的-Mapper-方法" class="headerlink" title="1.3 工作台依赖的 Mapper 方法"></a>1.3 工作台依赖的 Mapper 方法</h3><p>工作台大量调用 day11 引入的通用 <code>sumByMap(Map)</code> 和 <code>countByMap(Map)</code> 方法。由于我 day11 的报表实现与讲义不同（自己用了 <code>turnoverStatistics</code>、<code>ordersStatistics</code> 等专用方法），这些通用方法在代码仓库中缺失，需要补全后工作台才能正常编译。</p>
+<p>补全的方法分布：</p>
+<table>
+<thead>
+<tr>
+<th>Mapper</th>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>OrderMapper</code></td>
+<td><code>Double sumByMap(Map map)</code></td>
+<td>按动态条件（status + 时间范围）求营业额</td>
+</tr>
+<tr>
+<td><code>OrderMapper</code></td>
+<td><code>Integer countByMap(Map map)</code></td>
+<td>按动态条件统计订单数量</td>
+</tr>
+<tr>
+<td><code>UserMapper</code></td>
+<td><code>Integer countByMap(Map map)</code></td>
+<td>按动态条件统计用户数量</td>
+</tr>
+<tr>
+<td><code>DishMapper</code></td>
+<td><code>Integer countByMap(Map map)</code></td>
+<td>按动态条件（status + categoryId）统计菜品数量</td>
+</tr>
+<tr>
+<td><code>SetmealMapper</code></td>
+<td><code>Integer countByMap(Map map)</code></td>
+<td>按动态条件统计套餐数量</td>
+</tr>
+</tbody></table>
+<p>这些方法全部使用 <code>&lt;where&gt;</code> + <code>&lt;if&gt;</code> 动态 SQL，Service 层通过往 <code>Map</code> 里放不同的 key 来灵活控制查询条件，一个 Mapper 方法应对多种查询场景。例如 <code>getOrderOverView</code> 中对同一个 <code>countByMap</code> 传 5 次不同的 <code>status</code>，分别查出各状态订单数。</p>
+<hr>
+<h2 id="二、Apache-POI"><a href="#二、Apache-POI" class="headerlink" title="二、Apache POI"></a>二、Apache POI</h2><h3 id="2-1-概述"><a href="#2-1-概述" class="headerlink" title="2.1 概述"></a>2.1 概述</h3><p>Apache POI 是一个处理 Microsoft Office 文件格式的开源 Java 库，一般用于读写 Excel 文件。常见应用场景包括导出交易明细、业务报表、批量导入数据等。</p>
+<p>项目通过 Maven 引入两个依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi-ooxml<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-核心-API"><a href="#2-2-核心-API" class="headerlink" title="2.2 核心 API"></a>2.2 核心 API</h3><p>POI 操作 Excel 的核心类都在 <code>org.apache.poi.xssf.usermodel</code> 包下，层级关系为 <strong>工作簿 → Sheet 页 → 行 → 单元格</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>类</th>
+<th>对应 Excel 概念</th>
+<th>常用方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>XSSFWorkbook</code></td>
+<td>Excel 文件（工作簿）</td>
+<td><code>new XSSFWorkbook(inputStream)</code> 基于模板创建；<code>getSheet(&quot;Sheet1&quot;)</code> 获取 Sheet；<code>write(out)</code> 写入输出流；<code>close()</code> 关闭</td>
+</tr>
+<tr>
+<td><code>XSSFSheet</code></td>
+<td>Sheet 页</td>
+<td><code>getRow(i)</code> 获取指定行；<code>createRow(0)</code> 创建行</td>
+</tr>
+<tr>
+<td><code>XSSFRow</code></td>
+<td>行</td>
+<td><code>getCell(j)</code> 获取单元格；<code>createCell(j)</code> 创建单元格；<code>setCellValue(value)</code> 设置值</td>
+</tr>
+<tr>
+<td><code>XSSFCell</code></td>
+<td>单元格</td>
+<td><code>getStringCellValue()</code> 获取文本值</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>注意</strong>：行号和列号均从 0 开始计数。<code>getRow(3)</code> 获取的是第 4 行，<code>getCell(2)</code> 获取的是第 3 列。</p>
+</blockquote>
+<hr>
+<h2 id="三、导出运营数据报表"><a href="#三、导出运营数据报表" class="headerlink" title="三、导出运营数据报表"></a>三、导出运营数据报表</h2><h3 id="3-1-需求与接口设计"><a href="#3-1-需求与接口设计" class="headerlink" title="3.1 需求与接口设计"></a>3.1 需求与接口设计</h3><p>导出最近 30 天的运营数据为 Excel 文件。接口特点：</p>
+<ul>
+<li><p><strong>GET 请求</strong>，不需要任何请求参数（后端计算近 30 天范围）</p>
+</li>
+<li><p><strong>无返回数据</strong>，本质是文件下载——通过输出流将 Excel 写到客户端浏览器</p>
+</li>
+<li><p>需要提前设计好 Excel 模板文件，放到 <code>resources/template/</code> 目录下</p>
+</li>
+</ul>
+<h3 id="3-2-实现步骤"><a href="#3-2-实现步骤" class="headerlink" title="3.2 实现步骤"></a>3.2 实现步骤</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 设计 Excel 模板文件（含表头、格式）</span><br><span class="line">2. 查询近 30 天的运营数据（复用 WorkspaceService.getBusinessData）</span><br><span class="line">3. 基于模板创建 Excel 对象，将数据写入对应单元格</span><br><span class="line">4. 通过 HttpServletResponse 输出流下载到客户端</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-关键代码"><a href="#3-3-关键代码" class="headerlink" title="3.3 关键代码"></a>3.3 关键代码</h3><h4 id="Controller-层"><a href="#Controller-层" class="headerlink" title="Controller 层"></a>Controller 层</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/export&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">void</span> <span class="title function_">exportExcel</span><span class="params">(HttpServletResponse response)</span> &#123;</span><br><span class="line">    reportService.exportExcel(response);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>返回类型为 <code>void</code>，不返回 JSON，直接操作 <code>HttpServletResponse</code> 的输出流。</p>
+<h4 id="Service-层核心实现"><a href="#Service-层核心实现" class="headerlink" title="Service 层核心实现"></a>Service 层核心实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">void</span> <span class="title function_">exportExcel</span><span class="params">(HttpServletResponse response)</span> &#123;</span><br><span class="line">    <span class="type">LocalDate</span> <span class="variable">begin</span> <span class="operator">=</span> LocalDate.now().minusDays(<span class="number">30</span>);</span><br><span class="line">    <span class="type">LocalDate</span> <span class="variable">end</span> <span class="operator">=</span> LocalDate.now().minusDays(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查询概览数据，复用工作台的 getBusinessData</span></span><br><span class="line">    <span class="type">BusinessDataVO</span> <span class="variable">businessData</span> <span class="operator">=</span> workspaceService.getBusinessData(</span><br><span class="line">            LocalDateTime.of(begin, LocalTime.MIN),</span><br><span class="line">            LocalDateTime.of(end, LocalTime.MAX));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取模板输入流</span></span><br><span class="line">    <span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> <span class="built_in">this</span>.getClass().getClassLoader()</span><br><span class="line">            .getResourceAsStream(<span class="string">&quot;template/运营数据报表模板.xlsx&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="type">XSSFWorkbook</span> <span class="variable">excel</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">XSSFWorkbook</span>(in);       <span class="comment">// 基于模板创建工作簿</span></span><br><span class="line">        <span class="type">XSSFSheet</span> <span class="variable">sheet</span> <span class="operator">=</span> excel.getSheet(<span class="string">&quot;Sheet1&quot;</span>);      <span class="comment">// 获取 Sheet 页</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 填充概览数据（第2行日期、第4-5行汇总指标）</span></span><br><span class="line">        sheet.getRow(<span class="number">1</span>).getCell(<span class="number">1</span>).setCellValue(<span class="string">&quot;日期: &quot;</span> + begin + <span class="string">&quot; 至 &quot;</span> + end);</span><br><span class="line"></span><br><span class="line">        <span class="type">XSSFRow</span> <span class="variable">row</span> <span class="operator">=</span> sheet.getRow(<span class="number">3</span>);</span><br><span class="line">        row.getCell(<span class="number">2</span>).setCellValue(businessData.getTurnover());</span><br><span class="line">        row.getCell(<span class="number">4</span>).setCellValue(businessData.getOrderCompletionRate());</span><br><span class="line">        row.getCell(<span class="number">6</span>).setCellValue(businessData.getNewUsers());</span><br><span class="line"></span><br><span class="line">        row = sheet.getRow(<span class="number">4</span>);</span><br><span class="line">        row.getCell(<span class="number">2</span>).setCellValue(businessData.getValidOrderCount());</span><br><span class="line">        row.getCell(<span class="number">4</span>).setCellValue(businessData.getUnitPrice());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 循环填充30天明细数据（从第8行开始）</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">30</span>; i++) &#123;</span><br><span class="line">            <span class="type">LocalDate</span> <span class="variable">date</span> <span class="operator">=</span> begin.plusDays(i);</span><br><span class="line">            businessData = workspaceService.getBusinessData(</span><br><span class="line">                    LocalDateTime.of(date, LocalTime.MIN),</span><br><span class="line">                    LocalDateTime.of(date, LocalTime.MAX));</span><br><span class="line">            row = sheet.getRow(i + <span class="number">7</span>);</span><br><span class="line">            row.getCell(<span class="number">1</span>).setCellValue(date.toString());</span><br><span class="line">            row.getCell(<span class="number">2</span>).setCellValue(businessData.getTurnover());</span><br><span class="line">            row.getCell(<span class="number">3</span>).setCellValue(businessData.getValidOrderCount());</span><br><span class="line">            row.getCell(<span class="number">4</span>).setCellValue(businessData.getOrderCompletionRate());</span><br><span class="line">            row.getCell(<span class="number">5</span>).setCellValue(businessData.getUnitPrice());</span><br><span class="line">            row.getCell(<span class="number">6</span>).setCellValue(businessData.getNewUsers());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 通过输出流下载到客户端</span></span><br><span class="line">        <span class="type">ServletOutputStream</span> <span class="variable">out</span> <span class="operator">=</span> response.getOutputStream();</span><br><span class="line">        excel.write(out);</span><br><span class="line">        out.flush();</span><br><span class="line">        out.close();</span><br><span class="line">        excel.close();</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-两个关键点"><a href="#3-4-两个关键点" class="headerlink" title="3.4 两个关键点"></a>3.4 两个关键点</h3><p><strong>获取模板输入流</strong>——通过 ClassLoader 从 classpath 读取模板文件，而非磁盘绝对路径：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> <span class="built_in">this</span>.getClass().getClassLoader()</span><br><span class="line">        .getResourceAsStream(<span class="string">&quot;template/运营数据报表模板.xlsx&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>前提是模板文件已放在 <code>src/main/resources/template/</code> 目录下，编译后会出现在 classpath 中。</p>
+<p><strong>获取输出流</strong>——通过 <code>HttpServletResponse</code> 获取浏览器的输出流：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ServletOutputStream</span> <span class="variable">out</span> <span class="operator">=</span> response.getOutputStream();</span><br><span class="line">excel.write(out);</span><br></pre></td></tr></table></figure>
+
+<p>不需要设置响应头，浏览器会直接弹出文件下载。</p>
+<h3 id="3-5-模板文件的结构"><a href="#3-5-模板文件的结构" class="headerlink" title="3.5 模板文件的结构"></a>3.5 模板文件的结构</h3><p>模板 <code>运营数据报表模板.xlsx</code> 是提前设计好的 Excel 文件，包含固定的表头和格式。数据写入时需要<strong>严格对应行列号</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>行号（0 基）</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>日期范围（第2列）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>概览：营业额(第3列)、完成率(第5列)、新增用户(第7列)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>概览：有效订单(第3列)、客单价(第5列)</td>
+</tr>
+<tr>
+<td>7 ~ 36</td>
+<td>30 天明细：日期、营业额、有效订单、完成率、客单价、新增用户</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="今日总结"><a href="#今日总结" class="headerlink" title="今日总结"></a>今日总结</h2><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>核心要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>工作台</strong></td>
+<td>管理端首页概览，4 个接口分别查今日营业数据、各状态订单数、菜品&#x2F;套餐启售停售数</td>
+</tr>
+<tr>
+<td><strong>通用 Mapper 方法</strong></td>
+<td><code>sumByMap(Map)</code> &#x2F; <code>countByMap(Map)</code> 用动态 SQL 灵活组合条件，工作台和导出报表都依赖它们；由于 day11 自实现方式不同，需补全这些方法</td>
+</tr>
+<tr>
+<td><strong>Apache POI</strong></td>
+<td>Java 操作 Excel 的库，核心类层级：<code>XSSFWorkbook</code> → <code>XSSFSheet</code> → <code>XSSFRow</code> → <code>XSSFCell</code>，行列号从 0 开始</td>
+</tr>
+<tr>
+<td><strong>导出报表</strong></td>
+<td>GET 请求无参数无返回值，本质是文件下载；步骤为设计模板 → 查询数据 → 写入 Excel → 输出流下载</td>
+</tr>
+<tr>
+<td><strong>模板输入流</strong></td>
+<td><code>this.getClass().getClassLoader().getResourceAsStream(&quot;template/xxx.xlsx&quot;)</code> 从 classpath 读取模板</td>
+</tr>
+<tr>
+<td><strong>浏览器输出流</strong></td>
+<td><code>response.getOutputStream()</code> 获取输出流，<code>excel.write(out)</code> 写入后关闭资源</td>
+</tr>
+</tbody></table>
+
+      </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/03/%E5%A4%8D%E7%9B%98/Day28%20%E5%B7%A5%E4%BD%9C%E5%8F%B0%E4%B8%8E%20Apache%20POI%20%E5%AF%BC%E5%87%BA%E6%8A%A5%E8%A1%A8/" rel="prev" title="Day28 工作台与 Apache POI 导出报表">
+      <i class="fa fa-chevron-left"></i> Day28 工作台与 Apache POI 导出报表
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Day28-%E5%B7%A5%E4%BD%9C%E5%8F%B0%E4%B8%8E-Apache-POI-%E5%AF%BC%E5%87%BA%E6%8A%A5%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">Day28 - 工作台与 Apache POI 导出报表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%B7%A5%E4%BD%9C%E5%8F%B0"><span class="nav-number">1.1.</span> <span class="nav-text">一、工作台</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%8A%9F%E8%83%BD%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 功能概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 实现方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E5%B7%A5%E4%BD%9C%E5%8F%B0%E4%BE%9D%E8%B5%96%E7%9A%84-Mapper-%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 工作台依赖的 Mapper 方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Apache-POI"><span class="nav-number">1.2.</span> <span class="nav-text">二、Apache POI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%A0%B8%E5%BF%83-API"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 核心 API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AF%BC%E5%87%BA%E8%BF%90%E8%90%A5%E6%95%B0%E6%8D%AE%E6%8A%A5%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text">三、导出运营数据报表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E9%9C%80%E6%B1%82%E4%B8%8E%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 需求与接口设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 实现步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 关键代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Controller-%E5%B1%82"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">Controller 层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Service-%E5%B1%82%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">Service 层核心实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E4%B8%A4%E4%B8%AA%E5%85%B3%E9%94%AE%E7%82%B9"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 两个关键点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.5 模板文件的结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">今日总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZHX"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">ZHX</p>
+  <div class="site-description" itemprop="description">记录编程学习、项目实战和踩坑笔记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
