@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.blog-x.cc.cd","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Day30 - 黑马点评短信登录与Session实现一、项目导入1.1 黑马点评项目结构黑马点评（hm-dianping）是一个基于 Spring Boot 的点评类项目，本次学习从导入项目开始。项目采用分层架构，核心包结构如下： 12345678com.hmdp├── config      # 配置类（MvcConfig、MybatisConfig 等）├── controller  # 控制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day30 - 黑马点评短信登录与Session实现">
+<meta property="og:url" content="https://www.blog-x.cc.cd/2026/09/05/%E7%AC%94%E8%AE%B0/Day30%20-%20%E9%BB%91%E9%A9%AC%E7%82%B9%E8%AF%84%E7%9F%AD%E4%BF%A1%E7%99%BB%E5%BD%95%E4%B8%8ESession%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="我的学习日记">
+<meta property="og:description" content="Day30 - 黑马点评短信登录与Session实现一、项目导入1.1 黑马点评项目结构黑马点评（hm-dianping）是一个基于 Spring Boot 的点评类项目，本次学习从导入项目开始。项目采用分层架构，核心包结构如下： 12345678com.hmdp├── config      # 配置类（MvcConfig、MybatisConfig 等）├── controller  # 控制">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-05T15:50:00.000Z">
+<meta property="article:modified_time" content="2026-09-05T15:09:00.030Z">
+<meta property="article:author" content="ZHX">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.blog-x.cc.cd/2026/09/05/%E7%AC%94%E8%AE%B0/Day30%20-%20%E9%BB%91%E9%A9%AC%E7%82%B9%E8%AF%84%E7%9F%AD%E4%BF%A1%E7%99%BB%E5%BD%95%E4%B8%8ESession%E5%AE%9E%E7%8E%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Day30 - 黑马点评短信登录与Session实现 | 我的学习日记</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">我的学习日记</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">36</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">0</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/09/05/%E7%AC%94%E8%AE%B0/Day30%20-%20%E9%BB%91%E9%A9%AC%E7%82%B9%E8%AF%84%E7%9F%AD%E4%BF%A1%E7%99%BB%E5%BD%95%E4%B8%8ESession%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="ZHX">
+      <meta itemprop="description" content="记录编程学习、项目实战和踩坑笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的学习日记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day30 - 黑马点评短信登录与Session实现
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-09-05 23:50:00 / 修改时间：23:09:00" itemprop="dateCreated datePublished" datetime="2026-09-05T23:50:00+08:00">2026-09-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+      <div class="post-body" itemprop="articleBody">
+
+        
+          <h1 id="Day30-黑马点评短信登录与Session实现"><a href="#Day30-黑马点评短信登录与Session实现" class="headerlink" title="Day30 - 黑马点评短信登录与Session实现"></a>Day30 - 黑马点评短信登录与Session实现</h1><h2 id="一、项目导入"><a href="#一、项目导入" class="headerlink" title="一、项目导入"></a>一、项目导入</h2><h3 id="1-1-黑马点评项目结构"><a href="#1-1-黑马点评项目结构" class="headerlink" title="1.1 黑马点评项目结构"></a>1.1 黑马点评项目结构</h3><p>黑马点评（hm-dianping）是一个基于 Spring Boot 的点评类项目，本次学习从导入项目开始。项目采用分层架构，核心包结构如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">com.hmdp</span><br><span class="line">├── config      # 配置类（MvcConfig、MybatisConfig 等）</span><br><span class="line">├── controller  # 控制层</span><br><span class="line">├── dto         # 数据传输对象（LoginFormDTO、UserDTO、Result 等）</span><br><span class="line">├── entity      # 实体类（User、Shop 等）</span><br><span class="line">├── mapper      # MyBatis-Plus Mapper 接口</span><br><span class="line">├── service     # 业务接口与实现</span><br><span class="line">└── utils       # 工具类（LoginInterceptor、UserHolder、RedisConstants 等）</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-短信登录的整体流程"><a href="#1-2-短信登录的整体流程" class="headerlink" title="1.2 短信登录的整体流程"></a>1.2 短信登录的整体流程</h3><p>短信登录分为三步：</p>
+<ol>
+<li><strong>发送短信验证码</strong>：用户提交手机号，后台校验格式后生成 6 位验证码，存入 Session。</li>
+<li><strong>验证码登录</strong>：用户提交手机号和验证码，后台从 Session 取出验证码比对，一致则根据手机号查询用户，不存在则自动创建，最后将用户信息存入 Session。</li>
+<li><strong>校验登录状态</strong>：后续请求携带 Cookie 中的 <code>JSESSIONID</code>，后台通过拦截器从 Session 取出用户信息，未登录则拦截。</li>
+</ol>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">发送验证码 → 验证码登录（查用户/创建用户）→ 拦截器校验登录状态</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="二、基于-Session-实现短信登录"><a href="#二、基于-Session-实现短信登录" class="headerlink" title="二、基于 Session 实现短信登录"></a>二、基于 Session 实现短信登录</h2><h3 id="2-1-对-Session-的理解"><a href="#2-1-对-Session-的理解" class="headerlink" title="2.1 对 Session 的理解"></a>2.1 对 Session 的理解</h3><p>每个 Tomcat 服务器维护一个 <strong>Session 池</strong>。当浏览器发起请求并调用 <code>session.setAttribute(key, value)</code> 时：</p>
+<ol>
+<li>服务器为该浏览器生成一个 <strong>SessionID</strong>；</li>
+<li>创建一个 <strong>Session 对象</strong>，将字段名与字段值存入其中；</li>
+<li>将 SessionID 通过 Cookie 返回给浏览器；</li>
+<li>下次请求时浏览器携带该 SessionID，服务器据此找到对应的 Session 对象。</li>
+</ol>
+<p>Session 的核心作用是在<strong>无状态的 HTTP 协议</strong>下保存用户的登录状态。</p>
+<h3 id="2-2-发送短信验证码"><a href="#2-2-发送短信验证码" class="headerlink" title="2.2 发送短信验证码"></a>2.2 发送短信验证码</h3><p>接口：<code>POST /user/code</code>，参数为手机号。实现位于 <code>UserServiceImpl.sendCode</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">Result</span> <span class="title function_">sendCode</span><span class="params">(String phone, HttpSession session)</span> &#123;</span><br><span class="line">    <span class="comment">// 1. 校验手机号格式</span></span><br><span class="line">    <span class="keyword">if</span> (RegexUtils.isPhoneInvalid(phone)) &#123;</span><br><span class="line">        <span class="keyword">return</span> Result.fail(<span class="string">&quot;手机号格式错误&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2. 生成 6 位数字验证码</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">code</span> <span class="operator">=</span> RandomUtil.randomNumbers(<span class="number">6</span>);</span><br><span class="line">    <span class="comment">// 3. 将验证码存入 session</span></span><br><span class="line">    session.setAttribute(<span class="string">&quot;code&quot;</span>, code);</span><br><span class="line">    <span class="comment">// 4. 模拟发送短信（打印日志）</span></span><br><span class="line">    log.debug(<span class="string">&quot;发送验证码到手机号：&#123;&#125;，验证码：&#123;&#125;&quot;</span>, phone, code);</span><br><span class="line">    <span class="keyword">return</span> Result.ok();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关键点：</p>
+<ul>
+<li><p><code>RegexUtils.isPhoneInvalid</code> 校验手机号格式，不合法直接返回错误；</p>
+</li>
+<li><p><code>RandomUtil.randomNumbers(6)</code> 来自 Hutool，生成 6 位随机数字；</p>
+</li>
+<li><p>验证码以 <code>&quot;code&quot;</code> 为 key 存入 Session，供登录时比对。</p>
+</li>
+</ul>
+<h3 id="2-3-验证码登录"><a href="#2-3-验证码登录" class="headerlink" title="2.3 验证码登录"></a>2.3 验证码登录</h3><p>接口：<code>POST /user/login</code>，参数为 <code>LoginFormDTO</code>（包含 phone、code、password）。实现位于 <code>UserServiceImpl.login</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">Result</span> <span class="title function_">login</span><span class="params">(LoginFormDTO loginForm, HttpSession session)</span> &#123;</span><br><span class="line">    <span class="comment">// 1. 校验手机号</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">phone</span> <span class="operator">=</span> loginForm.getPhone();</span><br><span class="line">    <span class="keyword">if</span> (RegexUtils.isPhoneInvalid(phone)) &#123;</span><br><span class="line">        <span class="keyword">return</span> Result.fail(<span class="string">&quot;手机号格式错误&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2. 从 session 取出验证码并比对</span></span><br><span class="line">    <span class="type">Object</span> <span class="variable">cacheCode</span> <span class="operator">=</span> session.getAttribute(<span class="string">&quot;code&quot;</span>);</span><br><span class="line">    <span class="type">String</span> <span class="variable">code</span> <span class="operator">=</span> loginForm.getCode();</span><br><span class="line">    <span class="keyword">if</span> (cacheCode == <span class="literal">null</span> || !code.equals(cacheCode.toString())) &#123;</span><br><span class="line">        <span class="keyword">return</span> Result.fail(<span class="string">&quot;验证码错误&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 3. 根据手机号查询用户</span></span><br><span class="line">    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> query().eq(<span class="string">&quot;phone&quot;</span>, phone).one();</span><br><span class="line">    <span class="keyword">if</span> (user == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// 4. 不存在则自动创建用户</span></span><br><span class="line">        user = createUserWithPhone(phone);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 5. 保存用户信息到 session</span></span><br><span class="line">    session.setAttribute(<span class="string">&quot;user&quot;</span>, user);</span><br><span class="line">    <span class="keyword">return</span> Result.ok();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>登录逻辑：校验手机号 → 校验验证码 → 查询用户 → 不存在则创建 → 存入 Session。</p>
+<h3 id="2-4-自动创建用户"><a href="#2-4-自动创建用户" class="headerlink" title="2.4 自动创建用户"></a>2.4 自动创建用户</h3><p><code>createUserWithPhone</code> 方法在用户不存在时自动创建账号：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">User</span> <span class="title function_">createUserWithPhone</span><span class="params">(String phone)</span> &#123;</span><br><span class="line">    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">    user.setPhone(phone);</span><br><span class="line">    user.setNickName(<span class="string">&quot;user_&quot;</span> + RandomUtil.randomString(<span class="number">10</span>));</span><br><span class="line">    save(user);</span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>昵称随机生成，格式为 <code>user_</code> + 10 位随机字符串。</p>
+<h3 id="2-5-MyBatis-Plus-快捷操作"><a href="#2-5-MyBatis-Plus-快捷操作" class="headerlink" title="2.5 MyBatis-Plus 快捷操作"></a>2.5 MyBatis-Plus 快捷操作</h3><p>本项目使用 MyBatis-Plus，<strong>无需编写 Mapper 层的 SQL</strong>，直接通过 Service 层的链式方法操作数据库：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>query().eq(&quot;phone&quot;, phone).one()</code></td>
+<td>条件查询单条记录</td>
+</tr>
+<tr>
+<td><code>save(user)</code></td>
+<td>插入一条记录</td>
+</tr>
+</tbody></table>
+<p><code>UserServiceImpl</code> 继承 <code>ServiceImpl&lt;UserMapper, User&gt;</code>，从而获得 <code>query()</code>、<code>save()</code> 等方法。</p>
+<h3 id="2-6-TableId-主键自增"><a href="#2-6-TableId-主键自增" class="headerlink" title="2.6 @TableId 主键自增"></a>2.6 <code>@TableId</code> 主键自增</h3><p><code>User</code> 实体的主键使用 <code>@TableId</code> 注解，声明主键字段和自增策略：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TableId(value = &quot;id&quot;, type = IdType.AUTO)</span></span><br><span class="line"><span class="keyword">private</span> Long id;</span><br></pre></td></tr></table></figure>
+
+<p><code>IdType.AUTO</code> 表示使用数据库自增主键。调用 <code>save(user)</code> 后，数据库生成的主键 id 会<strong>回填到 user 对象</strong>中，后续可以直接通过 <code>user.getId()</code> 获取。</p>
+<blockquote>
+<p><code>@TableId</code> 的 <code>type</code> 属性还有 <code>ASSIGN_ID</code>（雪花算法）、<code>INPUT</code>（手动输入）等取值，本项目使用数据库自增。</p>
+</blockquote>
+<hr>
+<h2 id="三、登录校验：拦截器与-ThreadLocal"><a href="#三、登录校验：拦截器与-ThreadLocal" class="headerlink" title="三、登录校验：拦截器与 ThreadLocal"></a>三、登录校验：拦截器与 ThreadLocal</h2><h3 id="3-1-拦截器实现登录校验"><a href="#3-1-拦截器实现登录校验" class="headerlink" title="3.1 拦截器实现登录校验"></a>3.1 拦截器实现登录校验</h3><p><code>LoginInterceptor</code> 实现 <code>HandlerInterceptor</code>，在请求进入 Controller 前拦截：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> &#123;</span><br><span class="line">    <span class="type">HttpSession</span> <span class="variable">session</span> <span class="operator">=</span> request.getSession();</span><br><span class="line">    <span class="type">Object</span> <span class="variable">user</span> <span class="operator">=</span> session.getAttribute(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (user == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// 未登录，返回 401</span></span><br><span class="line">        response.setStatus(<span class="number">401</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 已登录，将用户信息存入 ThreadLocal</span></span><br><span class="line">    UserHolder.saveUser(BeanUtil.copyProperties((User) user, UserDTO.class));</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">void</span> <span class="title function_">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> &#123;</span><br><span class="line">    <span class="comment">// 请求结束后清除 ThreadLocal，防止内存泄漏</span></span><br><span class="line">    UserHolder.removeUser();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>拦截逻辑：从 Session 取 <code>user</code> → 为空返回 401 拦截 → 不为空则存入 ThreadLocal 并放行。</p>
+<h3 id="3-2-ThreadLocal-保存用户信息"><a href="#3-2-ThreadLocal-保存用户信息" class="headerlink" title="3.2 ThreadLocal 保存用户信息"></a>3.2 ThreadLocal 保存用户信息</h3><p><code>UserHolder</code> 封装了基于 <code>ThreadLocal</code> 的用户存取：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserHolder</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">ThreadLocal</span>&lt;UserDTO&gt; <span class="variable">tl</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ThreadLocal</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">saveUser</span><span class="params">(UserDTO user)</span> &#123; tl.set(user); &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">UserDTO</span> <span class="title function_">getUser</span><span class="params">()</span>        &#123; <span class="keyword">return</span> tl.get(); &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">removeUser</span><span class="params">()</span>        &#123; tl.remove(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>为什么用 ThreadLocal</strong>：Tomcat 从线程池中取一个线程处理每个请求，请求结束后线程归还线程池。ThreadLocal 以<strong>当前线程为 key</strong> 存储数据，保证每个线程只能访问自己的那份用户信息，实现线程隔离。Controller 中通过 <code>UserHolder.getUser()</code> 获取当前登录用户。</p>
+<blockquote>
+<p>注意：必须在 <code>afterCompletion</code> 中调用 <code>removeUser()</code> 清除 ThreadLocal，否则线程复用会导致数据错乱和内存泄漏。</p>
+</blockquote>
+<h3 id="3-3-注册拦截器"><a href="#3-3-注册拦截器" class="headerlink" title="3.3 注册拦截器"></a>3.3 注册拦截器</h3><p><code>MvcConfig</code> 中注册拦截器，并放行不需要登录的路径：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MvcConfig</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LoginInterceptor loginInterceptor;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> &#123;</span><br><span class="line">        registry.addInterceptor(loginInterceptor)</span><br><span class="line">                .addPathPatterns(<span class="string">&quot;/**&quot;</span>)</span><br><span class="line">                .excludePathPatterns(</span><br><span class="line">                    <span class="string">&quot;/user/code&quot;</span>, <span class="string">&quot;/user/login&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;/blog/hot&quot;</span>, <span class="string">&quot;/shop/**&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;/shop-type/**&quot;</span>, <span class="string">&quot;/voucher/**&quot;</span>, <span class="string">&quot;/upload/**&quot;</span></span><br><span class="line">                );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>/user/code</code> 和 <code>/user/login</code> 必须放行，否则用户无法获取验证码和登录。</p>
+<hr>
+<h2 id="四、UserDTO-隐藏敏感信息"><a href="#四、UserDTO-隐藏敏感信息" class="headerlink" title="四、UserDTO 隐藏敏感信息"></a>四、UserDTO 隐藏敏感信息</h2><h3 id="4-1-为什么用-UserDTO"><a href="#4-1-为什么用-UserDTO" class="headerlink" title="4.1 为什么用 UserDTO"></a>4.1 为什么用 UserDTO</h3><p><code>User</code> 实体包含 <code>password</code> 等敏感字段，直接存入 Session 并返回前端存在安全风险。<code>UserDTO</code> 只保留必要字段：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDTO</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String nickName;</span><br><span class="line">    <span class="keyword">private</span> String icon;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>UserDTO</code> 的好处：</p>
+<ul>
+<li><p><strong>避免敏感信息返回前端</strong>：不暴露 password 等字段；</p>
+</li>
+<li><p><strong>节省内存</strong>：只传递业务需要的字段。</p>
+</li>
+</ul>
+<h3 id="4-2-User-转-UserDTO"><a href="#4-2-User-转-UserDTO" class="headerlink" title="4.2 User 转 UserDTO"></a>4.2 User 转 UserDTO</h3><p>项目中有两种对象拷贝方式，注意区分：</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>来源</th>
+<th>写法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>BeanUtil.copyProperties</code></td>
+<td>Hutool</td>
+<td><code>BeanUtil.copyProperties(user, UserDTO.class)</code></td>
+</tr>
+<tr>
+<td><code>BeanUtils.copyProperties</code></td>
+<td>Spring</td>
+<td><code>BeanUtils.copyProperties(user, userDTO)</code></td>
+</tr>
+</tbody></table>
+<p>本项目拦截器中使用 Hutool 的 <code>BeanUtil</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserHolder.saveUser(BeanUtil.copyProperties((User) user, UserDTO.class));</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意 <code>BeanUtil</code>（Hutool）和 <code>BeanUtils</code>（Spring）名字相似，前者的第二个参数可以直接传目标类的 <code>Class</code>，后者需要传入目标对象实例。</p>
+</blockquote>
+<hr>
+<h2 id="五、Session-共享问题"><a href="#五、Session-共享问题" class="headerlink" title="五、Session 共享问题"></a>五、Session 共享问题</h2><h3 id="5-1-问题描述"><a href="#5-1-问题描述" class="headerlink" title="5.1 问题描述"></a>5.1 问题描述</h3><p>在<strong>集群部署</strong>时，每台 Tomcat 服务器的 Session 是<strong>独立</strong>的：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用户请求 → 负载均衡 → Tomcat1（有 session）</span><br><span class="line">                 ↘ Tomcat2（没有 session）→ 登录失效</span><br></pre></td></tr></table></figure>
+
+<p>用户第一次请求落到 Tomcat1 并在其 Session 中保存了登录信息，第二次请求可能被负载均衡分发到 Tomcat2，而 Tomcat2 上没有该用户的 Session，导致登录校验失败。</p>
+<h3 id="5-2-传统方案：Session-拷贝"><a href="#5-2-传统方案：Session-拷贝" class="headerlink" title="5.2 传统方案：Session 拷贝"></a>5.2 传统方案：Session 拷贝</h3><p>早期通过 Session 拷贝实现共享：任意一台服务器的 Session 修改时，同步给其他 Tomcat。但存在两个问题：</p>
+<ol>
+<li>每台服务器都保存完整的 Session 数据，<strong>服务器压力过大</strong>；</li>
+<li>Session 拷贝存在<strong>延迟</strong>，可能导致短时间内数据不一致。</li>
+</ol>
+<h3 id="5-3-解决方案：用-Redis-代替-Session"><a href="#5-3-解决方案：用-Redis-代替-Session" class="headerlink" title="5.3 解决方案：用 Redis 代替 Session"></a>5.3 解决方案：用 Redis 代替 Session</h3><p>Redis 数据本身是<strong>共享存储</strong>的，多台 Tomcat 都访问同一个 Redis，天然解决 Session 共享问题。Redis 实现登录的具体代码明日再学。</p>
+<hr>
+<h2 id="今日总结"><a href="#今日总结" class="headerlink" title="今日总结"></a>今日总结</h2><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>核心要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>项目结构</td>
+<td>黑马点评采用 Controller → Service → Mapper 分层，集成 MyBatis-Plus</td>
+</tr>
+<tr>
+<td>短信登录</td>
+<td>发送验证码（存 Session）→ 验证码登录（查&#x2F;建用户，存 Session）→ 拦截器校验</td>
+</tr>
+<tr>
+<td>Session 原理</td>
+<td>每台 Tomcat 有 Session 池，通过 SessionID（Cookie）关联浏览器与 Session 对象</td>
+</tr>
+<tr>
+<td>MyBatis-Plus</td>
+<td>继承 <code>ServiceImpl</code> 获得 <code>query()</code>、<code>save()</code> 等方法，无需写 Mapper SQL</td>
+</tr>
+<tr>
+<td><code>@TableId</code></td>
+<td><code>IdType.AUTO</code> 声明自增主键，<code>save</code> 后主键回填到实体</td>
+</tr>
+<tr>
+<td>登录校验</td>
+<td><code>LoginInterceptor</code> 从 Session 取用户，未登录返回 401；已登录存入 ThreadLocal</td>
+</tr>
+<tr>
+<td>ThreadLocal</td>
+<td>以当前线程为 key 存储数据，实现线程隔离；请求结束必须 <code>remove</code> 防泄漏</td>
+</tr>
+<tr>
+<td>UserDTO</td>
+<td>只保留 id、nickName、icon，隐藏 password 等敏感信息，节省内存</td>
+</tr>
+<tr>
+<td>对象拷贝</td>
+<td>Hutool <code>BeanUtil.copyProperties(user, UserDTO.class)</code> 与 Spring <code>BeanUtils</code> 区分</td>
+</tr>
+<tr>
+<td>Session 共享</td>
+<td>集群下每台 Tomcat Session 独立；传统拷贝有压力和延迟问题；用 Redis 代替可解决</td>
+</tr>
+</tbody></table>
+
+      </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/05/%E7%AC%94%E8%AE%B0/day29%20Redis%E5%85%A5%E9%97%A8%E4%B8%8EJava%E5%AE%A2%E6%88%B7%E7%AB%AF/" rel="prev" title="day29 Redis入门与Java客户端">
+      <i class="fa fa-chevron-left"></i> day29 Redis入门与Java客户端
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/05/%E5%A4%8D%E7%9B%98/Day30%20%E9%BB%91%E9%A9%AC%E7%82%B9%E8%AF%84%E7%9F%AD%E4%BF%A1%E7%99%BB%E5%BD%95%E4%B8%8ESession%E5%AE%9E%E7%8E%B0/" rel="next" title="Day30 黑马点评短信登录与Session实现">
+      Day30 黑马点评短信登录与Session实现 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Day30-%E9%BB%91%E9%A9%AC%E7%82%B9%E8%AF%84%E7%9F%AD%E4%BF%A1%E7%99%BB%E5%BD%95%E4%B8%8ESession%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">Day30 - 黑马点评短信登录与Session实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E5%AF%BC%E5%85%A5"><span class="nav-number">1.1.</span> <span class="nav-text">一、项目导入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E9%BB%91%E9%A9%AC%E7%82%B9%E8%AF%84%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 黑马点评项目结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E7%9F%AD%E4%BF%A1%E7%99%BB%E5%BD%95%E7%9A%84%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 短信登录的整体流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%9F%BA%E4%BA%8E-Session-%E5%AE%9E%E7%8E%B0%E7%9F%AD%E4%BF%A1%E7%99%BB%E5%BD%95"><span class="nav-number">1.2.</span> <span class="nav-text">二、基于 Session 实现短信登录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%AF%B9-Session-%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 对 Session 的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%8F%91%E9%80%81%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 发送短信验证码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E9%AA%8C%E8%AF%81%E7%A0%81%E7%99%BB%E5%BD%95"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 验证码登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 自动创建用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-MyBatis-Plus-%E5%BF%AB%E6%8D%B7%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 MyBatis-Plus 快捷操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-TableId-%E4%B8%BB%E9%94%AE%E8%87%AA%E5%A2%9E"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6 @TableId 主键自增</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%EF%BC%9A%E6%8B%A6%E6%88%AA%E5%99%A8%E4%B8%8E-ThreadLocal"><span class="nav-number">1.3.</span> <span class="nav-text">三、登录校验：拦截器与 ThreadLocal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 拦截器实现登录校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-ThreadLocal-%E4%BF%9D%E5%AD%98%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 ThreadLocal 保存用户信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%B3%A8%E5%86%8C%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 注册拦截器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81UserDTO-%E9%9A%90%E8%97%8F%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF"><span class="nav-number">1.4.</span> <span class="nav-text">四、UserDTO 隐藏敏感信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8-UserDTO"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 为什么用 UserDTO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-User-%E8%BD%AC-UserDTO"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 User 转 UserDTO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81Session-%E5%85%B1%E4%BA%AB%E9%97%AE%E9%A2%98"><span class="nav-number">1.5.</span> <span class="nav-text">五、Session 共享问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%A1%88%EF%BC%9ASession-%E6%8B%B7%E8%B4%9D"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 传统方案：Session 拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A%E7%94%A8-Redis-%E4%BB%A3%E6%9B%BF-Session"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.3 解决方案：用 Redis 代替 Session</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E6%80%BB%E7%BB%93"><span class="nav-number">1.6.</span> <span class="nav-text">今日总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZHX"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">ZHX</p>
+  <div class="site-description" itemprop="description">记录编程学习、项目实战和踩坑笔记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
