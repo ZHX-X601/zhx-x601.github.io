@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.blog-x.cc.cd","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1. 今天做了什么 基于 Redis 实现 session 共享，替代原来的 Session 方案  存验证码、校验验证码、存用户数据到 Redis  修改拦截器逻辑：获取 user、存储到 ThreadLocal、刷新失效时间  学习 MyBatis-Plus 的基本用法   2. 核心知识点基于 Redis 实现 session 共享 存验证码： 123&#x2F;&#x2F;将验证码存入RedisstringR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day31 Redis实现Session共享与MyBatis-Plus基础">
+<meta property="og:url" content="https://www.blog-x.cc.cd/2026/09/06/%E5%A4%8D%E7%9B%98/day31%20Redis%E5%AE%9E%E7%8E%B0Session%E5%85%B1%E4%BA%AB%E4%B8%8EMyBatis-Plus%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="我的学习日记">
+<meta property="og:description" content="1. 今天做了什么 基于 Redis 实现 session 共享，替代原来的 Session 方案  存验证码、校验验证码、存用户数据到 Redis  修改拦截器逻辑：获取 user、存储到 ThreadLocal、刷新失效时间  学习 MyBatis-Plus 的基本用法   2. 核心知识点基于 Redis 实现 session 共享 存验证码： 123&#x2F;&#x2F;将验证码存入RedisstringR">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-06T13:18:00.000Z">
+<meta property="article:modified_time" content="2026-09-06T13:20:32.878Z">
+<meta property="article:author" content="ZHX">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.blog-x.cc.cd/2026/09/06/%E5%A4%8D%E7%9B%98/day31%20Redis%E5%AE%9E%E7%8E%B0Session%E5%85%B1%E4%BA%AB%E4%B8%8EMyBatis-Plus%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Day31 Redis实现Session共享与MyBatis-Plus基础 | 我的学习日记</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">我的学习日记</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">38</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">0</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/09/06/%E5%A4%8D%E7%9B%98/day31%20Redis%E5%AE%9E%E7%8E%B0Session%E5%85%B1%E4%BA%AB%E4%B8%8EMyBatis-Plus%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="ZHX">
+      <meta itemprop="description" content="记录编程学习、项目实战和踩坑笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的学习日记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day31 Redis实现Session共享与MyBatis-Plus基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-09-06 21:18:00 / 修改时间：21:20:32" itemprop="dateCreated datePublished" datetime="2026-09-06T21:18:00+08:00">2026-09-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%8D%E7%9B%98/" itemprop="url" rel="index"><span itemprop="name">复盘</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%8D%E7%9B%98/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+      <div class="post-body" itemprop="articleBody">
+
+        
+          <h2 id="1-今天做了什么"><a href="#1-今天做了什么" class="headerlink" title="1. 今天做了什么"></a>1. 今天做了什么</h2><ul>
+<li><p>基于 Redis 实现 session 共享，替代原来的 Session 方案</p>
+</li>
+<li><p>存验证码、校验验证码、存用户数据到 Redis</p>
+</li>
+<li><p>修改拦截器逻辑：获取 user、存储到 ThreadLocal、刷新失效时间</p>
+</li>
+<li><p>学习 MyBatis-Plus 的基本用法</p>
+</li>
+</ul>
+<h2 id="2-核心知识点"><a href="#2-核心知识点" class="headerlink" title="2. 核心知识点"></a>2. 核心知识点</h2><p><strong>基于 Redis 实现 session 共享</strong></p>
+<p>存验证码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将验证码存入Redis</span></span><br><span class="line">stringRedisTemplate.opsForValue().set(LOGIN_CODE_KEY+phone, code,</span><br><span class="line">        LOGIN_CODE_TTL, TimeUnit.MINUTES);<span class="comment">//2分钟过期</span></span><br></pre></td></tr></table></figure>
+
+<p>校验验证码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">cacheCode</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().get(LOGIN_CODE_KEY + phone);</span><br></pre></td></tr></table></figure>
+
+<p>存用户数据：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 生成token</span></span><br><span class="line"><span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> UUID.randomUUID(<span class="literal">true</span>).toString();</span><br><span class="line"><span class="type">String</span> <span class="variable">tokenKey</span> <span class="operator">=</span> LOGIN_USER_KEY + token;</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.user转为map</span></span><br><span class="line"><span class="type">UserDTO</span> <span class="variable">userDTO</span> <span class="operator">=</span> BeanUtil.copyProperties(user, UserDTO.class);</span><br><span class="line"><span class="type">Map</span>&lt;String, Object&gt; <span class="variable">userDtoMap</span> <span class="operator">=</span> BeanUtil.beanToMap(userDTO);</span><br><span class="line"></span><br><span class="line"><span class="comment">//3. 存储到Redis</span></span><br><span class="line">stringRedisTemplate.opsForHash().putAll(tokenKey, userDtoMap);</span><br><span class="line"><span class="comment">//设置过期时间</span></span><br><span class="line">stringRedisTemplate.expire(tokenKey,LOGIN_USER_TTL,TimeUnit.SECONDS);</span><br></pre></td></tr></table></figure>
+
+<p>怎样获取 map：<code>.entries(token)</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Map</span>&lt;Object, Object&gt; <span class="variable">userMap</span> <span class="operator">=</span> stringRedisTemplate.opsForHash().entries(token);</span><br></pre></td></tr></table></figure>
+
+<p>Redis 实现要考虑：</p>
+<ul>
+<li><p>合适数据结构</p>
+</li>
+<li><p>合适 key</p>
+</li>
+<li><p>存储粒度（去除敏感信息）</p>
+</li>
+</ul>
+<p><strong>字符串判空为啥不用</strong> <strong><code>==null</code></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;authorization&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(StrUtil.isBlank(token))&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>==null</code> 只能判断为 null 的情况</li>
+<li><code>StrUtil.isBlank()</code>（Hutool 工具类）能判断：<code>null</code>、空串、以及仅包含空白字符（空格、制表符等）的字符串，统统返回 <code>true</code></li>
+<li><code>isEmpty()</code> 只判断长度是否为 0，对空格字符串返回 <code>false</code></li>
+</ol>
+<p><strong>MyBatis-Plus 的基本用法</strong></p>
+<ol>
+<li>引入依赖</li>
+<li>数据库配置</li>
+<li>数据表准备，实体类准备</li>
+<li>使数据表的字段与实体类的属性对应</li>
+<li>Mapper 接口继承 <code>BaseMapper&lt;User&gt;</code>，泛型里是该接口操作的数据表对应的实体类，即可使用 Mapper 层方法</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserMapper</span> <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;User&gt; &#123;</span><br><span class="line">    <span class="comment">// 只需继承 BaseMapper，无需编写任何 CRUD 方法！</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>除了 Mapper 层，MyBatis-Plus 还提供了通用的 Service 层接口 <code>IService&lt;T&gt;</code>。创建 Service 接口和实现类，即可使用 Service 层方法</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Service 接口</span></span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.extension.service.IService;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserService</span> <span class="keyword">extends</span> <span class="title class_">IService</span>&lt;User&gt; &#123;</span><br><span class="line">    <span class="comment">// 可以扩展自定义方法</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Service 实现类</span></span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceImpl</span> <span class="keyword">extends</span> <span class="title class_">ServiceImpl</span>&lt;UserMapper, User&gt; <span class="keyword">implements</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="comment">// 自定义方法实现</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-深度思考"><a href="#3-深度思考" class="headerlink" title="3. 深度思考"></a>3. 深度思考</h2><p><strong>验证码登录后并未使验证码失效</strong></p>
+<ul>
+<li><p>生成验证码，时间 2 分钟</p>
+</li>
+<li><p>用户使用验证码登录后，并未使验证码失效</p>
+</li>
+<li><p>解决：登录成功时移出验证码</p>
+</li>
+</ul>
+<p><strong>刷新失效时间的操作放在一个拦截器里面存在问题</strong></p>
+<ul>
+<li><p>用户访问不需要拦截的页面时不会刷新拦截器</p>
+</li>
+<li><p>解决：</p>
+<ul>
+<li><p>拦截器 1 拦截所有请求，并查询信息，保存到 ThreadLocal，刷新</p>
+</li>
+<li><p>拦截器 2 拦截需要拦截的请求，从 ThreadLocal 中查询数据</p>
+</li>
+<li><p>配置拦截器，设置执行顺序</p>
+</li>
+<li><p>注意 <code>.order(0)</code> 数字越小，优先级越高</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-踩过的坑"><a href="#4-踩过的坑" class="headerlink" title="4. 踩过的坑"></a>4. 踩过的坑</h2><p><strong>运行报错：StringRedisTemplate 存 Long 类型报错</strong></p>
+<ul>
+<li><p>原因：<code>StringRedisTemplate</code> 的 key、value 都必须是 String，而存的时候，<code>Map&lt;String, Object&gt; userDtoMap = BeanUtil.beanToMap(userDTO);</code> Map 里面存的 id 是 Long</p>
+</li>
+<li><p>解决：</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//2.user转为map</span></span><br><span class="line"><span class="type">UserDTO</span> <span class="variable">userDTO</span> <span class="operator">=</span> BeanUtil.copyProperties(user, UserDTO.class);</span><br><span class="line"><span class="type">Map</span>&lt;String, Object&gt; <span class="variable">userDtoMap</span> <span class="operator">=</span> BeanUtil.beanToMap(</span><br><span class="line">        userDTO,<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(),</span><br><span class="line">        CopyOptions.create().setIgnoreNullValue(<span class="literal">true</span>).setFieldValueEditor(</span><br><span class="line">                (fieldName, value) -&gt; value.toString()</span><br><span class="line">        )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-遗留问题-想不通"><a href="#5-遗留问题-想不通" class="headerlink" title="5. 遗留问题 &#x2F; 想不通"></a>5. 遗留问题 &#x2F; 想不通</h2>
+      </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/05/%E7%AC%94%E8%AE%B0/Day30%20%E9%BB%91%E9%A9%AC%E7%82%B9%E8%AF%84%E7%9F%AD%E4%BF%A1%E7%99%BB%E5%BD%95%E4%B8%8ESession%E5%AE%9E%E7%8E%B0/" rel="prev" title="Day30 黑马点评短信登录与Session实现">
+      <i class="fa fa-chevron-left"></i> Day30 黑马点评短信登录与Session实现
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/09/06/%E7%AC%94%E8%AE%B0/Day31%20Redis%E5%AE%9E%E7%8E%B0Session%E5%85%B1%E4%BA%AB%E4%B8%8EMyBatis-Plus%E5%9F%BA%E7%A1%80/" rel="next" title="Day31 Redis实现Session共享与MyBatis-Plus基础">
+      Day31 Redis实现Session共享与MyBatis-Plus基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%8A%E5%A4%A9%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">1. 今天做了什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">2. 核心知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">3. 深度思考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91"><span class="nav-number">4.</span> <span class="nav-text">4. 踩过的坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%81%97%E7%95%99%E9%97%AE%E9%A2%98-%E6%83%B3%E4%B8%8D%E9%80%9A"><span class="nav-number">5.</span> <span class="nav-text">5. 遗留问题 &#x2F; 想不通</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZHX"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">ZHX</p>
+  <div class="site-description" itemprop="description">记录编程学习、项目实战和踩坑笔记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
