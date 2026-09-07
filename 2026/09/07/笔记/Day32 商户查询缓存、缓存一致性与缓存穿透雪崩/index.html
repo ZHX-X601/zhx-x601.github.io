@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.blog-x.cc.cd","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Day32 商户查询缓存、缓存一致性与缓存穿透雪崩一、缓存概述1.1 什么是缓存缓存（Cache）是数据交换的缓冲区，数据一般从数据库中获取，存储在内存中。内存的读写性能远高于磁盘，缓存可以防止过高的数据访问量直接冲击数据库，导致系统瘫痪。 1.2 缓存的作用与成本作用：降低数据库读写压力，提高系统响应速度。 成本：    成本维度 说明    数据一致性 缓存数据来源于数据库，数据库变化时缓存若">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day32 商户查询缓存、缓存一致性与缓存穿透雪崩">
+<meta property="og:url" content="https://www.blog-x.cc.cd/2026/09/07/%E7%AC%94%E8%AE%B0/Day32%20%E5%95%86%E6%88%B7%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98%E3%80%81%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%8E%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E9%9B%AA%E5%B4%A9/index.html">
+<meta property="og:site_name" content="我的学习日记">
+<meta property="og:description" content="Day32 商户查询缓存、缓存一致性与缓存穿透雪崩一、缓存概述1.1 什么是缓存缓存（Cache）是数据交换的缓冲区，数据一般从数据库中获取，存储在内存中。内存的读写性能远高于磁盘，缓存可以防止过高的数据访问量直接冲击数据库，导致系统瘫痪。 1.2 缓存的作用与成本作用：降低数据库读写压力，提高系统响应速度。 成本：    成本维度 说明    数据一致性 缓存数据来源于数据库，数据库变化时缓存若">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-07T14:58:45.000Z">
+<meta property="article:modified_time" content="2026-09-07T15:10:34.735Z">
+<meta property="article:author" content="ZHX">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.blog-x.cc.cd/2026/09/07/%E7%AC%94%E8%AE%B0/Day32%20%E5%95%86%E6%88%B7%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98%E3%80%81%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%8E%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E9%9B%AA%E5%B4%A9/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Day32 商户查询缓存、缓存一致性与缓存穿透雪崩 | 我的学习日记</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">我的学习日记</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">0</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/09/07/%E7%AC%94%E8%AE%B0/Day32%20%E5%95%86%E6%88%B7%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98%E3%80%81%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%8E%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E9%9B%AA%E5%B4%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="ZHX">
+      <meta itemprop="description" content="记录编程学习、项目实战和踩坑笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的学习日记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day32 商户查询缓存、缓存一致性与缓存穿透雪崩
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-09-07 22:58:45 / 修改时间：23:10:34" itemprop="dateCreated datePublished" datetime="2026-09-07T22:58:45+08:00">2026-09-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+      <div class="post-body" itemprop="articleBody">
+
+        
+          <h1 id="Day32-商户查询缓存、缓存一致性与缓存穿透雪崩"><a href="#Day32-商户查询缓存、缓存一致性与缓存穿透雪崩" class="headerlink" title="Day32 商户查询缓存、缓存一致性与缓存穿透雪崩"></a>Day32 商户查询缓存、缓存一致性与缓存穿透雪崩</h1><h2 id="一、缓存概述"><a href="#一、缓存概述" class="headerlink" title="一、缓存概述"></a>一、缓存概述</h2><h3 id="1-1-什么是缓存"><a href="#1-1-什么是缓存" class="headerlink" title="1.1 什么是缓存"></a>1.1 什么是缓存</h3><p>缓存（Cache）是数据交换的缓冲区，数据一般从数据库中获取，存储在内存中。内存的读写性能远高于磁盘，缓存可以防止过高的数据访问量直接冲击数据库，导致系统瘫痪。</p>
+<h3 id="1-2-缓存的作用与成本"><a href="#1-2-缓存的作用与成本" class="headerlink" title="1.2 缓存的作用与成本"></a>1.2 缓存的作用与成本</h3><p><strong>作用</strong>：降低数据库读写压力，提高系统响应速度。</p>
+<p><strong>成本</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>成本维度</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据一致性</td>
+<td>缓存数据来源于数据库，数据库变化时缓存若未同步，会出现一致性问题</td>
+</tr>
+<tr>
+<td>代码维护</td>
+<td>增加缓存逻辑后，代码复杂度上升</td>
+</tr>
+<tr>
+<td>运维</td>
+<td>需要维护 Redis 等缓存基础设施</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、商户查询缓存"><a href="#二、商户查询缓存" class="headerlink" title="二、商户查询缓存"></a>二、商户查询缓存</h2><h3 id="2-1-缓存模型与流程"><a href="#2-1-缓存模型与流程" class="headerlink" title="2.1 缓存模型与流程"></a>2.1 缓存模型与流程</h3><p>标准缓存查询流程：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">请求查询</span><br><span class="line">    ↓</span><br><span class="line">查询 Redis 缓存</span><br><span class="line">    ↓</span><br><span class="line">命中？──是──→ 返回数据</span><br><span class="line">    │</span><br><span class="line">    否</span><br><span class="line">    ↓</span><br><span class="line">查询数据库</span><br><span class="line">    ↓</span><br><span class="line">查到？──否──→ 返回错误</span><br><span class="line">    │</span><br><span class="line">    是</span><br><span class="line">    ↓</span><br><span class="line">建立缓存，返回结果</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-商户查询缓存实现"><a href="#2-2-商户查询缓存实现" class="headerlink" title="2.2 商户查询缓存实现"></a>2.2 商户查询缓存实现</h3><p>项目 <code>ShopServiceImpl</code> 中通过 <code>queryWithPassThrough</code> 方法实现商户查询缓存，同时解决了缓存穿透问题：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">Shop</span> <span class="title function_">queryWithPassThrough</span><span class="params">(Long id)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> CACHE_SHOP_KEY + id;</span><br><span class="line">    <span class="comment">// 1. 查询缓存</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">shopJson</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().get(key);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 存在且不为空，直接返回</span></span><br><span class="line">    <span class="keyword">if</span> (StrUtil.isNotBlank(shopJson)) &#123;</span><br><span class="line">        <span class="keyword">return</span> JSONUtil.toBean(shopJson, Shop.class);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 3. 不为 null 但为空值，说明之前查过数据库未查到，直接返回 null</span></span><br><span class="line">    <span class="keyword">if</span> (shopJson != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 4. 未命中，查询数据库</span></span><br><span class="line">    <span class="type">Shop</span> <span class="variable">shop</span> <span class="operator">=</span> getById(id);</span><br><span class="line">    <span class="comment">// 5. 数据库未查到，缓存空值（解决缓存穿透）</span></span><br><span class="line">    <span class="keyword">if</span> (shop == <span class="literal">null</span>) &#123;</span><br><span class="line">        stringRedisTemplate.opsForValue().set(key, <span class="string">&quot;&quot;</span>, CACHE_NULL_TTL, TimeUnit.MINUTES);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 6. 查到，建立缓存并设置超时时间</span></span><br><span class="line">    stringRedisTemplate.opsForValue()</span><br><span class="line">            .set(key, JSONUtil.toJsonStr(shop), CACHE_SHOP_TTL + RandomUtil.randomLong(<span class="number">0L</span>, <span class="number">10L</span>), TimeUnit.MINUTES);</span><br><span class="line">    <span class="keyword">return</span> shop;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关键点：</p>
+<ul>
+<li><p>缓存 key 格式为 <code>cache:shop:{id}</code>，定义在 <code>RedisConstants</code> 中</p>
+</li>
+<li><p>正常数据 TTL 为 <code>CACHE_SHOP_TTL</code>（30 分钟）加上 0~10 分钟随机值，避免大量 key 同时失效</p>
+</li>
+<li><p>空值 TTL 为 <code>CACHE_NULL_TTL</code>（2 分钟），较短的超时时间可以减少短期数据不一致</p>
+</li>
+</ul>
+<h3 id="2-3-商户类型列表缓存"><a href="#2-3-商户类型列表缓存" class="headerlink" title="2.3 商户类型列表缓存"></a>2.3 商户类型列表缓存</h3><p><code>ShopTypeServiceImpl</code> 中的 <code>queryTypeList</code> 方法实现了类似的缓存逻辑：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">Result</span> <span class="title function_">queryTypeList</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">range</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().get(CACHE_SHOP_TYPE_KEY);</span><br><span class="line">    <span class="keyword">if</span> (range != <span class="literal">null</span> &amp;&amp; !range.isEmpty()) &#123;</span><br><span class="line">        <span class="type">List</span>&lt;ShopType&gt; <span class="variable">list</span> <span class="operator">=</span> JSONUtil.toBean(range, List.class);</span><br><span class="line">        <span class="keyword">return</span> Result.ok(list);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">List</span>&lt;ShopType&gt; <span class="variable">typeList</span> <span class="operator">=</span> query().orderByAsc(<span class="string">&quot;sort&quot;</span>).list();</span><br><span class="line">    <span class="keyword">if</span> (typeList == <span class="literal">null</span> || typeList.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">return</span> Result.fail(<span class="string">&quot;查询店铺类型失败&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    stringRedisTemplate.opsForValue()</span><br><span class="line">            .set(CACHE_SHOP_TYPE_KEY, JSONUtil.toJsonStr(typeList),</span><br><span class="line">                 CACHE_SHOP_TTL + RandomUtil.randomLong(<span class="number">0L</span>, <span class="number">10L</span>), TimeUnit.MINUTES);</span><br><span class="line">    <span class="keyword">return</span> Result.ok(typeList);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>与商户查询缓存流程一致：先查缓存 → 命中返回 → 未命中查数据库 → 建立缓存并返回。区别在于 key 是固定的 <code>cache:shop-type</code>，因为类型列表不按 ID 区分。</p>
+<hr>
+<h2 id="三、缓存更新策略"><a href="#三、缓存更新策略" class="headerlink" title="三、缓存更新策略"></a>三、缓存更新策略</h2><h3 id="3-1-三种缓存更新策略"><a href="#3-1-三种缓存更新策略" class="headerlink" title="3.1 三种缓存更新策略"></a>3.1 三种缓存更新策略</h3><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>说明</th>
+<th>一致性</th>
+<th>维护成本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内存淘汰</td>
+<td>Redis 内存达到 <code>maxmemory</code> 时自动淘汰数据</td>
+<td>弱</td>
+<td>最低</td>
+</tr>
+<tr>
+<td>超时剔除</td>
+<td>为 key 设置 TTL，到期后 Redis 自动删除</td>
+<td>一般</td>
+<td>低</td>
+</tr>
+<tr>
+<td>主动更新</td>
+<td>编码手动删除或更新缓存</td>
+<td>强</td>
+<td>高</td>
+</tr>
+</tbody></table>
+<p>根据对一致性的要求选择策略，也可以多种结合使用。项目中采用了<strong>超时剔除 + 主动更新</strong>结合的方式。</p>
+<h3 id="3-2-主动更新方案选择"><a href="#3-2-主动更新方案选择" class="headerlink" title="3.2 主动更新方案选择"></a>3.2 主动更新方案选择</h3><p>三种主动更新方案：</p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cache Aside Pattern</td>
+<td>人工编码，调用者在更新数据库后更新缓存（双写方案）</td>
+</tr>
+<tr>
+<td>Read&#x2F;Write Through Pattern</td>
+<td>由系统本身处理数据库与缓存的一致性</td>
+</tr>
+<tr>
+<td>Write Behind Caching Pattern</td>
+<td>调用者只操作缓存，其他线程异步处理数据库</td>
+</tr>
+</tbody></table>
+<p>三种方案中，<strong>Cache Aside Pattern</strong>（开发者编码）最优，可控性最强。</p>
+<h3 id="3-3-删除缓存还是更新缓存"><a href="#3-3-删除缓存还是更新缓存" class="headerlink" title="3.3 删除缓存还是更新缓存"></a>3.3 删除缓存还是更新缓存</h3><p>在 Cache Aside 方案下，操作数据库后对缓存进行更新还是删除？</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>更新缓存</td>
+<td>频繁更新数据库时，每次都要更新缓存；若期间无查询，中间的更新操作没有意义</td>
+</tr>
+<tr>
+<td>删除缓存</td>
+<td>频繁更新数据库时，若期间无查询，只需操作数据库，缓存等下次查询时再加载</td>
+</tr>
+</tbody></table>
+<p><strong>删除缓存更优</strong>：避免无效写操作，查询时再按需加载。</p>
+<h3 id="3-4-先删缓存还是先更新数据库"><a href="#3-4-先删缓存还是先更新数据库" class="headerlink" title="3.4 先删缓存还是先更新数据库"></a>3.4 先删缓存还是先更新数据库</h3><p>这个问题涉及线程安全，需要分析并发场景下的不一致风险。</p>
+<p><strong>方案一：先删缓存，再更新数据库</strong></p>
+<ol>
+<li>线程 1 删除缓存</li>
+<li>线程切换给线程 2（查询操作）</li>
+<li>线程 2 缓存未命中，查询数据库得到<strong>旧数据</strong></li>
+<li>线程 2 将旧数据写入缓存</li>
+<li>线程 1 更新数据库</li>
+<li>结果：缓存中是旧数据，数据库是新数据，不一致</li>
+</ol>
+<p><strong>方案二：先更新数据库，再删除缓存</strong></p>
+<ol>
+<li>线程 2 查询缓存未命中，从数据库查询到<strong>旧数据</strong></li>
+<li>线程切换给线程 1（更新操作）</li>
+<li>线程 1 更新数据库，删除缓存</li>
+<li>线程切换回线程 2，将旧数据写入缓存</li>
+<li>结果：缓存中是旧数据，不一致</li>
+</ol>
+<p><strong>结论：先更新数据库，再删除缓存更优。</strong></p>
+<p>原因分析：</p>
+<ul>
+<li><p>先删缓存：线程切换发生在一个<strong>长时间段</strong>（查询数据库、处理数据的过程中）</p>
+</li>
+<li><p>先更新数据库：线程切换发生在一个<strong>极短时间</strong>（查到数据库旧数据与写入缓存之间的间隔）</p>
+</li>
+<li><p>此外，先更新数据库方案发生不一致还需要恰好在一个查询任务执行时进入更新操作，概率较小</p>
+</li>
+</ul>
+<h3 id="3-5-项目中的实现"><a href="#3-5-项目中的实现" class="headerlink" title="3.5 项目中的实现"></a>3.5 项目中的实现</h3><p><code>ShopServiceImpl.updateShop</code> 方法采用了先更新数据库再删除缓存的策略，并使用 <code>@Transactional</code> 保证原子性：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">Result</span> <span class="title function_">updateShop</span><span class="params">(Shop shop)</span> &#123;</span><br><span class="line">    <span class="type">Long</span> <span class="variable">id</span> <span class="operator">=</span> shop.getId();</span><br><span class="line">    <span class="keyword">if</span> (id == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> Result.fail(<span class="string">&quot;商户id不能为空&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 1. 先更新数据库</span></span><br><span class="line">    updateById(shop);</span><br><span class="line">    <span class="comment">// 2. 再删除缓存</span></span><br><span class="line">    stringRedisTemplate.delete(CACHE_SHOP_KEY + id);</span><br><span class="line">    <span class="keyword">return</span> Result.ok();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：单体系统将数据库操作与缓存操作放在同一事务中，保证两者同时成功或失败。分布式系统则需要使用 TCC 等分布式事务方案。</p>
+</blockquote>
+<hr>
+<h2 id="四、缓存穿透"><a href="#四、缓存穿透" class="headerlink" title="四、缓存穿透"></a>四、缓存穿透</h2><h3 id="4-1-什么是缓存穿透"><a href="#4-1-什么是缓存穿透" class="headerlink" title="4.1 什么是缓存穿透"></a>4.1 什么是缓存穿透</h3><p>缓存穿透是指客户端请求的数据在<strong>缓存和数据库中都不存在</strong>，缓存永远不会生效，这些请求会直接到达数据库。如果大量这样的请求同时到来，会给数据库带来巨大压力。</p>
+<h3 id="4-2-解决方案"><a href="#4-2-解决方案" class="headerlink" title="4.2 解决方案"></a>4.2 解决方案</h3><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>缓存空对象</td>
+<td>实现简单，维护方便</td>
+<td>占用额外内存，可能造成短期数据不一致</td>
+</tr>
+<tr>
+<td>布隆过滤</td>
+<td>内存占用少，没有多余 key</td>
+<td>实现复杂，存在误判风险（哈希冲突）</td>
+</tr>
+</tbody></table>
+<p>项目中采用<strong>缓存空对象</strong>方案。</p>
+<h3 id="4-3-缓存空对象实现"><a href="#4-3-缓存空对象实现" class="headerlink" title="4.3 缓存空对象实现"></a>4.3 缓存空对象实现</h3><p>在 <code>queryWithPassThrough</code> 方法中（见 2.2 节），缓存空值的核心逻辑：</p>
+<ol>
+<li>查询缓存命中且<strong>不为 null 且不为空字符串</strong> → 返回数据</li>
+<li>查询缓存命中但<strong>不为 null 且为空字符串</strong> → 说明之前查过数据库未查到，直接返回 null，不再查询数据库</li>
+<li>缓存未命中 → 查询数据库</li>
+<li>数据库未查到 → 将空字符串 <code>&quot;&quot;</code> 写入缓存，TTL 为 2 分钟（<code>CACHE_NULL_TTL</code>）</li>
+<li>数据库查到 → 正常建立缓存并返回</li>
+</ol>
+<p><code>StrUtil.isNotBlank(shopJson)</code> 用于区分正常数据和空值缓存：空字符串 <code>&quot;&quot;</code> 不会被 <code>isNotBlank</code> 判定为存在，但也不为 <code>null</code>，因此通过 <code>shopJson != null</code> 可以识别出这是之前缓存的空值。</p>
+<hr>
+<h2 id="五、缓存雪崩"><a href="#五、缓存雪崩" class="headerlink" title="五、缓存雪崩"></a>五、缓存雪崩</h2><h3 id="5-1-什么是缓存雪崩"><a href="#5-1-什么是缓存雪崩" class="headerlink" title="5.1 什么是缓存雪崩"></a>5.1 什么是缓存雪崩</h3><p>缓存雪崩是指在同一时段<strong>大量的缓存 key 同时失效</strong>或者 <strong>Redis 服务器异常</strong>，导致大量请求到达数据库，带来巨大压力。</p>
+<h3 id="5-2-解决思路"><a href="#5-2-解决思路" class="headerlink" title="5.2 解决思路"></a>5.2 解决思路</h3><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TTL 设置随机数</td>
+<td>给不同 key 的 TTL 添加随机值，避免同时失效</td>
+</tr>
+<tr>
+<td>Redis 集群</td>
+<td>提高服务的可用性，防止单点故障</td>
+</tr>
+<tr>
+<td>降级限流</td>
+<td>给缓存业务添加降级限流策略</td>
+</tr>
+<tr>
+<td>多级缓存</td>
+<td>构建多级缓存体系</td>
+</tr>
+</tbody></table>
+<p>项目中已实现 TTL 随机值方案：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CACHE_SHOP_TTL + RandomUtil.randomLong(<span class="number">0L</span>, <span class="number">10L</span>)  <span class="comment">// 30分钟 + 0~10分钟随机值</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Redis 集群、降级限流、多级缓存尚未学习，待后续在 Redis 高级与 SpringCloud 中学习。</p>
+</blockquote>
+<hr>
+<h2 id="今日总结"><a href="#今日总结" class="headerlink" title="今日总结"></a>今日总结</h2><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>核心要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>缓存概述</td>
+<td>缓存是内存中的数据缓冲区，降低数据库压力；成本包括数据一致性、代码维护和运维</td>
+</tr>
+<tr>
+<td>商户查询缓存</td>
+<td>查 Redis → 命中返回 → 未命中查 DB → 查到建缓存返回、未查到返回错误</td>
+</tr>
+<tr>
+<td>缓存更新策略</td>
+<td>内存淘汰、超时剔除、主动更新；项目中采用超时剔除 + 主动更新结合</td>
+</tr>
+<tr>
+<td>删除 vs 更新缓存</td>
+<td>删除更优，避免无效写操作，查询时再按需加载</td>
+</tr>
+<tr>
+<td>先删 vs 先更新 DB</td>
+<td>先更新数据库再删缓存更优，线程切换时间短，不一致概率低</td>
+</tr>
+<tr>
+<td>缓存穿透</td>
+<td>缓存和数据库都不存在的数据导致请求直达数据库；解决：缓存空对象</td>
+</tr>
+<tr>
+<td>缓存雪崩</td>
+<td>大量 key 同时失效或 Redis 异常；解决：TTL 随机值（已实现）、集群、降级限流、多级缓存（待学习）</td>
+</tr>
+</tbody></table>
+
+      </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/09/07/%E5%A4%8D%E7%9B%98/day32/" rel="prev" title="Day32 商户查询缓存、缓存一致性与缓存穿透雪崩">
+      <i class="fa fa-chevron-left"></i> Day32 商户查询缓存、缓存一致性与缓存穿透雪崩
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Day32-%E5%95%86%E6%88%B7%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98%E3%80%81%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%8E%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E9%9B%AA%E5%B4%A9"><span class="nav-number">1.</span> <span class="nav-text">Day32 商户查询缓存、缓存一致性与缓存穿透雪崩</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%BC%93%E5%AD%98%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">一、缓存概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 什么是缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E7%BC%93%E5%AD%98%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E6%88%90%E6%9C%AC"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 缓存的作用与成本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%95%86%E6%88%B7%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98"><span class="nav-number">1.2.</span> <span class="nav-text">二、商户查询缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E7%BC%93%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 缓存模型与流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%95%86%E6%88%B7%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 商户查询缓存实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%95%86%E6%88%B7%E7%B1%BB%E5%9E%8B%E5%88%97%E8%A1%A8%E7%BC%93%E5%AD%98"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 商户类型列表缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5"><span class="nav-number">1.3.</span> <span class="nav-text">三、缓存更新策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E4%B8%89%E7%A7%8D%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 三种缓存更新策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E4%B8%BB%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%96%B9%E6%A1%88%E9%80%89%E6%8B%A9"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 主动更新方案选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98%E8%BF%98%E6%98%AF%E6%9B%B4%E6%96%B0%E7%BC%93%E5%AD%98"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 删除缓存还是更新缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E5%85%88%E5%88%A0%E7%BC%93%E5%AD%98%E8%BF%98%E6%98%AF%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 先删缓存还是先更新数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.5 项目中的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-number">1.4.</span> <span class="nav-text">四、缓存穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 什么是缓存穿透</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E7%BC%93%E5%AD%98%E7%A9%BA%E5%AF%B9%E8%B1%A1%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3 缓存空对象实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-number">1.5.</span> <span class="nav-text">五、缓存雪崩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 什么是缓存雪崩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 解决思路</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E6%80%BB%E7%BB%93"><span class="nav-number">1.6.</span> <span class="nav-text">今日总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZHX"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">ZHX</p>
+  <div class="site-description" itemprop="description">记录编程学习、项目实战和踩坑笔记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZHX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
