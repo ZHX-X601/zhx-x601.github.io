@@ -19,19 +19,19 @@
     var CONFIG = {"hostname":"www.blog-x.cc.cd","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="1. 今天做了什么外卖day7的一部分  缓存菜品 缓存套餐  2. 核心知识点 两种实现缓存的方式 使用Redis自己实现缓存 根据分类id查询菜品,将分类id作为key,将查询到的集合作为value 查询时先查缓存是否存在,存在直接返回,不存在则查询后存入缓存返回 一旦管理端发生新增,修改,删除,起售停售,都要对缓存进行清理   使用Spring Cache实现缓存 完全使用注解实现,很方便">
+  <meta name="description" content="1. 今天做了什么 学习缓存击穿问题的两种解决方案：互斥锁和逻辑过期 实现了互斥锁解决缓存击穿（queryWithMutex） 实现了逻辑过期解决缓存击穿（queryWithLogicalExpire） 对逻辑过期方案的适用场景产生了疑问 学习缓存工具类封装 CacheClint（讲义中为 CacheClient），将缓存穿透、缓存击穿的处理逻辑从 Service 中抽成通用工具方法，ShopSe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="day22 缓存">
-<meta property="og:url" content="https://www.blog-x.cc.cd/2026/08/21/%E5%A4%8D%E7%9B%98/day22%20%E7%BC%93%E5%AD%98/index.html">
+<meta property="og:title" content="day33 缓存击穿方案与缓存工具类封装">
+<meta property="og:url" content="https://www.blog-x.cc.cd/2026/09/08/%E5%A4%8D%E7%9B%98/day33%20%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%E6%96%B9%E6%A1%88%E4%B8%8E%E7%BC%93%E5%AD%98%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%B0%81%E8%A3%85/index.html">
 <meta property="og:site_name" content="我的学习日记">
-<meta property="og:description" content="1. 今天做了什么外卖day7的一部分  缓存菜品 缓存套餐  2. 核心知识点 两种实现缓存的方式 使用Redis自己实现缓存 根据分类id查询菜品,将分类id作为key,将查询到的集合作为value 查询时先查缓存是否存在,存在直接返回,不存在则查询后存入缓存返回 一旦管理端发生新增,修改,删除,起售停售,都要对缓存进行清理   使用Spring Cache实现缓存 完全使用注解实现,很方便">
+<meta property="og:description" content="1. 今天做了什么 学习缓存击穿问题的两种解决方案：互斥锁和逻辑过期 实现了互斥锁解决缓存击穿（queryWithMutex） 实现了逻辑过期解决缓存击穿（queryWithLogicalExpire） 对逻辑过期方案的适用场景产生了疑问 学习缓存工具类封装 CacheClint（讲义中为 CacheClient），将缓存穿透、缓存击穿的处理逻辑从 Service 中抽成通用工具方法，ShopSe">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-08-21T13:02:58.000Z">
-<meta property="article:modified_time" content="2026-08-25T09:27:49.119Z">
+<meta property="article:published_time" content="2026-09-08T15:26:24.000Z">
+<meta property="article:modified_time" content="2026-09-08T15:37:32.293Z">
 <meta property="article:author" content="ZHX">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://www.blog-x.cc.cd/2026/08/21/%E5%A4%8D%E7%9B%98/day22%20%E7%BC%93%E5%AD%98/">
+<link rel="canonical" href="https://www.blog-x.cc.cd/2026/09/08/%E5%A4%8D%E7%9B%98/day33%20%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%E6%96%B9%E6%A1%88%E4%B8%8E%E7%BC%93%E5%AD%98%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%B0%81%E8%A3%85/">
 
 
 <script id="page-configurations">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>day22 缓存 | 我的学习日记</title>
+  <title>day33 缓存击穿方案与缓存工具类封装 | 我的学习日记</title>
   
 
 
@@ -160,7 +160,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/08/21/%E5%A4%8D%E7%9B%98/day22%20%E7%BC%93%E5%AD%98/">
+    <link itemprop="mainEntityOfPage" href="https://www.blog-x.cc.cd/2026/09/08/%E5%A4%8D%E7%9B%98/day33%20%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%E6%96%B9%E6%A1%88%E4%B8%8E%E7%BC%93%E5%AD%98%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%B0%81%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -173,7 +173,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          day22 缓存
+          day33 缓存击穿方案与缓存工具类封装
         </h1>
 
         <div class="post-meta">
@@ -182,16 +182,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2026-08-21 21:02:58" itemprop="dateCreated datePublished" datetime="2026-08-21T21:02:58+08:00">2026-08-21</time>
+              <time title="创建时间：2026-09-08 23:26:24 / 修改时间：23:37:32" itemprop="dateCreated datePublished" datetime="2026-09-08T23:26:24+08:00">2026-09-08</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-08-25 17:27:49" itemprop="dateModified" datetime="2026-08-25T17:27:49+08:00">2026-08-25</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -202,7 +196,7 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%8D%E7%9B%98/%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/" itemprop="url" rel="index"><span itemprop="name">苍穹外卖</span></a>
+                  <a href="/categories/%E5%A4%8D%E7%9B%98/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
                 </span>
             </span>
 
@@ -217,47 +211,101 @@
       <div class="post-body" itemprop="articleBody">
 
         
-          <h2 id="1-今天做了什么"><a href="#1-今天做了什么" class="headerlink" title="1. 今天做了什么"></a>1. 今天做了什么</h2><p>外卖day7的一部分</p>
+          <h2 id="1-今天做了什么"><a href="#1-今天做了什么" class="headerlink" title="1. 今天做了什么"></a>1. 今天做了什么</h2><ul>
+<li>学习缓存击穿问题的两种解决方案：互斥锁和逻辑过期</li>
+<li>实现了互斥锁解决缓存击穿（<code>queryWithMutex</code>）</li>
+<li>实现了逻辑过期解决缓存击穿（<code>queryWithLogicalExpire</code>）</li>
+<li>对逻辑过期方案的适用场景产生了疑问</li>
+<li>学习缓存工具类封装 <code>CacheClint</code>（讲义中为 <code>CacheClient</code>），将缓存穿透、缓存击穿的处理逻辑从 Service 中抽成通用工具方法，ShopServiceImpl 改为调用工具类</li>
+<li>首次接触”把函数当作参数传进方法”的写法：泛型方法 <code>public &lt;R,ID&gt; R queryWithPassThrough(...)</code> 中的 <code>Function&lt;ID,R&gt; dbFallback</code> 参数，调用时传入方法引用（如 <code>this::getById</code>）</li>
+</ul>
+<h2 id="2-核心知识点"><a href="#2-核心知识点" class="headerlink" title="2. 核心知识点"></a>2. 核心知识点</h2><p><strong>缓存击穿</strong></p>
+<p>一些高并发访问、且缓存重建时间较长的数据发生过期时，在缓存尚未建立之前，所有请求都无法命中，直接查询数据库重建缓存，给数据库带来巨大压力。也叫热点 Key 问题。</p>
+<p><strong>解决方案一：互斥锁</strong></p>
+<ul>
+<li>为查询数据库、建立缓存的过程添加互斥锁</li>
+<li>当一个线程缓存未命中，拿到锁开始查数据重建缓存</li>
+<li>在此期间其他所有请求无法拿到锁，进入等待（休眠后重试）</li>
+<li>直到缓存重建完成，其他请求从缓存中查到数据</li>
+<li>特点：实现简单，无额外内存占用，保证数据一致性，但其他线程需要等待</li>
+</ul>
+<p><strong>互斥锁实现思路</strong></p>
 <ol>
-<li>缓存菜品</li>
-<li>缓存套餐</li>
+<li>使用 Redis 的 <code>setnx</code>（<code>setIfAbsent</code>），只有 key 不存在时才设置成功</li>
+<li>尝试获取锁就是尝试用 <code>setnx</code> 设置 key，成功返回 true，其他线程无法获取锁</li>
+<li>释放锁就是对设置的 key 进行删除</li>
+<li>为防止锁无法释放，设置 key 时加失效时间</li>
 </ol>
-<h2 id="2-核心知识点"><a href="#2-核心知识点" class="headerlink" title="2. 核心知识点"></a>2. 核心知识点</h2><ol>
-<li>两种实现缓存的方式<ol>
-<li>使用Redis自己实现缓存<ol>
-<li>根据分类id查询菜品,将分类id作为key,将查询到的集合作为value</li>
-<li>查询时先查缓存是否存在,存在直接返回,不存在则查询后存入缓存返回</li>
-<li>一旦管理端发生新增,修改,删除,起售停售,都要对缓存进行清理</li>
+<p><strong>解决方案二：逻辑过期</strong></p>
+<ul>
+<li>不设置物理过期时间，添加一个字段作为逻辑过期时间</li>
+<li>缓存始终能命中（key 不会物理失效）</li>
+<li>当一次请求查到缓存，发现缓存逻辑过期，获取互斥锁，开启新线程执行缓存重建，并返回旧数据</li>
+<li>重建期间，其他请求无法获取锁，直接返回查到的旧数据</li>
+<li>特点：无需等待，性能好，但实现稍复杂，额外占用内存存储过期时间，不保证数据强一致性</li>
+</ul>
+<p><strong>逻辑过期实现要点</strong></p>
+<ol>
+<li>使用 <code>RedisData</code> 类封装数据和逻辑过期时间，不侵入实体类</li>
+<li>缓存 key 不设置物理 TTL，逻辑过期时间存在 value 中</li>
+<li>缓存未命中直接返回 null，不再去查数据库</li>
+<li>获取到锁则开启新线程建立缓存并释放锁</li>
+<li>无论是否获取到锁，最后都返回旧数据</li>
 </ol>
-</li>
-<li>使用Spring Cache实现缓存<ol>
-<li>完全使用注解实现,很方便</li>
-<li>在启动类使用注解进行开启</li>
-<li>在相应查询接口上添加注解,实现查询时先查缓存是否存在,存在直接返回,不存在则查询后存入缓存返回</li>
-<li>在管理端新增,修改,删除操作添加清除缓存的注解</li>
-<li>Spring Cache底层可以用多种方式实现,这里使用Redis,添加了Redis的依赖,可以自动识别</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="3-深度思考"><a href="#3-深度思考" class="headerlink" title="3. 深度思考"></a>3. 深度思考</h2><ol>
-<li>为什么要做缓存<ol>
-<li>在业务执行过程中,数据库查询操作从磁盘读取数据,比较耗时</li>
-<li>用户使用量比较大时加载较慢,影响使用体验</li>
-<li>在Redis中做缓存,从内存中读取速度很快</li>
-</ol>
-</li>
-</ol>
-<h2 id="4-踩过的坑"><a href="#4-踩过的坑" class="headerlink" title="4. 踩过的坑"></a>4. 踩过的坑</h2><ol>
-<li>redisTemplate.delete()不支持通配符,redisTemplate.keys()支持,先查询keys,再删除</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiOperation(&quot;修改菜品&quot;)</span>  </span><br><span class="line"><span class="meta">@PutMapping</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="type">Result</span> <span class="title function_">update</span><span class="params">(<span class="meta">@RequestBody</span> DishDTO dishDTO)</span>&#123;  </span><br><span class="line">    log.info(<span class="string">&quot;修改菜品：&#123;&#125;&quot;</span>, dishDTO);  </span><br><span class="line">    dishService.update(dishDTO);  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">//更新菜品后，清除缓存  </span></span><br><span class="line">    clearCache(<span class="string">&quot;dish_*&quot;</span>);  </span><br><span class="line">    <span class="keyword">return</span> Result.success();  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="type">void</span> <span class="title function_">clearCache</span><span class="params">(String pattern)</span>&#123;  </span><br><span class="line">    <span class="type">Set</span> <span class="variable">keys</span> <span class="operator">=</span> redisTemplate.keys(pattern);  </span><br><span class="line">    redisTemplate.delete(keys);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>Spring Cache的@CacheEvict注解,清除所有setmealcache的缓存:</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CacheEvict(cacheNames = &quot;setmealcache&quot;, allEntries = true)</span></span><br></pre></td></tr></table></figure>
-<h2 id="5-遗留问题-想不通"><a href="#5-遗留问题-想不通" class="headerlink" title="5. 遗留问题 &#x2F; 想不通"></a>5. 遗留问题 &#x2F; 想不通</h2>
+<p><strong>缓存工具类封装（CacheClint）</strong></p>
+<ul>
+<li>把缓存穿透（缓存空值）、缓存击穿（互斥锁、逻辑过期）的完整处理逻辑从 <code>ShopServiceImpl</code> 抽到独立的工具类 <code>CacheClint</code> 中，Service 只负责调用</li>
+<li>工具类方法使用泛型方法签名，可适配任意实体类型，不再写死 <code>Shop</code></li>
+<li>提供的方法：<code>set</code>（带 TTL 写入）、<code>setWithLogicalExpire</code>（带逻辑过期写入）、<code>queryWithPassThrough</code>（解决穿透）、<code>queryWithMutex</code>（互斥锁解决击穿）、<code>queryWithLogicalExpire</code>（逻辑过期解决击穿）</li>
+</ul>
+<p><strong>泛型方法与函数式参数（重点，第一次见）</strong></p>
+<ul>
+<li>方法签名：<code>public &lt;R,ID&gt; R queryWithPassThrough(String prefix, ID id, Class&lt;R&gt; type, Function&lt;ID,R&gt; dbFallback, Long time, TimeUnit unit)</code></li>
+<li><code>&lt;R,ID&gt;</code> 是方法级别的泛型声明，<code>R</code> 是返回类型，<code>ID</code> 是主键类型，都在调用时才确定</li>
+<li><code>Function&lt;ID,R&gt; dbFallback</code> 是一个函数式接口参数，含义是”接收一个 <code>ID</code>，返回一个 <code>R</code>“，代表”根据 id 从数据库查询数据”这个行为</li>
+<li>函数也能当参数：调用时传方法引用 <code>this::getById</code>（或 Lambda），工具类内部通过 <code>dbFallback.apply(id)</code> 触发查询</li>
+<li>好处：缓存逻辑只写一次，具体查库动作由调用方注入，任何实体都能复用这套缓存方案</li>
+</ul>
+<h2 id="3-深度思考"><a href="#3-深度思考" class="headerlink" title="3. 深度思考"></a>3. 深度思考</h2><p><strong>疑问：逻辑过期方案中，缓存未命中直接返回 null，未建立缓存的资源无法访问，这样的设计合理吗？</strong></p>
+<p><strong>解答：</strong></p>
+<p>逻辑过期方案的设计前提就是<strong>热点数据提前预热</strong>，它不是一个通用的缓存查询方案。详细说明如下：</p>
+<p><strong>1. 为什么缓存未命中直接返回 null？</strong></p>
+<p>逻辑过期方案的核心假设是”缓存始终存在”——因为 key 不设物理过期时间，只要预热过就一直在 Redis 中。</p>
+<p>如果缓存未命中时去查数据库，会产生两个问题：</p>
+<ul>
+<li>高并发场景下，第一次访问某个 key 时，大量请求同时打到数据库，本质上就是缓存击穿问题本身</li>
+<li>逻辑过期方案的设计目标是”请求不等待、快速返回”，如果要查数据库就违背了这个目标</li>
+</ul>
+<p>所以逻辑过期方案<strong>故意</strong>在缓存未命中时返回 null，就是为了强制要求热点数据必须提前预热。</p>
+<p><strong>2. 实际项目中怎么用？</strong></p>
+<p>实际项目中不会只用逻辑过期一种方案，而是<strong>多种方案并存</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>适用方案</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>普通数据</td>
+<td>互斥锁 + 缓存穿透（<code>queryWithMutex</code>）</td>
+<td>正常缓存查询，缓存未命中查数据库，用互斥锁防止击穿</td>
+</tr>
+<tr>
+<td>热点数据</td>
+<td>逻辑过期（<code>queryWithLogicalExpire</code>）</td>
+<td>提前预热到 Redis，过期后异步重建，始终返回旧数据不等待</td>
+</tr>
+</tbody></table>
+<p><strong>3. 为什么函数也能当参数传入？</strong></p>
+<ul>
+<li>Java 中函数式接口（如 <code>Function&lt;ID,R&gt;</code>）只有<strong>一个抽象方法</strong>，因此可以用方法引用或 Lambda 表达式的形式”打包一段行为”作为值传递</li>
+<li><code>this::getById</code> 就是”方法引用”，它把 <code>getById(ID)</code> 这个方法本身变成了一个 <code>Function&lt;ID,R&gt;</code> 对象传入工具类</li>
+<li>工具类不关心”怎么查数据库”，只负责”缓存逻辑 + 在需要时调用 <code>dbFallback.apply(id)</code>“，实现行为参数化，这也是工具类能被任意实体复用的原因</li>
+<li>这是之前没有见过的写法：以前方法参数都是数据，这次参数本身是一段可执行逻辑</li>
+</ul>
+<h2 id="4-踩过的坑"><a href="#4-踩过的坑" class="headerlink" title="4. 踩过的坑"></a>4. 踩过的坑</h2><h2 id="5-遗留问题-想不通"><a href="#5-遗留问题-想不通" class="headerlink" title="5. 遗留问题 &#x2F; 想不通"></a>5. 遗留问题 &#x2F; 想不通</h2>
       </div>
 
     
@@ -272,13 +320,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2026/08/21/%E5%A4%8D%E7%9B%98/day21%20%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95/" rel="prev" title="day21 微信登录">
-      <i class="fa fa-chevron-left"></i> day21 微信登录
+    <a href="/2026/09/08/%E7%AC%94%E8%AE%B0/day33%20%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%E6%96%B9%E6%A1%88%E4%B8%8E%E7%BC%93%E5%AD%98%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%B0%81%E8%A3%85/" rel="prev" title="day33 缓存击穿方案与缓存工具类封装">
+      <i class="fa fa-chevron-left"></i> day33 缓存击穿方案与缓存工具类封装
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2026/08/25/%E5%A4%8D%E7%9B%98/day23%20%E8%B4%AD%E7%89%A9%E8%BD%A6%E4%B8%8E%E7%94%A8%E6%88%B7%E4%B8%8B%E5%8D%95/" rel="next" title="day23 购物车与用户下单">
-      day23 购物车与用户下单 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     

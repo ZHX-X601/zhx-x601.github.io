@@ -21,13 +21,13 @@
 
   <meta name="description" content="1. 今天做了什么 基于 Redis 实现 session 共享，替代原来的 Session 方案  存验证码、校验验证码、存用户数据到 Redis  修改拦截器逻辑：获取 user、存储到 ThreadLocal、刷新失效时间  学习 MyBatis-Plus 的基本用法   2. 核心知识点基于 Redis 实现 session 共享 存验证码： 123&#x2F;&#x2F;将验证码存入RedisstringR">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Day31 Redis实现Session共享与MyBatis-Plus基础">
+<meta property="og:title" content="day31 Redis实现Session共享与MyBatis-Plus基础">
 <meta property="og:url" content="https://www.blog-x.cc.cd/2026/09/06/%E5%A4%8D%E7%9B%98/day31%20Redis%E5%AE%9E%E7%8E%B0Session%E5%85%B1%E4%BA%AB%E4%B8%8EMyBatis-Plus%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="我的学习日记">
 <meta property="og:description" content="1. 今天做了什么 基于 Redis 实现 session 共享，替代原来的 Session 方案  存验证码、校验验证码、存用户数据到 Redis  修改拦截器逻辑：获取 user、存储到 ThreadLocal、刷新失效时间  学习 MyBatis-Plus 的基本用法   2. 核心知识点基于 Redis 实现 session 共享 存验证码： 123&#x2F;&#x2F;将验证码存入RedisstringR">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-09-06T13:18:00.000Z">
-<meta property="article:modified_time" content="2026-09-06T13:20:32.878Z">
+<meta property="article:modified_time" content="2026-09-08T15:37:32.292Z">
 <meta property="article:author" content="ZHX">
 <meta name="twitter:card" content="summary">
 
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>Day31 Redis实现Session共享与MyBatis-Plus基础 | 我的学习日记</title>
+  <title>day31 Redis实现Session共享与MyBatis-Plus基础 | 我的学习日记</title>
   
 
 
@@ -118,7 +118,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">42</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -173,7 +173,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Day31 Redis实现Session共享与MyBatis-Plus基础
+          day31 Redis实现Session共享与MyBatis-Plus基础
         </h1>
 
         <div class="post-meta">
@@ -182,10 +182,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-09-06 21:18:00 / 修改时间：21:20:32" itemprop="dateCreated datePublished" datetime="2026-09-06T21:18:00+08:00">2026-09-06</time>
+              <time title="创建时间：2026-09-06 21:18:00" itemprop="dateCreated datePublished" datetime="2026-09-06T21:18:00+08:00">2026-09-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-09-08 23:37:32" itemprop="dateModified" datetime="2026-09-08T23:37:32+08:00">2026-09-08</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -316,12 +322,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2026/09/05/%E7%AC%94%E8%AE%B0/Day30%20%E9%BB%91%E9%A9%AC%E7%82%B9%E8%AF%84%E7%9F%AD%E4%BF%A1%E7%99%BB%E5%BD%95%E4%B8%8ESession%E5%AE%9E%E7%8E%B0/" rel="prev" title="Day30 黑马点评短信登录与Session实现">
-      <i class="fa fa-chevron-left"></i> Day30 黑马点评短信登录与Session实现
+    <a href="/2026/09/05/%E7%AC%94%E8%AE%B0/day30%20%E9%BB%91%E9%A9%AC%E7%82%B9%E8%AF%84%E7%9F%AD%E4%BF%A1%E7%99%BB%E5%BD%95%E4%B8%8ESession%E5%AE%9E%E7%8E%B0/" rel="prev" title="day30 黑马点评短信登录与Session实现">
+      <i class="fa fa-chevron-left"></i> day30 黑马点评短信登录与Session实现
     </a></div>
       <div class="post-nav-item">
-    <a href="/2026/09/06/%E7%AC%94%E8%AE%B0/Day31%20Redis%E5%AE%9E%E7%8E%B0Session%E5%85%B1%E4%BA%AB%E4%B8%8EMyBatis-Plus%E5%9F%BA%E7%A1%80/" rel="next" title="Day31 Redis实现Session共享与MyBatis-Plus基础">
-      Day31 Redis实现Session共享与MyBatis-Plus基础 <i class="fa fa-chevron-right"></i>
+    <a href="/2026/09/06/%E7%AC%94%E8%AE%B0/day31%20Redis%E5%AE%9E%E7%8E%B0Session%E5%85%B1%E4%BA%AB%E4%B8%8EMyBatis-Plus%E5%9F%BA%E7%A1%80/" rel="next" title="day31 Redis实现Session共享与MyBatis-Plus基础">
+      day31 Redis实现Session共享与MyBatis-Plus基础 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -397,7 +403,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
